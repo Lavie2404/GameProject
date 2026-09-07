@@ -7983,13 +7983,59 @@ const CharacterInfoModal = ({
     );
 };
 
-const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledge, getRealmInfoFromLevel, handleUserUploadNpcAvatar, handleUserUploadPlayerAvatar, handleAutoGenerateAvatar, handleAppraiseNpc, generatingAvatars, handleRecruitCompanion, handleSongTu, isProcessingAction, handleManifestLoreNpc, onSetCourtesyName, onGenerateCourtesyName }) => {
+// Bản nháp cho chế độ "Chỉnh sửa toàn bộ" của bảng thông tin nhân vật. Chỉ số
+// lấy từ chỉ số GỐC (baseX) vì chỉ số hiển thị là kết quả đã cộng trang bị/trạng
+// thái; nhân vật kiểu "PvP object" (chưa có baseX) thì mồi bằng chỉ số cuối.
+const CHARACTER_EDIT_BASE_STAT_FIELDS = [
+    { key: 'baseHp', finalKey: 'maxhp', label: 'Sinh lực gốc' },
+    { key: 'baseAtk', finalKey: 'atk', label: 'Công kích gốc' },
+    { key: 'baseDef', finalKey: 'def', label: 'Phòng ngự gốc' },
+    { key: 'baseSpd', finalKey: 'spd', label: 'Tốc độ gốc' },
+    { key: 'baseCr', finalKey: 'cr', label: 'Tỉ lệ bạo kích (%)' },
+    { key: 'baseCdmg', finalKey: 'cdmg', label: 'Sát thương bạo kích (%)' },
+    { key: 'baseEvasion', finalKey: 'evasion', label: 'Né tránh (%)' },
+    { key: 'baseDmgAmp', finalKey: 'dmgAmp', label: 'Khuếch đại sát thương (%)' },
+    { key: 'baseDmgRes', finalKey: 'dmgRes', label: 'Giảm sát thương (%)' },
+];
+const CHARACTER_EDIT_GENDER_OPTIONS = ['Nam', 'Nữ', 'Khác', 'Không xác định'];
+const CHARACTER_EDIT_STANCE_OPTIONS = ['Thân thiện', 'Trung lập', 'Thù địch', 'Sợ hãi', 'Nghi ngờ'];
+const buildCharacterEditDraft = (c) => {
+    const draft = {
+        Name: c.Name || '',
+        CourtesyName: c.CourtesyName || '',
+        Gender: c.Gender || '',
+        Role: c.Role || '',
+        Personality: c.Personality || '',
+        Appearance: c.Appearance || '',
+        Backstory: c.Backstory || '',
+        description: c.description || '',
+        Stance: c.Stance || '',
+        titles: Array.isArray(c.titles) ? c.titles.join(', ') : '',
+        level: c.level ?? 1,
+        exp: c.exp ?? 0,
+        hp: c.hp ?? '',
+        affinity: c.affinity ?? 0,
+    };
+    CHARACTER_EDIT_BASE_STAT_FIELDS.forEach(f => { draft[f.key] = c[f.key] ?? c[f.finalKey] ?? 0; });
+    return draft;
+};
+
+const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledge, getRealmInfoFromLevel, handleUserUploadNpcAvatar, handleUserUploadPlayerAvatar, handleAutoGenerateAvatar, handleAppraiseNpc, generatingAvatars, handleRecruitCompanion, handleSongTu, isProcessingAction, handleManifestLoreNpc, onSetCourtesyName, onGenerateCourtesyName, onEditCharacter }) => {
     // Trạng thái sửa/thêm Tự (tên chữ) — đặt TRƯỚC early-return để không đổi số
     // lượt gọi hook giữa các lần render (component này vốn đã return null sớm ở
     // dưới trước khi gọi useMemo, nhưng do được mount/unmount theo `show` từ nơi
     // gọi nên chưa gây lỗi; thêm hook mới ở đây vẫn an toàn hơn thêm sau return).
     const [editingCourtesyName, setEditingCourtesyName] = useState(false);
     const [courtesyNameDraft, setCourtesyNameDraft] = useState('');
+    // Chế độ "Chỉnh sửa toàn bộ": mọi trường trong bảng đều thành ô nhập, lưu một lần.
+    const [isEditingProfile, setIsEditingProfile] = useState(false);
+    const [profileDraft, setProfileDraft] = useState(null);
+    const editTargetId = loreItem?.entity?.id;
+    useEffect(() => {
+        setIsEditingProfile(false);
+        setProfileDraft(null);
+        setEditingCourtesyName(false);
+    }, [editTargetId]);
 
     if (!show || !loreItem || !loreItem.entity) return null;
 
@@ -8299,6 +8345,130 @@ const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledg
             }
         };
 
+        // ---- Chế độ "Chỉnh sửa toàn bộ" ------------------------------------
+        // Dùng hàm trả JSX (KHÔNG khai báo component con bên trong render) để
+        // React không remount <input> mỗi lần gõ phím và làm mất focus.
+        if (isEditingProfile && profileDraft) {
+            const draft = profileDraft;
+            const setField = (key, value) => setProfileDraft(prev => ({ ...prev, [key]: value }));
+            const inputClass = 'w-full p-2 bg-[#0a0f0a] border border-[#cda45e]/30 text-[#e8d3a1] scale-text-sm focus:border-[#cda45e] outline-none';
+            const labelClass = 'block scale-text-xs font-semibold text-[#8ba888] mb-1';
+            const textField = (key, label, opts = {}) => (
+                <div key={key} className={opts.className || ''}>
+                    <label className={labelClass}>{label}</label>
+                    <input
+                        type="text"
+                        list={opts.list}
+                        value={draft[key] ?? ''}
+                        placeholder={opts.placeholder || ''}
+                        onChange={(e) => setField(key, e.target.value)}
+                        className={inputClass}
+                    />
+                </div>
+            );
+            const areaField = (key, label, rows = 3) => (
+                <div key={key}>
+                    <label className={labelClass}>{label}</label>
+                    <textarea
+                        rows={rows}
+                        value={draft[key] ?? ''}
+                        onChange={(e) => setField(key, e.target.value)}
+                        className={inputClass + ' resize-y leading-relaxed'}
+                    />
+                </div>
+            );
+            const numberField = (key, label, opts = {}) => (
+                <div key={key}>
+                    <label className={labelClass}>{label}</label>
+                    <input
+                        type="number"
+                        min={opts.min}
+                        max={opts.max}
+                        step={opts.step || 'any'}
+                        value={draft[key] ?? ''}
+                        placeholder={opts.placeholder || ''}
+                        onChange={(e) => setField(key, e.target.value)}
+                        className={inputClass + ' font-mono'}
+                    />
+                </div>
+            );
+            const saveProfile = () => {
+                if (!String(draft.Name || '').trim()) return;
+                onEditCharacter?.(finalStats.id, draft);
+                setIsEditingProfile(false);
+                setProfileDraft(null);
+            };
+            const cancelProfile = () => {
+                setIsEditingProfile(false);
+                setProfileDraft(null);
+            };
+            const sectionTitle = (text, color = 'text-[#cda45e]') => (
+                <h5 className={'font-bold uppercase tracking-widest scale-text-sm border-b border-[#cda45e]/20 pb-1 mb-3 ' + color} style={{ fontFamily: "'Protest Revolution', sans-serif" }}>{text}</h5>
+            );
+
+            return (
+                <div className="space-y-4 scale-text-sm">
+                    <p className="scale-text-xs text-[#a5b4fc] italic">Mọi thay đổi áp dụng tức thì, KHÔNG ghi vào lịch sử cốt truyện. Để trống một ô tùy chọn = xóa thông tin đó.</p>
+
+                    <div className="p-4 bg-[#101a10] border border-[#cda45e]/30 space-y-3">
+                        {sectionTitle('Hồ sơ')}
+                        {textField('Name', 'Tên (bắt buộc)', { placeholder: 'Tên nhân vật' })}
+                        {textField('CourtesyName', 'Tự (tên chữ)', { placeholder: 'VD: Vân Trường' })}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {textField('Gender', 'Giới tính', { list: 'quicklore-gender-options', placeholder: 'Nam / Nữ / Khác' })}
+                            {!finalStats.isPlayer && textField('Stance', 'Thái độ với nhân vật chính', { list: 'quicklore-stance-options', placeholder: 'Thân thiện / Trung lập / Thù địch' })}
+                        </div>
+                        <datalist id="quicklore-gender-options">{CHARACTER_EDIT_GENDER_OPTIONS.map(o => <option key={o} value={o} />)}</datalist>
+                        <datalist id="quicklore-stance-options">{CHARACTER_EDIT_STANCE_OPTIONS.map(o => <option key={o} value={o} />)}</datalist>
+                        {textField('Role', 'Thân phận')}
+                        {textField('titles', 'Danh hiệu (cách nhau bằng dấu phẩy)', { placeholder: 'VD: Kiếm Thánh, Thiên Hạ Đệ Nhất' })}
+                        {areaField('Personality', 'Tính cách', 3)}
+                        {areaField('Appearance', 'Ngoại hình', 4)}
+                        {areaField('Backstory', 'Tiểu sử', 5)}
+                        {areaField('description', 'Mô tả ngắn (dùng khi chưa giám định)', 2)}
+                    </div>
+
+                    <div className="p-4 bg-[#101a10] border border-[#cda45e]/30">
+                        {sectionTitle('Chỉ số chiến đấu', 'text-[#ff4d4d]')}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-3">
+                            {numberField('level', 'Cấp độ', { min: 1, step: 1 })}
+                            {finalStats.isPlayer && numberField('exp', 'EXP hiện tại', { min: 0, step: 1 })}
+                            {numberField('hp', 'Sinh lực hiện tại', { min: 0, step: 1, placeholder: String(finalStats.maxhp ?? '') })}
+                        </div>
+                        <p className="scale-text-xs text-[#8ba888] italic mb-2">Chỉ số GỐC (chưa tính trang bị/trạng thái). Đổi cấp sẽ đưa EXP về 0 và tính lại điểm tiềm năng còn trống; chỉ số gốc giữ đúng số đã nhập.</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {CHARACTER_EDIT_BASE_STAT_FIELDS.map(f => numberField(f.key, f.label + (finalStats[f.finalKey] !== undefined ? ` (hiện: ${finalStats[f.finalKey]})` : ''), { min: 0 }))}
+                        </div>
+                    </div>
+
+                    {!finalStats.isPlayer && (
+                        <div className="p-4 bg-[#101a10] border border-[#cda45e]/30">
+                            {sectionTitle('Hảo cảm & Song Tu')}
+                            {numberField('affinity', 'Hảo cảm với ngươi (-100 → 100)', { min: -100, max: 100, step: 1 })}
+                        </div>
+                    )}
+
+                    <div className="flex gap-3 pt-1">
+                        <button
+                            onClick={saveProfile}
+                            disabled={!String(draft.Name || '').trim()}
+                            style={{ minHeight: TOUCH_TARGET_MIN + 'px' }}
+                            className="flex-1 bg-[#cda45e] hover:bg-[#e8d3a1] text-[#101a10] font-bold py-2 px-4 uppercase tracking-widest scale-text-xs transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                            Lưu Thay Đổi
+                        </button>
+                        <button
+                            onClick={cancelProfile}
+                            style={{ minHeight: TOUCH_TARGET_MIN + 'px' }}
+                            className="flex-1 bg-transparent border border-[#8ba888]/60 hover:border-[#e8d3a1] text-[#a3b8a3] hover:text-[#e8d3a1] font-bold py-2 px-4 uppercase tracking-widest scale-text-xs transition-colors"
+                        >
+                            Hủy
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className="space-y-4 scale-text-sm">
                 {card.order.map(blockId => renderCardBlock(blockId))}
@@ -8389,6 +8559,22 @@ const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledg
                         <div className="text-[#a3b8a3] italic text-sm mt-1">
                             <ExpandableText text={headerDescription} maxLength={80} />
                         </div>
+                        {/* Chế độ "Chỉnh sửa toàn bộ": mở form thay cho các khối hiển thị bên dưới. */}
+                        {type === 'character' && onEditCharacter && entity.id && !isEditingProfile && (
+                            <button
+                                onClick={() => {
+                                    setEditingCourtesyName(false);
+                                    setProfileDraft(buildCharacterEditDraft(entity));
+                                    setIsEditingProfile(true);
+                                }}
+                                disabled={isProcessingAction}
+                                title="Sửa toàn bộ thông tin: hồ sơ, chỉ số, cấp độ, hảo cảm..."
+                                style={{ minHeight: TOUCH_TARGET_MIN + 'px' }}
+                                className="mt-2 inline-flex items-center gap-1 not-italic bg-[#1b2a1b] border border-[#cda45e]/60 hover:bg-[#cda45e]/20 text-[#cda45e] font-bold px-3 py-1 uppercase tracking-widest scale-text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <PencilIcon className="w-3.5 h-3.5" /> Chỉnh Sửa Toàn Bộ
+                            </button>
+                        )}
                     </div>
                 </div>
                 
@@ -23375,6 +23561,107 @@ const handleSetCourtesyName = useCallback((characterId, newCourtesyName) => {
     });
 }, [setknowledge]);
 
+// Bảng thông tin nhân vật (QuickLoreModal) — chế độ "Chỉnh sửa" cho phép sửa
+// TOÀN BỘ: hồ sơ (tên, tự, giới tính, thân phận, tính cách, ngoại hình, tiểu sử,
+// mô tả, thái độ, danh hiệu), cấp độ/EXP, sinh lực, chỉ số gốc và hảo cảm của
+// BẤT KỲ nhân vật nào (kể cả nhân vật chính). Áp dụng tức thì, KHÔNG ghi lịch sử
+// cốt truyện — cùng tinh thần Bảng Tùy Chỉnh, nên cũng đi qua noteCustomizationWrite
+// (gdd-01 F3: vô hiệu snapshot Undo + đánh dấu hack_mode_used_this_slot).
+// - Chuỗi rỗng ở trường tùy chọn = xóa trường đó (như handleSetCourtesyName).
+// - Đổi tên: cập nhật luôn `relationships` (tra theo tên) để không mất hảo cảm/quan hệ.
+// - Nhân vật chính: đồng bộ tên/giới tính/thân phận/tính cách/ngoại hình/tiểu sử
+//   sang gameSettings vì nhiều prompt đọc từ đó thay vì từ object nhân vật.
+// - Đổi cấp: EXP về 0 + trạng thái Tu Luyện Thường (bộ ba nguyên tử, gdd-06 C4 D.2b),
+//   tính lại AP còn trống; chỉ số gốc GIỮ NGUYÊN theo đúng số người chơi đã gõ.
+const EDITABLE_CHARACTER_TEXT_FIELDS = ['Name', 'CourtesyName', 'Gender', 'Role', 'Personality', 'Appearance', 'Backstory', 'description', 'Stance'];
+const EDITABLE_CHARACTER_BASE_STAT_FIELDS = ['baseHp', 'baseAtk', 'baseDef', 'baseSpd', 'baseCr', 'baseCdmg', 'baseEvasion', 'baseDmgAmp', 'baseDmgRes'];
+const handleEditCharacterProfile = (characterId, edits) => {
+    if (!characterId || !edits) return;
+    const toNumber = (v) => {
+        if (v === '' || v === null || v === undefined) return undefined;
+        const n = Number(v);
+        return Number.isFinite(n) ? n : undefined;
+    };
+
+    setknowledge(prev => {
+        const charIndex = prev.characters.findIndex(c => c.id === characterId);
+        if (charIndex === -1) return prev;
+        const newKnowledge = JSON.parse(JSON.stringify(prev));
+        const ch = newKnowledge.characters[charIndex];
+        const oldName = ch.Name;
+
+        EDITABLE_CHARACTER_TEXT_FIELDS.forEach(key => {
+            if (!(key in edits)) return;
+            const value = String(edits[key] ?? '').trim();
+            if (key === 'Name') { if (value) ch.Name = value; return; } // Tên không được rỗng
+            if (value) ch[key] = value; else delete ch[key];
+        });
+
+        if ('titles' in edits) {
+            const titles = Array.isArray(edits.titles)
+                ? edits.titles
+                : String(edits.titles || '').split(',');
+            const cleaned = titles.map(t => String(t).trim()).filter(Boolean);
+            if (cleaned.length) ch.titles = cleaned; else delete ch.titles;
+        }
+
+        const newLevel = toNumber(edits.level);
+        if (newLevel !== undefined) {
+            const lvl = Math.max(1, Math.floor(newLevel));
+            if (lvl !== (ch.level || 1)) {
+                ch.level = lvl;
+                ch.exp = 0;
+                ch.progressionState = PROGRESSION_STATE_NORMAL;
+                const spentAp = Object.values(ch.allocatedPoints || {}).reduce((s, p) => s + (Number(p) || 0), 0);
+                ch.ap = Math.max(0, calculateTotalAP(lvl) - spentAp);
+            }
+        }
+        const newExp = toNumber(edits.exp);
+        if (newExp !== undefined) ch.exp = Math.max(0, newExp);
+
+        EDITABLE_CHARACTER_BASE_STAT_FIELDS.forEach(key => {
+            const value = toNumber(edits[key]);
+            if (value !== undefined) ch[key] = value;
+        });
+
+        if (!ch.isPlayer) {
+            const newAffinity = toNumber(edits.affinity);
+            if (newAffinity !== undefined) ch.affinity = Math.max(-100, Math.min(100, Math.round(newAffinity)));
+        }
+
+        const newHp = toNumber(edits.hp);
+        newKnowledge.characters[charIndex] = calculateFinalStats(
+            ch,
+            newKnowledge.characters,
+            newHp !== undefined ? { setHp: newHp } : { preserveHp: true }
+        );
+
+        const finalName = newKnowledge.characters[charIndex].Name;
+        if (finalName !== oldName) {
+            (newKnowledge.relationships || []).forEach(rel => {
+                if (rel && rel.NPC === oldName) rel.NPC = finalName;
+            });
+        }
+        return newKnowledge;
+    });
+
+    const target = knowledge.characters.find(c => c.id === characterId);
+    if (target?.isPlayer) {
+        const syncMap = { Name: 'characterName', Gender: 'characterGender', Role: 'characterRole', Personality: 'characterPersonality', Appearance: 'characterAppearance', Backstory: 'characterBackstory' };
+        const settingsPatch = {};
+        Object.entries(syncMap).forEach(([charKey, settingsKey]) => {
+            if (!(charKey in edits)) return;
+            const value = String(edits[charKey] ?? '').trim();
+            if (charKey === 'Name' && !value) return;
+            settingsPatch[settingsKey] = value;
+        });
+        if (Object.keys(settingsPatch).length) setGameSettings(prev => ({ ...prev, ...settingsPatch }));
+    }
+
+    noteCustomizationWrite();
+    setModalMessage({ show: true, title: 'Cập Nhật Thành Công', content: `Đã lưu thông tin mới cho [${String(edits.Name || target?.Name || '').trim() || 'nhân vật'}].`, type: 'success' });
+};
+
 // Nút "+ Thêm Tự" trong bảng thông tin: để AI tự nghĩ (khác với "(sửa)" ở trên,
 // nơi người chơi tự gõ tay). Dùng isProcessingAction làm cờ khóa/loading — cùng
 // pattern handleAppraiseNpc đã dùng cho một tác vụ AI nền tương tự.
@@ -37971,6 +38258,7 @@ const formatStoryText = useCallback((text) => {
         handleManifestLoreNpc={handleManifestLoreNpc}
         onSetCourtesyName={handleSetCourtesyName}
         onGenerateCourtesyName={handleGenerateCourtesyName}
+        onEditCharacter={handleEditCharacterProfile}
     />
 )}
       <SuggestionsModal
