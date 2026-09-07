@@ -1,8 +1,8 @@
 {
-  "id": "2cfbcae4-eea5-4357-b8ba-2db30e798e6a",
-  "currentTurn": 1,
+  "id": "eb81eba5-a033-4df8-a751-182dca7e193b",
+  "currentTurn": 2,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-06T09:15:21.824Z",
+  "timestamp": "2026-09-07T07:32:42.279Z",
   "gameSettings": {
     "storyTitle": "Tam quốc chí",
     "theme": "Dã sử, Huyền Huyễn, Tu Tiên, Quân sự, Cổ đại, Chiến tranh, Tam quốc",
@@ -95,7 +95,7 @@
       {
         "id": "97e04055-38f9-4811-937d-591e48e08281",
         "name": "Bách Điểu Triều Phụng Thương",
-        "description": "Thần binh gắn với tên tuổi của Thương Tôn Đồng Uyên",
+        "description": "Thần binh gắn liền với tên tuổi Thương Tôn Đổng Uyên",
         "category": "Vật phẩm",
         "rarity": "Thần Thoại",
         "stats": "ATK: 999999999\nSRP: 999999999",
@@ -120,51 +120,34 @@
       "year": 0,
       "month": 1,
       "day": 1,
-      "hour": 5
+      "hour": 21
     },
-    "weather": "Trời trong",
+    "weather": "Trời tối, gió mát",
     "loreLocations": [],
     "loreNpcs": [],
     "loreItems": [],
     "locations": [
       {
-        "id": "dai_han_empire",
-        "description": "Triều đại nhà Hán đang trong thời kỳ suy vi, quan lại tham nhũng, thiên hạ bắt đầu nảy sinh mầm mống đại loạn.",
-        "category": "Quốc Gia",
-        "tier": 2,
-        "Name": "Đại Hán Đế Quốc"
-      },
-      {
-        "id": "thon_moc_nhi_con",
-        "loreId": "87a03dd1-43e3-4993-b99e-021c18d886c6",
-        "description": "Một ngôi làng nhỏ hẻo lánh thuộc huyện Hãn Châu, tỉnh Sơn Tây, nơi khởi đầu của những biến số thiên hạ.",
-        "category": "Thành Trì",
-        "tier": 3,
-        "parentLocationId": "dai_han_empire",
-        "Name": "Thôn Mộc Nhĩ"
+        "id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
+        "Name": "Thôn Mộc Nhĩ",
+        "description": "Một địa điểm vừa được khám phá.",
+        "category": "Khu Vực",
+        "tier": 3
       }
     ],
     "items": [],
     "worldItems": [],
-    "relationships": [],
+    "relationships": [
+      {
+        "id": "bcad8843-6bf5-4059-b0c1-3af0b25049c9",
+        "NPC": "Điêu Thuyền",
+        "Standing": "Thân thiết",
+        "Reason": "Ngươi luôn chăm sóc chu đáo, mang cá ngon về cho nàng."
+      }
+    ],
     "quests": [],
     "trackedQuestId": null,
-    "realmProgressionList": [
-      "Phàm Nhân",
-      "Luyện Thể",
-      "Khai Mạch",
-      "Tụ Khí",
-      "Ngưng Sát",
-      "Linh Hải",
-      "Thiên Quân",
-      "Trảm Tướng",
-      "Vạn Phu Mạc Địch",
-      "Võ Thánh",
-      "Đấu Chiến Tôn",
-      "Bán Tiên",
-      "Chân Tiên",
-      "Cửu Thiên Huyền Tiên"
-    ],
+    "realmProgressionList": [],
     "knownRecipes": [],
     "eventHistory": [],
     "unlearnedSkillScrolls": [],
@@ -176,7 +159,7 @@
         "isPlayer": true,
         "loreId": null,
         "level": 1,
-        "exp": 0.1,
+        "exp": 10.1,
         "progressionState": "Tu Luyện Thường",
         "ap": 5,
         "currency": 0,
@@ -186,7 +169,7 @@
           "def": 0,
           "spd": 0
         },
-        "current_location_id": "thon_moc_nhi_con",
+        "current_location_id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
         "baseHp": 2000,
         "baseAtk": 200,
         "baseDef": 100,
@@ -198,9 +181,9 @@
         "baseEvasion": 100,
         "hp": 2000,
         "maxhp": 2000,
-        "atk": 1000000199,
+        "atk": 200,
         "def": 100,
-        "spd": 1000000299,
+        "spd": 300,
         "cr": 15,
         "cdmg": 200,
         "dmgAmp": 100,
@@ -208,206 +191,8 @@
         "evasion": 0,
         "learnedSkills": [],
         "equippedSkills": {
-          "combat_basic_1": {
-            "id": "dd3e15d3-a8a3-4a60-a8a3-0223359cd933",
-            "sourceIdeaId": "e6667682-91f7-4f04-b409-a9b0725fcf66",
-            "skillType": "combat",
-            "Name": "Bách Điểu Triều Phụng",
-            "description": "Tuyệt kỹ thương pháp đỉnh cao, mũi thương hóa thành trăm cánh chim lửa lượn lờ, quét sạch thiên quân vạn mã như bách điểu triều phụng.",
-            "technicaldescription": "Tấn công toàn bộ kẻ địch, gây 999999999 sát thương cố định (Bỏ qua 100% phòng ngự, không thể né tránh). Gây Choáng 1 hiệp và áp dụng [Xuất Huyết] trong 3 hiệp. [Xuất Huyết]: Khiến mục tiêu mất 5% Máu tối đa mỗi hiệp, hiệu ứng không thể bị xóa bỏ và có thể cộng dồn tối đa 5 tầng.",
-            "Stats": "atk_fixed:999999999",
-            "Rarity": "Thần Thoại",
-            "cooldown": 0,
-            "effects": [
-              {
-                "action": {
-                  "type": "damage",
-                  "target": {
-                    "type": "all_enemies",
-                    "hit_count": 7
-                  },
-                  "visual_effects": {
-                    "vfxType": "rapid_slashes",
-                    "moveType": "dash_through",
-                    "color": "#ff4500",
-                    "vfxCount": 7
-                  }
-                },
-                "conditions": null
-              },
-              {
-                "action": {
-                  "type": "damage",
-                  "target": {
-                    "type": "all_enemies"
-                  },
-                  "power_components": [
-                    {
-                      "source_stat": "FIXED_VALUE",
-                      "scale_number": 999999999,
-                      "based_on": "caster"
-                    }
-                  ],
-                  "special_properties": {
-                    "armor_penetration": 1,
-                    "cannot_be_dodged": true,
-                    "true_damage": false
-                  },
-                  "visual_effects": {
-                    "vfxType": "strike",
-                    "moveType": "stay",
-                    "color": "#ff4500",
-                    "vfxCount": 1
-                  }
-                },
-                "conditions": null
-              },
-              {
-                "action": {
-                  "type": "apply_status",
-                  "target": {
-                    "type": "all_enemies"
-                  },
-                  "status_to_apply": {
-                    "status_id": "STUN",
-                    "status_name": "Choáng (Đẩy lùi)",
-                    "status_type": "debuff"
-                  },
-                  "visual_effects": {
-                    "vfxType": "explosion",
-                    "moveType": "stay",
-                    "color": "#ffff00",
-                    "vfxCount": 1
-                  }
-                },
-                "conditions": null
-              },
-              {
-                "action": {
-                  "type": "apply_status",
-                  "target": {
-                    "type": "all_enemies"
-                  },
-                  "status_to_apply": {
-                    "status_id": "BLEED",
-                    "status_name": "Xuất Huyết",
-                    "status_type": "debuff"
-                  },
-                  "visual_effects": {
-                    "vfxType": "aura_down",
-                    "moveType": "stay",
-                    "color": "#8b0000",
-                    "vfxCount": 1
-                  }
-                },
-                "conditions": null
-              }
-            ],
-            "skillCategory": "basic",
-            "currentCooldown": 0,
-            "exp": 0,
-            "maxExp": null,
-            "slotKey": null
-          },
-          "combat_basic_2": {
-            "id": "6805395a-beb5-45b7-80cb-45421ce22222",
-            "sourceIdeaId": "f2c59fe6-d618-43ca-8841-e13b598268c4",
-            "skillType": "combat",
-            "Name": "Phong Quyển Tàn Vân",
-            "description": "Kiếm khí trùng tiêu tam vạn lý, Nhất kiếm quang hàn thập cửu châu. Đường kiếm mang theo sức mạnh thần thánh, một khi vung ra khiến vạn dặm mây tan, mười chín châu lục chấn động bởi hơi lạnh thấu xương.",
-            "technicaldescription": "Gây sát thương bằng 999,999,999% Công lên toàn bộ kẻ địch, đòn tấn công bỏ qua 100% phòng ngự và không thể né tránh. Đồng thời áp dụng trạng thái [Trọng Thương] trong 2 lượt, làm giảm 50% Công, 50% Tốc độ và ngăn chặn mọi khả năng hồi phục của mục tiêu.",
-            "Stats": "atk_percent:999999999",
-            "Rarity": "Thần Thoại",
-            "cooldown": 0,
-            "effects": [
-              {
-                "action": {
-                  "type": "damage",
-                  "target": {
-                    "type": "all_enemies"
-                  },
-                  "visual_effects": {
-                    "vfxType": "slash",
-                    "moveType": "dash_through",
-                    "color": "#e0ffff",
-                    "vfxCount": 3
-                  }
-                },
-                "conditions": null
-              },
-              {
-                "action": {
-                  "type": "apply_status",
-                  "target": {
-                    "type": "all_enemies"
-                  },
-                  "power_components": [
-                    {
-                      "source_stat": "ATK",
-                      "scale_number": 999999999,
-                      "based_on": "caster"
-                    }
-                  ],
-                  "special_properties": {
-                    "armor_penetration": 1,
-                    "cannot_be_dodged": true,
-                    "true_damage": false
-                  },
-                  "status_to_apply": {
-                    "status_id": "GRIEVOUS_WOUND",
-                    "status_name": "Trọng Thương",
-                    "status_type": "debuff"
-                  },
-                  "visual_effects": {
-                    "vfxType": "aura_down",
-                    "moveType": "stay",
-                    "color": "#4b0082",
-                    "vfxCount": 1
-                  }
-                },
-                "conditions": null
-              },
-              {
-                "action": {
-                  "type": "apply_dynamic_status",
-                  "target": {
-                    "type": "all_enemies"
-                  },
-                  "status_to_apply": {
-                    "duration": 2,
-                    "is_dispellable": false,
-                    "stat_modifications": [
-                      {
-                        "stat_name": "ATK_PERCENT",
-                        "modifier_type": "percentage",
-                        "value": -50
-                      },
-                      {
-                        "stat_name": "SPD_PERCENT",
-                        "modifier_type": "percentage",
-                        "value": -50
-                      }
-                    ],
-                    "status_id": "DEBUFF_STATS",
-                    "status_name": "Suy Nhược",
-                    "status_type": "debuff"
-                  },
-                  "visual_effects": {
-                    "vfxType": "aura_down",
-                    "moveType": "stay",
-                    "color": "#ff4500",
-                    "vfxCount": 1
-                  }
-                },
-                "conditions": null
-              }
-            ],
-            "skillCategory": "basic",
-            "currentCooldown": 0,
-            "exp": 0,
-            "maxExp": null,
-            "slotKey": null
-          },
+          "combat_basic_1": null,
+          "combat_basic_2": null,
           "combat_basic_3": null,
           "combat_basic_4": null,
           "combat_basic_5": null,
@@ -428,61 +213,7 @@
           "Đầu": null,
           "Thân": null,
           "Chân": null,
-          "Vũ khí chính": {
-            "Name": "Bách Điểu Triều Phụng Thương",
-            "Type": "Vũ khí",
-            "Rarity": "Thần Thoại",
-            "description": "Thần binh gắn với tên tuổi của Thương Tôn Đồng Uyên",
-            "Stats": "atk:999999999,spd:999999999",
-            "Requirements": "level:1",
-            "Weight": 15,
-            "effects": [
-              {
-                "action": {
-                  "type": "apply_status",
-                  "target": {
-                    "type": "single_enemy",
-                    "count": 1
-                  },
-                  "status_to_apply": {
-                    "status_id": "trong_thuong",
-                    "status_name": "Trọng thương",
-                    "status_type": "debuff"
-                  }
-                },
-                "conditions": [
-                  {
-                    "trigger": "ON_DEAL_DAMAGE"
-                  }
-                ]
-              },
-              {
-                "action": {
-                  "type": "apply_status",
-                  "target": {
-                    "type": "single_enemy",
-                    "count": 1
-                  },
-                  "status_to_apply": {
-                    "status_id": "vet_thuong_sau",
-                    "status_name": "Vết thương sâu",
-                    "status_type": "debuff"
-                  }
-                },
-                "conditions": [
-                  {
-                    "trigger": "ON_DEAL_DAMAGE"
-                  }
-                ]
-              }
-            ],
-            "technicaldescription": "Khi gây sát thương, áp dụng đồng thời hai hiệu ứng: [Trọng thương] (Giảm 50% ATK, 50% SPD) và [Vết thương sâu] (Giảm 50% DEF, 50% HP). Cả hai hiệu ứng này đều khiến mục tiêu không thể hồi phục máu bằng thuốc hoặc kỹ năng.",
-            "Consumable": false,
-            "Equippable": true,
-            "id": "267a7b3a-8430-4aca-a3eb-815ddf12a763",
-            "Value": 9999900000,
-            "was_ever_equipped": true
-          },
+          "Vũ khí chính": null,
           "Vũ khí phụ": null,
           "Phụ kiện 1": null,
           "Phụ kiện 2": null,
@@ -490,51 +221,41 @@
           "Trữ vật": null,
           "Dị thường": null
         },
-        "Name": "Diệp Thần",
-        "Gender": "Nam",
-        "Role": "Lập trình viên đột tử khi đang tăng ca được xuyên không về Tam quốc ",
-        "Appearance": "Trích tiên hạ phàm. Dung mạo khiến tất cả các mỹ nhân như Điêu Thuyền, Thái Văn Cơ, Chân Cơ, Đại Kiều, Tiểu Kiều,... đều yêu ngay từ cái nhìn đầu tiên",
-        "Backstory": "Lập trình viên đột quỵ khi đang tăng ca được xuyên không về thời tam quốc trong hình hài của 1 cậu bé 8 tuổi mồ côi tại Thôn Mộc Nhĩ, huyện Hãn Châu, tỉnh Sơn Tây. Hàng xóm của Điêu Thuyền lúc 8 tuổi",
-        "MartialSouls": [],
-        "Personality": "Lạc quan, Bí ẩn, Thông minh",
-        "isAppraised": true,
-        "description": "",
-        "isCompanion": false,
+        "Name": "",
         "maxExp": 100,
-        "realm": "Phàm Nhân",
-        "incomingHealing": 1,
-        "CourtesyName": "Huyền Cơ"
+        "realm": "Giai Đoạn 1",
+        "incomingHealing": 1
       },
       {
-        "id": "npc_lao_tam_01",
+        "id": "dieu_thuyen_10t",
         "isPlayer": false,
         "loreId": null,
-        "level": 2,
+        "level": 1,
         "exp": 0,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
         "allocatedPoints": {
-          "hp": 4,
-          "atk": 2,
-          "def": 2,
-          "spd": 2
+          "hp": 2,
+          "atk": 1,
+          "def": 1,
+          "spd": 1
         },
-        "current_location_id": null,
-        "baseHp": 220,
-        "baseAtk": 22,
-        "baseDef": 11,
-        "baseSpd": 31,
+        "current_location_id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
+        "baseHp": 200,
+        "baseAtk": 20,
+        "baseDef": 10,
+        "baseSpd": 30,
         "baseCr": 15,
         "baseCdmg": 200,
         "baseDmgAmp": 100,
         "baseDmgRes": 100,
         "baseEvasion": 100,
-        "hp": 1020,
-        "maxhp": 1020,
-        "atk": 42,
-        "def": 31,
-        "spd": 51,
+        "hp": 600,
+        "maxhp": 600,
+        "atk": 30,
+        "def": 20,
+        "spd": 40,
         "cr": 15,
         "cdmg": 200,
         "dmgAmp": 100,
@@ -573,16 +294,20 @@
           "Dị thường": null
         },
         "isCompanion": false,
-        "affinity": 0,
-        "description": "Lão nông bộc trực trong thôn, biết nhiều chuyện vặt vãnh quanh vùng.",
+        "affinity": 45,
+        "description": "",
         "stance": "Thân thiện",
-        "personality": "Cởi mở",
-        "Gender": "Nam",
-        "sizeCategory": "2",
-        "Name": "Lão Tam",
-        "realm": "Phàm Nhân",
+        "Name": "Điêu Thuyền",
+        "CourtesyName": "Tú Nhi",
+        "realm": "Giai Đoạn 1",
         "incomingHealing": 1,
-        "maxExp": 282
+        "maxExp": 100,
+        "Role": "Thanh mai trúc mã nhà bên, Thiên Hương tiên thể chưa thức tỉnh",
+        "Appearance": "Dù mới mười tuổi và mặc y phục vải thô đơn sơ, Tú Nhi đã lộ rõ dung mạo của một tuyệt thế giai nhân tương lai. Đôi mắt trong veo như nước mùa thu, làn da trắng ngần mịn màng như bạch ngọc, mái tóc đen nhánh buộc hai bên bằng dây ruy-băng đỏ. Mỗi bước đi của cô bé đều toát lên vẻ nhẹ nhàng, uyển chuyển tự nhiên.",
+        "Backstory": "Là cô bé hàng xóm sống cạnh nhà nhân vật chính. Cha mẹ mất sớm do thiên tai, cô bé phải tự lập từ nhỏ nhưng may mắn được nhân vật chính thường xuyên giúp đỡ, đùm bọc. Ít ai biết rằng, trong huyết quản của Tú Nhi đang ẩn chứa một luồng mị lực bẩm sinh của tiên thể chưa thức tỉnh, vận mệnh sau này định sẵn sẽ làm khuynh đảo cả giang sơn Tam Quốc.",
+        "Personality": "Thông minh, hiểu chuyện trước tuổi, tính cách dịu dàng, hoạt bát nhưng cũng có phần bướng bỉnh khi muốn bảo vệ những người mình yêu thương. Rất thích bám lấy nhân vật chính và luôn nỗ lực giúp đỡ việc nhà.",
+        "Stance": "Cực kỳ ỷ lại và tin tưởng nhân vật chính, coi chàng như người thân duy nhất và là chỗ dựa vững chãi trong cuộc đời.",
+        "isAppraised": true
       }
     ],
     "sharedCooldowns": {
@@ -592,7 +317,12 @@
     "adventureSkillCooldowns": {},
     "requestNpcDesign": null,
     "progression": {
-      "recentMeaningfulActions": [],
+      "recentMeaningfulActions": [
+        {
+          "reason": "Trò chuyện với Thôn trưởng Lão Tam và nắm bắt thông tin về Thái Bình Đạo dưới góc nhìn lạc quan",
+          "turn": 7
+        }
+      ],
       "lastExpResolvedTurn": 1
     },
     "loreQuests": [],
@@ -626,34 +356,207 @@
       "fields": {
         "exp_delta_player": 0.1
       }
-    }
+    },
+    "narrativeCombatState": {
+      "isActive": false,
+      "combatants": []
+    },
+    "stateHistory": [
+      {
+        "time": {
+          "year": 0,
+          "month": 1,
+          "day": 1,
+          "hour": 8
+        },
+        "location_id": null,
+        "weather": "Trời trong",
+        "characters": [
+          {
+            "id": "player",
+            "Name": "",
+            "level": 1,
+            "exp": 0,
+            "hp": 2000,
+            "maxhp": 2000,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          }
+        ],
+        "quests": []
+      },
+      {
+        "time": {
+          "year": 0,
+          "month": 1,
+          "day": 1,
+          "hour": 21
+        },
+        "location_id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
+        "weather": "Trời tối, gió mát",
+        "characters": [
+          {
+            "id": "player",
+            "Name": "",
+            "level": 1,
+            "exp": 10,
+            "hp": 2000,
+            "maxhp": 2000,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          }
+        ],
+        "quests": []
+      }
+    ]
   },
   "storyHistory": [
     {
-      "id": "94cc0ca3-a676-4611-9d4a-8ab8c0fbf42a",
+      "id": "2c523fd1-c2f2-41f6-80b0-a494e09538b0",
       "type": "story",
       "content": [
         {
           "type": "narrative",
-          "content": "Tiết trời tháng Chạp, sương mờ còn giăng lối trên những rặng cây già tại *Thôn Mộc Nhĩ*. Tiếng gà gáy sớm xé toạc không gian tĩnh lặng của huyện *Hãn Châu*, báo hiệu một ngày mới bắt đầu giữa lúc giang sơn *Đại Hán* đang âm thầm chuyển mình trong cơn bão dữ.\nNgươi — *Diệp Thần* — khẽ cựa mình trên đống rơm khô sau hiên nhà, phủi đi những hạt sương đêm còn đọng trên vạt áo sờn. Trong đôi mắt ngươi không có sự lo âu của một kẻ không cửa không nhà, trái lại, nó trong vắt và chứa đựng một sự thâm trầm khó định. Thế đạo này, kẻ mạnh vi tôn, nhưng kẻ thông minh mới là kẻ sống sót cuối cùng để chứng kiến thời đại thay đổi.\nTừ xa, bóng dáng một lão nông thấp đậm đang lúi húi xách đôi thùng nước tiến về phía giếng làng. Đó là *Lão Tam*, người vẫn thường kể cho ngươi nghe về những tin đồn quái lạ về một giáo phái mang khăn vàng đang thu nạp tín đồ ở các châu lân cận.\nThấy ngươi đã tỉnh, *Lão Tam* đặt đôi thùng xuống, lau mồ hôi trên trán rồi lên tiếng:"
+          "content": "Ánh hoàng hôn đỏ ối như máu nhuộm rực cả một góc trời phía tây, rải những tia sáng cuối ngày xuống *Thôn Mộc Nhĩ* hẻo lánh. Gió chiều thổi qua rặng tre xào xạc, mang theo chút không khí mát mẻ nhưng dường như cũng lẫn vào đó một sự ngột ngạt vô hình của thời cuộc dông bão sắp đến. \nNằm lười biếng trên bãi cỏ mịn ven thôn, *Diệp Thần* ngậm một cọng cỏ khô, hai tay gối sau đầu, đôi mắt lấp lánh phản chiếu ánh ráng chiều rực rỡ. Với tính cách lạc quan bẩm sinh, ngươi dường như chẳng hề bận tâm đến những tin đồn triều đình mục nát hay thiên tai liên miên ngoài kia. \nTừ phía lối mòn nhỏ, một bóng dáng lom khom khệ nệ bê chiếc rổ tre lớn chứa đầy mộc nhĩ khô đang tiến lại gần. Đó là *Lão Tam*, thôn trưởng tốt bụng của thôn này. Thấy ngươi vẫn nằm đó hưởng nhàn, lão dừng bước, đặt rổ xuống đất rồi thở dài một tiếng dầy lo âu."
         },
         {
           "type": "dialogue",
           "speaker": "Lão Tam",
-          "content": "Này ngươi, sớm thế này mà đã dậy rồi sao? Ta nghe nói trên huyện vừa có trạm canh mới của quan quân, dạo này tình hình chẳng yên ổn chút nào. Ngươi định hôm nay làm gì?"
+          "content": "Diệp Thần này, ngươi còn thong thả nằm đây sao? Gần đây trong huyện truyền tai nhau, có mấy người mặc đạo bào màu vàng, hành tung quỷ dị thường xuyên lảng vảng ngoài thôn. Ta nghe nói bọn họ tự xưng là người của *Thái Bình Đạo*, chuyên phát bùa nước trị bệnh, nhưng ánh mắt bọn họ nhìn thôn chúng ta thật đáng ngại."
         },
         {
           "type": "narrative",
-          "content": "Ngươi nở một nụ cười lạc quan, ánh mắt lướt qua rặng núi phía xa, nơi linh khí mỏng manh đang bắt đầu hội tụ dưới ánh bình minh. Vận mệnh của ngươi, và cả thiên hạ này, có lẽ sẽ bắt đầu từ chính ngôi làng nhỏ bé này."
+          "content": "Ngươi khẽ nhếch môi cười, xoay người ngồi dậy một cách nhẹ nhàng rồi đáp lời lão bằng giọng điệu đầy thư thái."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Lão Tam ơi là Lão Tam, thiên hạ bao la, đạo sĩ đi truyền đạo là chuyện thường tình của nhân gian. Bọn họ cứu nhân độ thế thì cứ kệ bọn họ đi, có khi nào lại mang đến cho thôn chúng ta chút sinh khí mới không chừng?"
+        },
+        {
+          "type": "narrative",
+          "content": "*Lão Tam* nghe vậy chỉ biết lắc đầu ngao ngán trước sự lạc quan đến kỳ lạ của ngươi. Lão dặn dò ngươi vài câu chú ý an toàn rồi lại khệ nệ bê rổ mộc nhĩ đi về hướng cuối thôn. Ánh mặt trời đã hoàn toàn tắt lịm sau dãy núi phía xa, màn đêm tĩnh mịch bắt đầu bao phủ lấy *Thôn Mộc Nhĩ*."
+        }
+      ]
+    },
+    {
+      "id": "b373c55d-a536-46d6-8052-452500c5b7e4",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Lời Ngươi]: \"Không nói với lão nữa, ta phải đem con cá này về cho Tú Nhi nhà ta nấu canh\"\n[Đoạn 2 - Tường thuật]: \"Tú Nhi là tên chữ của Điêu Thuyền. Chính là đệ nhất mỹ nữ Tam Quốc. Hiện nàng đang là cô bé hàng xóm của ngươi. Năm nay nàng 10 tuổi, phụ mẫu nàng đã qua đời vì bạo bệnh 2 năm trước. Trong 2 năm này, luôn là ngươi chiếu cố nàng. Mỗi lần đi săn hay đi câu về đều dành phần ngon nhất cho nàng, chỗ còn lại thì đem bán hoặc tự ăn\"\n[Đoạn 3 - Lời Ngươi]: \"Tú Nhi, Tú Nhi. Ra xem ta câu được con cá to lắm nè\"\n[Đoạn 4 - Lời Điêu Thuyền]: \"Diệp ca ca đi câu về rồi à. Mau vào uống bát nước cho mát. Để con cá đó cho muội xử lý. Tối nay chúng ta có canh cá với dưa chua\"\n[Đoạn 5 - Lời Ngươi]: \"Được được được. Ta thích nhất là canh cá Tú Nhi nấu\"\n[Đoạn 6 - Lời Điêu Thuyền]: \"Huynh bớt trêu muội lại đi. Nếu thích ăn thì ngày nào muội cũng nấu cho huynh ăn\"\n[Đoạn 7 - Lời Ngươi]: \"Thế thì ngày nào ta cũng phải cố gắng câu thật nhiều cá rồi\""
+    },
+    {
+      "id": "0c655d6c-f14a-4965-be9b-a5fd8a5d16b9",
+      "type": "story",
+      "content": [
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Không nói với lão nữa, ta phải đem con cá này về cho Tú Nhi nhà ta nấu canh."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi dứt lời dứt khoát, tay xách xâu cỏ tranh luồn qua mang một con cá chép lớn béo mầm, khẽ vẫy tay chào tạm biệt thôn trưởng *Lão Tam* rồi sải bước đi nhanh về phía con đường mòn nhỏ dẫn vào sâu trong thôn. Sau lưng ngươi, bóng dáng lom khom của lão thôn trưởng tốt bụng khẽ lắc đầu, thở dài một tiếng dầy lo âu rồi lại khệ nệ bê rổ mộc nhĩ đi về hướng ngược lại. Hoàng hôn đỏ rực như máu đã hoàn toàn chìm khuất sau những rặng núi điệp trùng phía tây, nhường chỗ cho màn đêm đen thẫm tĩnh mịch bao phủ lấy *Thôn Mộc Nhĩ*. Gió đêm bắt đầu thổi mạnh hơn, mang theo hơi nước mát lạnh từ bờ sông mát rượi thổi qua những rặng tre xào xạc, nhưng dường như giữa khoảng không gian tĩnh mịch ấy vẫn phảng phất một chút gì đó bất ổn của thời cuộc dông bão sắp sửa ập đến nhân gian.\nNgươi đi trên con đường đất quen thuộc, bước chân nhẹ nhàng uyển chuyển. Chân nguyên trong cơ thể cuộn trào đều đặn theo từng nhịp thở, giúp ngươi hoàn toàn giữ được sự thư thái tối đa dù đêm tối đã buông xuống. Nghĩ đến bóng dáng nhỏ nhắn đang đợi mình ở nhà, lòng ngươi bỗng chốc mềm mại đi rất nhiều, mọi lo toan về thời cuộc hay những lời cảnh báo của *Lão Tam* về giáo chúng *Thái Bình Đạo* đều bị quét sạch ra sau đầu.\n*Tú Nhi* chính là tên chữ của *Điêu Thuyền* – đệ nhất mỹ nữ của thời *Tam Quốc* trong tương lai. Nhưng hiện tại, nàng vẫn chỉ là một cô bé hàng xóm mười tuổi ngây thơ, thánh thiện của ngươi. Phụ mẫu của nàng vốn là những nông phu hiền lành, nhưng không may đã qua đời vì một trận dịch bệnh quỷ quái hoành hành cách đây hai năm. Kể từ cái ngày định mệnh tang thương ấy, khi một cô bé tám tuổi khóc đến khản cả giọng bên linh cữu lạnh lẽo của cha mẹ, chính ngươi đã dang tay che chở và dắt tay nàng bước qua những tháng ngày tăm tối nhất. \nTrong suốt hai năm ròng rã đầy rẫy những biến động khôn lường ngoài kia, luôn là một tay ngươi chăm sóc, bảo hộ cho nàng. Cuộc sống nơi thôn dã nghèo khó nhưng bình yên, ngươi dựa vào bản lĩnh săn bắn và câu cá của mình để nuôi sống hai miệng ăn. Mỗi lần vào rừng sâu săn được gà rừng, thỏ béo, hay ra bờ sông câu được những con cá tươi ngon nhất, ngươi luôn dành phần thịt mềm ngọt nhất cho *Tú Nhi*. Chỗ còn thừa, ngươi mới đem ra chợ huyện bán lấy vài đồng tiền lẻ mua gạo muối, hoặc giữ lại tự ăn qua ngày. Đối với ngươi, nụ cười rạng rỡ của nàng chính là sự đền đáp xứng đáng nhất, ấm áp nhất giữa thế gian đầy rẫy rạn nứt này.\nKhi bước chân ngươi dừng lại trước chiếc cổng tre nhỏ quen thuộc của sân nhà, ánh lửa vàng ấm áp từ gian bếp nhỏ củi rơm đã lọt qua khe cửa, hắt những vệt sáng nhảy mót lên khoảng sân đất ẩm ướt. Mùi khói bếp thoang thoảng quyện cùng hương vị quen thuộc của mái nhà tranh khiến lòng ngươi dâng lên một cảm giác yên bình khó tả. Ngươi không kìm được mà cất tiếng gọi lớn, giọng nói tràn đầy sự phấn khởi, vang vọng cả góc sân nhỏ."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tú Nhi, Tú Nhi! Ra xem ta câu được con cá to lắm nè!"
+        },
+        {
+          "type": "narrative",
+          "content": "Tiếng gọi vừa dứt, từ bên trong gian bếp, tiếng bước chân nhỏ nhắn, dồn dập nhưng đầy khấp khởi vang lên. Cánh cửa gỗ khẽ kẹt một tiếng mở ra, một bóng dáng nhỏ nhắn, gầy guộc nhanh chóng chạy ra ngoài. Dưới ánh trăng non mới nhú và ánh lửa bập bùng từ bếp lò hắt ra, dung nhan của nàng dần hiện rõ. Dẫu mới mười tuổi, nhưng đường nét trên gương mặt của *Tú Nhi* đã vô cùng thanh tú, đôi mắt to tròn đen lánh như chứa đựng cả bầu trời sao, làn da dẫu có chút sương gió thôn quê nhưng vẫn trắng ngần, mịn màng. Nàng mặc một bộ y phục bằng vải thô màu xanh nhạt đã sờn vai nhưng được giặt giũ vô cùng sạch sẽ, mái tóc đen mượt được bới gọn gàng sau gáy bằng một chiếc trâm gỗ giản dị do chính tay ngươi gọt tặng.\nNhìn thấy ngươi đứng ở sân, tay xách con cá chép lớn vẫn còn quẫy đuôi thỉnh thoảng vảy nước lấp lánh dưới ánh trăng, đôi mắt của *Tú Nhi* cong lên thành hai vầng trăng khuyết đáng yêu. Nàng nhanh nhẹn bước tới, đôi bàn tay nhỏ nhắn giấu trong vạt áo khẽ chìa ra, đón lấy chiếc nón lá trên tay ngươi treo lên vách tre, rồi dịu dàng nói bằng giọng oanh yến trong trẻo."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Diệp ca ca đi câu về rồi à. Mau vào uống bát nước cho mát. Để con cá đó cho muội xử lý. Tối nay chúng ta có canh cá với dưa chua."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi nhìn điệu bộ đảm đang, ra dáng một người nội trợ nhỏ của nàng mà lòng không khỏi ấm áp. Ngươi khẽ đưa con cá cho nàng, cố ý lắc mạnh khiến con cá quẫy đuôi làm nước bắn lên gò má phúng phính của nàng, cười ha hả đầy chiều chuộng."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Được được được. Ta thích nhất là canh cá Tú Nhi nấu!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Tú Nhi* bị nước bắn vào mặt liền khẽ nghiêng đầu né tránh, đôi má phúng phính đỏ ửng lên dưới ánh lửa bếp bập bùng. Nàng giơ vạt áo lên khẽ lau đi những giọt nước bám trên mặt, chu cái miệng nhỏ nhắn lên nhìn ngươi đầy hờn dỗi, nhưng trong mắt lại tràn ngập ý cười ấm áp. Nàng cầm lấy xâu cá, xoay người đi vào bếp, miệng vẫn không quên lẩm bẩm đáp lời ngươi."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Huynh bớt trêu muội lại đi. Nếu thích ăn thì ngày nào muội cũng nấu cho huynh ăn."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi bước theo nàng vào trong gian bếp ấm cúng, nhìn bóng lưng nhỏ nhắn của nàng đang loay hoay múc nước rửa cá bên chum sành. Lòng ngươi ngập tràn một thứ cảm xúc dịu dàng khó tả, ngươi bước tới gần bếp lò, thêm vài thanh củi khô vào đống lửa đang cháy đượm, rồi khẽ cười trêu đùa tiếp lời nàng."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Thế thì ngày nào ta cũng phải cố gắng câu thật nhiều cá rồi!"
+        },
+        {
+          "type": "narrative",
+          "content": "Hai huynh muội cười đùa vui vẻ bên bếp lửa hồng, xua tan đi cái lạnh lẽo và tĩnh mịch của màn đêm nơi thôn dã. *Tú Nhi* quả thực vô cùng khéo tay. Nàng ngồi trên chiếc ghế gỗ nhỏ, một tay giữ cá, tay kia cầm con dao nhỏ đánh vảy một cách thuần thục. Những chiếc vảy cá lấp lánh rơi rụng trên thớt gỗ, tiếng dao thớt gõ nhẹ đều đặn hòa cùng tiếng lửa reo tí tách tạo nên một khúc nhạc gia đình vô cùng êm đềm. \nNgươi ngồi bên cạnh, không đành lòng để nàng làm hết một mình, liền phụ giúp nàng rửa sạch những cây dưa cải muối chua trong hũ gốm góc nhà, rồi thái chúng ra thành từng khúc nhỏ đều đặn. Dưa cải nhà muối có màu vàng ruộm, mùi thơm chua nồng đặc trưng tỏa ra lập tức kích thích vị giác của cả hai. \nKhi nồi nước trên bếp lò bắt đầu sôi sùng sục, phả ra những làn hơi nước mờ ảo, *Tú Nhi* khéo léo thả những khúc cá đã được chiên sơ qua dầu ép từ hạt trà vào nồi. Tiếng \"xèo xèo\" vui tai vang lên, tiếp đó là dưa chua, vài lát gừng già đập dập và một chút ớt hiểm cay nồng để át đi vị tanh của cá sông. Chỉ một loáng sau, một mùi thơm nồng nàn, ngào ngạt của canh cá dưa chua đã tràn ngập khắp gian bếp nhỏ, xua đi cái không khí se lạnh của gió đêm luồn qua khe cửa tre.\nDưới ánh lửa bập bùng của bếp lò, gương mặt của *Tú Nhi* đỏ hồng lên vì hơi nóng, vài sợi tóc mai bết nhẹ mồ hôi dán chặt bên thái dương càng tôn lên vẻ thanh tú, kiều diễm của nàng. Ngươi nhìn nàng chăm chú, trong thâm tâm thầm nghĩ, thời gian trôi qua thật nhanh, cô bé nhỏ ngày nào giờ đã bắt đầu có dáng dấp của một thiếu nữ xinh đẹp. Một ngày nào đó, khi nàng thực sự trưởng thành, e là vẻ đẹp này sẽ khiến cả thế gian ngoài kia phải điên đảo. Nhưng bất luận thế sự đổi dời ra sao, ngươi vẫn thầm thề sẽ dùng cả tính mạng và tu vi chân nguyên của mình để bảo vệ sự thuần khiết, bình yên này của nàng.\nBữa tối giản dị nhanh chóng được dọn ra chiếc bàn gỗ nhỏ đặt ở gian giữa. Một bát canh cá dưa chua bốc khói nghi ngút, một đĩa rau rừng luộc xanh mướt và hai bát cơm gạo tẻ nóng hổi. Hai huynh muội ngồi đối diện nhau, ánh đèn dầu lạc mờ ảo tỏa ra vầng sáng màu cam dịu nhẹ, bao bọc lấy hai tâm hồn nương tựa vào nhau giữa cõi đời đầy biến động.\nNgươi cầm đũa, khéo léo gỡ bỏ hết phần xương dăm của một miếng lườn cá béo ngậy, đặt vào bát của *Tú Nhi*. Nàng ngước nhìn ngươi, đôi mắt lấp lánh niềm hạnh phúc ngập tràn, khẽ gật đầu cảm ơn rồi đưa lên miệng ăn một cách ngon lành."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Cá hôm nay thịt thật săn chắc và ngọt, Diệp ca ca. Huynh cũng ăn đi, đừng chỉ gắp cho muội mãi thế."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi mỉm cười gật đầu, tự múc cho mình một bát nước canh chua cay ấm nồng, húp một ngụm lớn. Vị chua thanh của dưa cải quyện với vị ngọt đậm đà của cá chép sông, chút cay nồng của ớt bừng lên nơi đầu lưỡi khiến cơ thể ngươi như ấm hẳn lên, chân nguyên trong cơ thể vận chuyển nhẹ nhàng, vô cùng sảng khoái."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Ngon lắm! Tay nghề của Tú Nhi nhà ta quả thực ngày càng tiến bộ. Sau này ai cưới được muội chắc chắn là phúc phận tu ba đời mới có được."
+        },
+        {
+          "type": "narrative",
+          "content": "*Tú Nhi* nghe ngươi trêu ghẹo, đôi gò má lại một lần nữa đỏ bừng lên như quả táo chín. Nàng cúi đầu thật thấp, gần như muốn chôn mặt vào bát cơm, khẽ lý nhí trong miệng đầy thẹn thùng."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Ca ca lại nói đùa rồi... Muội chẳng thèm gả cho ai cả. Muội chỉ muốn ở lại đây, ngày ngày nấu canh cá cho ca ca ăn thôi."
+        },
+        {
+          "type": "narrative",
+          "content": "Lời nói ngây ngô nhưng chân thành của nàng chạm vào nơi mềm mại nhất trong lòng ngươi. Ngươi khẽ thở dài một tiếng dầy tự hào và thương mến, xoa đầu nàng một cái thật nhẹ, không nói gì thêm mà chỉ lẳng lặng gắp thêm thức ăn vào bát cho nàng. \nBên ngoài cửa sổ, gió đêm vẫn thổi ào ạt qua rặng tre, tiếng xào xạc ngày một lớn hơn. Màn đêm bao phủ lấy *Thôn Mộc Nhĩ* càng lúc càng dày đặc, tựa như một tấm màn đen khổng lồ đang che giấu những sóng gió, bão bùng của thiên hạ ngoài kia. Giữa cõi nhân gian đang dần rạn nứt bởi binh đao và loạn lạc, trong căn nhà tranh nhỏ bé này, ánh lửa ấm áp và mùi thơm của bát canh cá dưa chua dường như đã tạo nên một thế giới hoàn toàn tách biệt, yên bình và đầy ắp tình thương.\nSau khi dùng xong bữa tối ấm cúng, hai huynh muội cùng nhau thu dọn bát đũa. Ngươi giành phần rửa bát để nàng nghỉ ngơi, nhưng *Tú Nhi* vẫn không chịu ngồi yên, nàng lấy chiếc chổi tre nhỏ quét dọn sạch sẽ những vảy cá rơi rụng dưới đất và lau chùi bàn ăn ngăn nắp. Mọi việc xong xuôi, đêm cũng đã về khuya, gió ngoài trời thổi qua khe cửa rít lên từng hồi lạnh buốt.\nNgươi tiễn *Tú Nhi* về gian phòng nhỏ bên cạnh của nàng. Đứng trước cửa phòng, ngươi khẽ chỉnh lại chiếc áo khoác thô cho nàng, dặn dò chu đáo."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Đêm nay gió lạnh lắm, muội nhớ đắp chăn ấm và đóng chặt cửa sổ nhé. Có chuyện gì cứ gọi ta ngay, ta ở ngay gian bên cạnh."
+        },
+        {
+          "type": "narrative",
+          "content": "*Tú Nhi* ngoan ngoãn gật đầu, đôi mắt to tròn nhìn ngươi đầy lưu luyến, nàng khẽ cười ngọt ngào rồi khép hờ cánh cửa gỗ."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Diệp ca ca cũng ngủ ngon nhé. Ngày mai muội lại chờ huynh mang cá về."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi mỉm cười quay trở về gian phòng của mình. Đóng chặt cửa phòng, ngươi ngồi xếp bằng trên chiếc giường gỗ đơn sơ. Đêm sâu tĩnh mịch, chỉ có tiếng gió rít gào bên ngoài vách đất. Ngươi khẽ nhắm mắt, điều hòa hơi thở, cảm nhận luồng chân nguyên tràn đầy đang luân chuyển tuần hoàn khắp các kinh mạch trong cơ thể. Những lời cảnh báo lúc chiều của *Lão Tam* về đám đạo sĩ mặc áo vàng của *Thái Bình Đạo* lại một lần nữa hiện lên trong tâm trí ngươi. Thời cuộc đang dần trở nên hỗn loạn, và để bảo vệ nụ cười bình yên của *Tú Nhi*, ngươi biết mình cần phải chuẩn bị thật kỹ lưỡng cho những ngày tháng sắp tới."
         }
       ]
     }
   ],
   "choices": [
-    "Tiến đến giúp Lão Tam gánh nước và hỏi thăm thêm về các tin đồn quanh huyện. {Tỷ lệ thành công: 90%. Hậu quả/Phần thưởng: Tăng hảo cảm với dân làng, nhận thông tin về tình hình quân sự.}",
-    "Đi dạo quanh làng để quan sát địa thế và tìm kiếm dấu hiệu của linh khí tu luyện. {Tỷ lệ thành công: 70%. Hậu quả/Phần thưởng: Có khả năng phát hiện địa điểm tu luyện hoặc vật phẩm bị bỏ quên.}",
-    "Rời thôn, đi thẳng về phía huyện lỵ Hãn Châu để xem thực hư chuyện quan binh lập trạm. {Tỷ lệ thành công: 60%. Hậu quả/Phần thưởng: Tiếp cận gần hơn với sự kiện chính trị, rủi ro bị quan binh sách nhiễu.}",
-    "Tìm một gốc cây cổ thụ vắng người, bắt đầu tĩnh tâm cảm nhận luồng khí tức đầu tiên của trời đất. {Tỷ lệ thành công: 50%. Hậu quả/Phần thưởng: Bắt đầu quá trình tu luyện cấp độ 1, có thể ngộ ra sơ bộ về linh lực.}"
+    "Ngồi xếp bằng tĩnh tọa vận chuyển chân nguyên rèn luyện tu vi để gia tăng thực lực phòng thân trước thời loạn. {Tỷ lệ thành công: 85%, Hậu quả/Phần thưởng: Chân nguyên trở nên tinh thuần và mạnh mẽ hơn, cơ thể tràn đầy sinh khí}",
+    "Đi vòng quanh kiểm tra lại toàn bộ hệ thống hàng rào và cửa nẻo quanh nhà để đảm bảo an toàn tuyệt đối cho Tú Nhi trong đêm tối. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Phát hiện các điểm yếu của tường rào để gia cố, tăng mức độ an toàn cho ngôi nhà}",
+    "Thắp một ngọn đèn dầu nhỏ và ngồi nghiên cứu tấm bản đồ địa hình xung quanh Thôn Mộc Nhĩ để tìm kiếm các khu vực săn bắn và câu cá an toàn hơn. {Tỷ lệ thành công: 80%, Hậu quả/Phần thưởng: Hiểu rõ địa hình xung quanh, phát hiện thêm một vài điểm câu cá và săn bắn tiềm năng}",
+    "Nằm nghỉ ngơi thư giãn để hồi phục hoàn toàn tinh thần sau một ngày dài đi câu mệt mỏi chuẩn bị cho các hoạt động ngày mai. {Tỷ lệ thành công: 100%, Hậu quả/Phần thưởng: Tinh thần sảng khoái tối đa, xua tan mọi mệt mỏi thể chất}"
   ],
   "gameMode": "EXPLORATION",
   "activeTrade": {
@@ -666,5 +569,5 @@
     "itemSpecificBuyBonuses": {}
   },
   "storySummaries": [],
-  "adventureTurnCount": 0
+  "adventureTurnCount": 1
 }
