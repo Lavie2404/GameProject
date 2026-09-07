@@ -12241,6 +12241,48 @@ const calculateMaxLearnedSkills = (character) => {
     return maxSkills;
 };
 
+// --- KHO TIỀM THỨC DÙNG CHUNG ----------------------------------------------
+// Kho tiềm thức là của CẢ TỔ ĐỘI (nhân vật chính + đồng hành), không tách riêng
+// theo từng hành giả. Dữ liệu vẫn nằm rải rác trong `learnedSkills` của từng
+// thành viên (để không phải migrate save cũ); các helper dưới đây gom lại thành
+// một kho duy nhất, còn khi gỡ kỹ năng thì luôn trả về nhân vật chính (chủ kho).
+const getSkillPoolMembers = (characters) =>
+    (characters || []).filter(c => c && (c.isPlayer || c.isCompanion));
+
+/** Mọi kỹ năng chưa vận dụng của cả tổ đội, khử trùng lặp theo id. */
+const getSharedSkillPool = (characters) => {
+    const members = getSkillPoolMembers(characters);
+    const equippedIds = new Set();
+    members.forEach(m => Object.values(m.equippedSkills || {}).forEach(s => { if (s && s.id) equippedIds.add(s.id); }));
+    const pool = new Map();
+    members.forEach(m => {
+        (m.learnedSkills || m.skills || []).forEach(s => {
+            if (s && s.id && !equippedIds.has(s.id) && !pool.has(s.id)) pool.set(s.id, s);
+        });
+    });
+    return Array.from(pool.values());
+};
+
+/** Sức chứa kho chung = 10 cơ bản + mọi ô cộng thêm (ADD_SKILL_SLOT) của cả tổ đội. */
+const calculateSharedMaxLearnedSkills = (characters) => {
+    const base = calculateMaxLearnedSkills(null);
+    return getSkillPoolMembers(characters).reduce((sum, m) => sum + (calculateMaxLearnedSkills(m) - base), base);
+};
+
+/** Xóa một kỹ năng (theo id) khỏi learnedSkills của MỌI thành viên tổ đội. */
+const removeSkillFromSharedPool = (characters, skillId) => {
+    getSkillPoolMembers(characters).forEach(m => {
+        if (Array.isArray(m.learnedSkills)) m.learnedSkills = m.learnedSkills.filter(s => !s || s.id !== skillId);
+    });
+};
+
+/** Tổ đội đã biết kỹ năng tên này chưa (kho chung + ô đang dùng của nhân vật mục tiêu). */
+const isSkillKnownByParty = (characters, targetCharacter, skillName) => {
+    if (!skillName) return false;
+    const equipped = Object.values((targetCharacter && targetCharacter.equippedSkills) || {}).some(s => s && s.Name === skillName);
+    return equipped || getSharedSkillPool(characters).some(s => s && s.Name === skillName);
+};
+
 const CustomSkillForgeModal = ({ show, onClose, onSaveSkill, characterId, character, gameSettings, onGenerateVfxImage, availableSkills }) => {
     const [activeTab, setActiveTab] = useState('vfx'); 
     const [isGeneratingVfx, setIsGeneratingVfx] = useState(false);
@@ -12807,19 +12849,11 @@ const SkillManagementModal = ({ show, onClose, knowledge, handleEquipSkill, hand
     const selectedCharacter = manageableCharacters.find(c => c.id === selectedCharacterId) || manageableCharacters[0];
     if (!selectedCharacter) return null; 
     
-    const maxLearnedSkills = calculateMaxLearnedSkills(selectedCharacter);
+    // Kho Tiềm Thức DÙNG CHUNG cho cả tổ đội: không phụ thuộc hành giả đang chọn.
+    // Chỉ cột "Kỹ Năng Đang Dùng" mới là của riêng từng hành giả.
+    const maxLearnedSkills = calculateSharedMaxLearnedSkills(knowledge?.characters);
     const { equippedSkills = {} } = selectedCharacter;
-    const allSkillsInStorage = selectedCharacter.learnedSkills || selectedCharacter.skills || [];
-    const uniqueSkillsMap = new Map();
-    allSkillsInStorage.forEach(s => {
-        if (s && s.id) {
-            uniqueSkillsMap.set(s.id, s);
-        }
-    });
-    const uniqueSkillsInStorage = Array.from(uniqueSkillsMap.values());
-    
-    const equippedSkillIds = new Set(Object.values(equippedSkills).filter(Boolean).map(s => s.id));
-    const unequippedSkills = uniqueSkillsInStorage.filter(s => !equippedSkillIds.has(s.id));
+    const unequippedSkills = getSharedSkillPool(knowledge?.characters);
 
 
     const onEquipWrapper = (skill, characterId) => {
@@ -13055,7 +13089,7 @@ const SkillManagementModal = ({ show, onClose, knowledge, handleEquipSkill, hand
                     {/* Cột 1: Kho tiềm thức */}
                     <div className={getTabClass('kho')}>
                         <div className="flex justify-between items-center mb-5 flex-shrink-0 border-b border-[#cda45e]/20 pb-3">
-                            <h3 className="text-lg font-bold text-[#cda45e] uppercase tracking-widest flex items-center">Kho Tiềm Thức</h3>
+                            <h3 className="text-lg font-bold text-[#cda45e] uppercase tracking-widest flex items-center" title="Kho dùng chung cho cả tổ đội — hành giả nào cũng có thể vận dụng kỹ năng trong kho">Kho Tiềm Thức <span className="ml-2 text-[9px] font-normal text-[#8ba888] normal-case tracking-wider border border-[#8ba888]/40 px-1.5 py-0.5">dùng chung</span></h3>
                             
                             {/* --- NÚT TẠO KỸ NĂNG VÀ ĐẾM SỐ LƯỢNG ĐƯỢC GOM VÀO ĐÂY --- */}
                             <div className="flex items-center gap-2">
@@ -24309,9 +24343,10 @@ useEffect(() => {
 
                             if (!targetCharacter) break; 
 
-                            const maxSkills = calculateMaxLearnedSkills(targetCharacter);
-                            if ((targetCharacter.learnedSkills || []).length >= maxSkills) {
-                                break; 
+                            // Kho tiềm thức dùng chung: giới hạn tính trên cả tổ đội.
+                            const maxSkills = calculateSharedMaxLearnedSkills(knowledge.characters);
+                            if (getSharedSkillPool(knowledge.characters).length >= maxSkills) {
+                                break;
                             }
 
                             let finalRarity = skillIdea.rarity || sourceRarity || getFinalRarityByLevel(targetCharacter?.level || 1);
@@ -30330,7 +30365,10 @@ const handleEquipSkill = (skillToEquip, characterId = 'player') => {
         }
 
         if (slotToFill) {
-            character.learnedSkills = character.learnedSkills.filter(s => s.id !== skillToEquip.id);
+            // Kho dùng chung: kỹ năng có thể đang nằm trong learnedSkills của một
+            // thành viên khác — gỡ khỏi TẤT CẢ để không bị nhân đôi.
+            removeSkillFromSharedPool(newKnowledge.characters, skillToEquip.id);
+            if (!character.equippedSkills) character.equippedSkills = {};
             character.equippedSkills[slotToFill] = skillToEquip;
             
             setModalMessage({ show: true, title: "Thành Công", content: `Đã vận hành kỹ năng "${skillToEquip.Name || skillToEquip.action_name}".`, type: "success" });
@@ -30352,13 +30390,14 @@ const handleForgetSkill = (skillToForget, characterId) => {
         onConfirm: () => {
             setknowledge(prev => {
                 const newKnowledge = JSON.parse(JSON.stringify(prev));
+                // Kho dùng chung: xóa khỏi mọi thành viên tổ đội, không chỉ hành giả đang chọn.
+                removeSkillFromSharedPool(newKnowledge.characters, skillToForget.id);
                 const charIndex = newKnowledge.characters.findIndex(c => c.id === characterId);
-                
                 if (charIndex > -1) {
                     const character = newKnowledge.characters[charIndex];
                     character.learnedSkills = (character.learnedSkills || []).filter(s => s.id !== skillToForget.id);
                 }
-                
+
                 return newKnowledge;
             });
             setModalMessage({
@@ -30385,14 +30424,19 @@ const handleUnequipSkill = (slotKey, characterId = 'player') => {
 
         if (!skillToUnequip) return prev;
 
-        // Kiểm tra giới hạn kho tiềm thức
-        if (character.learnedSkills.length >= 4) {
-            setModalMessage({ show: true, title: "Kho Tiềm Thức Đầy", content: "Không thể gỡ kỹ năng vì kho đã đầy. Hãy gỡ một kỹ năng khác trước.", type: "error" });
+        // Kiểm tra giới hạn kho tiềm thức DÙNG CHUNG của cả tổ đội
+        const sharedPoolSize = getSharedSkillPool(newKnowledge.characters).length;
+        const sharedMax = calculateSharedMaxLearnedSkills(newKnowledge.characters);
+        if (sharedPoolSize >= sharedMax) {
+            setModalMessage({ show: true, title: "Kho Tiềm Thức Đầy", content: `Kho chung của tổ đội đã đầy (${sharedPoolSize}/${sharedMax}). Hãy lãng quên hoặc vận dụng một kỹ năng khác trước.`, type: "error" });
             return prev;
         }
 
-        // Trả kỹ năng về kho
-        character.learnedSkills.push(skillToUnequip);
+        // Trả kỹ năng về kho chung — chủ kho là nhân vật chính (nếu có), để
+        // mọi hành giả đều thấy và dùng được.
+        const poolOwner = newKnowledge.characters.find(c => c.isPlayer) || character;
+        if (!Array.isArray(poolOwner.learnedSkills)) poolOwner.learnedSkills = [];
+        poolOwner.learnedSkills.push(skillToUnequip);
         // Làm trống ô trang bị
         character.equippedSkills[slotKey] = null;
 
@@ -33952,7 +33996,7 @@ const handbookData = [
                 subtitle: "Kho Tiềm Thức & Vận Dụng",
                 content: (
                     <>
-                        <p>Mọi kỹ năng ngươi học được sẽ đi vào <strong>"Kho Tiềm Thức"</strong>. Kho này có giới hạn (mặc định chứa được 4 kỹ năng, có thể tăng sức chứa bằng các kỹ năng phiêu lưu khác).</p>
+                        <p>Mọi kỹ năng tổ đội học được sẽ đi vào <strong>"Kho Tiềm Thức"</strong> — kho này <strong>dùng chung</strong> cho cả nhân vật chính lẫn đồng hành: ai cũng có thể vận dụng kỹ năng trong kho. Kho có giới hạn (mặc định chứa được 10 kỹ năng, có thể tăng sức chứa bằng các kỹ năng phiêu lưu khác).</p>
                         <p className="mt-3">Để sử dụng một kỹ năng, ngươi phải <strong>"Vận Dụng"</strong> nó từ Kho Tiềm Thức vào các ô <strong>"Thực Tại"</strong>. Mỗi nhân vật có:</p>
                         <ul className="list-disc list-inside space-y-1 mt-2 text-sm bg-[#101a10] p-3 border border-[#8ba888]/20">
                             <li>2 ô kỹ năng Chiến đấu cơ bản</li>
@@ -34573,9 +34617,10 @@ const applyUpdates = (currentKnowledge, updates, currentGameMode, commandBlock =
                 }
                 case 'Sách kỹ năng': {
                     const skillNameToLearn = itemToUse.skillName || itemToUse.Name;
-                    const alreadyLearned = Object.values(character.equippedSkills || {}).some(s => s && s.Name === skillNameToLearn) || (character.learnedSkills || []).some(s => s && s.Name === skillNameToLearn);
+                    // Kho dùng chung: kỹ năng đã có trong kho tổ đội thì không học lại.
+                    const alreadyLearned = isSkillKnownByParty(newKnowledge.characters, character, skillNameToLearn);
                     if (alreadyLearned) {
-                        setTimeout(() => setModalMessage({ show: true, title: "Kỹ Năng Đã Biết", content: `${character.Name} đã biết "${skillNameToLearn}".`, type: "info" }), 100);
+                        setTimeout(() => setModalMessage({ show: true, title: "Kỹ Năng Đã Biết", content: `Tổ đội đã có kỹ năng "${skillNameToLearn}" trong kho tiềm thức.`, type: "info" }), 100);
                         return;
                     }
 
@@ -35566,8 +35611,8 @@ const applyUpdates = (currentKnowledge, updates, currentGameMode, commandBlock =
             }
 
             if (!targetCharacter) { console.warn(`Không tìm thấy nhân vật mục tiêu "${idea.target}" để học kỹ năng.`); return; }
-            const alreadyLearned = Object.values(targetCharacter.equippedSkills || {}).some(skill => skill && skill.Name === idea.name) || (targetCharacter.learnedSkills || []).some(skill => skill && skill.Name === idea.name);
-            if (alreadyLearned) { console.warn(`Nhân vật "${targetCharacter.Name}" đã biết kỹ năng "${idea.name}". Bỏ qua.`); return; }
+            const alreadyLearned = isSkillKnownByParty(newKnowledge.characters, targetCharacter, idea.name);
+            if (alreadyLearned) { console.warn(`Tổ đội đã có kỹ năng "${idea.name}" (kho tiềm thức dùng chung). Bỏ qua.`); return; }
             if (!newKnowledge.pendingCreations) newKnowledge.pendingCreations = [];
             newKnowledge.pendingCreations.push({ type: 'skill', payload: { skillIdea: { id: crypto.randomUUID(), ...idea }, sourceRarity: idea.rarity || null, targetCharacterId: finalTargetId } });
         }
@@ -38485,8 +38530,9 @@ const formatStoryText = useCallback((text) => {
                                         char.basicAttackVfx = newSkill.visual_effects || newSkill.effects?.[0]?.action?.visual_effects;
                                     } else {
                                         if (!char.learnedSkills) char.learnedSkills = [];
+                                        // Kho dùng chung: kỹ năng hiến tế có thể nằm ở thành viên khác.
                                         if (sacrificeSkillId) {
-                                            char.learnedSkills = char.learnedSkills.filter(s => s.id !== sacrificeSkillId);
+                                            removeSkillFromSharedPool(newK.characters, sacrificeSkillId);
                                         }
                                         char.learnedSkills.push(newSkill);
                                     }
