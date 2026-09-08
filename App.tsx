@@ -26343,22 +26343,69 @@ const parseGeminiResponseAndUpdateState = async (text, knowledgeToUse, setActive
     // từ nào có nghĩa tương đương tiếng Việt rõ ràng, không mơ hồ thì THAY THẾ
     // (vd "under" = "dưới"; "curtains" = "màn/rèm", ở đây trong cụm "hạ màn" nên
     // dùng "màn"); còn lại (chưa xác định được nghĩa thay thế an toàn) thì CẮT BỎ.
-    const ENGLISH_LEAK_REPLACEMENTS = { under: 'dưới', curtains: 'màn' };
-    const ENGLISH_LEAK_STRIP_WORDS = [];
+    //
+    // Mở rộng 2026-09-08 (tái phát với "...thở dài out khỏi..."): thay vì chỉ
+    // vá từng từ đã gặp, chặn sẵn bộ TỪ CHỨC NĂNG tiếng Anh hay bị AI chèn
+    // (giới từ, liên từ, trạng từ, trợ động từ). Chỉ chọn những từ KHÔNG trùng
+    // hình với âm tiết tiếng Việt có dấu (AI luôn viết có dấu, nên "the"/"and"/
+    // "out" xuất hiện nguyên dạng ASCII giữa câu chắc chắn là rò rỉ). Vẫn KHÔNG
+    // đụng tới danh từ/động từ thường vì dễ trùng tên riêng ngoại quốc.
+    const ENGLISH_LEAK_REPLACEMENTS = {
+        // giới từ / trạng từ chỉ hướng — có nghĩa tương đương rõ ràng
+        out: 'ra', into: 'vào', onto: 'lên', from: 'từ', with: 'với', through: 'xuyên qua',
+        under: 'dưới', beneath: 'bên dưới', above: 'phía trên', below: 'phía dưới', behind: 'phía sau',
+        between: 'giữa', among: 'giữa', toward: 'về phía', towards: 'về phía', inside: 'bên trong',
+        outside: 'bên ngoài', around: 'xung quanh', across: 'băng qua', along: 'dọc theo', beside: 'bên cạnh',
+        within: 'trong', beyond: 'vượt qua', upon: 'lên', until: 'cho đến khi',
+        // liên từ / trạng từ
+        // KHÔNG đưa "then" (tiếng Việt: "then chốt", "cài then") và "the" ("áo the") vào đây.
+        and: 'và', but: 'nhưng', because: 'vì', while: 'trong khi', however: 'tuy nhiên',
+        although: 'dù', though: 'dù', suddenly: 'đột nhiên', slowly: 'chậm rãi', quickly: 'nhanh chóng',
+        finally: 'cuối cùng', again: 'lần nữa', already: 'đã', still: 'vẫn', never: 'không bao giờ',
+        always: 'luôn', almost: 'gần như', very: 'rất', just: 'chỉ', only: 'chỉ', even: 'thậm chí',
+        really: 'thực sự', immediately: 'ngay lập tức', quietly: 'lặng lẽ', gently: 'nhẹ nhàng',
+        // đã gặp thực tế
+        curtains: 'màn',
+    };
+    // Không có bản dịch an toàn theo ngữ cảnh → cắt bỏ (câu tiếng Việt còn lại vẫn đủ ý).
+    const ENGLISH_LEAK_STRIP_WORDS = [
+        'this', 'that', 'these', 'those', 'there', 'here', 'now', 'of', 'over', 'against',
+        'away', 'off', 'is', 'was', 'were', 'are', 'been', 'being', 'has', 'have', 'had',
+        'will', 'would', 'could', 'should', 'itself', 'himself', 'herself', 'themselves',
+    ];
+    // Ranh giới từ theo Unicode (\b của JS coi chữ có dấu như "ế" là ký tự KHÔNG
+    // phải chữ, nên "\bthe\b" có thể khớp nhầm bên trong "thế"/"thê" khi kề dấu).
     const ENGLISH_LEAK_RE = new RegExp(
-        '\\b(' + [...Object.keys(ENGLISH_LEAK_REPLACEMENTS), ...ENGLISH_LEAK_STRIP_WORDS].join('|') + ')\\b',
-        'gi',
+        '(?<!\\p{L})(' + [...Object.keys(ENGLISH_LEAK_REPLACEMENTS), ...ENGLISH_LEAK_STRIP_WORDS].join('|') + ')(?!\\p{L})',
+        'giu',
     );
+    // KHÔNG lọc bên trong: thẻ lệnh [TAG: ...] (vd START_COMBAT_WITH, MOVE_PLAYER_TO
+    // chứa "with"/"to"), thẻ XML <dialogue speaker="...">, và tên riêng *...* (tên
+    // ngoại quốc trong thế giới đồng nhân có thể trùng từ tiếng Anh).
+    const ENGLISH_LEAK_PROTECTED_RE = /(\[[A-Z_]+(?::[^\]]*)?\]|<[^>\n]+>|\*[^*\n]+\*)/g;
+    const scrubEnglishLeak = (segment) => segment.replace(ENGLISH_LEAK_RE, (match) => {
+        // Chữ IN HOA toàn bộ (vd "AND" trong tiêu đề/nhãn) không coi là rò rỉ.
+        if (match.length > 1 && match === match.toUpperCase()) return match;
+        const replacement = ENGLISH_LEAK_REPLACEMENTS[match.toLowerCase()] ?? '';
+        // Giữ hoa đầu câu: "Suddenly" → "Đột nhiên".
+        return (replacement && match[0] === match[0].toUpperCase())
+            ? replacement.charAt(0).toUpperCase() + replacement.slice(1)
+            : replacement;
+    });
+    const scrubEnglishLeakOutsideTags = (content) => content
+        .split(ENGLISH_LEAK_PROTECTED_RE)
+        .map((part, idx) => (idx % 2 === 1 ? part : scrubEnglishLeak(part)))
+        .join('');
 
-    storyContent = storyContent
-        .replace(/[^.!?\n]*chuỗi hành động[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*[.!?]?/gi, '')
-        .replace(/[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*chuỗi hành động[^.!?\n]*[.!?]?/gi, '')
-        .replace(FOREIGN_SCRIPT_LEAK_RE, '')
-        .replace(ENGLISH_LEAK_RE, (match) => ENGLISH_LEAK_REPLACEMENTS[match.toLowerCase()] ?? '')
+    storyContent = scrubEnglishLeakOutsideTags(
+        storyContent
+            .replace(/[^.!?\n]*chuỗi hành động[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*[.!?]?/gi, '')
+            .replace(/[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*chuỗi hành động[^.!?\n]*[.!?]?/gi, '')
+            .replace(FOREIGN_SCRIPT_LEAK_RE, '')
+    )
         .replace(/ {2,}/g, ' ')
-        // Nếu một từ trong ENGLISH_LEAK_STRIP_WORDS (không có bản dịch an toàn) bị
-        // cắt ngay trước dấu câu, nó để lại khoảng trắng mồ côi (vd "...abc ." thay
-        // vì "...abc.") — dọn nốt cho câu liền mạch, dù danh sách đó hiện đang rỗng.
+        // Từ bị CẮT ngay trước dấu câu để lại khoảng trắng mồ côi (vd "...abc ." thay
+        // vì "...abc.") — dọn nốt cho câu liền mạch.
         .replace(/ +([.,!?;:])/g, '$1');
 
     const updates = {
