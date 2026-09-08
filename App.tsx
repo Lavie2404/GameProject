@@ -17813,7 +17813,11 @@ const githubApiFetch = async (urlPath, options = {}) => {
     if (!GITHUB_SAVE_TOKEN) {
         throw new Error('Chưa cấu hình VITE_GITHUB_TOKEN trong .env.local. Vui lòng tạo Personal Access Token (quyền "Contents: Read and write") cho repo và điền vào .env.local rồi khởi động lại.');
     }
+    // GitHub REST trả `Cache-Control: max-age=60` — trình duyệt sẽ dùng lại phản
+    // hồi GET cũ trong 60s, nên ngay sau khi lưu, đọc lại index.json/slot vẫn ra
+    // bản cũ (slot vừa lưu hiện "TRỐNG", sha cũ dễ gây 409). Luôn bỏ qua cache.
     return fetch(`https://api.github.com/repos/${GITHUB_SAVE_REPO}/${urlPath}`, {
+        cache: 'no-store',
         ...options,
         headers: {
             'Authorization': `Bearer ${GITHUB_SAVE_TOKEN}`,
@@ -17884,6 +17888,25 @@ const getGithubSaveIndex = async () => {
     while (slots.length < GITHUB_SAVE_SLOT_COUNT) slots.push(null);
     return { slots: slots.slice(0, GITHUB_SAVE_SLOT_COUNT), sha: result.sha };
 };
+
+// Chuyển 5 slot trong index.json thành các mục "bản lưu" cùng hình dạng với
+// bản lưu Firestore/IndexedDB để dùng chung cho danh sách Tải Game và modal chọn slot.
+const githubSlotsToSavedGames = (slots) => (slots || [])
+    .map((slot, idx) => slot ? {
+        id: `github_${idx + 1}_${slot.gameId || idx + 1}`,
+        isGithubCloud: true,
+        githubSlot: idx + 1,
+        updatedAt: { toDate: () => new Date(slot.timestamp) },
+        currentTurn: slot.currentTurn,
+        gameSettings: { characterName: slot.characterName, storyTitle: slot.storyTitle, difficulty: slot.difficulty }
+    } : null)
+    .filter(Boolean);
+
+const sortSavedGamesNewestFirst = (games) => [...games].sort((a, b) => {
+    const timeA = a.updatedAt?.toDate ? a.updatedAt.toDate().getTime() : 0;
+    const timeB = b.updatedAt?.toDate ? b.updatedAt.toDate().getTime() : 0;
+    return timeB - timeA;
+});
 
 // 1. Hàm gọi lấy khóa ImgBB bảo mật được giấu trên Supabase
 const fetchImgbbKeyFromCloud = async () => {
@@ -23366,6 +23389,9 @@ const handleConfirmGithubSaveSlot = async (slotNumber) => {
         );
 
         setModalMessage({ show: true, title: 'Đã Lưu Thành Công', content: `Đã lưu tiến trình lên GitHub (Phiến Ngọc ${slotNumber}). Bạn có thể tải lại đúng ván này trên bất kỳ thiết bị nào khác.`, type: 'success' });
+        // Cập nhật ngay danh sách bản lưu (không đợi tải lại trang) để modal Tải
+        // Game / chọn slot hiện đúng phiến ngọc vừa ghi.
+        refreshGithubSavedGames();
     } catch (error) {
         console.error("Lỗi khi lưu lên GitHub:", error);
         setModalMessage({ show: true, title: 'Lỗi Lưu GitHub', content: error.message, type: 'error' });
@@ -24461,6 +24487,27 @@ useEffect(() => {
 }, [isLoading, isCheckingMemory, gameMode, activeCombatLoop]);
 
 
+  // Nạp lại RIÊNG phần bản lưu GitHub trong danh sách. Trước đây danh sách chỉ
+  // được dựng lại trong callback onSnapshot của Firestore bên dưới — Firestore
+  // không đổi khi lưu lên GitHub, nên sau khi lưu xong Phiến Ngọc mới vẫn hiện
+  // "TRỐNG"/"Lượt" cũ cho tới khi tải lại trang (báo lỗi 2026-09-08).
+  const refreshGithubSavedGames = useCallback(async () => {
+      if (!GITHUB_SAVE_TOKEN) return;
+      try {
+          const { slots } = await getGithubSaveIndex();
+          const githubGames = githubSlotsToSavedGames(slots);
+          setSavedGames(prev => sortSavedGamesNewestFirst([...prev.filter(g => !g.isGithubCloud), ...githubGames]));
+      } catch (e) {
+          console.error("Lỗi nạp lại danh sách bản lưu GitHub:", e);
+      }
+  }, []);
+
+  // Mỗi lần mở modal Tải Game hoặc modal chọn slot "Lưu Lên GitHub" thì đọc lại
+  // index.json để luôn thấy đúng trạng thái 5 phiến ngọc (kể cả lưu từ máy khác).
+  useEffect(() => {
+      if (showLoadGameModal || showGithubSaveSlotModal) refreshGithubSavedGames();
+  }, [showLoadGameModal, showGithubSaveSlotModal, refreshGithubSavedGames]);
+
   useEffect(() => {
     if (isAuthReady && userId) {
       const gamesCollectionPath = `artifacts/${appId}/users/${userId}/games`;
@@ -24498,30 +24545,13 @@ useEffect(() => {
           if (GITHUB_SAVE_TOKEN) {
               try {
                   const { slots } = await getGithubSaveIndex();
-                  githubGames = slots
-                      .map((slot, idx) => slot ? {
-                          id: `github_${idx + 1}_${slot.gameId || idx + 1}`,
-                          isGithubCloud: true,
-                          githubSlot: idx + 1,
-                          updatedAt: { toDate: () => new Date(slot.timestamp) },
-                          currentTurn: slot.currentTurn,
-                          gameSettings: { characterName: slot.characterName, storyTitle: slot.storyTitle, difficulty: slot.difficulty }
-                      } : null)
-                      .filter(Boolean);
+                  githubGames = githubSlotsToSavedGames(slots);
               } catch (e) {
                   console.error("Lỗi tải danh sách bản lưu GitHub:", e);
               }
           }
 
-          const combinedGames = [...localAutosaves, ...cloudGames, ...githubGames];
-
-          combinedGames.sort((a, b) => {
-              const timeA = a.updatedAt?.toDate ? a.updatedAt.toDate().getTime() : 0;
-              const timeB = b.updatedAt?.toDate ? b.updatedAt.toDate().getTime() : 0;
-              return timeB - timeA;
-          });
-
-          setSavedGames(combinedGames);
+          setSavedGames(sortSavedGamesNewestFirst([...localAutosaves, ...cloudGames, ...githubGames]));
       }, (error) => {
           console.error("Error fetching saved games:", error);
       });
@@ -28146,11 +28176,15 @@ const filterHistoryContext = (history, htabName) => {
 const convertCharacterStatsToNarrative = (character) => {
     if (!character) return "";
     const hpRatio = character.maxhp > 0 ? character.hp / character.maxhp : 1;
-    let hpDesc = "hoàn toàn khỏe mạnh, chân nguyên tràn đầy";
-    if (hpRatio <= 0) hpDesc = "khí tuyệt thân vong, kinh mạch đứt đoạn";
+    // Genre-neutral wording only: this string is injected into the narrator
+    // prompt every turn, so any cultivation vocabulary here ("chân nguyên",
+    // "chân khí", "kinh mạch"...) leaks into settings that have no such
+    // energy system (e.g. Tam Quốc). Describe the body, not an energy.
+    let hpDesc = "hoàn toàn khỏe mạnh, sức lực sung mãn";
+    if (hpRatio <= 0) hpDesc = "khí tuyệt thân vong";
     else if (hpRatio < 0.2) hpDesc = "hơi thở thoi thóp, sinh mệnh như ngọn đèn trước gió, cận kề tử lộ";
-    else if (hpRatio < 0.5) hpDesc = "bị trọng thương nghiêm trọng, nguyên khí tổn hao nặng nề, đi đứng lảo đảo";
-    else if (hpRatio < 0.8) hpDesc = "suy yếu nhẹ, chân khí có chút hỗn loạn do vết thương ngoài da";
+    else if (hpRatio < 0.5) hpDesc = "bị trọng thương nghiêm trọng, khí huyết hao tổn nặng nề, đi đứng lảo đảo";
+    else if (hpRatio < 0.8) hpDesc = "suy yếu nhẹ, còn đau nhức do vết thương ngoài da";
 
     const statuses = [...(character.longTermStatuses || []), ...(character.combatStatuses || [])];
     const badStatuses = statuses.filter(s => {
@@ -29059,7 +29093,7 @@ ${PILLAR1_DIRECTIVES_NARRATION.map(x => '//    * ' + x).join('\n')}
 
 // 1.5. CHỈ VIẾT BẰNG CHỮ QUỐC NGỮ (TUYỆT ĐỐI CẤM CHỮ VIẾT NGOÀI TIẾNG VIỆT):
 //    - Toàn bộ văn tường thuật, hội thoại, và 4 gợi ý hành động PHẢI 100% bằng chữ Quốc ngữ (bảng chữ Latin có dấu tiếng Việt). TUYỆT ĐỐI KHÔNG được để lẫn bất kỳ ký tự/từ nào của ngôn ngữ khác vào giữa câu tiếng Việt — kể cả chỉ một chữ Hán/Kana/Hangul/Kirin (Nga) đơn lẻ, dù chỉ một âm tiết, VÀ kể cả một TỪ TIẾNG ANH nguyên vẹn (dù cùng dùng chữ Latin như tiếng Việt) — mọi từ, kể cả từ đơn giản/thông dụng, PHẢI dịch hẳn sang tiếng Việt, không được giữ nguyên văn gốc tiếng Anh.
-//    - Muốn diễn đạt khái niệm gốc Hán (võ công, công pháp, danh xưng, tâm pháp...), BẮT BUỘC dùng từ Hán Việt đã phiên âm sang chữ Quốc ngữ (VD: "niệm", "chân nguyên", "tâm ma"), TUYỆT ĐỐI KHÔNG viết trực tiếp ký tự Hán gốc (VD: 念, 心, 氣).
+//    - Muốn diễn đạt khái niệm gốc Hán (võ công, công pháp, danh xưng, tâm pháp...), BẮT BUỘC dùng từ Hán Việt đã phiên âm sang chữ Quốc ngữ (VD: "niệm", "chiêu thức", "tâm ma"), TUYỆT ĐỐI KHÔNG viết trực tiếp ký tự Hán gốc (VD: 念, 心, 氣).
 //    - VÍ DỤ SAI (lẫn tiếng Nga): "Vận dụng toàn bộ sức mạnh физи thể chất lướt tới áp sát..." — "физи" là ký tự ngoại lai vô nghĩa trong câu, TUYỆT ĐỐI không được xuất hiện.
 //    - VÍ DỤ SAI (lẫn chữ Hán thay vì Hán Việt): "Ngươi tâm念 vừa động, chuôi thần binh... hiện ra" — phải viết trọn "niệm" bằng chữ Quốc ngữ: "Ngươi tâm niệm vừa động".
 //    - VÍ DỤ SAI (lẫn nguyên từ tiếng Anh): "...bọc giáp sáng quắc under sự dẫn dắt của..." (phải viết "dưới sự dẫn dắt của"); "...màn kịch của mình đã đến lúc thu hạ curtains." (phải viết trọn ý bằng tiếng Việt, VD "đã đến lúc hạ màn.", KHÔNG được giữ từ "curtains").
@@ -29170,6 +29204,15 @@ ${gameSettings.isTamQuocWorld ? `//    - THẾ GIỚI TAM QUỐC: khi một nhâ
 //    - BẮT BUỘC BÁO DANH ĐẦY ĐỦ TẤT CẢ CÁC BÊN, KHÔNG ĐƯỢC BỎ SÓT: Nếu có N bên là Hồn Sư tham chiến (kể cả chính nhân vật chính), TẤT CẢ N bên đều phải báo danh theo đúng cú pháp trên trong CÙNG phản hồi trước khi giao đấu — TUYỆT ĐỐI KHÔNG được chỉ báo danh một bên (VD chỉ NPC đối phương) rồi bỏ quên báo danh của nhân vật chính, hay ngược lại.
 //      * VÍ DỤ SAI: Chỉ có <dialogue speaker="Vương Đông Nhi">Vương Đông Nhi - Cấp 41 - Cường công hệ chiến Hồn Tông - Võ hồn Quang Minh Nữ Thần Điệp.</dialogue> mà thiếu hẳn câu báo danh của nhân vật chính.
 //      * VÍ DỤ ĐÚNG: Cả nhân vật chính lẫn Vương Đông Nhi đều có câu báo danh riêng theo đúng cú pháp, nối tiếp nhau tự nhiên trong mạch truyện trước khi giao đấu.
+
+// 2.10b. CẤM MẶC ĐỊNH HỆ NĂNG LƯỢNG TU LUYỆN KHI BỐI CẢNH KHÔNG THIẾT LẬP (BẮT BUỘC, ÁP DỤNG MỌI LÚC):
+//    - Nhãn thể loại "Tu Tiên"/"Huyền Huyễn"/tên cảnh giới (Luyện Khí, Trúc Cơ, Tiên Đế...) KHÔNG tự động đồng nghĩa với việc nhân vật chính sở hữu "chân nguyên". Chỉ khi phần Bối cảnh/thiết lập thế giới, hành động của người chơi, hay kỹ năng/trạng thái ĐÃ CÓ của nhân vật NÊU RÕ TÊN một dạng năng lượng nội tại (chân nguyên, chân khí, linh lực, nội lực, pháp lực, ma khí...) thì ngươi mới được nhắc đến dạng năng lượng ĐÚNG TÊN đó. Người chơi không nhắc thì coi như KHÔNG TỒN TẠI.
+//    - TUYỆT ĐỐI KHÔNG tự bịa ra rằng nhân vật chính "hồi phục chân nguyên", "chân nguyên dồi dào", "vận chuyển chân khí", "linh lực tràn đầy", "khai mở kinh mạch/đan điền", "điều tức chữa thương bằng nội lực"... như một mặc định — kể cả khi tả sức khỏe, hồi phục, nghỉ ngơi, hay sức mạnh vượt trội. Sức mạnh có thể hoàn toàn đến từ thể chất: luyện thể, gân cốt, khí huyết, sức lực, kinh nghiệm chiến trận. Một cao thủ luyện thể tới đỉnh cao vẫn vô địch mà không cần bất kỳ năng lượng nào.
+//    - Bối cảnh lịch sử/dã sử (Tam Quốc, Xuân Thu, Hán, Đường...): thế giới này KHÔNG có hệ "chân nguyên". Kể cả khi trong bối cảnh có vài nhân vật biết pháp thuật (Tả Từ, Nam Hoa Lão Tiên, Trương Giác...), đó là phép thuật/đạo thuật riêng của HỌ, không phải năng lượng phổ quát mà ai cũng có, và cũng không tự động thuộc về nhân vật chính. Không được lấy sự tồn tại của họ làm lý do để gán chân nguyên/pháp lực cho nhân vật chính hay NPC khác.
+//    - Muốn tả thể trạng/hồi phục khi bối cảnh không có hệ năng lượng, CHỈ dùng ngôn ngữ thân thể: hơi thở, khí huyết, sức lực, cơ bắp, vết thương, mệt mỏi, tinh thần.
+//      * VÍ DỤ SAI: "chân nguyên trong cơ thể đã hồi phục trọn vẹn, dồi dào hơn bao giờ hết" (bối cảnh Tam Quốc, người chơi chưa từng nhắc đến chân nguyên).
+//      * VÍ DỤ ĐÚNG: "vết thương đã lành hẳn, khí huyết lưu thông, sức lực dồi dào hơn bao giờ hết".
+//    - Quy tắc này áp dụng cho văn tường thuật, lời thoại NPC, 'summary' kịch bản, VÀ 4 lựa chọn hành động cuối phản hồi. Nó độc lập với quy tắc 2.11 bên dưới (2.11 chỉ chặn TRƯỚC khi thức tỉnh; 2.10b chặn MỌI LÚC nếu năng lượng đó chưa từng được thiết lập).
 
 // 2.11. QUY TẮC PHONG ẤN NHẬN THỨC SIÊU NHIÊN (BẮT BUỘC KHI BỐI CẢNH THIẾT LẬP):
 //    - Nếu bối cảnh thế giới quy định rằng nhân vật chính và/hoặc người thường chưa/không thể nhận biết được thế giới siêu nhiên (quái vật, dị năng, bí cảnh kỳ văn...) trước khi thức tỉnh/giác ngộ, thì TRƯỚC KHI cốt truyện đã thực sự thuật lại sự kiện thức tỉnh của nhân vật chính, TUYỆT ĐỐI KHÔNG được viết bất kỳ đoạn văn nào miêu tả nhân vật chính hoặc NPC người thường xung quanh nhìn thấy/nghe thấy/cảm nhận được quái vật, thực thể siêu nhiên, hay bí cảnh — dù chỉ thoáng qua, từ xa, hay trong giấc mơ/linh cảm mơ hồ.
@@ -32897,7 +32940,7 @@ QUY TẮC PHÁN QUYẾT:
     - Nếu truyện kể nhân vật bị dầm mưa, dính độc, kiệt sức, đói khát, tẩu hỏa nhập ma, hoặc bị thương thâm mạch... hãy dán trạng thái bất lợi dài hạn tương ứng lên cơ thể họ.
       Xuất thẻ lệnh: [APPLY_LONG_TERM_STATUS: target="Ngươi hoặc Tên đồng hành", status_id="BAT_TINH/TRONG_THUONG/XUAT_HUYET/TRUNG_DOC"]
     - Nếu có nhân vật tử vong trong cốt truyện thám hiểm dã ngoại, xuất thẻ: [CHARACTER_DEATH: Name="Tên nhân vật"]
-    - ĐẶC BIỆT QUAN TRỌNG: Hãy đối chiếu với các trạng thái hiện có của nhân vật. NẾU câu chuyện miêu tả nhân vật được chữa trị, giải độc, thanh lọc, phục hồi, tỉnh táo lại hoặc trạng thái xấu đã biến mất (ví dụ: "chân nguyên ổn định", "độc đã giải", "hết hỗn loạn"), ngươi BẮT BUỘC phải gỡ bỏ trạng thái tiêu cực đó! ${debuffContext}
+    - ĐẶC BIỆT QUAN TRỌNG: Hãy đối chiếu với các trạng thái hiện có của nhân vật. NẾU câu chuyện miêu tả nhân vật được chữa trị, giải độc, thanh lọc, phục hồi, tỉnh táo lại hoặc trạng thái xấu đã biến mất (ví dụ: "vết thương đã ổn định", "độc đã giải", "hết hỗn loạn"), ngươi BẮT BUỘC phải gỡ bỏ trạng thái tiêu cực đó! ${debuffContext}
       Xuất thẻ lệnh: [CHARACTER_UPDATE: Name="Ngươi hoặc Tên đồng hành", Stats="longtermstatuses:-'Tên chính xác của trạng thái'"] (Ví dụ: [CHARACTER_UPDATE: Name="Ngươi", Stats="longtermstatuses:-'Trọng Thương'"])
     - **CƠ CHẾ PHỤC HỒI HP (MỚI):** NẾU cốt truyện miêu tả Ký chủ nghỉ ngơi (ngủ một giấc, nghỉ chân), vận công điều tức chữa thương, được y sư trị liệu, hoặc dùng bữa ăn no nê hồi phục thể lực, ngươi BẮT BUỘC phải đánh giá mức độ phục hồi và xuất thẻ lệnh hồi HP.
       Xuất thẻ lệnh: [HEAL_PARTICIPANTS: percentage=X] 
