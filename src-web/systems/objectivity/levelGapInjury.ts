@@ -40,7 +40,7 @@ export const GAP_INJURY_STATUS_ID = 'TRONG_THUONG_CANH_GIOI';
 export const GAP_INJURY_STATUS_NAME = 'Trọng Thương (Cảnh Giới Suy Giảm)';
 
 export const GAP_INJURY_STATUS_DESCRIPTION =
-  'Cựu thương chưa lành: kinh mạch nứt vỡ, đan điền rạn nứt, chân nguyên tản mát không tụ lại được. ' +
+  'Cựu thương chưa lành: gân cốt tổn hại, khí huyết suy kiệt, sức lực không thể phát huy trọn vẹn. ' +
   'Tu vi thật của người này vốn cao hơn nhiều, nhưng vết thương cũ đang đè nén cảnh giới xuống mức hiện tại. ' +
   'Có thể hồi phục hoàn toàn nhờ linh đan diệu dược, một cơ duyên lớn, hoặc bàn tay của bậc danh y — ' +
   'thời gian trôi qua KHÔNG tự chữa lành nó.';
@@ -353,7 +353,7 @@ export const GAP_INJURY_CARD_LINE = 'Trọng Thương — cảnh giới bị đ�
 /** System message shown when the injury is applied. */
 export function gapInjuryAppliedMessage(name: string): string {
   return (
-    '**' + (name || 'Đối phương') + '** mang trên mình cựu thương chưa lành — kinh mạch tổn hại khiến ' +
+    '**' + (name || 'Đối phương') + '** mang trên mình cựu thương chưa lành — thân thể tổn hại khiến ' +
     'cảnh giới hiện tại bị đè nén xuống thấp hơn thực lực vốn có. Vết thương này có thể được chữa lành.'
   );
 }
@@ -361,7 +361,7 @@ export function gapInjuryAppliedMessage(name: string): string {
 /** System message shown when the injury is recovered. */
 export function gapInjuryRecoveredMessage(name: string): string {
   return (
-    '**' + (name || 'Đối phương') + '** đã chữa lành cựu thương — chân nguyên hồi tụ, ' +
+    '**' + (name || 'Đối phương') + '** đã chữa lành cựu thương — khí huyết hồi phục, ' +
     'cảnh giới thật sự trở lại nguyên vẹn.'
   );
 }
