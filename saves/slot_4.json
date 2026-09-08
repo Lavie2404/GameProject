@@ -1,8 +1,8 @@
 {
   "id": "3dacff74-4249-4ea8-a097-c514e95f9812",
-  "currentTurn": 27,
+  "currentTurn": 28,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-08T09:56:10.434Z",
+  "timestamp": "2026-09-08T17:33:21.847Z",
   "gameSettings": {
     "storyTitle": "Tam quốc chí",
     "theme": "Dã sử, Huyền Huyễn, Tu Tiên, Quân sự, Cổ đại, Chiến tranh, Tam quốc",
@@ -810,7 +810,52 @@
         "evasion": 0,
         "learnedSkills": [],
         "equippedSkills": {
-          "combat_basic_1": null,
+          "combat_basic_1": {
+            "id": "c9849f5e-b5af-4717-a2a2-60a00a9a3394",
+            "skillType": "combat",
+            "Name": "Lưu Vân Khinh Vũ",
+            "description": "Hạ Hầu Khinh Y uyển chuyển xoay người, triệu hồi luồng gió xoáy nguyên tố Phong mang sắc xanh bích ngọc, gây sát thương phép cho kẻ địch xung quanh và gia tăng tốc độ di chuyển cho đồng minh trong 5 giây.",
+            "technicaldescription": "Gây 180% sát thương theo Tấn Công (ATK) lên toàn bộ kẻ địch. Đồng thời tăng 20% Tốc độ (SPD) cho toàn phe đồng minh trong 5 lượt.",
+            "Stats": "atk_percent:180",
+            "Rarity": "Hiếm",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "all_enemies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "explosion",
+                    "moveType": "stay",
+                    "color": "#50C878",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "all_allies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_up",
+                    "moveType": "stay",
+                    "color": "#50C878",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 2000
+          },
           "combat_basic_2": null,
           "combat_basic_3": null,
           "combat_basic_4": null,
@@ -857,7 +902,56 @@
         "Personality": "Thông tuệ, ngoài nhu trong cương, giàu lòng trắc ẩn, yêu thích sự tự do và tò mò về thế giới bên ngoài.",
         "Stance": "Tò mò và có thiện cảm nhẹ đối với người chơi",
         "isAppraised": true,
-        "inParty": true
+        "inParty": true,
+        "skills": [
+          {
+            "id": "c9849f5e-b5af-4717-a2a2-60a00a9a3394",
+            "skillType": "combat",
+            "Name": "Lưu Vân Khinh Vũ",
+            "description": "Hạ Hầu Khinh Y uyển chuyển xoay người, triệu hồi luồng gió xoáy nguyên tố Phong mang sắc xanh bích ngọc, gây sát thương phép cho kẻ địch xung quanh và gia tăng tốc độ di chuyển cho đồng minh trong 5 giây.",
+            "technicaldescription": "Gây 180% sát thương theo Tấn Công (ATK) lên toàn bộ kẻ địch. Đồng thời tăng 20% Tốc độ (SPD) cho toàn phe đồng minh trong 5 lượt.",
+            "Stats": "atk_percent:180",
+            "Rarity": "Hiếm",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "all_enemies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "explosion",
+                    "moveType": "stay",
+                    "color": "#50C878",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "all_allies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_up",
+                    "moveType": "stay",
+                    "color": "#50C878",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 2000
+          }
+        ],
+        "isCompanionSetupDone": true
       },
       {
         "id": "f0bb2066-67fc-4529-9547-bed96b71615c",
@@ -939,7 +1033,8 @@
         "Backstory": "Là một võ tướng trẻ thuộc dòng tộc Hạ Hầu uy danh tại Tiêu Huyện. Dù được rèn luyện võ nghệ từ nhỏ và sở hữu sức mạnh hơn người, hắn lại thiếu bản lĩnh chiến đấu thực chiến khốc liệt. Hiện đang dẫn dắt binh lính tư gia đi dẹp trộm cướp rải rác xung quanh vùng.",
         "Personality": "Kiêu ngạo, hống hách, cậy thế dòng họ nhưng bản tính nhát gan khi đối mặt với hiểm nguy thật sự.",
         "CourtesyName": "Bá Uy",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "c2f54fda-d99a-4425-a0c0-6912abafe521",
@@ -1015,7 +1110,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "a77f8d3a-71d6-4e93-82d2-18bb2f7de558",
@@ -1091,7 +1187,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "bd300959-34f0-4b71-b8dd-29716e94c95f",
@@ -1167,7 +1264,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "d49463ec-7bf4-4982-b3db-5a7b2e502a7f",
@@ -1243,7 +1341,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "c20fdbe3-c0ff-409b-8f49-e8e4e075aa33",
@@ -1319,7 +1418,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "c76a4b0e-be02-4430-bd13-83a12399d126",
@@ -1395,7 +1495,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "npc_trieu_van_01",
@@ -1478,7 +1579,8 @@
         "Backstory": "Xuất thân từ Thường Sơn, Chân Định. Triệu Vân sớm bộc lộ thiên tư võ học, được ẩn sĩ Đồng Uyên thu nhận và truyền dạy Bách Điểu Triều Phượng Thương. Anh vừa rời núi với tâm nguyện tìm kiếm một minh chủ thực sự để phò tá, cứu giúp chúng sinh khỏi cảnh lầm than khi mầm mống loạn lạc bắt đầu nhen nhóm khắp nơi.",
         "Personality": "Trầm ổn, chính trực, trọng nghĩa khinh tài và tuyệt đối trung thành. Anh luôn hành xử khiêm nhường nhưng vô cùng quyết liệt, dũng cảm khi đối đầu với kẻ ác.",
         "Stance": "Lễ độ và quan sát. Anh sẵn lòng giúp đỡ những người yếu thế và có thiện cảm với những ai có chí hướng vì dân vì nước.",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "45150f2d-91a1-4f7e-9e6f-ac09ee9cba25",
@@ -1554,7 +1656,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "89c47e57-b671-4453-bcce-7d608253ac09",
@@ -1630,7 +1733,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "d2de40b5-6f05-4792-b7d6-7290229f6fc7",
@@ -1706,7 +1810,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "3212a582-1ed3-4a78-b66f-5503186aea0c",
@@ -1782,7 +1887,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "npc_trieu_vu_01",
@@ -1821,7 +1927,57 @@
         "evasion": 0,
         "learnedSkills": [],
         "equippedSkills": {
-          "combat_basic_1": null,
+          "combat_basic_1": {
+            "id": "5c4ab1e4-6a9d-4965-ada5-3222d795e7bf",
+            "skillType": "combat",
+            "Name": "Tật Phong Liên Kích",
+            "description": "Triệu Vũ thi triển thương pháp nhanh như chớp, tạo ra các luồng kình khí sắc lẹm bao quanh mũi thương để tấn công liên tiếp, đồng thời khiến kẻ địch rơi vào trạng thái giảm tốc độ di chuyển.",
+            "technicaldescription": "Tấn công liên tiếp 3 đòn vào 1 kẻ địch, mỗi đòn gây 60% ATK (tổng 180% ATK). Giảm 30% Tốc độ (SPD) của mục tiêu trong 2 lượt.",
+            "Stats": "atk_percent:180",
+            "Rarity": "Tốt",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "single_enemy",
+                    "hit_count": 3
+                  },
+                  "visual_effects": {
+                    "vfxType": "rapid_slashes",
+                    "moveType": "dash",
+                    "color": "#00f5ff",
+                    "vfxCount": 3
+                  }
+                },
+                "conditions": null
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "status_to_apply": {
+                    "status_id": "SLOW",
+                    "status_name": "Giảm Tốc",
+                    "status_type": "debuff"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_down",
+                    "moveType": "stay",
+                    "color": "#808080",
+                    "vfxCount": 1
+                  }
+                }
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 600
+          },
           "combat_basic_2": null,
           "combat_basic_3": null,
           "combat_basic_4": null,
@@ -1865,7 +2021,61 @@
         "Personality": "Bướng bỉnh, thẳng thắn, trọng nghĩa khí và vô cùng dũng cảm. Nàng có phần kiêu ngạo về tài nghệ của mình, ghét sự hèn nhát, nhưng bên trong lại là một cô gái ấm áp, biết quan tâm đến dân chúng lầm than.",
         "Stance": "Cảnh giác nhưng hiếu kỳ trước thực lực của nhân vật chính, sẵn sàng khảo nghiệm nếu nhân vật chính dám thể hiện khí phách.",
         "isAppraised": true,
-        "inParty": true
+        "inParty": true,
+        "skills": [
+          {
+            "id": "5c4ab1e4-6a9d-4965-ada5-3222d795e7bf",
+            "skillType": "combat",
+            "Name": "Tật Phong Liên Kích",
+            "description": "Triệu Vũ thi triển thương pháp nhanh như chớp, tạo ra các luồng kình khí sắc lẹm bao quanh mũi thương để tấn công liên tiếp, đồng thời khiến kẻ địch rơi vào trạng thái giảm tốc độ di chuyển.",
+            "technicaldescription": "Tấn công liên tiếp 3 đòn vào 1 kẻ địch, mỗi đòn gây 60% ATK (tổng 180% ATK). Giảm 30% Tốc độ (SPD) của mục tiêu trong 2 lượt.",
+            "Stats": "atk_percent:180",
+            "Rarity": "Tốt",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "single_enemy",
+                    "hit_count": 3
+                  },
+                  "visual_effects": {
+                    "vfxType": "rapid_slashes",
+                    "moveType": "dash",
+                    "color": "#00f5ff",
+                    "vfxCount": 3
+                  }
+                },
+                "conditions": null
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "status_to_apply": {
+                    "status_id": "SLOW",
+                    "status_name": "Giảm Tốc",
+                    "status_type": "debuff"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_down",
+                    "moveType": "stay",
+                    "color": "#808080",
+                    "vfxCount": 1
+                  }
+                }
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 600
+          }
+        ],
+        "isCompanionSetupDone": true
       }
     ],
     "sharedCooldowns": {
@@ -4304,14 +4514,14 @@
           "content": "Thái độ vừa ngang ngạnh dũng mãnh vừa có chút bướng bỉnh đáng yêu của nàng làm cả soái đường phá lên cười vui vẻ. Sự gắn kết khăng khít và thiện cảm ban đầu giữa ngươi và *Triệu Vũ* đã được thắt chặt hoàn hảo.\nTrong những ngày tiếp theo tại quân doanh *Cổng Tây*, bầu không khí huấn luyện diễn ra vô cùng khẩn trương và nghiêm cẩn. Với sự hỗ trợ đắc lực của hai anh em nhà họ Triệu, ba ngàn quân sĩ phòng thủ được tổ chức vô cùng chặt chẽ. *Triệu Vân* trầm ổn chính trực, đảm nhận việc huấn luyện kỵ binh cơ động, còn *Triệu Vũ* với tính cách ngang ngạnh dũng mãnh, trực tiếp thống lĩnh bộ binh hạng nặng gia cố hệ thống cự mã và rào chông ngoài quan ải.\nCứ mỗi buổi chiều tà, khi nắng hoàng hôn trải dài trên các tháp canh bằng đá, ngươi lại đứng trên bờ thành cao, lặng lẽ quan sát bóng dáng khỏe khoắn của *Triệu Vũ* đang vung vẩy ngọn trường thương bạc chỉ huy binh sĩ dưới sân. Những động tác dứt khoát, tiếng hô vang lảnh lót cùng mồ hôi đọng trên gò má sạm nắng của nàng toát lên một sức hút nguyên sơ khó tả. Thỉnh thoảng, cảm nhận được ánh mắt ấm áp của ngươi dõi theo từ trên cao, *Triệu Vũ* lại khẽ dừng thương, ngước mặt lên chạm mắt với ngươi. Nàng khẽ chun chiếc mũi thanh tú, nở một nụ cười đầy kiêu hãnh thách thức rồi lại tiếp tục lao vào luyện tập, khiến trái tim ngươi không khỏi rạo rực một luồng sóng tình dạt dào.\nTình cảm và sự thấu hiểu giữa ngươi cùng hai anh em *Triệu Vân*, *Triệu Vũ* ngày càng thắt chặt tuyệt đối. Thế nhưng, tin tức thám báo gửi về liên tục cho thấy đại quân chính thức của giặc Khăn Vàng dưới sự dẫn dắt của *Trương Mạn Thành* đang tiến gần hơn bao giờ hết, đe dọa trực tiếp đến sự bình yên của thành *Chân Định*.\nBạn đứng bên bờ thành cùng *Triệu Vân* và *Triệu Vũ*, chiếc lệnh bài Thống Lĩnh dát đồng giắt bên hông lấp lánh dưới nắng chiều. Hãy quyết định bước đi tiếp theo:"
         }
       ]
+    },
+    {
+      "id": "5529b750-74a1-4749-a718-0735e26344d2",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Tường thuật]: \"Trong khoảng thời gian đợi quân địch đánh tới, ngươi sai người gia cố tường thành, tăng cường đào hào, chuẩn bị tên, bẫy rập, dầu nóng, đá, nước sôi,...\nTrong lúc đó, ngươi cùng anh em Triệu Vân giao lưu thương pháp. Đầu tiên, ngươi đánh với Triệu Vân sau đó mới đánh với Triệu Vũ. Điều kỳ lạ là, thương pháp của Triệu Vân bình thường không phải đặc biệt mạnh như trong dã sử. Còn thương pháp Triệu Vũ lại vô cùng linh hoạt, biến hóa khôn lường. Ngươi thầm nghĩ\"\n[Đoạn 2 - Lời Diệp Thần]: \"Chẳng lẽ dã sử có sai sót, vị tướng quân trong ngũ hổ thượng tướng là Triệu Vũ chứ không phải Triệu Vân?\"\n[Đoạn 3 - Tường thuật]: \"Nghĩ thì nghĩ vậy nhưng ngươi cũng không biểu lộ điều gì ra khuôn mặt. Sau khi giao lưu với cả 2 người, Triệu Vũ càng nể phục ngươi. Cách xưng hô cũng thân thiết hơn, không còn e ngại như lúc đầu. Triệu Vân thấy muội muội mình tùy ý như vậy chỉ biết xin lỗi ngươi, mong ngươi không chấp nhặt với nàng. Ngươi thì cười vui vẻ. Ngươi cũng rất thích sự thân thiết này của Triệu Vũ. Như thể nàng coi ngươi là người nhà mà đối đãi chứ không phải chủ tướng\""
     }
   ],
-  "choices": [
-    "Tổ chức một buổi tiệc rượu nhỏ tại trung quân đại trướng để chính thức tiếp đón Triệu Vũ và cùng hai anh em thảo luận chi tiết bản đồ phòng thủ Cổng Tây. {Tỷ lệ thành công: 100%, Hậu quả/Phần thưởng: Thắt chặt mối quan hệ tình cảm khăng khít và nâng cao sự hiểu biết chiến thuật giữa ba người}",
-    "Đích thân cùng Triệu Vũ ra sân diễn võ để thực hiện lời hứa tỷ thí thương pháp, thể hiện bản lĩnh tuyệt luân để chinh phục hoàn toàn trái tim ngang ngạnh của nàng. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Nhận được sự ngưỡng mộ tột độ từ Triệu Vũ và tăng cường độ ăn ý khi phối hợp chiến đấu}",
-    "Cùng Triệu Vân và Triệu Vũ đi tuần tra kiểm tra lại toàn bộ hệ thống hào chông, bẫy cự mã đã dựng ngoài quan lộ để đảm bảo không có sơ hở trước giờ giặc tới. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Phát hiện các điểm yếu của hệ thống phòng ngự và củng cố sĩ khí của ba ngàn binh sĩ}",
-    "Cử Triệu Vũ dẫn một toán kỵ binh nhẹ đi thám sát kỹ lưỡng các lối mòn trong rừng phía Tây để chủ động nắm bắt quỹ đạo hành quân của đại quân Khăn Vàng. {Tỷ lệ thành công: 85%, Hậu quả/Phần thưởng: Thu thập được thông tin tình báo chính xác về thời gian và quân số của kẻ địch sắp tới}"
-  ],
+  "choices": [],
   "gameMode": "EXPLORATION",
   "activeTrade": {
     "trader": null,
@@ -4323,5 +4533,5 @@
     "itemSpecificBuyBonuses": {}
   },
   "storySummaries": [],
-  "adventureTurnCount": 26
+  "adventureTurnCount": 27
 }
