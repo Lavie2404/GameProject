@@ -2,7 +2,12 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport-fit=cover: draw under the iOS notch/home bar (safe-area
+         padding handled in mobile.css). interactive-widget=resizes-content:
+         on Android Chrome the on-screen keyboard shrinks the layout viewport
+         instead of covering the bottom action box. Focus auto-zoom is fixed
+         in mobile.css (16px inputs), NOT by user-scalable=no. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
     <title>AI Story Game</title>
     <!-- Tailwind Play CDN: App.tsx's className strings are plain Tailwind
          utility classes with no build-time config (as authored in Google AI
@@ -15,6 +20,8 @@
          <link>, so the browser received JS instead of CSS in dev (worked
          fine in prod builds, broke only locally — found via verification). -->
     <link rel="stylesheet" href="/theme.css" />
+    <!-- Hand-written mobile/touch fixes (NOT generated) — see public/mobile.css. -->
+    <link rel="stylesheet" href="/mobile.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>

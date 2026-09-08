@@ -10362,6 +10362,14 @@ const ActionComposer = ({ knownNpcPool, playerName, disabled, writeCtx, resetSig
                                 <textarea
                                     value={seg.text}
                                     onChange={(e) => updateSegment(seg.id, { text: e.target.value })}
+                                    // Mobile: bàn phím ảo bật lên sau khi focus ~300ms và có thể che
+                                    // ô đang gõ (khung hành động nằm sát đáy màn hình). Cuộn ô vào
+                                    // giữa vùng nhìn thấy SAU khi bàn phím đã mở. Không zoom: cỡ chữ
+                                    // ô nhập trên mobile đã ép 16px trong public/mobile.css.
+                                    onFocus={(e) => {
+                                        const el = e.currentTarget;
+                                        setTimeout(() => { try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch { /* trình duyệt cũ */ } }, 350);
+                                    }}
                                     rows={2}
                                     placeholder={seg.type === 'narration' ? 'Miêu tả hành động, diễn biến...' : 'Nội dung lời nói...'}
                                     disabled={disabled}
@@ -11281,7 +11289,7 @@ const renderDefaultActions = () => {
                             </div>
                         </div>
 
-                        <div className="mt-auto flex-shrink-0 bg-[#0a0f0a] border-t-2 border-[#cda45e]/50 z-20 shadow-[0_-10px_20px_rgba(10,20,10,0.9)] relative">
+                        <div className="mt-auto flex-shrink-0 bg-[#0a0f0a] border-t-2 border-[#cda45e]/50 z-20 shadow-[0_-10px_20px_rgba(10,20,10,0.9)] relative safe-area-bottom">
                             {/* Neo theo mép TRÊN của chính khung hành động (-top, không phải
                                 bottom đo từ đáy màn hình) — trước đây dùng style={{bottom:
                                 '260px'}} đoán chiều cao khung hành động + thanh điều hướng dưới,
@@ -37951,7 +37959,10 @@ const formatStoryText = useCallback((text) => {
             {/* THAY ĐỔI 2: InitializationOverlay giờ đây hoạt động như một Modal */}
 
             {/* Div 3: Container chịu trách nhiệm hiển thị và CĂN GIỮA nội dung */}
-             <div className={`flex flex-col ${currentScreen === 'gameplay' ? 'w-full h-screen' : 'items-center justify-center min-h-screen p-4 sm:p-6'} font-theme-body text-white`}>
+             {/* h-[100dvh] (dynamic viewport) sau h-screen: trên mobile, 100vh tính cả phần
+                 bị thanh địa chỉ trình duyệt che nên khung hành động dưới cùng bị cắt;
+                 dvh theo đúng phần nhìn thấy. Trình duyệt cũ không hiểu dvh sẽ giữ h-screen. */}
+             <div className={`flex flex-col ${currentScreen === 'gameplay' ? 'w-full h-screen h-[100dvh]' : 'items-center justify-center min-h-screen p-4 sm:p-6'} font-theme-body text-white`}>
                 
                 {/* Các thẻ input ẩn */}
                 <input type="file" ref={fileInputRef} onChange={handleLoadGame} accept=".json" className="hidden" />
