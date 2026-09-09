@@ -1,20 +1,20 @@
 {
   "slots": [
     {
-      "gameId": "e3b06da5-e8e3-47e0-a8d8-14216eb92dff",
-      "timestamp": "2026-09-05T13:31:05.640Z",
+      "gameId": "3dacff74-4249-4ea8-a097-c514e95f9812",
+      "timestamp": "2026-09-08T04:36:23.200Z",
       "characterName": "Diệp Thần",
       "storyTitle": "Tam quốc chí",
       "difficulty": "Ác Mộng",
-      "currentTurn": 20
+      "currentTurn": 10
     },
     {
-      "gameId": "a0f9cc1a-0258-425b-be01-ca06583ced77",
-      "timestamp": "2026-09-01T10:15:36.264Z",
+      "gameId": "eb81eba5-a033-4df8-a751-182dca7e193b",
+      "timestamp": "2026-09-07T07:32:42.279Z",
       "characterName": "Diệp Thần",
       "storyTitle": "Tam quốc chí",
       "difficulty": "Ác Mộng",
-      "currentTurn": 16
+      "currentTurn": 2
     },
     {
       "gameId": "a0f9cc1a-0258-425b-be01-ca06583ced77",
@@ -24,7 +24,14 @@
       "difficulty": "Ác Mộng",
       "currentTurn": 41
     },
-    null,
+    {
+      "gameId": "3dacff74-4249-4ea8-a097-c514e95f9812",
+      "timestamp": "2026-09-09T18:23:02.001Z",
+      "characterName": "Diệp Thần",
+      "storyTitle": "Tam quốc chí",
+      "difficulty": "Ác Mộng",
+      "currentTurn": 47
+    },
     null
   ]
 }

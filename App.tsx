@@ -7983,13 +7983,59 @@ const CharacterInfoModal = ({
     );
 };
 
-const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledge, getRealmInfoFromLevel, handleUserUploadNpcAvatar, handleUserUploadPlayerAvatar, handleAutoGenerateAvatar, handleAppraiseNpc, generatingAvatars, handleRecruitCompanion, handleSongTu, isProcessingAction, handleManifestLoreNpc, onSetCourtesyName, onGenerateCourtesyName }) => {
+// Bản nháp cho chế độ "Chỉnh sửa toàn bộ" của bảng thông tin nhân vật. Chỉ số
+// lấy từ chỉ số GỐC (baseX) vì chỉ số hiển thị là kết quả đã cộng trang bị/trạng
+// thái; nhân vật kiểu "PvP object" (chưa có baseX) thì mồi bằng chỉ số cuối.
+const CHARACTER_EDIT_BASE_STAT_FIELDS = [
+    { key: 'baseHp', finalKey: 'maxhp', label: 'Sinh lực gốc' },
+    { key: 'baseAtk', finalKey: 'atk', label: 'Công kích gốc' },
+    { key: 'baseDef', finalKey: 'def', label: 'Phòng ngự gốc' },
+    { key: 'baseSpd', finalKey: 'spd', label: 'Tốc độ gốc' },
+    { key: 'baseCr', finalKey: 'cr', label: 'Tỉ lệ bạo kích (%)' },
+    { key: 'baseCdmg', finalKey: 'cdmg', label: 'Sát thương bạo kích (%)' },
+    { key: 'baseEvasion', finalKey: 'evasion', label: 'Né tránh (%)' },
+    { key: 'baseDmgAmp', finalKey: 'dmgAmp', label: 'Khuếch đại sát thương (%)' },
+    { key: 'baseDmgRes', finalKey: 'dmgRes', label: 'Giảm sát thương (%)' },
+];
+const CHARACTER_EDIT_GENDER_OPTIONS = ['Nam', 'Nữ', 'Khác', 'Không xác định'];
+const CHARACTER_EDIT_STANCE_OPTIONS = ['Thân thiện', 'Trung lập', 'Thù địch', 'Sợ hãi', 'Nghi ngờ'];
+const buildCharacterEditDraft = (c) => {
+    const draft = {
+        Name: c.Name || '',
+        CourtesyName: c.CourtesyName || '',
+        Gender: c.Gender || '',
+        Role: c.Role || '',
+        Personality: c.Personality || '',
+        Appearance: c.Appearance || '',
+        Backstory: c.Backstory || '',
+        description: c.description || '',
+        Stance: c.Stance || '',
+        titles: Array.isArray(c.titles) ? c.titles.join(', ') : '',
+        level: c.level ?? 1,
+        exp: c.exp ?? 0,
+        hp: c.hp ?? '',
+        affinity: c.affinity ?? 0,
+    };
+    CHARACTER_EDIT_BASE_STAT_FIELDS.forEach(f => { draft[f.key] = c[f.key] ?? c[f.finalKey] ?? 0; });
+    return draft;
+};
+
+const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledge, getRealmInfoFromLevel, handleUserUploadNpcAvatar, handleUserUploadPlayerAvatar, handleAutoGenerateAvatar, handleAppraiseNpc, generatingAvatars, handleRecruitCompanion, handleSongTu, isProcessingAction, handleManifestLoreNpc, onSetCourtesyName, onGenerateCourtesyName, onEditCharacter }) => {
     // Trạng thái sửa/thêm Tự (tên chữ) — đặt TRƯỚC early-return để không đổi số
     // lượt gọi hook giữa các lần render (component này vốn đã return null sớm ở
     // dưới trước khi gọi useMemo, nhưng do được mount/unmount theo `show` từ nơi
     // gọi nên chưa gây lỗi; thêm hook mới ở đây vẫn an toàn hơn thêm sau return).
     const [editingCourtesyName, setEditingCourtesyName] = useState(false);
     const [courtesyNameDraft, setCourtesyNameDraft] = useState('');
+    // Chế độ "Chỉnh sửa toàn bộ": mọi trường trong bảng đều thành ô nhập, lưu một lần.
+    const [isEditingProfile, setIsEditingProfile] = useState(false);
+    const [profileDraft, setProfileDraft] = useState(null);
+    const editTargetId = loreItem?.entity?.id;
+    useEffect(() => {
+        setIsEditingProfile(false);
+        setProfileDraft(null);
+        setEditingCourtesyName(false);
+    }, [editTargetId]);
 
     if (!show || !loreItem || !loreItem.entity) return null;
 
@@ -8299,6 +8345,130 @@ const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledg
             }
         };
 
+        // ---- Chế độ "Chỉnh sửa toàn bộ" ------------------------------------
+        // Dùng hàm trả JSX (KHÔNG khai báo component con bên trong render) để
+        // React không remount <input> mỗi lần gõ phím và làm mất focus.
+        if (isEditingProfile && profileDraft) {
+            const draft = profileDraft;
+            const setField = (key, value) => setProfileDraft(prev => ({ ...prev, [key]: value }));
+            const inputClass = 'w-full p-2 bg-[#0a0f0a] border border-[#cda45e]/30 text-[#e8d3a1] scale-text-sm focus:border-[#cda45e] outline-none';
+            const labelClass = 'block scale-text-xs font-semibold text-[#8ba888] mb-1';
+            const textField = (key, label, opts = {}) => (
+                <div key={key} className={opts.className || ''}>
+                    <label className={labelClass}>{label}</label>
+                    <input
+                        type="text"
+                        list={opts.list}
+                        value={draft[key] ?? ''}
+                        placeholder={opts.placeholder || ''}
+                        onChange={(e) => setField(key, e.target.value)}
+                        className={inputClass}
+                    />
+                </div>
+            );
+            const areaField = (key, label, rows = 3) => (
+                <div key={key}>
+                    <label className={labelClass}>{label}</label>
+                    <textarea
+                        rows={rows}
+                        value={draft[key] ?? ''}
+                        onChange={(e) => setField(key, e.target.value)}
+                        className={inputClass + ' resize-y leading-relaxed'}
+                    />
+                </div>
+            );
+            const numberField = (key, label, opts = {}) => (
+                <div key={key}>
+                    <label className={labelClass}>{label}</label>
+                    <input
+                        type="number"
+                        min={opts.min}
+                        max={opts.max}
+                        step={opts.step || 'any'}
+                        value={draft[key] ?? ''}
+                        placeholder={opts.placeholder || ''}
+                        onChange={(e) => setField(key, e.target.value)}
+                        className={inputClass + ' font-mono'}
+                    />
+                </div>
+            );
+            const saveProfile = () => {
+                if (!String(draft.Name || '').trim()) return;
+                onEditCharacter?.(finalStats.id, draft);
+                setIsEditingProfile(false);
+                setProfileDraft(null);
+            };
+            const cancelProfile = () => {
+                setIsEditingProfile(false);
+                setProfileDraft(null);
+            };
+            const sectionTitle = (text, color = 'text-[#cda45e]') => (
+                <h5 className={'font-bold uppercase tracking-widest scale-text-sm border-b border-[#cda45e]/20 pb-1 mb-3 ' + color} style={{ fontFamily: "'Protest Revolution', sans-serif" }}>{text}</h5>
+            );
+
+            return (
+                <div className="space-y-4 scale-text-sm">
+                    <p className="scale-text-xs text-[#a5b4fc] italic">Mọi thay đổi áp dụng tức thì, KHÔNG ghi vào lịch sử cốt truyện. Để trống một ô tùy chọn = xóa thông tin đó.</p>
+
+                    <div className="p-4 bg-[#101a10] border border-[#cda45e]/30 space-y-3">
+                        {sectionTitle('Hồ sơ')}
+                        {textField('Name', 'Tên (bắt buộc)', { placeholder: 'Tên nhân vật' })}
+                        {textField('CourtesyName', 'Tự (tên chữ)', { placeholder: 'VD: Vân Trường' })}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {textField('Gender', 'Giới tính', { list: 'quicklore-gender-options', placeholder: 'Nam / Nữ / Khác' })}
+                            {!finalStats.isPlayer && textField('Stance', 'Thái độ với nhân vật chính', { list: 'quicklore-stance-options', placeholder: 'Thân thiện / Trung lập / Thù địch' })}
+                        </div>
+                        <datalist id="quicklore-gender-options">{CHARACTER_EDIT_GENDER_OPTIONS.map(o => <option key={o} value={o} />)}</datalist>
+                        <datalist id="quicklore-stance-options">{CHARACTER_EDIT_STANCE_OPTIONS.map(o => <option key={o} value={o} />)}</datalist>
+                        {textField('Role', 'Thân phận')}
+                        {textField('titles', 'Danh hiệu (cách nhau bằng dấu phẩy)', { placeholder: 'VD: Kiếm Thánh, Thiên Hạ Đệ Nhất' })}
+                        {areaField('Personality', 'Tính cách', 3)}
+                        {areaField('Appearance', 'Ngoại hình', 4)}
+                        {areaField('Backstory', 'Tiểu sử', 5)}
+                        {areaField('description', 'Mô tả ngắn (dùng khi chưa giám định)', 2)}
+                    </div>
+
+                    <div className="p-4 bg-[#101a10] border border-[#cda45e]/30">
+                        {sectionTitle('Chỉ số chiến đấu', 'text-[#ff4d4d]')}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-3">
+                            {numberField('level', 'Cấp độ', { min: 1, step: 1 })}
+                            {finalStats.isPlayer && numberField('exp', 'EXP hiện tại', { min: 0, step: 1 })}
+                            {numberField('hp', 'Sinh lực hiện tại', { min: 0, step: 1, placeholder: String(finalStats.maxhp ?? '') })}
+                        </div>
+                        <p className="scale-text-xs text-[#8ba888] italic mb-2">Chỉ số GỐC (chưa tính trang bị/trạng thái). Đổi cấp sẽ đưa EXP về 0 và tính lại điểm tiềm năng còn trống; chỉ số gốc giữ đúng số đã nhập.</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {CHARACTER_EDIT_BASE_STAT_FIELDS.map(f => numberField(f.key, f.label + (finalStats[f.finalKey] !== undefined ? ` (hiện: ${finalStats[f.finalKey]})` : ''), { min: 0 }))}
+                        </div>
+                    </div>
+
+                    {!finalStats.isPlayer && (
+                        <div className="p-4 bg-[#101a10] border border-[#cda45e]/30">
+                            {sectionTitle('Hảo cảm & Song Tu')}
+                            {numberField('affinity', 'Hảo cảm với ngươi (-100 → 100)', { min: -100, max: 100, step: 1 })}
+                        </div>
+                    )}
+
+                    <div className="flex gap-3 pt-1">
+                        <button
+                            onClick={saveProfile}
+                            disabled={!String(draft.Name || '').trim()}
+                            style={{ minHeight: TOUCH_TARGET_MIN + 'px' }}
+                            className="flex-1 bg-[#cda45e] hover:bg-[#e8d3a1] text-[#101a10] font-bold py-2 px-4 uppercase tracking-widest scale-text-xs transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                            Lưu Thay Đổi
+                        </button>
+                        <button
+                            onClick={cancelProfile}
+                            style={{ minHeight: TOUCH_TARGET_MIN + 'px' }}
+                            className="flex-1 bg-transparent border border-[#8ba888]/60 hover:border-[#e8d3a1] text-[#a3b8a3] hover:text-[#e8d3a1] font-bold py-2 px-4 uppercase tracking-widest scale-text-xs transition-colors"
+                        >
+                            Hủy
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className="space-y-4 scale-text-sm">
                 {card.order.map(blockId => renderCardBlock(blockId))}
@@ -8389,6 +8559,22 @@ const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledg
                         <div className="text-[#a3b8a3] italic text-sm mt-1">
                             <ExpandableText text={headerDescription} maxLength={80} />
                         </div>
+                        {/* Chế độ "Chỉnh sửa toàn bộ": mở form thay cho các khối hiển thị bên dưới. */}
+                        {type === 'character' && onEditCharacter && entity.id && !isEditingProfile && (
+                            <button
+                                onClick={() => {
+                                    setEditingCourtesyName(false);
+                                    setProfileDraft(buildCharacterEditDraft(entity));
+                                    setIsEditingProfile(true);
+                                }}
+                                disabled={isProcessingAction}
+                                title="Sửa toàn bộ thông tin: hồ sơ, chỉ số, cấp độ, hảo cảm..."
+                                style={{ minHeight: TOUCH_TARGET_MIN + 'px' }}
+                                className="mt-2 inline-flex items-center gap-1 not-italic bg-[#1b2a1b] border border-[#cda45e]/60 hover:bg-[#cda45e]/20 text-[#cda45e] font-bold px-3 py-1 uppercase tracking-widest scale-text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <PencilIcon className="w-3.5 h-3.5" /> Chỉnh Sửa Toàn Bộ
+                            </button>
+                        )}
                     </div>
                 </div>
                 
@@ -10176,6 +10362,14 @@ const ActionComposer = ({ knownNpcPool, playerName, disabled, writeCtx, resetSig
                                 <textarea
                                     value={seg.text}
                                     onChange={(e) => updateSegment(seg.id, { text: e.target.value })}
+                                    // Mobile: bàn phím ảo bật lên sau khi focus ~300ms và có thể che
+                                    // ô đang gõ (khung hành động nằm sát đáy màn hình). Cuộn ô vào
+                                    // giữa vùng nhìn thấy SAU khi bàn phím đã mở. Không zoom: cỡ chữ
+                                    // ô nhập trên mobile đã ép 16px trong public/mobile.css.
+                                    onFocus={(e) => {
+                                        const el = e.currentTarget;
+                                        setTimeout(() => { try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch { /* trình duyệt cũ */ } }, 350);
+                                    }}
                                     rows={2}
                                     placeholder={seg.type === 'narration' ? 'Miêu tả hành động, diễn biến...' : 'Nội dung lời nói...'}
                                     disabled={disabled}
@@ -11095,7 +11289,7 @@ const renderDefaultActions = () => {
                             </div>
                         </div>
 
-                        <div className="mt-auto flex-shrink-0 bg-[#0a0f0a] border-t-2 border-[#cda45e]/50 z-20 shadow-[0_-10px_20px_rgba(10,20,10,0.9)] relative">
+                        <div className="mt-auto flex-shrink-0 bg-[#0a0f0a] border-t-2 border-[#cda45e]/50 z-20 shadow-[0_-10px_20px_rgba(10,20,10,0.9)] relative safe-area-bottom">
                             {/* Neo theo mép TRÊN của chính khung hành động (-top, không phải
                                 bottom đo từ đáy màn hình) — trước đây dùng style={{bottom:
                                 '260px'}} đoán chiều cao khung hành động + thanh điều hướng dưới,
@@ -12055,6 +12249,48 @@ const calculateMaxLearnedSkills = (character) => {
     return maxSkills;
 };
 
+// --- KHO TIỀM THỨC DÙNG CHUNG ----------------------------------------------
+// Kho tiềm thức là của CẢ TỔ ĐỘI (nhân vật chính + đồng hành), không tách riêng
+// theo từng hành giả. Dữ liệu vẫn nằm rải rác trong `learnedSkills` của từng
+// thành viên (để không phải migrate save cũ); các helper dưới đây gom lại thành
+// một kho duy nhất, còn khi gỡ kỹ năng thì luôn trả về nhân vật chính (chủ kho).
+const getSkillPoolMembers = (characters) =>
+    (characters || []).filter(c => c && (c.isPlayer || c.isCompanion));
+
+/** Mọi kỹ năng chưa vận dụng của cả tổ đội, khử trùng lặp theo id. */
+const getSharedSkillPool = (characters) => {
+    const members = getSkillPoolMembers(characters);
+    const equippedIds = new Set();
+    members.forEach(m => Object.values(m.equippedSkills || {}).forEach(s => { if (s && s.id) equippedIds.add(s.id); }));
+    const pool = new Map();
+    members.forEach(m => {
+        (m.learnedSkills || m.skills || []).forEach(s => {
+            if (s && s.id && !equippedIds.has(s.id) && !pool.has(s.id)) pool.set(s.id, s);
+        });
+    });
+    return Array.from(pool.values());
+};
+
+/** Sức chứa kho chung = 10 cơ bản + mọi ô cộng thêm (ADD_SKILL_SLOT) của cả tổ đội. */
+const calculateSharedMaxLearnedSkills = (characters) => {
+    const base = calculateMaxLearnedSkills(null);
+    return getSkillPoolMembers(characters).reduce((sum, m) => sum + (calculateMaxLearnedSkills(m) - base), base);
+};
+
+/** Xóa một kỹ năng (theo id) khỏi learnedSkills của MỌI thành viên tổ đội. */
+const removeSkillFromSharedPool = (characters, skillId) => {
+    getSkillPoolMembers(characters).forEach(m => {
+        if (Array.isArray(m.learnedSkills)) m.learnedSkills = m.learnedSkills.filter(s => !s || s.id !== skillId);
+    });
+};
+
+/** Tổ đội đã biết kỹ năng tên này chưa (kho chung + ô đang dùng của nhân vật mục tiêu). */
+const isSkillKnownByParty = (characters, targetCharacter, skillName) => {
+    if (!skillName) return false;
+    const equipped = Object.values((targetCharacter && targetCharacter.equippedSkills) || {}).some(s => s && s.Name === skillName);
+    return equipped || getSharedSkillPool(characters).some(s => s && s.Name === skillName);
+};
+
 const CustomSkillForgeModal = ({ show, onClose, onSaveSkill, characterId, character, gameSettings, onGenerateVfxImage, availableSkills }) => {
     const [activeTab, setActiveTab] = useState('vfx'); 
     const [isGeneratingVfx, setIsGeneratingVfx] = useState(false);
@@ -12621,19 +12857,11 @@ const SkillManagementModal = ({ show, onClose, knowledge, handleEquipSkill, hand
     const selectedCharacter = manageableCharacters.find(c => c.id === selectedCharacterId) || manageableCharacters[0];
     if (!selectedCharacter) return null; 
     
-    const maxLearnedSkills = calculateMaxLearnedSkills(selectedCharacter);
+    // Kho Tiềm Thức DÙNG CHUNG cho cả tổ đội: không phụ thuộc hành giả đang chọn.
+    // Chỉ cột "Kỹ Năng Đang Dùng" mới là của riêng từng hành giả.
+    const maxLearnedSkills = calculateSharedMaxLearnedSkills(knowledge?.characters);
     const { equippedSkills = {} } = selectedCharacter;
-    const allSkillsInStorage = selectedCharacter.learnedSkills || selectedCharacter.skills || [];
-    const uniqueSkillsMap = new Map();
-    allSkillsInStorage.forEach(s => {
-        if (s && s.id) {
-            uniqueSkillsMap.set(s.id, s);
-        }
-    });
-    const uniqueSkillsInStorage = Array.from(uniqueSkillsMap.values());
-    
-    const equippedSkillIds = new Set(Object.values(equippedSkills).filter(Boolean).map(s => s.id));
-    const unequippedSkills = uniqueSkillsInStorage.filter(s => !equippedSkillIds.has(s.id));
+    const unequippedSkills = getSharedSkillPool(knowledge?.characters);
 
 
     const onEquipWrapper = (skill, characterId) => {
@@ -12869,7 +13097,7 @@ const SkillManagementModal = ({ show, onClose, knowledge, handleEquipSkill, hand
                     {/* Cột 1: Kho tiềm thức */}
                     <div className={getTabClass('kho')}>
                         <div className="flex justify-between items-center mb-5 flex-shrink-0 border-b border-[#cda45e]/20 pb-3">
-                            <h3 className="text-lg font-bold text-[#cda45e] uppercase tracking-widest flex items-center">Kho Tiềm Thức</h3>
+                            <h3 className="text-lg font-bold text-[#cda45e] uppercase tracking-widest flex items-center" title="Kho dùng chung cho cả tổ đội — hành giả nào cũng có thể vận dụng kỹ năng trong kho">Kho Tiềm Thức <span className="ml-2 text-[9px] font-normal text-[#8ba888] normal-case tracking-wider border border-[#8ba888]/40 px-1.5 py-0.5">dùng chung</span></h3>
                             
                             {/* --- NÚT TẠO KỸ NĂNG VÀ ĐẾM SỐ LƯỢNG ĐƯỢC GOM VÀO ĐÂY --- */}
                             <div className="flex items-center gap-2">
@@ -17556,7 +17784,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_GjYTTTowUg-P9paHkTvaOg_nW4C3Fye";
 
 // --- CẤU HÌNH LƯU TRỮ QUA GITHUB (dùng cho "Lưu Ngay" — đồng bộ đa thiết bị) ---
 // Token PHẢI được đặt trong .env.local (VITE_GITHUB_TOKEN) — KHÔNG BAO GIỜ hardcode/commit token vào source code.
-const GITHUB_SAVE_REPO = import.meta.env.VITE_GITHUB_REPO || 'Lavie2404/textbase';
+const GITHUB_SAVE_REPO = import.meta.env.VITE_GITHUB_REPO || 'Lavie2404/GameProject';
 /**
  * The key used when the player has not supplied one (`apiMode === 'defaultGemini'`).
  *
@@ -17585,7 +17813,11 @@ const githubApiFetch = async (urlPath, options = {}) => {
     if (!GITHUB_SAVE_TOKEN) {
         throw new Error('Chưa cấu hình VITE_GITHUB_TOKEN trong .env.local. Vui lòng tạo Personal Access Token (quyền "Contents: Read and write") cho repo và điền vào .env.local rồi khởi động lại.');
     }
+    // GitHub REST trả `Cache-Control: max-age=60` — trình duyệt sẽ dùng lại phản
+    // hồi GET cũ trong 60s, nên ngay sau khi lưu, đọc lại index.json/slot vẫn ra
+    // bản cũ (slot vừa lưu hiện "TRỐNG", sha cũ dễ gây 409). Luôn bỏ qua cache.
     return fetch(`https://api.github.com/repos/${GITHUB_SAVE_REPO}/${urlPath}`, {
+        cache: 'no-store',
         ...options,
         headers: {
             'Authorization': `Bearer ${GITHUB_SAVE_TOKEN}`,
@@ -17656,6 +17888,25 @@ const getGithubSaveIndex = async () => {
     while (slots.length < GITHUB_SAVE_SLOT_COUNT) slots.push(null);
     return { slots: slots.slice(0, GITHUB_SAVE_SLOT_COUNT), sha: result.sha };
 };
+
+// Chuyển 5 slot trong index.json thành các mục "bản lưu" cùng hình dạng với
+// bản lưu Firestore/IndexedDB để dùng chung cho danh sách Tải Game và modal chọn slot.
+const githubSlotsToSavedGames = (slots) => (slots || [])
+    .map((slot, idx) => slot ? {
+        id: `github_${idx + 1}_${slot.gameId || idx + 1}`,
+        isGithubCloud: true,
+        githubSlot: idx + 1,
+        updatedAt: { toDate: () => new Date(slot.timestamp) },
+        currentTurn: slot.currentTurn,
+        gameSettings: { characterName: slot.characterName, storyTitle: slot.storyTitle, difficulty: slot.difficulty }
+    } : null)
+    .filter(Boolean);
+
+const sortSavedGamesNewestFirst = (games) => [...games].sort((a, b) => {
+    const timeA = a.updatedAt?.toDate ? a.updatedAt.toDate().getTime() : 0;
+    const timeB = b.updatedAt?.toDate ? b.updatedAt.toDate().getTime() : 0;
+    return timeB - timeA;
+});
 
 // 1. Hàm gọi lấy khóa ImgBB bảo mật được giấu trên Supabase
 const fetchImgbbKeyFromCloud = async () => {
@@ -23138,6 +23389,9 @@ const handleConfirmGithubSaveSlot = async (slotNumber) => {
         );
 
         setModalMessage({ show: true, title: 'Đã Lưu Thành Công', content: `Đã lưu tiến trình lên GitHub (Phiến Ngọc ${slotNumber}). Bạn có thể tải lại đúng ván này trên bất kỳ thiết bị nào khác.`, type: 'success' });
+        // Cập nhật ngay danh sách bản lưu (không đợi tải lại trang) để modal Tải
+        // Game / chọn slot hiện đúng phiến ngọc vừa ghi.
+        refreshGithubSavedGames();
     } catch (error) {
         console.error("Lỗi khi lưu lên GitHub:", error);
         setModalMessage({ show: true, title: 'Lỗi Lưu GitHub', content: error.message, type: 'error' });
@@ -23374,6 +23628,107 @@ const handleSetCourtesyName = useCallback((characterId, newCourtesyName) => {
         return { ...prev, characters: newCharacters };
     });
 }, [setknowledge]);
+
+// Bảng thông tin nhân vật (QuickLoreModal) — chế độ "Chỉnh sửa" cho phép sửa
+// TOÀN BỘ: hồ sơ (tên, tự, giới tính, thân phận, tính cách, ngoại hình, tiểu sử,
+// mô tả, thái độ, danh hiệu), cấp độ/EXP, sinh lực, chỉ số gốc và hảo cảm của
+// BẤT KỲ nhân vật nào (kể cả nhân vật chính). Áp dụng tức thì, KHÔNG ghi lịch sử
+// cốt truyện — cùng tinh thần Bảng Tùy Chỉnh, nên cũng đi qua noteCustomizationWrite
+// (gdd-01 F3: vô hiệu snapshot Undo + đánh dấu hack_mode_used_this_slot).
+// - Chuỗi rỗng ở trường tùy chọn = xóa trường đó (như handleSetCourtesyName).
+// - Đổi tên: cập nhật luôn `relationships` (tra theo tên) để không mất hảo cảm/quan hệ.
+// - Nhân vật chính: đồng bộ tên/giới tính/thân phận/tính cách/ngoại hình/tiểu sử
+//   sang gameSettings vì nhiều prompt đọc từ đó thay vì từ object nhân vật.
+// - Đổi cấp: EXP về 0 + trạng thái Tu Luyện Thường (bộ ba nguyên tử, gdd-06 C4 D.2b),
+//   tính lại AP còn trống; chỉ số gốc GIỮ NGUYÊN theo đúng số người chơi đã gõ.
+const EDITABLE_CHARACTER_TEXT_FIELDS = ['Name', 'CourtesyName', 'Gender', 'Role', 'Personality', 'Appearance', 'Backstory', 'description', 'Stance'];
+const EDITABLE_CHARACTER_BASE_STAT_FIELDS = ['baseHp', 'baseAtk', 'baseDef', 'baseSpd', 'baseCr', 'baseCdmg', 'baseEvasion', 'baseDmgAmp', 'baseDmgRes'];
+const handleEditCharacterProfile = (characterId, edits) => {
+    if (!characterId || !edits) return;
+    const toNumber = (v) => {
+        if (v === '' || v === null || v === undefined) return undefined;
+        const n = Number(v);
+        return Number.isFinite(n) ? n : undefined;
+    };
+
+    setknowledge(prev => {
+        const charIndex = prev.characters.findIndex(c => c.id === characterId);
+        if (charIndex === -1) return prev;
+        const newKnowledge = JSON.parse(JSON.stringify(prev));
+        const ch = newKnowledge.characters[charIndex];
+        const oldName = ch.Name;
+
+        EDITABLE_CHARACTER_TEXT_FIELDS.forEach(key => {
+            if (!(key in edits)) return;
+            const value = String(edits[key] ?? '').trim();
+            if (key === 'Name') { if (value) ch.Name = value; return; } // Tên không được rỗng
+            if (value) ch[key] = value; else delete ch[key];
+        });
+
+        if ('titles' in edits) {
+            const titles = Array.isArray(edits.titles)
+                ? edits.titles
+                : String(edits.titles || '').split(',');
+            const cleaned = titles.map(t => String(t).trim()).filter(Boolean);
+            if (cleaned.length) ch.titles = cleaned; else delete ch.titles;
+        }
+
+        const newLevel = toNumber(edits.level);
+        if (newLevel !== undefined) {
+            const lvl = Math.max(1, Math.floor(newLevel));
+            if (lvl !== (ch.level || 1)) {
+                ch.level = lvl;
+                ch.exp = 0;
+                ch.progressionState = PROGRESSION_STATE_NORMAL;
+                const spentAp = Object.values(ch.allocatedPoints || {}).reduce((s, p) => s + (Number(p) || 0), 0);
+                ch.ap = Math.max(0, calculateTotalAP(lvl) - spentAp);
+            }
+        }
+        const newExp = toNumber(edits.exp);
+        if (newExp !== undefined) ch.exp = Math.max(0, newExp);
+
+        EDITABLE_CHARACTER_BASE_STAT_FIELDS.forEach(key => {
+            const value = toNumber(edits[key]);
+            if (value !== undefined) ch[key] = value;
+        });
+
+        if (!ch.isPlayer) {
+            const newAffinity = toNumber(edits.affinity);
+            if (newAffinity !== undefined) ch.affinity = Math.max(-100, Math.min(100, Math.round(newAffinity)));
+        }
+
+        const newHp = toNumber(edits.hp);
+        newKnowledge.characters[charIndex] = calculateFinalStats(
+            ch,
+            newKnowledge.characters,
+            newHp !== undefined ? { setHp: newHp } : { preserveHp: true }
+        );
+
+        const finalName = newKnowledge.characters[charIndex].Name;
+        if (finalName !== oldName) {
+            (newKnowledge.relationships || []).forEach(rel => {
+                if (rel && rel.NPC === oldName) rel.NPC = finalName;
+            });
+        }
+        return newKnowledge;
+    });
+
+    const target = knowledge.characters.find(c => c.id === characterId);
+    if (target?.isPlayer) {
+        const syncMap = { Name: 'characterName', Gender: 'characterGender', Role: 'characterRole', Personality: 'characterPersonality', Appearance: 'characterAppearance', Backstory: 'characterBackstory' };
+        const settingsPatch = {};
+        Object.entries(syncMap).forEach(([charKey, settingsKey]) => {
+            if (!(charKey in edits)) return;
+            const value = String(edits[charKey] ?? '').trim();
+            if (charKey === 'Name' && !value) return;
+            settingsPatch[settingsKey] = value;
+        });
+        if (Object.keys(settingsPatch).length) setGameSettings(prev => ({ ...prev, ...settingsPatch }));
+    }
+
+    noteCustomizationWrite();
+    setModalMessage({ show: true, title: 'Cập Nhật Thành Công', content: `Đã lưu thông tin mới cho [${String(edits.Name || target?.Name || '').trim() || 'nhân vật'}].`, type: 'success' });
+};
 
 // Nút "+ Thêm Tự" trong bảng thông tin: để AI tự nghĩ (khác với "(sửa)" ở trên,
 // nơi người chơi tự gõ tay). Dùng isProcessingAction làm cờ khóa/loading — cùng
@@ -24022,9 +24377,10 @@ useEffect(() => {
 
                             if (!targetCharacter) break; 
 
-                            const maxSkills = calculateMaxLearnedSkills(targetCharacter);
-                            if ((targetCharacter.learnedSkills || []).length >= maxSkills) {
-                                break; 
+                            // Kho tiềm thức dùng chung: giới hạn tính trên cả tổ đội.
+                            const maxSkills = calculateSharedMaxLearnedSkills(knowledge.characters);
+                            if (getSharedSkillPool(knowledge.characters).length >= maxSkills) {
+                                break;
                             }
 
                             let finalRarity = skillIdea.rarity || sourceRarity || getFinalRarityByLevel(targetCharacter?.level || 1);
@@ -24131,6 +24487,27 @@ useEffect(() => {
 }, [isLoading, isCheckingMemory, gameMode, activeCombatLoop]);
 
 
+  // Nạp lại RIÊNG phần bản lưu GitHub trong danh sách. Trước đây danh sách chỉ
+  // được dựng lại trong callback onSnapshot của Firestore bên dưới — Firestore
+  // không đổi khi lưu lên GitHub, nên sau khi lưu xong Phiến Ngọc mới vẫn hiện
+  // "TRỐNG"/"Lượt" cũ cho tới khi tải lại trang (báo lỗi 2026-09-08).
+  const refreshGithubSavedGames = useCallback(async () => {
+      if (!GITHUB_SAVE_TOKEN) return;
+      try {
+          const { slots } = await getGithubSaveIndex();
+          const githubGames = githubSlotsToSavedGames(slots);
+          setSavedGames(prev => sortSavedGamesNewestFirst([...prev.filter(g => !g.isGithubCloud), ...githubGames]));
+      } catch (e) {
+          console.error("Lỗi nạp lại danh sách bản lưu GitHub:", e);
+      }
+  }, []);
+
+  // Mỗi lần mở modal Tải Game hoặc modal chọn slot "Lưu Lên GitHub" thì đọc lại
+  // index.json để luôn thấy đúng trạng thái 5 phiến ngọc (kể cả lưu từ máy khác).
+  useEffect(() => {
+      if (showLoadGameModal || showGithubSaveSlotModal) refreshGithubSavedGames();
+  }, [showLoadGameModal, showGithubSaveSlotModal, refreshGithubSavedGames]);
+
   useEffect(() => {
     if (isAuthReady && userId) {
       const gamesCollectionPath = `artifacts/${appId}/users/${userId}/games`;
@@ -24168,30 +24545,13 @@ useEffect(() => {
           if (GITHUB_SAVE_TOKEN) {
               try {
                   const { slots } = await getGithubSaveIndex();
-                  githubGames = slots
-                      .map((slot, idx) => slot ? {
-                          id: `github_${idx + 1}_${slot.gameId || idx + 1}`,
-                          isGithubCloud: true,
-                          githubSlot: idx + 1,
-                          updatedAt: { toDate: () => new Date(slot.timestamp) },
-                          currentTurn: slot.currentTurn,
-                          gameSettings: { characterName: slot.characterName, storyTitle: slot.storyTitle, difficulty: slot.difficulty }
-                      } : null)
-                      .filter(Boolean);
+                  githubGames = githubSlotsToSavedGames(slots);
               } catch (e) {
                   console.error("Lỗi tải danh sách bản lưu GitHub:", e);
               }
           }
 
-          const combinedGames = [...localAutosaves, ...cloudGames, ...githubGames];
-
-          combinedGames.sort((a, b) => {
-              const timeA = a.updatedAt?.toDate ? a.updatedAt.toDate().getTime() : 0;
-              const timeB = b.updatedAt?.toDate ? b.updatedAt.toDate().getTime() : 0;
-              return timeB - timeA;
-          });
-
-          setSavedGames(combinedGames);
+          setSavedGames(sortSavedGamesNewestFirst([...localAutosaves, ...cloudGames, ...githubGames]));
       }, (error) => {
           console.error("Error fetching saved games:", error);
       });
@@ -26013,22 +26373,69 @@ const parseGeminiResponseAndUpdateState = async (text, knowledgeToUse, setActive
     // từ nào có nghĩa tương đương tiếng Việt rõ ràng, không mơ hồ thì THAY THẾ
     // (vd "under" = "dưới"; "curtains" = "màn/rèm", ở đây trong cụm "hạ màn" nên
     // dùng "màn"); còn lại (chưa xác định được nghĩa thay thế an toàn) thì CẮT BỎ.
-    const ENGLISH_LEAK_REPLACEMENTS = { under: 'dưới', curtains: 'màn' };
-    const ENGLISH_LEAK_STRIP_WORDS = [];
+    //
+    // Mở rộng 2026-09-08 (tái phát với "...thở dài out khỏi..."): thay vì chỉ
+    // vá từng từ đã gặp, chặn sẵn bộ TỪ CHỨC NĂNG tiếng Anh hay bị AI chèn
+    // (giới từ, liên từ, trạng từ, trợ động từ). Chỉ chọn những từ KHÔNG trùng
+    // hình với âm tiết tiếng Việt có dấu (AI luôn viết có dấu, nên "the"/"and"/
+    // "out" xuất hiện nguyên dạng ASCII giữa câu chắc chắn là rò rỉ). Vẫn KHÔNG
+    // đụng tới danh từ/động từ thường vì dễ trùng tên riêng ngoại quốc.
+    const ENGLISH_LEAK_REPLACEMENTS = {
+        // giới từ / trạng từ chỉ hướng — có nghĩa tương đương rõ ràng
+        out: 'ra', into: 'vào', onto: 'lên', from: 'từ', with: 'với', through: 'xuyên qua',
+        under: 'dưới', beneath: 'bên dưới', above: 'phía trên', below: 'phía dưới', behind: 'phía sau',
+        between: 'giữa', among: 'giữa', toward: 'về phía', towards: 'về phía', inside: 'bên trong',
+        outside: 'bên ngoài', around: 'xung quanh', across: 'băng qua', along: 'dọc theo', beside: 'bên cạnh',
+        within: 'trong', beyond: 'vượt qua', upon: 'lên', until: 'cho đến khi',
+        // liên từ / trạng từ
+        // KHÔNG đưa "then" (tiếng Việt: "then chốt", "cài then") và "the" ("áo the") vào đây.
+        and: 'và', but: 'nhưng', because: 'vì', while: 'trong khi', however: 'tuy nhiên',
+        although: 'dù', though: 'dù', suddenly: 'đột nhiên', slowly: 'chậm rãi', quickly: 'nhanh chóng',
+        finally: 'cuối cùng', again: 'lần nữa', already: 'đã', still: 'vẫn', never: 'không bao giờ',
+        always: 'luôn', almost: 'gần như', very: 'rất', just: 'chỉ', only: 'chỉ', even: 'thậm chí',
+        really: 'thực sự', immediately: 'ngay lập tức', quietly: 'lặng lẽ', gently: 'nhẹ nhàng',
+        // đã gặp thực tế
+        curtains: 'màn',
+    };
+    // Không có bản dịch an toàn theo ngữ cảnh → cắt bỏ (câu tiếng Việt còn lại vẫn đủ ý).
+    const ENGLISH_LEAK_STRIP_WORDS = [
+        'this', 'that', 'these', 'those', 'there', 'here', 'now', 'of', 'over', 'against',
+        'away', 'off', 'is', 'was', 'were', 'are', 'been', 'being', 'has', 'have', 'had',
+        'will', 'would', 'could', 'should', 'itself', 'himself', 'herself', 'themselves',
+    ];
+    // Ranh giới từ theo Unicode (\b của JS coi chữ có dấu như "ế" là ký tự KHÔNG
+    // phải chữ, nên "\bthe\b" có thể khớp nhầm bên trong "thế"/"thê" khi kề dấu).
     const ENGLISH_LEAK_RE = new RegExp(
-        '\\b(' + [...Object.keys(ENGLISH_LEAK_REPLACEMENTS), ...ENGLISH_LEAK_STRIP_WORDS].join('|') + ')\\b',
-        'gi',
+        '(?<!\\p{L})(' + [...Object.keys(ENGLISH_LEAK_REPLACEMENTS), ...ENGLISH_LEAK_STRIP_WORDS].join('|') + ')(?!\\p{L})',
+        'giu',
     );
+    // KHÔNG lọc bên trong: thẻ lệnh [TAG: ...] (vd START_COMBAT_WITH, MOVE_PLAYER_TO
+    // chứa "with"/"to"), thẻ XML <dialogue speaker="...">, và tên riêng *...* (tên
+    // ngoại quốc trong thế giới đồng nhân có thể trùng từ tiếng Anh).
+    const ENGLISH_LEAK_PROTECTED_RE = /(\[[A-Z_]+(?::[^\]]*)?\]|<[^>\n]+>|\*[^*\n]+\*)/g;
+    const scrubEnglishLeak = (segment) => segment.replace(ENGLISH_LEAK_RE, (match) => {
+        // Chữ IN HOA toàn bộ (vd "AND" trong tiêu đề/nhãn) không coi là rò rỉ.
+        if (match.length > 1 && match === match.toUpperCase()) return match;
+        const replacement = ENGLISH_LEAK_REPLACEMENTS[match.toLowerCase()] ?? '';
+        // Giữ hoa đầu câu: "Suddenly" → "Đột nhiên".
+        return (replacement && match[0] === match[0].toUpperCase())
+            ? replacement.charAt(0).toUpperCase() + replacement.slice(1)
+            : replacement;
+    });
+    const scrubEnglishLeakOutsideTags = (content) => content
+        .split(ENGLISH_LEAK_PROTECTED_RE)
+        .map((part, idx) => (idx % 2 === 1 ? part : scrubEnglishLeak(part)))
+        .join('');
 
-    storyContent = storyContent
-        .replace(/[^.!?\n]*chuỗi hành động[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*[.!?]?/gi, '')
-        .replace(/[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*chuỗi hành động[^.!?\n]*[.!?]?/gi, '')
-        .replace(FOREIGN_SCRIPT_LEAK_RE, '')
-        .replace(ENGLISH_LEAK_RE, (match) => ENGLISH_LEAK_REPLACEMENTS[match.toLowerCase()] ?? '')
+    storyContent = scrubEnglishLeakOutsideTags(
+        storyContent
+            .replace(/[^.!?\n]*chuỗi hành động[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*[.!?]?/gi, '')
+            .replace(/[^.!?\n]*(?:trọn vẹn|đúng trình tự)[^.!?\n]*chuỗi hành động[^.!?\n]*[.!?]?/gi, '')
+            .replace(FOREIGN_SCRIPT_LEAK_RE, '')
+    )
         .replace(/ {2,}/g, ' ')
-        // Nếu một từ trong ENGLISH_LEAK_STRIP_WORDS (không có bản dịch an toàn) bị
-        // cắt ngay trước dấu câu, nó để lại khoảng trắng mồ côi (vd "...abc ." thay
-        // vì "...abc.") — dọn nốt cho câu liền mạch, dù danh sách đó hiện đang rỗng.
+        // Từ bị CẮT ngay trước dấu câu để lại khoảng trắng mồ côi (vd "...abc ." thay
+        // vì "...abc.") — dọn nốt cho câu liền mạch.
         .replace(/ +([.,!?;:])/g, '$1');
 
     const updates = {
@@ -27769,11 +28176,15 @@ const filterHistoryContext = (history, htabName) => {
 const convertCharacterStatsToNarrative = (character) => {
     if (!character) return "";
     const hpRatio = character.maxhp > 0 ? character.hp / character.maxhp : 1;
-    let hpDesc = "hoàn toàn khỏe mạnh, chân nguyên tràn đầy";
-    if (hpRatio <= 0) hpDesc = "khí tuyệt thân vong, kinh mạch đứt đoạn";
+    // Genre-neutral wording only: this string is injected into the narrator
+    // prompt every turn, so any cultivation vocabulary here ("chân nguyên",
+    // "chân khí", "kinh mạch"...) leaks into settings that have no such
+    // energy system (e.g. Tam Quốc). Describe the body, not an energy.
+    let hpDesc = "hoàn toàn khỏe mạnh, sức lực sung mãn";
+    if (hpRatio <= 0) hpDesc = "khí tuyệt thân vong";
     else if (hpRatio < 0.2) hpDesc = "hơi thở thoi thóp, sinh mệnh như ngọn đèn trước gió, cận kề tử lộ";
-    else if (hpRatio < 0.5) hpDesc = "bị trọng thương nghiêm trọng, nguyên khí tổn hao nặng nề, đi đứng lảo đảo";
-    else if (hpRatio < 0.8) hpDesc = "suy yếu nhẹ, chân khí có chút hỗn loạn do vết thương ngoài da";
+    else if (hpRatio < 0.5) hpDesc = "bị trọng thương nghiêm trọng, khí huyết hao tổn nặng nề, đi đứng lảo đảo";
+    else if (hpRatio < 0.8) hpDesc = "suy yếu nhẹ, còn đau nhức do vết thương ngoài da";
 
     const statuses = [...(character.longTermStatuses || []), ...(character.combatStatuses || [])];
     const badStatuses = statuses.filter(s => {
@@ -28089,9 +28500,9 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
         let nsfwNarrativeRule = "";
         if (tagsLower.includes('nsfw')) {
             if (gameSettings.allowNsfw) {
-                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (NSFW): Phân cảnh này chứa yếu tố 18+. Ngươi ĐƯỢC PHÉP và ĐƯỢC KHUYẾN KHÍCH mô tả các cảnh 18+ với phong cách truyện 18+. Các đại từ chỉ bộ phận sinh dục sẽ được cu, lồn, vú sẽ được giữ nguyên, ngoài ra đa dạng sử dụng ngôn từ biểu thị bộ phận sinh dục sao cho hấp dẫn và tự nhiên nhất, như dương vật, cặc, đầu khấc, hòn dái, bi, âm vật, lỗ đít, lỗ hậu, tử cung, bầu ngực..., và cảnh quan hệ được nói một cách nghệ thuật. Các cảnh bạo lực (BDSM) cũng phải mô tả trực diện, tàn nhẫn.`;
+                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (NSFW): Phân cảnh này chứa yếu tố 18+. Ngươi ĐƯỢC PHÉP và ĐƯỢC KHUYẾN KHÍCH mô tả các cảnh 18+ với phong cách truyện 18+. Các đại từ chỉ bộ phận sinh dục cu, lồn, vú sẽ được giữ nguyên, ngoài ra đa dạng sử dụng ngôn từ biểu thị bộ phận sinh dục sao cho hấp dẫn và tự nhiên nhất, như dương vật, cặc, đầu khấc, hòn dái, bi, âm vật, lỗ đít, lỗ hậu, tử cung, bầu ngực..., và cảnh quan hệ được nói một cách nghệ thuật. Các cảnh bạo lực (BDSM) cũng phải mô tả trực diện, tàn nhẫn.`;
             } else {
-                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (Kiểm duyệt): Phân cảnh này chứa yếu tố nhạy cảm hoặc bạo lực. Tuy nhiên, ngươi PHẢI SỬ DỤNG phong cách ngôn tình lãng mạn, hoa mỹ, hoặc ẩn dụ (fade-to-black). TUYỆT ĐỐI KHÔNG mô tả trần trụi các bộ phận sinh dục hay hành vi tình dục. Với cảnh bạo lực, hãy mô tả đầy tính nghệ thuật và ẩn ý, tránh sự kinh dị, máu me gây phản cảm.`;
+                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (NSFW): Phân cảnh này chứa yếu tố 18+. Ngươi ĐƯỢC PHÉP và ĐƯỢC KHUYẾN KHÍCH mô tả các cảnh 18+ với phong cách truyện 18+. Các đại từ chỉ bộ phận sinh dục cu, lồn, vú sẽ được giữ nguyên, ngoài ra đa dạng sử dụng ngôn từ biểu thị bộ phận sinh dục sao cho hấp dẫn và tự nhiên nhất, như dương vật, cặc, đầu khấc, hòn dái, bi, âm vật, lỗ đít, lỗ hậu, tử cung, bầu ngực..., và cảnh quan hệ được nói một cách nghệ thuật. Các cảnh bạo lực (BDSM) cũng phải mô tả trực diện, tàn nhẫn.`;
             }
         }
 
@@ -28683,11 +29094,11 @@ ${PILLAR1_DIRECTIVES_NARRATION.map(x => '//    * ' + x).join('\n')}
 
 // 1.5. CHỈ VIẾT BẰNG CHỮ QUỐC NGỮ (TUYỆT ĐỐI CẤM CHỮ VIẾT NGOÀI TIẾNG VIỆT):
 //    - Toàn bộ văn tường thuật, hội thoại, và 4 gợi ý hành động PHẢI 100% bằng chữ Quốc ngữ (bảng chữ Latin có dấu tiếng Việt). TUYỆT ĐỐI KHÔNG được để lẫn bất kỳ ký tự/từ nào của ngôn ngữ khác vào giữa câu tiếng Việt — kể cả chỉ một chữ Hán/Kana/Hangul/Kirin (Nga) đơn lẻ, dù chỉ một âm tiết, VÀ kể cả một TỪ TIẾNG ANH nguyên vẹn (dù cùng dùng chữ Latin như tiếng Việt) — mọi từ, kể cả từ đơn giản/thông dụng, PHẢI dịch hẳn sang tiếng Việt, không được giữ nguyên văn gốc tiếng Anh.
-//    - Muốn diễn đạt khái niệm gốc Hán (võ công, công pháp, danh xưng, tâm pháp...), BẮT BUỘC dùng từ Hán Việt đã phiên âm sang chữ Quốc ngữ (VD: "niệm", "chân nguyên", "tâm ma"), TUYỆT ĐỐI KHÔNG viết trực tiếp ký tự Hán gốc (VD: 念, 心, 氣).
+//    - Muốn diễn đạt khái niệm gốc Hán (võ công, công pháp, danh xưng, tâm pháp...), BẮT BUỘC dùng từ Hán Việt đã phiên âm sang chữ Quốc ngữ (VD: "niệm", "chiêu thức", "tâm ma"), TUYỆT ĐỐI KHÔNG viết trực tiếp ký tự Hán gốc (VD: 念, 心, 氣).
 //    - VÍ DỤ SAI (lẫn tiếng Nga): "Vận dụng toàn bộ sức mạnh физи thể chất lướt tới áp sát..." — "физи" là ký tự ngoại lai vô nghĩa trong câu, TUYỆT ĐỐI không được xuất hiện.
 //    - VÍ DỤ SAI (lẫn chữ Hán thay vì Hán Việt): "Ngươi tâm念 vừa động, chuôi thần binh... hiện ra" — phải viết trọn "niệm" bằng chữ Quốc ngữ: "Ngươi tâm niệm vừa động".
-//    - VÍ DỤ SAI (lẫn nguyên từ tiếng Anh): "...bọc giáp sáng quắc under sự dẫn dắt của..." (phải viết "dưới sự dẫn dắt của"); "...màn kịch của mình đã đến lúc thu hạ curtains." (phải viết trọn ý bằng tiếng Việt, VD "đã đến lúc hạ màn.", KHÔNG được giữ từ "curtains").
-//    - VÍ DỤ ĐÚNG: "Vận dụng toàn bộ sức mạnh thể chất lướt tới áp sát...", "Ngươi tâm niệm vừa động, chuôi thần binh... hiện ra", "...bọc giáp sáng quắc dưới sự dẫn dắt của...", "...màn kịch của mình đã đến lúc hạ màn.".
+//    - VÍ DỤ SAI (lẫn nguyên từ tiếng Anh): "...bọc giáp sáng quắc under sự dẫn dắt của..." (phải viết "dưới sự dẫn dắt của"); "...màn kịch của mình đã đến lúc thu hạ curtains." (phải viết trọn ý bằng tiếng Việt, VD "đã đến lúc hạ màn.", KHÔNG được giữ từ "curtains"); "Supple nhưng lại có chút vết chai mỏng ở lòng bàn tay" (từ tính từ tiếng Anh "supple" đứng đầu câu được viết hoa nên trông như tên riêng — vẫn là lỗi, phải viết "Mềm mại nhưng lại có chút vết chai mỏng ở lòng bàn tay"). ĐẶC BIỆT CẢNH GIÁC với các tính từ tả xúc giác/hình thể (supple, smooth, soft, firm, delicate, graceful...) — chúng hay lọt vào đầu câu miêu tả cơ thể.
+//    - VÍ DỤ ĐÚNG: "Vận dụng toàn bộ sức mạnh thể chất lướt tới áp sát...", "Ngươi tâm niệm vừa động, chuôi thần binh... hiện ra", "...bọc giáp sáng quắc dưới sự dẫn dắt của...", "...màn kịch của mình đã đến lúc hạ màn.", "Mềm mại nhưng lại có chút vết chai mỏng ở lòng bàn tay".
 //    - TỰ KIỂM TRA BẮT BUỘC TRƯỚC KHI TRẢ VỀ PHẢN HỒI: rà lại toàn bộ văn bản một lượt, kể cả những từ trông "vô hại" xen giữa câu tiếng Việt; nếu phát hiện bất kỳ ký tự/từ nào không phải chữ Quốc ngữ (kể cả một từ tiếng Anh thông dụng) hoặc dấu câu thông thường, PHẢI xóa hoặc dịch hẳn sang tiếng Việt trước khi hoàn tất.
 
 // 2. ĐỊNH DẠNG HỘI THOẠI (NGHIÊM CẤM ĐỂ TRỐNG SPEAKER):
@@ -28794,6 +29205,16 @@ ${gameSettings.isTamQuocWorld ? `//    - THẾ GIỚI TAM QUỐC: khi một nhâ
 //    - BẮT BUỘC BÁO DANH ĐẦY ĐỦ TẤT CẢ CÁC BÊN, KHÔNG ĐƯỢC BỎ SÓT: Nếu có N bên là Hồn Sư tham chiến (kể cả chính nhân vật chính), TẤT CẢ N bên đều phải báo danh theo đúng cú pháp trên trong CÙNG phản hồi trước khi giao đấu — TUYỆT ĐỐI KHÔNG được chỉ báo danh một bên (VD chỉ NPC đối phương) rồi bỏ quên báo danh của nhân vật chính, hay ngược lại.
 //      * VÍ DỤ SAI: Chỉ có <dialogue speaker="Vương Đông Nhi">Vương Đông Nhi - Cấp 41 - Cường công hệ chiến Hồn Tông - Võ hồn Quang Minh Nữ Thần Điệp.</dialogue> mà thiếu hẳn câu báo danh của nhân vật chính.
 //      * VÍ DỤ ĐÚNG: Cả nhân vật chính lẫn Vương Đông Nhi đều có câu báo danh riêng theo đúng cú pháp, nối tiếp nhau tự nhiên trong mạch truyện trước khi giao đấu.
+
+// 2.10b. CẤM MẶC ĐỊNH HỆ NĂNG LƯỢNG TU LUYỆN KHI BỐI CẢNH KHÔNG THIẾT LẬP (BẮT BUỘC, ÁP DỤNG MỌI LÚC):
+//    - Nhãn thể loại "Tu Tiên"/"Huyền Huyễn"/tên cảnh giới (Luyện Khí, Trúc Cơ, Tiên Đế...) KHÔNG tự động đồng nghĩa với việc nhân vật chính sở hữu "chân nguyên". Chỉ khi phần Bối cảnh/thiết lập thế giới, hành động của người chơi, hay kỹ năng/trạng thái ĐÃ CÓ của nhân vật NÊU RÕ TÊN một dạng năng lượng nội tại (chân nguyên, chân khí, linh lực, nội lực, pháp lực, ma khí...) thì ngươi mới được nhắc đến dạng năng lượng ĐÚNG TÊN đó. Người chơi không nhắc thì coi như KHÔNG TỒN TẠI.
+//    - TUYỆT ĐỐI KHÔNG tự bịa ra rằng nhân vật chính "hồi phục chân nguyên", "chân nguyên dồi dào", "vận chuyển chân khí", "linh lực tràn đầy", "điều tức chữa thương bằng nội lực"... như một mặc định. LƯU Ý: "đan điền", "kinh mạch", "vận khí", "tụ lực" là khái niệm thân thể/võ học có sẵn trong mọi bối cảnh Á Đông (kể cả Tam Quốc) — vẫn được dùng như nơi tụ lực, dẫn hơi, vận sức; chỉ cấm biến chúng thành nơi chứa/vận hành một dạng năng lượng siêu nhiên chưa được thiết lập — kể cả khi tả sức khỏe, hồi phục, nghỉ ngơi, hay sức mạnh vượt trội. Sức mạnh có thể hoàn toàn đến từ thể chất: luyện thể, gân cốt, khí huyết, sức lực, kinh nghiệm chiến trận. Một cao thủ luyện thể tới đỉnh cao vẫn vô địch mà không cần bất kỳ năng lượng nào.
+//    - Bối cảnh lịch sử/dã sử (Tam Quốc, Xuân Thu, Hán, Đường...): thế giới này KHÔNG có hệ "chân nguyên". Kể cả khi trong bối cảnh có vài nhân vật biết pháp thuật (Tả Từ, Nam Hoa Lão Tiên, Trương Giác...), đó là phép thuật/đạo thuật riêng của HỌ, không phải năng lượng phổ quát mà ai cũng có, và cũng không tự động thuộc về nhân vật chính. Không được lấy sự tồn tại của họ làm lý do để gán chân nguyên/pháp lực cho nhân vật chính hay NPC khác.
+//    - Muốn tả thể trạng/hồi phục khi bối cảnh không có hệ năng lượng, CHỈ dùng ngôn ngữ thân thể: hơi thở, khí huyết, sức lực, cơ bắp, vết thương, mệt mỏi, tinh thần.
+//      * VÍ DỤ SAI: "chân nguyên trong cơ thể đã hồi phục trọn vẹn, dồi dào hơn bao giờ hết" (bối cảnh Tam Quốc, người chơi chưa từng nhắc đến chân nguyên).
+//      * VÍ DỤ ĐÚNG: "vết thương đã lành hẳn, khí huyết lưu thông, sức lực dồi dào hơn bao giờ hết".
+//    - KHÔNG KẾ THỪA LỖI CŨ: nếu các đoạn truyện trước đó trong lịch sử có lỡ dùng "chân nguyên"/"linh lực"/"chân khí"... trong khi bối cảnh và người chơi chưa từng thiết lập, đó là lỗi tường thuật, KHÔNG phải bằng chứng rằng năng lượng ấy tồn tại. Ngươi KHÔNG được lấy đó làm căn cứ để tiếp tục dùng; hãy quay về ngôn ngữ thân thể.
+//    - Quy tắc này áp dụng cho văn tường thuật, lời thoại NPC, 'summary' kịch bản, VÀ 4 lựa chọn hành động cuối phản hồi. Nó độc lập với quy tắc 2.11 bên dưới (2.11 chỉ chặn TRƯỚC khi thức tỉnh; 2.10b chặn MỌI LÚC nếu năng lượng đó chưa từng được thiết lập).
 
 // 2.11. QUY TẮC PHONG ẤN NHẬN THỨC SIÊU NHIÊN (BẮT BUỘC KHI BỐI CẢNH THIẾT LẬP):
 //    - Nếu bối cảnh thế giới quy định rằng nhân vật chính và/hoặc người thường chưa/không thể nhận biết được thế giới siêu nhiên (quái vật, dị năng, bí cảnh kỳ văn...) trước khi thức tỉnh/giác ngộ, thì TRƯỚC KHI cốt truyện đã thực sự thuật lại sự kiện thức tỉnh của nhân vật chính, TUYỆT ĐỐI KHÔNG được viết bất kỳ đoạn văn nào miêu tả nhân vật chính hoặc NPC người thường xung quanh nhìn thấy/nghe thấy/cảm nhận được quái vật, thực thể siêu nhiên, hay bí cảnh — dù chỉ thoáng qua, từ xa, hay trong giấc mơ/linh cảm mơ hồ.
@@ -30044,7 +30465,10 @@ const handleEquipSkill = (skillToEquip, characterId = 'player') => {
         }
 
         if (slotToFill) {
-            character.learnedSkills = character.learnedSkills.filter(s => s.id !== skillToEquip.id);
+            // Kho dùng chung: kỹ năng có thể đang nằm trong learnedSkills của một
+            // thành viên khác — gỡ khỏi TẤT CẢ để không bị nhân đôi.
+            removeSkillFromSharedPool(newKnowledge.characters, skillToEquip.id);
+            if (!character.equippedSkills) character.equippedSkills = {};
             character.equippedSkills[slotToFill] = skillToEquip;
             
             setModalMessage({ show: true, title: "Thành Công", content: `Đã vận hành kỹ năng "${skillToEquip.Name || skillToEquip.action_name}".`, type: "success" });
@@ -30066,13 +30490,14 @@ const handleForgetSkill = (skillToForget, characterId) => {
         onConfirm: () => {
             setknowledge(prev => {
                 const newKnowledge = JSON.parse(JSON.stringify(prev));
+                // Kho dùng chung: xóa khỏi mọi thành viên tổ đội, không chỉ hành giả đang chọn.
+                removeSkillFromSharedPool(newKnowledge.characters, skillToForget.id);
                 const charIndex = newKnowledge.characters.findIndex(c => c.id === characterId);
-                
                 if (charIndex > -1) {
                     const character = newKnowledge.characters[charIndex];
                     character.learnedSkills = (character.learnedSkills || []).filter(s => s.id !== skillToForget.id);
                 }
-                
+
                 return newKnowledge;
             });
             setModalMessage({
@@ -30099,14 +30524,19 @@ const handleUnequipSkill = (slotKey, characterId = 'player') => {
 
         if (!skillToUnequip) return prev;
 
-        // Kiểm tra giới hạn kho tiềm thức
-        if (character.learnedSkills.length >= 4) {
-            setModalMessage({ show: true, title: "Kho Tiềm Thức Đầy", content: "Không thể gỡ kỹ năng vì kho đã đầy. Hãy gỡ một kỹ năng khác trước.", type: "error" });
+        // Kiểm tra giới hạn kho tiềm thức DÙNG CHUNG của cả tổ đội
+        const sharedPoolSize = getSharedSkillPool(newKnowledge.characters).length;
+        const sharedMax = calculateSharedMaxLearnedSkills(newKnowledge.characters);
+        if (sharedPoolSize >= sharedMax) {
+            setModalMessage({ show: true, title: "Kho Tiềm Thức Đầy", content: `Kho chung của tổ đội đã đầy (${sharedPoolSize}/${sharedMax}). Hãy lãng quên hoặc vận dụng một kỹ năng khác trước.`, type: "error" });
             return prev;
         }
 
-        // Trả kỹ năng về kho
-        character.learnedSkills.push(skillToUnequip);
+        // Trả kỹ năng về kho chung — chủ kho là nhân vật chính (nếu có), để
+        // mọi hành giả đều thấy và dùng được.
+        const poolOwner = newKnowledge.characters.find(c => c.isPlayer) || character;
+        if (!Array.isArray(poolOwner.learnedSkills)) poolOwner.learnedSkills = [];
+        poolOwner.learnedSkills.push(skillToUnequip);
         // Làm trống ô trang bị
         character.equippedSkills[slotKey] = null;
 
@@ -30290,23 +30720,42 @@ const handleSongTu = async (characterId) => {
     const npcName = npc.Name;
 
     const randomStyles = [
-            "với bối cảnh mờ ảo và dâng trào cảm xúc mãnh liệt hoang dại",
-            "mô tả siêu chậm rãi từng chuyển động nhỏ nhặt nhất, hơi thở dồn dập nóng rực nồng nàn",
-            "với phong thái nguyên thủy hoang dã đầy khát khao và say đắm tột bực",
-            "xen kẽ những lời mật ngọt thì thầm thâm tình sâu sắc đầy hứa hẹn trọn đời",
-            "tả thực chi tiết những va chạm dâm mỹ và quyến rũ kịch liệt đầy khoái cảm"
+            'với bối cảnh mờ ảo và dâng trào cảm xúc mãnh liệt hoang dại',
+            'mô tả siêu chậm rãi từng chuyển động nhỏ nhặt nhất, hơi thở dồn dập nóng rực nồng nàn',
+            'với phong thái nguyên thủy hoang dã đầy khát khao và say đắm tột bực',
+            'xen kẽ những lời mật ngọt thì thầm thâm tình sâu sắc',
+            'tả thực chi tiết tất cả các tư thế, tất cả những va chạm dâm mỹ và quyến rũ kịch liệt đầy khoái cảm của những tư thế khác nhau. Mỗi tư thế đều miêu tả chi tiết',
+            
+            'Viết theo văn phong sắc hiệp/tiểu thuyết mạng tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.',
+            'Mô tả chân thực và sống động sự va chạm cuồng nhiệt của dương vật nóng trướng nổi gân cắm lút cán vào sâu trong âm đạo tử cung rực lửa dâm mỹ, tiếng va chạm da thịt râm ran bạch bạch bạch, tiếng nước dâm thủy lép nhép dâm mỹ phát ra, tiếng rên rỉ dâm đãng đầy đê mê sướng đến tột cùng của "${npcName}", và khoảnh khắc bắn tinh túy nóng hổi phun thẳng ngập tràn tử cung nàng.',
+            'Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 3000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và sự hòa quyện của hai thân thể nóng bỏng.',
+            'BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết thật nhiều câu thoại rên rỉ dâm mỹ của "${npcName}" và lời trêu chọc thâm tình của ngươi để kéo dài tác phẩm một cách tự nhiên nhất.',
+            'Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.'
+
         ];
     const chosenStyle = randomStyles[Math.floor(Math.random() * randomStyles.length)];
+
+    // Song Tu prompts bypass the main narrator rule-set, so the world setting and
+    // the "no default cultivation energy" rule (main prompt §2.10b) must be
+    // restated here. Without this, every Song Tu scene hard-coded tu-tiên energy
+    // vocabulary (chân nguyên/chân khí/linh lực) regardless of setting.
+    const songTuWorldRules = `BỐI CẢNH THẾ GIỚI (BẮT BUỘC TUÂN THEO): Thế giới "${gameSettings.theme || 'Chưa rõ'}", Bối cảnh chi tiết: "${gameSettings.setting || 'Chưa rõ'}".
+                        QUY TẮC VỀ HỆ NĂNG LƯỢNG (TUYỆT ĐỐI):
+                        - CHỈ nhắc đến một dạng năng lượng nội tại (chân nguyên, chân khí, linh lực, nội lực, pháp lực...) NẾU bối cảnh ở trên NÊU RÕ TÊN dạng năng lượng đó, và phải gọi đúng tên ấy. Bối cảnh không nhắc thì coi như KHÔNG TỒN TẠI — không được bịa "linh lực giao hòa", "chân nguyên cộng hưởng", "chân khí luân chuyển", "đả thông kinh mạch bằng linh lực", "khôi phục chân nguyên" như một mặc định.
+                        - Bối cảnh lịch sử/dã sử (Tam Quốc, Hán, Đường...) KHÔNG có hệ chân nguyên. "Song tu" khi đó là hai người cùng nhau tĩnh tâm, điều hòa hơi thở, luyện thể, luận võ, chia sẻ tâm tư và gắn kết thân thể/tinh thần — sức lực hồi phục nhờ nghỉ ngơi, khí huyết lưu thông, tinh thần thoải mái, KHÔNG nhờ năng lượng nào.
+                        - Tả thể trạng/hồi phục bằng ngôn ngữ thân thể: hơi thở, khí huyết, sức lực, cơ bắp, sự thư thái. "Đan điền", "kinh mạch", "vận khí", "tụ lực" được dùng như khái niệm thân thể/võ học, nhưng không được biến thành nơi chứa/vận hành một năng lượng siêu nhiên chưa thiết lập.
+                        - Văn phong: tiểu thuyết mạng Tiếng Việt PHÙ HỢP VỚI BỐI CẢNH TRÊN (tu tiên chỉ khi bối cảnh là tu tiên; lịch sử thì dùng văn phong dã sử/võ hiệp).`;
 
     if (isNsfw) {
         setModalMessage({ show: true, title: "Đang Song Tu...", content: `Ngươi đang ôm khít lấy [${npc.Name}], lột bỏ xiêm y, cùng nhục thân hòa quyện song tu...`, type: "info" });
 
-                    const prompt = `Viết một câu chuyện sắc hiệp/tu tiên cực kỳ chi tiết, chậm rãi, nồng nàn và ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả tỉ mỉ quá trình nhục thân giao hợp quyến rũ nồng nhiệt giữa nhân vật chính (ngươi) và mỹ nữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, quyến rũ"}, Ngoại hình: ${npc.Appearance || "thanh tao, gợi cảm"}).
+                    const prompt = `Viết một câu chuyện sắc hiệp cực kỳ chi tiết, chậm rãi, nồng nàn và ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả tỉ mỉ quá trình nhục thân giao hợp quyến rũ nồng nhiệt giữa nhân vật chính (ngươi) và mỹ nữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, quyến rũ"}, Ngoại hình: ${npc.Appearance || "thanh tao, gợi cảm"}).
+                        ${songTuWorldRules}
                         Hãy viết câu chuyện theo phong cách đặc thù sau: ${chosenStyle}.
                         Yêu cầu phong cách viết:
-                        - Viết theo văn phong sắc hiệp/tiểu thuyết mạng tu tiên tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.
+                        - Viết theo văn phong sắc hiệp/tiểu thuyết mạng tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.
                         - Mô tả chân thực và sống động sự va chạm cuồng nhiệt của dương vật nóng trướng nổi gân cắm lút cán vào sâu trong âm đạo tử cung rực lửa dâm mỹ, tiếng va chạm da thịt râm ran bạch bạch bạch, tiếng nước dâm thủy lép nhép dâm mỹ phát ra, tiếng rên rỉ dâm đãng đầy đê mê sướng đến tột cùng của "${npcName}", và khoảnh khắc bắn tinh túy nóng hổi phun thẳng ngập tràn tử cung nàng.
-                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 2000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và dòng chân khí dung hợp luân chuyển làm bừng sáng kinh mạch.
+                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 3000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và sự hòa quyện của hai thân thể nóng bỏng.
                         - BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết thật nhiều câu thoại rên rỉ dâm mỹ của "${npcName}" và lời trêu chọc thâm tình của ngươi để kéo dài tác phẩm một cách tự nhiên nhất.
                         - Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.`;
 
@@ -30328,18 +30777,19 @@ const handleSongTu = async (characterId) => {
                                     storySnippet = customText.replace(/Đạo Lữ/g, npcName).replace(/\[npc\.Name\]/g, npcName).replace(/\[npcName\]/g, npcName);
                                 }
                             } else {
-                    const prompt = `Viết một câu chuyện tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng tu tiên Tiếng Việt hoành tráng, lãng mạn và thâm tình sâu sắc, ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả toàn bộ quá trình song tu, thần hồn giao hòa và linh lực cộng hưởng đỉnh cao giữa nhân vật chính (ngươi) và đạo lữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
+                    const prompt = `Viết một câu chuyện tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng Tiếng Việt hoành tráng, lãng mạn và thâm tình sâu sắc, ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả toàn bộ quá trình song tu — hai người cùng nhau tu luyện, tâm ý giao hòa và gắn kết sâu sắc — giữa nhân vật chính (ngươi) và đạo lữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
+                        ${songTuWorldRules}
                         Hãy viết câu chuyện theo phong cách đặc thù sau: ${chosenStyle}.
                         Yêu cầu phong cách viết:
-                        - Viết cực kỳ chi tiết, chậm rãi, mô tả từng bước của quá trình song tu: từ khoảnh khắc hai người ngồi đối diện đan tay, nhắm mắt tĩnh tâm, khởi động linh lực bản nguyên, cho đến khi chân khí hai bên chạm nhau, tạo nên vòng xoáy âm dương ngũ hành dung hợp.
-                        - Mô tả dòng khí ấm áp len lỏi qua từng sợi kinh mạch, đả thông các huyệt đạo bế tắc, thanh lọc lục phủ ngũ tạng, làm linh đài bừng sáng huy hoàng.
-                        - Thể hiện sự kết nối thần thức sâu sắc, khi tâm trí hai người hòa làm một, nhìn thấy ký ức và tâm tư thầm kín của nhau, cùng nhau vượt qua tâm ma kiếp nạn, thấu hiểu nhân quả tu hành.
-                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, tinh tế, giàu chất thơ và triết lý tu tiên, viết từng phân cảnh nhỏ một cách tỉ mỉ nhất có thể để đạt độ dài khổng lồ 2000-5000 từ.
+                        - Viết cực kỳ chi tiết, chậm rãi, mô tả từng bước của quá trình song tu theo ĐÚNG hệ thống sức mạnh mà bối cảnh thiết lập: từ khoảnh khắc hai người ngồi đối diện đan tay, nhắm mắt tĩnh tâm, điều hòa hơi thở, cho đến khi nhịp thở và tâm ý hai bên hòa làm một. Nếu bối cảnh có hệ năng lượng đã nêu tên, mới được tả dòng năng lượng đó giao hòa; nếu không, tả sự hòa hợp của hơi thở, khí huyết, thân thể và tinh thần.
+                        - Mô tả cảm giác ấm áp lan tỏa khắp thân thể, cơ bắp thư giãn, mệt mỏi tan biến, tinh thần thanh tịnh sáng suốt.
+                        - Thể hiện sự kết nối tâm hồn sâu sắc, khi tâm trí hai người hòa làm một, chia sẻ ký ức và tâm tư thầm kín của nhau, cùng nhau vượt qua nỗi sợ và vướng mắc trong lòng.
+                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, tinh tế, giàu chất thơ và triết lý phù hợp bối cảnh, viết từng phân cảnh nhỏ một cách tỉ mỉ nhất có thể để đạt độ dài khổng lồ 2000-5000 từ.
                         - BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết nhiều lời thoại trao đổi ngộ đạo, động viên và thổ lộ tình cảm của hai người.
                         - Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.`;
 
                                 try {
-                                    setModalMessage({ show: true, title: "Đang Song Tu...", content: `Ngươi đang cùng [${npcName}] bước vào trạng thái song tu, thần hồn giao hòa, linh khí luân chuyển...`, type: "info" });
+                                    setModalMessage({ show: true, title: "Đang Song Tu...", content: `Ngươi đang cùng [${npcName}] bước vào trạng thái song tu, tâm ý giao hòa, hơi thở hòa làm một...`, type: "info" });
                                     storySnippet = await fetchGenericGeminiText(prompt);
                                 } catch (e) {
                                     console.error("Lỗi khi tạo cốt truyện Song Tu:", e);
@@ -30347,10 +30797,11 @@ const handleSongTu = async (characterId) => {
 
                                 // Nếu lỗi hoặc nội dung quá ngắn, thử lại với một prompt ngắn gọn hơn trước khi dùng văn bản mặc định
                                 if (!storySnippet || storySnippet.length < 200) {
-                                    const shortPrompt = `Viết một đoạn tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng tu tiên Tiếng Việt hoành tráng và lãng mạn, mô tả quá trình song tu giữa nhân vật chính (người chơi) và đạo lữ "${npc.Name}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
-                                    Yêu cầu mô tả sự giao hòa của linh lực giữa hai người, chân khí luân chuyển qua kinh mạch, đả thông các huyệt đạo, cảm xúc dâng trào và sự cộng hưởng tâm linh sâu sắc.`;
+                                    const shortPrompt = `Viết một đoạn tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng Tiếng Việt hoành tráng và lãng mạn, mô tả quá trình song tu giữa nhân vật chính (người chơi) và đạo lữ "${npc.Name}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
+                                    ${songTuWorldRules}
+                                    Yêu cầu mô tả sự hòa hợp của hơi thở và tâm ý giữa hai người, cảm giác ấm áp lan khắp thân thể, cảm xúc dâng trào và sự cộng hưởng tâm hồn sâu sắc — chỉ nhắc đến năng lượng nội tại nếu bối cảnh đã nêu tên.`;
 
-                                    const finalPrompt = shortPrompt + "\n" + (rollStory ? `Đặc biệt, trong khoảnh khắc song tu thể xác giao hòa cực kỳ sâu sắc này, hãy hé lộ một chi tiết nhỏ, bất ngờ hoặc một bí mật sâu kín về quá khứ hoặc xuất thân của "${npc.Name}" mà nhân vật chính phát hiện qua ký ức thần thức của đối phương.` : "") + "\nHãy viết thật lôi cuốn, chi tiết từ 4 đến 6 câu dài theo văn phong tiểu thuyết mạng sắc hiệp/tu tiên Tiếng Việt cực kỳ hoa mỹ. Chỉ trả về duy nhất đoạn văn tường thuật đó, không giải thích thêm, không dùng markdown hay tiêu đề nào khác.";
+                                    const finalPrompt = shortPrompt + "\n" + (rollStory ? `Đặc biệt, trong khoảnh khắc song tu giao hòa cực kỳ sâu sắc này, hãy hé lộ một chi tiết nhỏ, bất ngờ hoặc một bí mật sâu kín về quá khứ hoặc xuất thân của "${npc.Name}" mà nhân vật chính nhận ra qua lời tâm sự hoặc biểu cảm của đối phương.` : "") + "\nHãy viết thật lôi cuốn, chi tiết từ 4 đến 6 câu dài theo văn phong tiểu thuyết mạng Tiếng Việt cực kỳ hoa mỹ, phù hợp bối cảnh. Chỉ trả về duy nhất đoạn văn tường thuật đó, không giải thích thêm, không dùng markdown hay tiêu đề nào khác.";
 
                                     try {
                                         storySnippet = await fetchGenericGeminiText(finalPrompt);
@@ -30360,7 +30811,7 @@ const handleSongTu = async (characterId) => {
                                 }
 
                                 if (!storySnippet) {
-                                    storySnippet = `Hai người ngồi xếp bằng đối diện, bốn bàn tay đan vào nhau một cách dịu dàng. Chân khí trong cơ thể bắt đầu vận chuyển theo chu thiên, linh lực hai bên chạm nhau rồi hòa quyện làm một thể thống nhất. Linh lực của ${npcName} ấm áp như ngọc ôn nhuận, nhẹ nhàng dẫn dắt khí hải của ngươi khai mở, cuốn trôi đi những tạp chất và đả thông linh mạch toàn thân. Trong phút chốc, thần hồn hai bên cộng hưởng sâu sắc, linh đài thanh tịnh, cảm giác ấm áp và gắn kết vô hình ngập tràn tâm trí cả hai, đẩy lùi mọi kiếp nạn trần thế.`;
+                                    storySnippet = `Hai người ngồi xếp bằng đối diện, bốn bàn tay đan vào nhau một cách dịu dàng. Hơi thở hai bên dần chậm lại, hòa vào cùng một nhịp, tâm ý lắng xuống như mặt hồ không gợn sóng. Hơi ấm từ bàn tay ${npcName} lan dần khắp thân thể ngươi, cơ bắp căng cứng từng chút thư giãn, khí huyết lưu thông, mọi mệt mỏi tích tụ như được cuốn trôi. Trong phút chốc, tâm hồn hai bên cộng hưởng sâu sắc, đầu óc thanh tịnh sáng suốt, cảm giác ấm áp và gắn kết vô hình ngập tràn tâm trí cả hai, đẩy lùi mọi ưu phiền trần thế.`;
                                 }
                             }
 
@@ -32512,7 +32963,7 @@ QUY TẮC PHÁN QUYẾT:
     - Nếu truyện kể nhân vật bị dầm mưa, dính độc, kiệt sức, đói khát, tẩu hỏa nhập ma, hoặc bị thương thâm mạch... hãy dán trạng thái bất lợi dài hạn tương ứng lên cơ thể họ.
       Xuất thẻ lệnh: [APPLY_LONG_TERM_STATUS: target="Ngươi hoặc Tên đồng hành", status_id="BAT_TINH/TRONG_THUONG/XUAT_HUYET/TRUNG_DOC"]
     - Nếu có nhân vật tử vong trong cốt truyện thám hiểm dã ngoại, xuất thẻ: [CHARACTER_DEATH: Name="Tên nhân vật"]
-    - ĐẶC BIỆT QUAN TRỌNG: Hãy đối chiếu với các trạng thái hiện có của nhân vật. NẾU câu chuyện miêu tả nhân vật được chữa trị, giải độc, thanh lọc, phục hồi, tỉnh táo lại hoặc trạng thái xấu đã biến mất (ví dụ: "chân nguyên ổn định", "độc đã giải", "hết hỗn loạn"), ngươi BẮT BUỘC phải gỡ bỏ trạng thái tiêu cực đó! ${debuffContext}
+    - ĐẶC BIỆT QUAN TRỌNG: Hãy đối chiếu với các trạng thái hiện có của nhân vật. NẾU câu chuyện miêu tả nhân vật được chữa trị, giải độc, thanh lọc, phục hồi, tỉnh táo lại hoặc trạng thái xấu đã biến mất (ví dụ: "vết thương đã ổn định", "độc đã giải", "hết hỗn loạn"), ngươi BẮT BUỘC phải gỡ bỏ trạng thái tiêu cực đó! ${debuffContext}
       Xuất thẻ lệnh: [CHARACTER_UPDATE: Name="Ngươi hoặc Tên đồng hành", Stats="longtermstatuses:-'Tên chính xác của trạng thái'"] (Ví dụ: [CHARACTER_UPDATE: Name="Ngươi", Stats="longtermstatuses:-'Trọng Thương'"])
     - **CƠ CHẾ PHỤC HỒI HP (MỚI):** NẾU cốt truyện miêu tả Ký chủ nghỉ ngơi (ngủ một giấc, nghỉ chân), vận công điều tức chữa thương, được y sư trị liệu, hoặc dùng bữa ăn no nê hồi phục thể lực, ngươi BẮT BUỘC phải đánh giá mức độ phục hồi và xuất thẻ lệnh hồi HP.
       Xuất thẻ lệnh: [HEAL_PARTICIPANTS: percentage=X] 
@@ -33666,7 +34117,7 @@ const handbookData = [
                 subtitle: "Kho Tiềm Thức & Vận Dụng",
                 content: (
                     <>
-                        <p>Mọi kỹ năng ngươi học được sẽ đi vào <strong>"Kho Tiềm Thức"</strong>. Kho này có giới hạn (mặc định chứa được 4 kỹ năng, có thể tăng sức chứa bằng các kỹ năng phiêu lưu khác).</p>
+                        <p>Mọi kỹ năng tổ đội học được sẽ đi vào <strong>"Kho Tiềm Thức"</strong> — kho này <strong>dùng chung</strong> cho cả nhân vật chính lẫn đồng hành: ai cũng có thể vận dụng kỹ năng trong kho. Kho có giới hạn (mặc định chứa được 10 kỹ năng, có thể tăng sức chứa bằng các kỹ năng phiêu lưu khác).</p>
                         <p className="mt-3">Để sử dụng một kỹ năng, ngươi phải <strong>"Vận Dụng"</strong> nó từ Kho Tiềm Thức vào các ô <strong>"Thực Tại"</strong>. Mỗi nhân vật có:</p>
                         <ul className="list-disc list-inside space-y-1 mt-2 text-sm bg-[#101a10] p-3 border border-[#8ba888]/20">
                             <li>2 ô kỹ năng Chiến đấu cơ bản</li>
@@ -34287,9 +34738,10 @@ const applyUpdates = (currentKnowledge, updates, currentGameMode, commandBlock =
                 }
                 case 'Sách kỹ năng': {
                     const skillNameToLearn = itemToUse.skillName || itemToUse.Name;
-                    const alreadyLearned = Object.values(character.equippedSkills || {}).some(s => s && s.Name === skillNameToLearn) || (character.learnedSkills || []).some(s => s && s.Name === skillNameToLearn);
+                    // Kho dùng chung: kỹ năng đã có trong kho tổ đội thì không học lại.
+                    const alreadyLearned = isSkillKnownByParty(newKnowledge.characters, character, skillNameToLearn);
                     if (alreadyLearned) {
-                        setTimeout(() => setModalMessage({ show: true, title: "Kỹ Năng Đã Biết", content: `${character.Name} đã biết "${skillNameToLearn}".`, type: "info" }), 100);
+                        setTimeout(() => setModalMessage({ show: true, title: "Kỹ Năng Đã Biết", content: `Tổ đội đã có kỹ năng "${skillNameToLearn}" trong kho tiềm thức.`, type: "info" }), 100);
                         return;
                     }
 
@@ -35280,8 +35732,8 @@ const applyUpdates = (currentKnowledge, updates, currentGameMode, commandBlock =
             }
 
             if (!targetCharacter) { console.warn(`Không tìm thấy nhân vật mục tiêu "${idea.target}" để học kỹ năng.`); return; }
-            const alreadyLearned = Object.values(targetCharacter.equippedSkills || {}).some(skill => skill && skill.Name === idea.name) || (targetCharacter.learnedSkills || []).some(skill => skill && skill.Name === idea.name);
-            if (alreadyLearned) { console.warn(`Nhân vật "${targetCharacter.Name}" đã biết kỹ năng "${idea.name}". Bỏ qua.`); return; }
+            const alreadyLearned = isSkillKnownByParty(newKnowledge.characters, targetCharacter, idea.name);
+            if (alreadyLearned) { console.warn(`Tổ đội đã có kỹ năng "${idea.name}" (kho tiềm thức dùng chung). Bỏ qua.`); return; }
             if (!newKnowledge.pendingCreations) newKnowledge.pendingCreations = [];
             newKnowledge.pendingCreations.push({ type: 'skill', payload: { skillIdea: { id: crypto.randomUUID(), ...idea }, sourceRarity: idea.rarity || null, targetCharacterId: finalTargetId } });
         }
@@ -37620,7 +38072,10 @@ const formatStoryText = useCallback((text) => {
             {/* THAY ĐỔI 2: InitializationOverlay giờ đây hoạt động như một Modal */}
 
             {/* Div 3: Container chịu trách nhiệm hiển thị và CĂN GIỮA nội dung */}
-             <div className={`flex flex-col ${currentScreen === 'gameplay' ? 'w-full h-screen' : 'items-center justify-center min-h-screen p-4 sm:p-6'} font-theme-body text-white`}>
+             {/* h-[100dvh] (dynamic viewport) sau h-screen: trên mobile, 100vh tính cả phần
+                 bị thanh địa chỉ trình duyệt che nên khung hành động dưới cùng bị cắt;
+                 dvh theo đúng phần nhìn thấy. Trình duyệt cũ không hiểu dvh sẽ giữ h-screen. */}
+             <div className={`flex flex-col ${currentScreen === 'gameplay' ? 'w-full h-screen h-[100dvh]' : 'items-center justify-center min-h-screen p-4 sm:p-6'} font-theme-body text-white`}>
                 
                 {/* Các thẻ input ẩn */}
                 <input type="file" ref={fileInputRef} onChange={handleLoadGame} accept=".json" className="hidden" />
@@ -37972,6 +38427,7 @@ const formatStoryText = useCallback((text) => {
         handleManifestLoreNpc={handleManifestLoreNpc}
         onSetCourtesyName={handleSetCourtesyName}
         onGenerateCourtesyName={handleGenerateCourtesyName}
+        onEditCharacter={handleEditCharacterProfile}
     />
 )}
       <SuggestionsModal
@@ -38198,8 +38654,9 @@ const formatStoryText = useCallback((text) => {
                                         char.basicAttackVfx = newSkill.visual_effects || newSkill.effects?.[0]?.action?.visual_effects;
                                     } else {
                                         if (!char.learnedSkills) char.learnedSkills = [];
+                                        // Kho dùng chung: kỹ năng hiến tế có thể nằm ở thành viên khác.
                                         if (sacrificeSkillId) {
-                                            char.learnedSkills = char.learnedSkills.filter(s => s.id !== sacrificeSkillId);
+                                            removeSkillFromSharedPool(newK.characters, sacrificeSkillId);
                                         }
                                         char.learnedSkills.push(newSkill);
                                     }
