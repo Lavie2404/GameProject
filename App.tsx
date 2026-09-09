@@ -30723,12 +30723,13 @@ const handleSongTu = async (characterId) => {
             'mô tả siêu chậm rãi từng chuyển động nhỏ nhặt nhất, hơi thở dồn dập nóng rực nồng nàn',
             'với phong thái nguyên thủy hoang dã đầy khát khao và say đắm tột bực',
             'xen kẽ những lời mật ngọt thì thầm thâm tình sâu sắc',
-            'tả thực chi tiết những va chạm dâm mỹ và quyến rũ kịch liệt đầy khoái cảm của những tư thế khác nhau. Mỗi tư thế đều miêu tả chi tiết',
-            '- Viết theo văn phong sắc hiệp/tiểu thuyết mạng tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.',
-            '- Mô tả chân thực và sống động sự va chạm cuồng nhiệt của dương vật nóng trướng nổi gân cắm lút cán vào sâu trong âm đạo tử cung rực lửa dâm mỹ, tiếng va chạm da thịt râm ran bạch bạch bạch, tiếng nước dâm thủy lép nhép dâm mỹ phát ra, tiếng rên rỉ dâm đãng đầy đê mê sướng đến tột cùng của "${npcName}", và khoảnh khắc bắn tinh túy nóng hổi phun thẳng ngập tràn tử cung nàng.',
-            '- Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 3000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và sự hòa quyện của hai thân thể nóng bỏng.',
-            '- BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết thật nhiều câu thoại rên rỉ dâm mỹ của "${npcName}" và lời trêu chọc thâm tình của ngươi để kéo dài tác phẩm một cách tự nhiên nhất.',
-            '- Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.'
+            'tả thực chi tiết tất cả các tư thế, tất cả những va chạm dâm mỹ và quyến rũ kịch liệt đầy khoái cảm của những tư thế khác nhau. Mỗi tư thế đều miêu tả chi tiết',
+            
+            'Viết theo văn phong sắc hiệp/tiểu thuyết mạng tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.',
+            'Mô tả chân thực và sống động sự va chạm cuồng nhiệt của dương vật nóng trướng nổi gân cắm lút cán vào sâu trong âm đạo tử cung rực lửa dâm mỹ, tiếng va chạm da thịt râm ran bạch bạch bạch, tiếng nước dâm thủy lép nhép dâm mỹ phát ra, tiếng rên rỉ dâm đãng đầy đê mê sướng đến tột cùng của "${npcName}", và khoảnh khắc bắn tinh túy nóng hổi phun thẳng ngập tràn tử cung nàng.',
+            'Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 3000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và sự hòa quyện của hai thân thể nóng bỏng.',
+            'BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết thật nhiều câu thoại rên rỉ dâm mỹ của "${npcName}" và lời trêu chọc thâm tình của ngươi để kéo dài tác phẩm một cách tự nhiên nhất.',
+            'Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.'
 
         ];
     const chosenStyle = randomStyles[Math.floor(Math.random() * randomStyles.length)];
