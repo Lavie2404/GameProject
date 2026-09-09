@@ -50,7 +50,7 @@ File: d:\GameProject\ai-story-game\App.tsx (34,502 lines) + gameConfig.js. React
 startingStats, apConversionRates, expFormula, apPerLevel, damageFormula, difficultyMultipliers, difficultyRandomness, rarityBaseValue, itemTypeMultiplier, fusion, rarityDistributionByLevel, skillCooldownMax, apiQueueDelayMs(13000), skillExpToNextRarity, skillExpPerUse, skillExpPerAdventureTrigger.
 
 ## External
-Firebase anon auth + Firestore saves; GitHub Contents API (VITE_GITHUB_REPO default 'Lavie2404/textbase', VITE_GITHUB_TOKEN); Supabase hardcoded; ImgBB; Gemini generateContent. No tests, no TODOs. No "Vô Danh Lục"/"Khế Ước" in code. Contract partially enforced by API-1/API-2 split (API-2 tags stripped 25241).
+Firebase anon auth + Firestore saves; GitHub Contents API (VITE_GITHUB_REPO default 'Lavie2404/GameProject', VITE_GITHUB_TOKEN); Supabase hardcoded; ImgBB; Gemini generateContent. No tests, no TODOs. No "Vô Danh Lục"/"Khế Ước" in code. Contract partially enforced by API-1/API-2 split (API-2 tags stripped 25241).
 
 ## Risks
 God component; knowledge mutated via ≥4 channels; applyUpdates 1278 lines deep-clones; secrets client-side. Song Tu block 27107–27320 has 4-value dependency surface (npc.affinity, npc.titles, gameSettings.allowNsfw, customNsfwText).

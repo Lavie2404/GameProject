@@ -7,9 +7,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   root: '.',
-  // GitHub Pages project-page URL: https://<user>.github.io/textbase/ — every
+  // GitHub Pages project-page URL: https://<user>.github.io/GameProject/ — every
   // built asset path needs this prefix or the deployed page 404s on load.
-  base: '/textbase/',
+  // (Repo renamed textbase -> GameProject on 2026-09-09.)
+  base: '/GameProject/',
   build: {
     outDir: 'dist',
   },

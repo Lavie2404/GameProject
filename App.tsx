@@ -17784,7 +17784,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_GjYTTTowUg-P9paHkTvaOg_nW4C3Fye";
 
 // --- CẤU HÌNH LƯU TRỮ QUA GITHUB (dùng cho "Lưu Ngay" — đồng bộ đa thiết bị) ---
 // Token PHẢI được đặt trong .env.local (VITE_GITHUB_TOKEN) — KHÔNG BAO GIỜ hardcode/commit token vào source code.
-const GITHUB_SAVE_REPO = import.meta.env.VITE_GITHUB_REPO || 'Lavie2404/textbase';
+const GITHUB_SAVE_REPO = import.meta.env.VITE_GITHUB_REPO || 'Lavie2404/GameProject';
 /**
  * The key used when the player has not supplied one (`apiMode === 'defaultGemini'`).
  *
