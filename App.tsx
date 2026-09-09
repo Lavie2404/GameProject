@@ -28500,9 +28500,9 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
         let nsfwNarrativeRule = "";
         if (tagsLower.includes('nsfw')) {
             if (gameSettings.allowNsfw) {
-                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (NSFW): Phân cảnh này chứa yếu tố 18+. Ngươi ĐƯỢC PHÉP và ĐƯỢC KHUYẾN KHÍCH mô tả các cảnh 18+ với phong cách truyện 18+. Các đại từ chỉ bộ phận sinh dục sẽ được cu, lồn, vú sẽ được giữ nguyên, ngoài ra đa dạng sử dụng ngôn từ biểu thị bộ phận sinh dục sao cho hấp dẫn và tự nhiên nhất, như dương vật, cặc, đầu khấc, hòn dái, bi, âm vật, lỗ đít, lỗ hậu, tử cung, bầu ngực..., và cảnh quan hệ được nói một cách nghệ thuật. Các cảnh bạo lực (BDSM) cũng phải mô tả trực diện, tàn nhẫn.`;
+                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (NSFW): Phân cảnh này chứa yếu tố 18+. Ngươi ĐƯỢC PHÉP và ĐƯỢC KHUYẾN KHÍCH mô tả các cảnh 18+ với phong cách truyện 18+. Các đại từ chỉ bộ phận sinh dục cu, lồn, vú sẽ được giữ nguyên, ngoài ra đa dạng sử dụng ngôn từ biểu thị bộ phận sinh dục sao cho hấp dẫn và tự nhiên nhất, như dương vật, cặc, đầu khấc, hòn dái, bi, âm vật, lỗ đít, lỗ hậu, tử cung, bầu ngực..., và cảnh quan hệ được nói một cách nghệ thuật. Các cảnh bạo lực (BDSM) cũng phải mô tả trực diện, tàn nhẫn.`;
             } else {
-                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (Kiểm duyệt): Phân cảnh này chứa yếu tố nhạy cảm hoặc bạo lực. Tuy nhiên, ngươi PHẢI SỬ DỤNG phong cách ngôn tình lãng mạn, hoa mỹ, hoặc ẩn dụ (fade-to-black). TUYỆT ĐỐI KHÔNG mô tả trần trụi các bộ phận sinh dục hay hành vi tình dục. Với cảnh bạo lực, hãy mô tả đầy tính nghệ thuật và ẩn ý, tránh sự kinh dị, máu me gây phản cảm.`;
+                nsfwNarrativeRule = `\n- LƯU Ý ĐẶC BIỆT (NSFW): Phân cảnh này chứa yếu tố 18+. Ngươi ĐƯỢC PHÉP và ĐƯỢC KHUYẾN KHÍCH mô tả các cảnh 18+ với phong cách truyện 18+. Các đại từ chỉ bộ phận sinh dục cu, lồn, vú sẽ được giữ nguyên, ngoài ra đa dạng sử dụng ngôn từ biểu thị bộ phận sinh dục sao cho hấp dẫn và tự nhiên nhất, như dương vật, cặc, đầu khấc, hòn dái, bi, âm vật, lỗ đít, lỗ hậu, tử cung, bầu ngực..., và cảnh quan hệ được nói một cách nghệ thuật. Các cảnh bạo lực (BDSM) cũng phải mô tả trực diện, tàn nhẫn.`;
             }
         }
 
@@ -29212,6 +29212,7 @@ ${gameSettings.isTamQuocWorld ? `//    - THẾ GIỚI TAM QUỐC: khi một nhâ
 //    - Muốn tả thể trạng/hồi phục khi bối cảnh không có hệ năng lượng, CHỈ dùng ngôn ngữ thân thể: hơi thở, khí huyết, sức lực, cơ bắp, vết thương, mệt mỏi, tinh thần.
 //      * VÍ DỤ SAI: "chân nguyên trong cơ thể đã hồi phục trọn vẹn, dồi dào hơn bao giờ hết" (bối cảnh Tam Quốc, người chơi chưa từng nhắc đến chân nguyên).
 //      * VÍ DỤ ĐÚNG: "vết thương đã lành hẳn, khí huyết lưu thông, sức lực dồi dào hơn bao giờ hết".
+//    - KHÔNG KẾ THỪA LỖI CŨ: nếu các đoạn truyện trước đó trong lịch sử có lỡ dùng "chân nguyên"/"linh lực"/"chân khí"... trong khi bối cảnh và người chơi chưa từng thiết lập, đó là lỗi tường thuật, KHÔNG phải bằng chứng rằng năng lượng ấy tồn tại. Ngươi KHÔNG được lấy đó làm căn cứ để tiếp tục dùng; hãy quay về ngôn ngữ thân thể.
 //    - Quy tắc này áp dụng cho văn tường thuật, lời thoại NPC, 'summary' kịch bản, VÀ 4 lựa chọn hành động cuối phản hồi. Nó độc lập với quy tắc 2.11 bên dưới (2.11 chỉ chặn TRƯỚC khi thức tỉnh; 2.10b chặn MỌI LÚC nếu năng lượng đó chưa từng được thiết lập).
 
 // 2.11. QUY TẮC PHONG ẤN NHẬN THỨC SIÊU NHIÊN (BẮT BUỘC KHI BỐI CẢNH THIẾT LẬP):
@@ -30718,23 +30719,41 @@ const handleSongTu = async (characterId) => {
     const npcName = npc.Name;
 
     const randomStyles = [
-            "với bối cảnh mờ ảo và dâng trào cảm xúc mãnh liệt hoang dại",
-            "mô tả siêu chậm rãi từng chuyển động nhỏ nhặt nhất, hơi thở dồn dập nóng rực nồng nàn",
-            "với phong thái nguyên thủy hoang dã đầy khát khao và say đắm tột bực",
-            "xen kẽ những lời mật ngọt thì thầm thâm tình sâu sắc đầy hứa hẹn trọn đời",
-            "tả thực chi tiết những va chạm dâm mỹ và quyến rũ kịch liệt đầy khoái cảm"
+            'với bối cảnh mờ ảo và dâng trào cảm xúc mãnh liệt hoang dại',
+            'mô tả siêu chậm rãi từng chuyển động nhỏ nhặt nhất, hơi thở dồn dập nóng rực nồng nàn',
+            'với phong thái nguyên thủy hoang dã đầy khát khao và say đắm tột bực',
+            'xen kẽ những lời mật ngọt thì thầm thâm tình sâu sắc',
+            'tả thực chi tiết những va chạm dâm mỹ và quyến rũ kịch liệt đầy khoái cảm của những tư thế khác nhau. Mỗi tư thế đều miêu tả chi tiết',
+            '- Viết theo văn phong sắc hiệp/tiểu thuyết mạng tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.',
+            '- Mô tả chân thực và sống động sự va chạm cuồng nhiệt của dương vật nóng trướng nổi gân cắm lút cán vào sâu trong âm đạo tử cung rực lửa dâm mỹ, tiếng va chạm da thịt râm ran bạch bạch bạch, tiếng nước dâm thủy lép nhép dâm mỹ phát ra, tiếng rên rỉ dâm đãng đầy đê mê sướng đến tột cùng của "${npcName}", và khoảnh khắc bắn tinh túy nóng hổi phun thẳng ngập tràn tử cung nàng.',
+            '- Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 3000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và sự hòa quyện của hai thân thể nóng bỏng.',
+            '- BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết thật nhiều câu thoại rên rỉ dâm mỹ của "${npcName}" và lời trêu chọc thâm tình của ngươi để kéo dài tác phẩm một cách tự nhiên nhất.',
+            '- Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.'
+
         ];
     const chosenStyle = randomStyles[Math.floor(Math.random() * randomStyles.length)];
+
+    // Song Tu prompts bypass the main narrator rule-set, so the world setting and
+    // the "no default cultivation energy" rule (main prompt §2.10b) must be
+    // restated here. Without this, every Song Tu scene hard-coded tu-tiên energy
+    // vocabulary (chân nguyên/chân khí/linh lực) regardless of setting.
+    const songTuWorldRules = `BỐI CẢNH THẾ GIỚI (BẮT BUỘC TUÂN THEO): Thế giới "${gameSettings.theme || 'Chưa rõ'}", Bối cảnh chi tiết: "${gameSettings.setting || 'Chưa rõ'}".
+                        QUY TẮC VỀ HỆ NĂNG LƯỢNG (TUYỆT ĐỐI):
+                        - CHỈ nhắc đến một dạng năng lượng nội tại (chân nguyên, chân khí, linh lực, nội lực, pháp lực...) NẾU bối cảnh ở trên NÊU RÕ TÊN dạng năng lượng đó, và phải gọi đúng tên ấy. Bối cảnh không nhắc thì coi như KHÔNG TỒN TẠI — không được bịa "linh lực giao hòa", "chân nguyên cộng hưởng", "chân khí luân chuyển", "đả thông kinh mạch bằng linh lực", "khôi phục chân nguyên" như một mặc định.
+                        - Bối cảnh lịch sử/dã sử (Tam Quốc, Hán, Đường...) KHÔNG có hệ chân nguyên. "Song tu" khi đó là hai người cùng nhau tĩnh tâm, điều hòa hơi thở, luyện thể, luận võ, chia sẻ tâm tư và gắn kết thân thể/tinh thần — sức lực hồi phục nhờ nghỉ ngơi, khí huyết lưu thông, tinh thần thoải mái, KHÔNG nhờ năng lượng nào.
+                        - Tả thể trạng/hồi phục bằng ngôn ngữ thân thể: hơi thở, khí huyết, sức lực, cơ bắp, sự thư thái. "Đan điền", "kinh mạch", "vận khí", "tụ lực" được dùng như khái niệm thân thể/võ học, nhưng không được biến thành nơi chứa/vận hành một năng lượng siêu nhiên chưa thiết lập.
+                        - Văn phong: tiểu thuyết mạng Tiếng Việt PHÙ HỢP VỚI BỐI CẢNH TRÊN (tu tiên chỉ khi bối cảnh là tu tiên; lịch sử thì dùng văn phong dã sử/võ hiệp).`;
 
     if (isNsfw) {
         setModalMessage({ show: true, title: "Đang Song Tu...", content: `Ngươi đang ôm khít lấy [${npc.Name}], lột bỏ xiêm y, cùng nhục thân hòa quyện song tu...`, type: "info" });
 
-                    const prompt = `Viết một câu chuyện sắc hiệp/tu tiên cực kỳ chi tiết, chậm rãi, nồng nàn và ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả tỉ mỉ quá trình nhục thân giao hợp quyến rũ nồng nhiệt giữa nhân vật chính (ngươi) và mỹ nữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, quyến rũ"}, Ngoại hình: ${npc.Appearance || "thanh tao, gợi cảm"}).
+                    const prompt = `Viết một câu chuyện sắc hiệp cực kỳ chi tiết, chậm rãi, nồng nàn và ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả tỉ mỉ quá trình nhục thân giao hợp quyến rũ nồng nhiệt giữa nhân vật chính (ngươi) và mỹ nữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, quyến rũ"}, Ngoại hình: ${npc.Appearance || "thanh tao, gợi cảm"}).
+                        ${songTuWorldRules}
                         Hãy viết câu chuyện theo phong cách đặc thù sau: ${chosenStyle}.
                         Yêu cầu phong cách viết:
-                        - Viết theo văn phong sắc hiệp/tiểu thuyết mạng tu tiên tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.
+                        - Viết theo văn phong sắc hiệp/tiểu thuyết mạng tiếng Việt cực kỳ lôi cuốn, tả thực, chi tiết từng cử động: nụ hôn nồng cháy ngấu nghiến, màn lột y phục đê mê lộ ra da thịt mịn màng, sự mân mê bóp mạnh đôi gò bồng đảo căng tròn tuyết trắng, ngón tay luồn lách thọc sâu mơn trớn khe lồn đầm đìa nước nôi dâm đãng kích thích cực độ.
                         - Mô tả chân thực và sống động sự va chạm cuồng nhiệt của dương vật nóng trướng nổi gân cắm lút cán vào sâu trong âm đạo tử cung rực lửa dâm mỹ, tiếng va chạm da thịt râm ran bạch bạch bạch, tiếng nước dâm thủy lép nhép dâm mỹ phát ra, tiếng rên rỉ dâm đãng đầy đê mê sướng đến tột cùng của "${npcName}", và khoảnh khắc bắn tinh túy nóng hổi phun thẳng ngập tràn tử cung nàng.
-                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 2000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và dòng chân khí dung hợp luân chuyển làm bừng sáng kinh mạch.
+                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, chi tiết từng phân cảnh nhỏ một cách chậm rãi nhất có thể để đạt độ dài khổng lồ 3000-5000 từ. Hãy miêu tả nội tâm rạo rực, sự dâm đãng bộc phát, từng tiếng thở dốc hầm hập, từng giọt mồ hôi rịn ra quấn quýt, và sự hòa quyện của hai thân thể nóng bỏng.
                         - BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết thật nhiều câu thoại rên rỉ dâm mỹ của "${npcName}" và lời trêu chọc thâm tình của ngươi để kéo dài tác phẩm một cách tự nhiên nhất.
                         - Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.`;
 
@@ -30756,18 +30775,19 @@ const handleSongTu = async (characterId) => {
                                     storySnippet = customText.replace(/Đạo Lữ/g, npcName).replace(/\[npc\.Name\]/g, npcName).replace(/\[npcName\]/g, npcName);
                                 }
                             } else {
-                    const prompt = `Viết một câu chuyện tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng tu tiên Tiếng Việt hoành tráng, lãng mạn và thâm tình sâu sắc, ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả toàn bộ quá trình song tu, thần hồn giao hòa và linh lực cộng hưởng đỉnh cao giữa nhân vật chính (ngươi) và đạo lữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
+                    const prompt = `Viết một câu chuyện tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng Tiếng Việt hoành tráng, lãng mạn và thâm tình sâu sắc, ĐỘ DÀI CỰC KHỦNG từ 2000 đến 5000 từ tiếng Việt, mô tả toàn bộ quá trình song tu — hai người cùng nhau tu luyện, tâm ý giao hòa và gắn kết sâu sắc — giữa nhân vật chính (ngươi) và đạo lữ "${npcName}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
+                        ${songTuWorldRules}
                         Hãy viết câu chuyện theo phong cách đặc thù sau: ${chosenStyle}.
                         Yêu cầu phong cách viết:
-                        - Viết cực kỳ chi tiết, chậm rãi, mô tả từng bước của quá trình song tu: từ khoảnh khắc hai người ngồi đối diện đan tay, nhắm mắt tĩnh tâm, khởi động linh lực bản nguyên, cho đến khi chân khí hai bên chạm nhau, tạo nên vòng xoáy âm dương ngũ hành dung hợp.
-                        - Mô tả dòng khí ấm áp len lỏi qua từng sợi kinh mạch, đả thông các huyệt đạo bế tắc, thanh lọc lục phủ ngũ tạng, làm linh đài bừng sáng huy hoàng.
-                        - Thể hiện sự kết nối thần thức sâu sắc, khi tâm trí hai người hòa làm một, nhìn thấy ký ức và tâm tư thầm kín của nhau, cùng nhau vượt qua tâm ma kiếp nạn, thấu hiểu nhân quả tu hành.
-                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, tinh tế, giàu chất thơ và triết lý tu tiên, viết từng phân cảnh nhỏ một cách tỉ mỉ nhất có thể để đạt độ dài khổng lồ 2000-5000 từ.
+                        - Viết cực kỳ chi tiết, chậm rãi, mô tả từng bước của quá trình song tu theo ĐÚNG hệ thống sức mạnh mà bối cảnh thiết lập: từ khoảnh khắc hai người ngồi đối diện đan tay, nhắm mắt tĩnh tâm, điều hòa hơi thở, cho đến khi nhịp thở và tâm ý hai bên hòa làm một. Nếu bối cảnh có hệ năng lượng đã nêu tên, mới được tả dòng năng lượng đó giao hòa; nếu không, tả sự hòa hợp của hơi thở, khí huyết, thân thể và tinh thần.
+                        - Mô tả cảm giác ấm áp lan tỏa khắp thân thể, cơ bắp thư giãn, mệt mỏi tan biến, tinh thần thanh tịnh sáng suốt.
+                        - Thể hiện sự kết nối tâm hồn sâu sắc, khi tâm trí hai người hòa làm một, chia sẻ ký ức và tâm tư thầm kín của nhau, cùng nhau vượt qua nỗi sợ và vướng mắc trong lòng.
+                        - Đảm bảo mạch văn diễn tiến cực kỳ CHẬM RÃI, tinh tế, giàu chất thơ và triết lý phù hợp bối cảnh, viết từng phân cảnh nhỏ một cách tỉ mỉ nhất có thể để đạt độ dài khổng lồ 2000-5000 từ.
                         - BẮT BUỘC bọc tất cả lời thoại của nhân vật trong thẻ <dialogue speaker="Ngươi">...</dialogue> hoặc <dialogue speaker="${npcName}">...</dialogue> tùy theo người nói. Hãy viết nhiều lời thoại trao đổi ngộ đạo, động viên và thổ lộ tình cảm của hai người.
                         - Ngôi kể chuyện (narrator) bắt buộc dùng từ "ngươi" để chỉ nhân vật chính.`;
 
                                 try {
-                                    setModalMessage({ show: true, title: "Đang Song Tu...", content: `Ngươi đang cùng [${npcName}] bước vào trạng thái song tu, thần hồn giao hòa, linh khí luân chuyển...`, type: "info" });
+                                    setModalMessage({ show: true, title: "Đang Song Tu...", content: `Ngươi đang cùng [${npcName}] bước vào trạng thái song tu, tâm ý giao hòa, hơi thở hòa làm một...`, type: "info" });
                                     storySnippet = await fetchGenericGeminiText(prompt);
                                 } catch (e) {
                                     console.error("Lỗi khi tạo cốt truyện Song Tu:", e);
@@ -30775,10 +30795,11 @@ const handleSongTu = async (characterId) => {
 
                                 // Nếu lỗi hoặc nội dung quá ngắn, thử lại với một prompt ngắn gọn hơn trước khi dùng văn bản mặc định
                                 if (!storySnippet || storySnippet.length < 200) {
-                                    const shortPrompt = `Viết một đoạn tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng tu tiên Tiếng Việt hoành tráng và lãng mạn, mô tả quá trình song tu giữa nhân vật chính (người chơi) và đạo lữ "${npc.Name}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
-                                    Yêu cầu mô tả sự giao hòa của linh lực giữa hai người, chân khí luân chuyển qua kinh mạch, đả thông các huyệt đạo, cảm xúc dâng trào và sự cộng hưởng tâm linh sâu sắc.`;
+                                    const shortPrompt = `Viết một đoạn tường thuật chi tiết, đậm chất văn phong tiểu thuyết mạng Tiếng Việt hoành tráng và lãng mạn, mô tả quá trình song tu giữa nhân vật chính (người chơi) và đạo lữ "${npc.Name}" (Tính cách: ${npc.Personality || "bí ẩn, sâu sắc"}, Ngoại hình: ${npc.Appearance || "thanh tao"}, Cảnh giới/Level: ${npc.level || 1}).
+                                    ${songTuWorldRules}
+                                    Yêu cầu mô tả sự hòa hợp của hơi thở và tâm ý giữa hai người, cảm giác ấm áp lan khắp thân thể, cảm xúc dâng trào và sự cộng hưởng tâm hồn sâu sắc — chỉ nhắc đến năng lượng nội tại nếu bối cảnh đã nêu tên.`;
 
-                                    const finalPrompt = shortPrompt + "\n" + (rollStory ? `Đặc biệt, trong khoảnh khắc song tu thể xác giao hòa cực kỳ sâu sắc này, hãy hé lộ một chi tiết nhỏ, bất ngờ hoặc một bí mật sâu kín về quá khứ hoặc xuất thân của "${npc.Name}" mà nhân vật chính phát hiện qua ký ức thần thức của đối phương.` : "") + "\nHãy viết thật lôi cuốn, chi tiết từ 4 đến 6 câu dài theo văn phong tiểu thuyết mạng sắc hiệp/tu tiên Tiếng Việt cực kỳ hoa mỹ. Chỉ trả về duy nhất đoạn văn tường thuật đó, không giải thích thêm, không dùng markdown hay tiêu đề nào khác.";
+                                    const finalPrompt = shortPrompt + "\n" + (rollStory ? `Đặc biệt, trong khoảnh khắc song tu giao hòa cực kỳ sâu sắc này, hãy hé lộ một chi tiết nhỏ, bất ngờ hoặc một bí mật sâu kín về quá khứ hoặc xuất thân của "${npc.Name}" mà nhân vật chính nhận ra qua lời tâm sự hoặc biểu cảm của đối phương.` : "") + "\nHãy viết thật lôi cuốn, chi tiết từ 4 đến 6 câu dài theo văn phong tiểu thuyết mạng Tiếng Việt cực kỳ hoa mỹ, phù hợp bối cảnh. Chỉ trả về duy nhất đoạn văn tường thuật đó, không giải thích thêm, không dùng markdown hay tiêu đề nào khác.";
 
                                     try {
                                         storySnippet = await fetchGenericGeminiText(finalPrompt);
@@ -30788,7 +30809,7 @@ const handleSongTu = async (characterId) => {
                                 }
 
                                 if (!storySnippet) {
-                                    storySnippet = `Hai người ngồi xếp bằng đối diện, bốn bàn tay đan vào nhau một cách dịu dàng. Chân khí trong cơ thể bắt đầu vận chuyển theo chu thiên, linh lực hai bên chạm nhau rồi hòa quyện làm một thể thống nhất. Linh lực của ${npcName} ấm áp như ngọc ôn nhuận, nhẹ nhàng dẫn dắt khí hải của ngươi khai mở, cuốn trôi đi những tạp chất và đả thông linh mạch toàn thân. Trong phút chốc, thần hồn hai bên cộng hưởng sâu sắc, linh đài thanh tịnh, cảm giác ấm áp và gắn kết vô hình ngập tràn tâm trí cả hai, đẩy lùi mọi kiếp nạn trần thế.`;
+                                    storySnippet = `Hai người ngồi xếp bằng đối diện, bốn bàn tay đan vào nhau một cách dịu dàng. Hơi thở hai bên dần chậm lại, hòa vào cùng một nhịp, tâm ý lắng xuống như mặt hồ không gợn sóng. Hơi ấm từ bàn tay ${npcName} lan dần khắp thân thể ngươi, cơ bắp căng cứng từng chút thư giãn, khí huyết lưu thông, mọi mệt mỏi tích tụ như được cuốn trôi. Trong phút chốc, tâm hồn hai bên cộng hưởng sâu sắc, đầu óc thanh tịnh sáng suốt, cảm giác ấm áp và gắn kết vô hình ngập tràn tâm trí cả hai, đẩy lùi mọi ưu phiền trần thế.`;
                                 }
                             }
 
