@@ -5990,7 +5990,7 @@ const GameSetupScreen = ({
                                 <span className={`font-bold font-ngoc-an text-lg tracking-wider transition-colors ${gameSettings.isTamQuocWorld ? 'text-[#cda45e]' : 'text-[#8ba888]'}`}>
                                     Thế Giới Tam Quốc
                                 </span>
-                                <p className="text-xs text-[#8ba888] font-sans mt-1">Bối cảnh Tam Quốc: mọi nhân vật lịch sử hoặc nhân vật quan trọng đều có Tự (tên chữ). Gọi thân mật dùng tự thay cho tên húy (VD: Thái Văn Cơ tự Diễm → gọi Thái Diễm / Diễm nhi).</p>
+                                <p className="text-xs text-[#8ba888] font-sans mt-1">Bối cảnh Tam Quốc: mọi nhân vật lịch sử hoặc nhân vật quan trọng đều có Tự (tên chữ). Gọi thân mật dùng tự thay cho tên húy (VD: Thái Diễm tự Văn Cơ → gọi Văn Cơ / Cơ nhi).</p>
                             </div>
                         </div>
                     </label>
@@ -19231,10 +19231,10 @@ const fetchNpcDetailsFromAI = async (npcBasicInfo, gameSettings, effectiveApiKey
            - NPC trung lập/người lạ thông thường: khoảng 0.
            - NPC có thiện cảm/thân thiện sẵn: 10 đến 50 (dương).
            - NPC thù địch/căm ghét/kẻ địch/không có thiện cảm: BẮT BUỘC là số ÂM, mức độ căm ghét càng sâu thì càng âm (địch nhẹ/cảnh giác: -10 đến -30, thù hằn rõ rệt: -40 đến -70, tử thù/sát ý muốn giết: -80 đến -100).
-        10. "CourtesyName": Tên tự (tên chữ) của nhân vật — CHỈ phần tự, KHÔNG kèm họ (VD: Thái Văn Cơ có tự là "Diễm"; Quan Vũ có tự là "Vân Trường").
+        10. "CourtesyName": Tên tự (tên chữ) của nhân vật — CHỈ phần tự, KHÔNG kèm họ (VD: Thái Diễm có tự là "Văn Cơ"; Quan Vũ có tự là "Vân Trường"). NẾU nhân vật này đã có CourtesyName sẵn trong hồ sơ hiện tại (kể cả do người chơi tự sửa tay), PHẢI giữ NGUYÊN giá trị đó, TUYỆT ĐỐI KHÔNG đổi lại theo dị bản khác mà ngươi biết từ kiến thức lịch sử/kiến thức nền.
            ${gameSettings.isTamQuocWorld
             ? `- ĐÂY LÀ THẾ GIỚI TAM QUỐC: trường này BẮT BUỘC phải có giá trị, KHÔNG được để trống.
-           - Nếu NPC là nhân vật lịch sử/danh nhân có thật trong sử sách hoặc trong Tam Quốc Diễn Nghĩa: PHẢI dùng ĐÚNG tên tự được ghi chép (VD: Tào Tháo → "Mạnh Đức", Lưu Bị → "Huyền Đức", Quan Vũ → "Vân Trường", Triệu Vân → "Tử Long", Thái Văn Cơ → "Diễm").
+           - Nếu NPC là nhân vật lịch sử/danh nhân có thật trong sử sách hoặc trong Tam Quốc Diễn Nghĩa VÀ CHƯA có CourtesyName sẵn: PHẢI dùng ĐÚNG tên tự phổ biến được ghi chép (VD: Tào Tháo → "Mạnh Đức", Lưu Bị → "Huyền Đức", Quan Vũ → "Vân Trường", Triệu Vân → "Tử Long", Thái Diễm → "Văn Cơ").
            - Nếu NPC là nhân vật hư cấu không có trong sử sách: ngươi PHẢI TỰ NGHĨ và ĐẶT một tên tự Hán Việt 1-2 chữ phù hợp với thân phận, tính cách và họ tên của nhân vật.`
             : `- Nếu bối cảnh thế giới là cổ trang/lịch sử Á Đông (không riêng gì Tam Quốc) VÀ nhân vật thuộc tầng lớp có học thức/danh môn/quý tộc (văn nhân, tiểu thư, công tử, danh sĩ, thế gia vọng tộc...), trường này BẮT BUỘC có giá trị — ngươi PHẢI TỰ NGHĨ một tên tự Hán Việt 1-2 chữ phù hợp thân phận và họ tên, TUYỆT ĐỐI KHÔNG bỏ trống chỉ vì lưỡng lự có phù hợp hay không. CHỈ trả về chuỗi rỗng "" khi bối cảnh KHÔNG phải cổ trang Á Đông, hoặc nhân vật rõ ràng xuất thân bình dân/không có học thức.`}
 
@@ -23229,7 +23229,7 @@ const handleCreateNpc = async (npcData, options = {}) => {
 
         NHIỆM VỤ:
         1.  **Sáng tạo:** Dựa vào mô tả, hãy tự suy luận ra các thuộc tính sau cho NPC: 'level' (gần bằng hoặc thấp hơn cấp người chơi), 'Stance' (Thái độ ban đầu), 'Personality' (Tính cách), 'Gender' (Giới tính: Nam, Nữ, Khác), và 'sizeCategory' (Chiều cao: 1:dáng người nhỏ nhắn, 2:dáng người trung bình, kích cỡ vừa phải, 3:dáng cao ráo, kích cỡ khá lớn, 4:dáng to cao vạm vỡ, 5:khồng lồ, cực kỳ lớn).
-        2.  **Tên tự ('CourtesyName'):** CHỈ phần tự, KHÔNG kèm họ (VD: Quan Vũ tự "Vân Trường", Thái Văn Cơ tự "Diễm"). ${gameSettings.isTamQuocWorld
+        2.  **Tên tự ('CourtesyName'):** CHỈ phần tự, KHÔNG kèm họ (VD: Quan Vũ tự "Vân Trường", Thái Diễm tự "Văn Cơ"). ${gameSettings.isTamQuocWorld
             ? `ĐÂY LÀ THẾ GIỚI TAM QUỐC nên trường này BẮT BUỘC có giá trị: nhân vật lịch sử/danh nhân dùng ĐÚNG tự trong sử sách; nhân vật hư cấu thì ngươi PHẢI TỰ NGHĨ một tên tự Hán Việt phù hợp thân phận và họ tên.`
             : `Nếu bối cảnh cổ trang Á Đông (Võ Hiệp/Tiên Hiệp/Huyền Huyễn cổ đại — không riêng gì Tam Quốc) VÀ nhân vật thuộc tầng lớp có học thức/danh môn/quý tộc (tiểu thư, công tử, thế gia vọng tộc, đệ tử môn phái lớn...), trường này BẮT BUỘC có giá trị — ngươi PHẢI TỰ NGHĨ một tên tự Hán Việt 1-2 chữ phù hợp thân phận và họ tên, TUYỆT ĐỐI KHÔNG bỏ trống chỉ vì lưỡng lự có phù hợp hay không. CHỈ trả về chuỗi rỗng "" khi bối cảnh KHÔNG phải cổ trang Á Đông, hoặc nhân vật rõ ràng xuất thân bình dân/không có học thức.`}
         3.  **Định dạng:** Chỉ trả về một đối tượng JSON duy nhất chứa các thuộc tính: level, Stance, Personality, Gender, sizeCategory, CourtesyName.
@@ -28566,9 +28566,10 @@ ${customRulesBlock}
 // A. GẶP GỠ THỰC TẾ (Hiện diện tại chỗ)
 //    - Xuất hiện NPC mới tại hiện trường: [WORLD_NPC: id="...", loreId="...", name="...", description="...", level=X, stance="...", personality="...", Gender="...", sizeCategory=Y, courtesyName="..."]
 //      * courtesyName = tên tự (tên chữ) của nhân vật, CHỈ phần tự không kèm họ.
+//      * QUY TẮC ƯU TIÊN TUYỆT ĐỐI (ÁP DỤNG CHO MỌI NHÂN VẬT ĐÃ CÓ TRONG HỒ SƠ/DANH SÁCH NHÂN VẬT — NPC, đồng hành, v.v.): nếu một nhân vật ĐÃ xuất hiện trong danh sách nhân vật/đồng hành ở bối cảnh lượt chơi kèm theo "(Tự: ...)", đó LÀ tên tự DUY NHẤT và CHÍNH XÁC của nhân vật đó trong thế giới game này — PHẢI dùng NGUYÊN VĂN giá trị đó trong mọi lời tường thuật, lời thoại, cách xưng hô. TUYỆT ĐỐI KHÔNG tự thay bằng một tên tự khác mà ngươi cho là "đúng hơn" theo kiến thức lịch sử/kiến thức nền của ngươi (kể cả khi nhân vật là danh nhân có thật và có nhiều dị bản tên tự trong sử sách — ví dụ Thái Diễm còn được ghi là tự "Chiêu Cơ" trước khi đổi thành "Văn Cơ" để kỵ húy: nếu hồ sơ đã ghi rõ một tên tự cụ thể, kể cả do NGƯỜI CHƠI chủ động sửa tay, đó là sự thật tuyệt đối, KHÔNG được "sửa lại" theo dị bản khác). Quy tắc TỰ NGHĨ tên tự dưới đây CHỈ áp dụng cho nhân vật CHƯA có courtesyName nào được thiết lập.
 //      * QUY TẮC TÊN TỰ (BẮT BUỘC — ÁP DỤNG CHO MỌI THẾ GIỚI CỔ TRANG Á ĐÔNG, không riêng gì Tam Quốc): nếu bối cảnh thế giới là cổ trang Á Đông (Võ Hiệp/Tiên Hiệp/Huyền Huyễn cổ đại...) VÀ nhân vật thuộc tầng lớp có học thức/danh môn/quý tộc (tiểu thư, công tử, thế gia vọng tộc, đệ tử môn phái lớn...), BẮT BUỘC kèm thuộc tính courtesyName — nếu nhân vật hư cấu chưa có sẵn tên tự, ngươi PHẢI TỰ NGHĨ một tên tự Hán Việt 1-2 chữ phù hợp họ tên/thân phận, TUYỆT ĐỐI KHÔNG bỏ trống chỉ vì lưỡng lự. CHỈ để trống courtesyName khi bối cảnh không phải cổ trang Á Đông, hoặc nhân vật rõ ràng xuất thân bình dân/không có học thức.
 ${gameSettings.isTamQuocWorld ? `//      * QUY TẮC TÊN TỰ — THẾ GIỚI TAM QUỐC (SIẾT CHẶT HƠN NỮA SO VỚI QUY TẮC CHUNG Ở TRÊN): MỌI nhân vật lịch sử có thật trong sử sách/Tam Quốc Diễn Nghĩa và MỌI nhân vật hư cấu quan trọng của cốt truyện đều PHẢI có tên tự, KỂ CẢ KHI không thuộc tầng lớp danh môn/học thức (quy tắc chung ở trên chỉ bắt buộc với tầng lớp danh môn — ở thế giới Tam Quốc, phạm vi bắt buộc rộng hơn, bao trùm mọi nhân vật quan trọng).
-//        + Nhân vật lịch sử: dùng ĐÚNG tên tự được ghi chép (Tào Tháo→"Mạnh Đức", Lưu Bị→"Huyền Đức", Quan Vũ→"Vân Trường", Trương Phi→"Dực Đức", Triệu Vân→"Tử Long", Gia Cát Lượng→"Khổng Minh", Thái Văn Cơ→"Diễm"...).
+//        + Nhân vật lịch sử CHƯA có courtesyName trong hồ sơ: dùng ĐÚNG tên tự phổ biến được ghi chép (Tào Tháo→"Mạnh Đức", Lưu Bị→"Huyền Đức", Quan Vũ→"Vân Trường", Trương Phi→"Dực Đức", Triệu Vân→"Tử Long", Gia Cát Lượng→"Khổng Minh", Thái Diễm→"Văn Cơ"...). Nếu nhân vật ĐÃ có courtesyName trong hồ sơ (dù khác dị bản sử sách), áp dụng QUY TẮC ƯU TIÊN TUYỆT ĐỐI ở trên.
 //        + Nhân vật hư cấu quan trọng: nếu chưa có tự, ngươi PHẢI TỰ NGHĨ và ĐẶT một tên tự Hán Việt 1-2 chữ hợp với họ tên, thân phận — TUYỆT ĐỐI không bỏ trống.
 //        + Khi xuất thẻ [WORLD_NPC] cho các nhân vật đó, BẮT BUỘC kèm thuộc tính courtesyName="tên tự".` : ''}
 //      * KHI NÀO KÍCH HOẠT: Khi nhân vật chính giáp mặt, đối thoại trực tiếp hoặc bị tấn công bởi một thực thể sinh linh mới xuất hiện tại chỗ.
