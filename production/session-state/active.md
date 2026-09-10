@@ -2,7 +2,7 @@
 
 ## PHIÊN 10–11/09/2026 — hiệu năng UI, 2 luật ngôn ngữ, modal quota
 
-4 commit, tất cả đã deploy lên GitHub Pages và xác minh trực tiếp trên bundle
+6 commit, tất cả đã deploy lên GitHub Pages và xác minh trực tiếp trên bundle
 production. Không việc nào còn dở.
 
 ### `459334f` — theme.css 1,5 MB → 32 KB (nút hết cảm giác trễ)
@@ -93,6 +93,35 @@ Module: `systems/ai/keyPoolStatus.ts` + `systems/ui/quotaModalView.ts` (mọi
 quyết định về chữ nằm ở view-model thuần, component chỉ vẽ).
 
 **Còn treo**: nút "Thử Lại" mới chỉ đóng modal, chưa phát lại lệnh gọi hỏng.
+
+### `e10ffac` — nút đảo màu mực-trên-mực; nhớ lựa chọn nguồn AI
+
+**Nút**: kiểu "đảo màu" nguyên bản là nền VÀNG + chữ ĐEN
+(`hover:bg-[#cda45e] hover:text-black`). Theme đổi vàng -> mực, mà
+`text-black` cũng -> mực, nên hover xong là mực trên mực, chữ biến mất. Dính
+cả nút "Thử Lại" của modal quota lẫn nút hành động của `MessageModal` (cái
+sau sai từ trước). Sửa ở tầng theme bằng selector ghép, cùng cách ngoại lệ
+CTA `#233523` đã dùng. **Nguyên tắc chung rút ra**: hễ theme đảo một nền
+sáng thành nền tối thì phải đảo cả chữ trên nền đó, nếu không sẽ mực-trên-mực.
+
+**Nguồn AI**: `apiMode` trước đây `useState('defaultGemini')` KHÔNG lưu ở
+đâu, và hiệu ứng khởi động SUY RA chế độ thay vì đọc lựa chọn người chơi —
+nên "Sử Dụng Gemini AI Mặc Định" không bao giờ sống qua một lần reload (key
+riêng còn trên Firestore lại kéo về `userKey`).
+
+Tệ hơn: nhánh cũ coi `VITE_GEMINI_API_KEY` là "key riêng của người chơi",
+trong khi đó CHÍNH LÀ `PLATFORM_DEFAULT_GEMINI_KEY` — key chính của nền tảng.
+Hệ quả là thông báo hết quota đổ lỗi cho một key người chơi chưa từng nhập,
+và app ngồi im trong `userKey` nên "Key AI Ưu Tiên" mất tác dụng. Nhánh này
+đã bỏ hẳn; chế độ mặc định vốn đã dùng đúng key đó, lại còn kèm 2 key dự
+phòng.
+
+User chốt "cả hai": lưu lựa chọn khi chủ động bấm, chưa từng chọn thì mặc
+định nguồn nền tảng. **Chi tiết dễ làm hỏng nếu sửa tiếp**: `setApiMode` CÓ
+lưu và chỉ dành cho hành động chủ động; hiệu ứng khởi động PHẢI dùng
+`setApiModeRaw` (không lưu), nếu không một chế độ do hệ thống suy ra sẽ được
+ghi đè lên như thể người chơi đã chọn, và lựa chọn thật không bao giờ thắng
+lại được. Khoá localStorage: `vdl.apiMode`.
 
 ### Ghi chú môi trường (QUAN TRỌNG cho phiên sau)
 
