@@ -1,6 +1,124 @@
-# Session State — Checkpoint 2026-08-17
+# Session State — Checkpoint 2026-09-11
 
-## ĐANG LÀM (mở phiên mới → đọc mục này trước)
+## PHIÊN 10–11/09/2026 — hiệu năng UI, 2 luật ngôn ngữ, modal quota
+
+4 commit, tất cả đã deploy lên GitHub Pages và xác minh trực tiếp trên bundle
+production. Không việc nào còn dở.
+
+### `459334f` — theme.css 1,5 MB → 32 KB (nút hết cảm giác trễ)
+
+User báo "các btn bấm vẫn cảm giác bị delay" ở MỌI nút, MỌI màn hình. Nguyên
+nhân KHÔNG nằm ở React mà ở chi phí style recalculation:
+
+- `public/theme.css` có 15.811 rule, TẤT CẢ dùng selector `[class~="..."]`.
+  Selector thuộc tính không mang khoá id/class/tag nên rơi vào *universal
+  bucket*: mọi phần tử phải thử khớp với mọi rule ở mọi lần recalc. Recalc
+  chạy sau mỗi lần React re-render → mỗi cú bấm trả giá bằng hàng triệu phép
+  khớp.
+- Trong 15.786 token, chỉ **243** thực sự có trong App.tsx. 98,5% là rule chết
+  nhưng vẫn tốn một phép thử mỗi phần tử mỗi lần recalc.
+
+`src-web/gen-theme.mjs` nay (a) chỉ sinh rule cho token có thật trong nguồn,
+(b) phát ra class selector escape `.bg-\[\#162216\]\/90` thay cho
+`[class~=...]`. Hai dạng có specificity y hệt (0,1,0) và ngữ nghĩa y hệt.
+**Nếu sửa generator về sau, đừng quay lại attribute selector** — đó chính là
+lỗi hiệu năng gốc.
+
+Kèm theo: `public/mobile.css` thêm `:active` (trước đó App.tsx không có MỘT
+biến thể `active:` nào trong 38.713 dòng, mà trên cảm ứng `hover:` không bao
+giờ kích hoạt → chạm xong không có phản hồi thị giác nào cho tới lần commit
+kế tiếp của React). `transition-duration: 0s` khi đang bấm là phần then chốt:
+phần lớn nút mang `transition-all duration-300`, không ép thì chính hiệu ứng
+lún cũng chạy 300ms.
+
+Cũng sửa một bug có sẵn trên bản deploy: gradient stop bị làm phẳng thành màu
+đục. `via-[#cda45e]/20` (ánh sáng lướt qua nút "Bắt Đầu Cuộc Phiêu Lưu" khi
+hover) biến thành `#1A1512` đặc → dải đen chắn giữa nút, chữ không đọc nổi.
+Gradient stop nay giữ alpha như `bg-` vẫn giữ; 16 stop khác cùng lỗi được sửa
+theo.
+
+### `829ae30` — chốt chặn chữ Hán (2 lớp)
+
+Bảng nhân vật hiện "Dung貌". Luật 1.5 "CHỈ VIẾT BẰNG CHỮ QUỐC NGỮ" đã có và
+viết rất kỹ, nhưng nằm INLINE trong đúng MỘT prompt (khối tường thuật), trong
+khi **hơn 20 lệnh gọi Gemini khác** sinh văn xuôi vào field JSON (hồ sơ NPC,
+vật phẩm, kỹ năng, nhiệm vụ, lore, các trường tạo thế giới) không có ràng
+buộc ngôn ngữ nào.
+
+Chốt đặt tại `fetchWithRetries` — cửa duy nhất mọi lệnh gọi Gemini đi qua.
+Hàm gốc đổi tên thành `fetchWithRetriesRaw`, bản bọc giữ NGUYÊN chữ ký nên
+không điểm gọi nào phải sửa **và lệnh gọi viết về sau tự động được phủ**.
+Lớp 1 chèn luật vào prompt nào chưa có; lớp 2 dò ký tự ngoại lai trong phản
+hồi rồi gọi lại đúng 1 lần kèm chỉ dẫn nêu đích danh ký tự sai. Vẫn sai thì
+ghi log và đi tiếp — không chặn người chơi.
+
+Module mới: `systems/contract/{languagePurity,foreignScript,promptPayload}.ts`.
+Luật 1.5 nay là hằng số dùng chung (bản tường thuật giữ nguyên TỪNG BYTE, đã
+kiểm chứng bằng cách dựng lại rồi so với khối gốc).
+
+Giới hạn: bộ dò bắt CHỮ VIẾT (Hán/Kana/Hangul/Kirin), không bắt NGÔN NGỮ —
+từ tiếng Anh lẫn vào vẫn chỉ dựa vào luật trong prompt.
+
+### `013c814` — tự (tên chữ) chỉ dùng trong lời thoại
+
+Tường thuật chú thích "(tự Bá Giai)" cho từng nhân vật. Không chỉ thiếu luật:
+nhánh Tam Quốc của mục 2.5b đang **chủ động yêu cầu** giới thiệu kèm tên tự
+trong văn kể, còn dòng lẽ ra chặn được thì viết mềm ("tự CHỦ YẾU xuất hiện
+trong lời thoại"). Đã siết dòng chung thành tuyệt đối (tự chỉ được nằm trong
+thẻ `<dialogue>`, cấm riêng dạng ngoặc `(tự ...)`) và chuyển phần giới thiệu
+của nhánh Tam Quốc vào lời tự giới thiệu trong `<dialogue>`.
+
+Vì sao phải cấm riêng dạng ngoặc: bối cảnh mỗi lượt truyền danh sách nhân vật
+dưới dạng `Thái Ung (Tự: Bá Giai)`, tức **chính định dạng dữ liệu vào đang
+làm mẫu cho lỗi**. Định dạng đó phải giữ (là đường duy nhất model biết tự),
+nên chặn ở đầu ra.
+
+**Còn treo**: luật này mới có 1 lớp (prompt), chưa có chốt chặn bằng code —
+khác với chữ Hán đã có 2 lớp. Dò được: `CourtesyName` có sẵn, chỉ cần quét
+phần nằm ngoài `<dialogue>` rồi tái dùng cơ chế guard của `829ae30`.
+
+### `037b873` — modal quota có đếm lùi sống
+
+User giữ 1 key chính + 2 key dự phòng; thông báo 429 cũ không cho biết key nào
+hết, key nào còn. Dữ liệu vốn có sẵn ở `aiSessionState.key_cooldown_until`,
+chỉ chưa ra tới màn hình. Modal riêng, bảng tự tính lại mỗi giây; key hồi xong
+thì dòng đổi sang "còn dùng được" và nút đổi thành "Thử Lại".
+
+**BẪY đã tránh — nhớ khi sửa tiếp**: `orderPlatformKeysByPreferredSlot` XOAY
+thứ tự pool khi người chơi chọn "Key AI Ưu Tiên", nên `key_index` lúc chạy là
+vị trí trong mảng đã xoay, KHÔNG phải slot trong dropdown. Nhãn phải tra theo
+pool CHUẨN `[key chính, ...dự phòng]` và khớp bằng chuỗi key.
+
+Module: `systems/ai/keyPoolStatus.ts` + `systems/ui/quotaModalView.ts` (mọi
+quyết định về chữ nằm ở view-model thuần, component chỉ vẽ).
+
+**Còn treo**: nút "Thử Lại" mới chỉ đóng modal, chưa phát lại lệnh gọi hỏng.
+
+### Ghi chú môi trường (QUAN TRỌNG cho phiên sau)
+
+`npm run dev` ở máy local ra **trang trắng**: `firebaseConfig` đọc từ
+`import.meta.env.VITE_FIREBASE_*`, `.env` bị gitignore và máy chưa có, nên
+`getAuth()` ném `auth/invalid-api-key` lúc khởi tạo module, trước khi React
+kịp render. Secrets chỉ nằm trong GitHub Actions. Hệ quả: **mọi thứ phiên này
+đều chỉ kiểm được gián tiếp** — unit test, build, so sánh CSS bằng script, và
+render headless component bằng cách trích source ra khỏi App.tsx. Chưa lần nào
+chạy app thật với AI thật. Muốn chạy local thì phải tạo `.env` với 6 biến
+`VITE_FIREBASE_*`.
+
+Tổng: 1454 unit test xanh, build xanh.
+
+### Việc còn treo của phiên này (xếp theo mức đáng làm)
+
+1. Chốt chặn bằng code cho luật tự (xem `013c814` ở trên).
+2. Nút "Thử Lại" phát lại luôn lệnh gọi hỏng (xem `037b873`).
+3. Bỏ hẳn vệt sáng hover thay vì giữ mực 20% — thuần thẩm mỹ, theo luật
+   "giấy mực không có hào quang" của theme; 1 dòng trong `gen-theme.mjs`.
+4. Tạo `.env` local (xem ghi chú môi trường).
+
+---
+
+
+## (Cũ, 17-08) TÁC VỤ LỚN — tích hợp GDD vào App.tsx (đã hoàn tất)
 
 **TÁC VỤ LỚN (17-08): Tích hợp GDD vào game (`App.tsx`).** User yêu cầu
 "Đưa các GDD đã thiết lập vào game", **trừ Combat GDD và Song Tu** (giữ
