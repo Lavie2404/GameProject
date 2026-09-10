@@ -5654,6 +5654,39 @@ const writePreferredTextModel = (model) => {
 // a fresh session re-rolls from key #1 even while a desktop session already landed on a
 // healthier key). Only meaningful in apiMode='defaultGemini' - a personal key always stays
 // primary regardless of this setting. '' = automatic order (main key first).
+/**
+ * Which AI source the player CHOSE, as opposed to one inferred from whether a
+ * key happens to exist somewhere.
+ *
+ * Before this, `apiMode` was plain `useState('defaultGemini')` with no storage
+ * at all, and the boot effect re-derived it on every load: a personal key left
+ * in Firestore forced `userKey` back on, so "Sử Dụng Gemini AI Mặc Định" never
+ * survived a reload (user report 2026-09-11). Worse, a build that carries
+ * `VITE_GEMINI_API_KEY` — the PLATFORM's own key — also forced `userKey` and
+ * poured that key into the "API Key của ngươi" box, which is why a quota error
+ * could claim the player's personal key ran out when they never entered one.
+ *
+ * Empty string = never chose; the app then starts in platform mode.
+ */
+const API_MODE_STORAGE_KEY = 'vdl.apiMode';
+const readApiMode = () => {
+    try {
+        if (typeof window === 'undefined' || !window.localStorage) return '';
+        const stored = window.localStorage.getItem(API_MODE_STORAGE_KEY) || '';
+        return stored === 'userKey' || stored === 'defaultGemini' ? stored : '';
+    } catch {
+        return '';
+    }
+};
+const writeApiMode = (mode) => {
+    try {
+        if (typeof window === 'undefined' || !window.localStorage) return;
+        if (mode) window.localStorage.setItem(API_MODE_STORAGE_KEY, mode);
+        else window.localStorage.removeItem(API_MODE_STORAGE_KEY);
+    } catch {
+        /* localStorage may be unavailable (private mode) - the in-memory value still applies */
+    }
+};
 const PREFERRED_KEY_SLOT_STORAGE_KEY = 'vdl.preferredKeySlot';
 const KEY_SLOT_PATTERN = /^[0-9]+$/;
 const readPreferredKeySlot = () => {
@@ -21123,7 +21156,15 @@ const [impromptuInput, setImpromptuInput] = useState('');
   const [activeCombatLoop, setActiveCombatLoop] = useState(null);
   const [characterInfoInitialTab, setCharacterInfoInitialTab] = useState('character');
   const [apiKey, setApiKey] = useState('');
-  const [apiMode, setApiMode] = useState('defaultGemini');
+  // `setApiMode` PERSISTS - it is for deliberate player choices only (bấm "Sử
+  // Dụng Gemini AI Mặc Định", lưu/gõ key riêng). The boot effect below must use
+  // `setApiModeRaw`, otherwise an inferred mode would be written back as if the
+  // player had picked it, and the stored choice could never win again.
+  const [apiMode, setApiModeRaw] = useState(() => readApiMode() || 'defaultGemini');
+  const setApiMode = useCallback((mode) => {
+      setApiModeRaw(mode);
+      writeApiMode(mode);
+  }, []);
   // Player-chosen model that leads the fallback ladder (see PREFERRED_TEXT_MODEL_STORAGE_KEY).
   const [preferredTextModel, setPreferredTextModelState] = useState(() => readPreferredTextModel());
   const setPreferredTextModel = useCallback((model) => {
@@ -24296,27 +24337,45 @@ useEffect(() => {
         // Logic đã được đơn giản hóa, chỉ tải key của Gemini
         const userGeminiKey = await loadApiKey(user.uid);
 
+        // Khôi phục key đã lưu, nhưng KHÔNG tự quyết chế độ thay người chơi:
+        // chỉ vào userKey khi chính họ đã chọn nó (đã lưu trong localStorage).
+        const chosenMode = readApiMode();
         if (userGeminiKey) {
           setApiKey(userGeminiKey);
           setInputApiKey(userGeminiKey);
-          setApiMode('userKey');
-          setApiKeyStatus({ status: 'Đã kết nối', message: 'API Key của Gemini đã được tải.', color: 'text-green-500' });
-        } else if (import.meta.env.VITE_GEMINI_API_KEY) {
-          // Chạy standalone (ngoài AI Studio): dùng key free-tier từ .env.local làm mặc định
-          setApiKey(import.meta.env.VITE_GEMINI_API_KEY);
-          setInputApiKey(import.meta.env.VITE_GEMINI_API_KEY);
-          setApiMode('userKey');
-          setApiKeyStatus({ status: 'Đã kết nối (.env)', message: 'Đang dùng Gemini API Key từ file .env.local (free tier).', color: 'text-green-500' });
+          if (chosenMode === 'userKey') {
+            setApiModeRaw('userKey');
+            setApiKeyStatus({ status: 'Đã kết nối', message: 'API Key của Gemini đã được tải.', color: 'text-green-500' });
+          } else {
+            // Có key riêng nhưng người chơi đang chọn nguồn nền tảng — tôn trọng
+            // lựa chọn đó. Key vẫn nằm sẵn trong ô nhập để bật lại lúc nào cũng được.
+            setApiModeRaw('defaultGemini');
+            setApiKeyStatus({ status: 'Đang dùng Gemini AI Mặc Định', message: 'Key riêng đã lưu vẫn còn — bấm "Lưu Key" trong Thiết Lập API Key để dùng lại.', color: 'text-sky-400' });
+          }
         } else {
-          setApiMode('defaultGemini');
-          setApiKeyStatus(PLATFORM_FALLBACK_GEMINI_KEYS.length > 0
+          // Bỏ hẳn nhánh cũ "có VITE_GEMINI_API_KEY thì coi như key riêng".
+          // VITE_GEMINI_API_KEY CHÍNH LÀ key chính của nền tảng
+          // (PLATFORM_DEFAULT_GEMINI_KEY), nên gán nó làm "key của ngươi" vừa sai
+          // sự thật — thông báo hết quota đổ lỗi cho key người chơi chưa từng nhập —
+          // vừa vô nghĩa: chế độ mặc định đã dùng đúng key đó rồi, lại còn kèm 2 key
+          // dự phòng và tôn trọng "Key AI Ưu Tiên", những thứ userKey không có.
+          // Không có key riêng nào để khôi phục, nên kể cả khi lựa chọn đã lưu là
+          // 'userKey' thì cũng không có gì để dùng — về nguồn nền tảng.
+          setApiModeRaw('defaultGemini');
+          // Trạng thái phải mô tả ĐÚNG pool đang có. Câu "Không có key chính
+          // trong .env.local" trước đây chỉ đúng cho nhánh cũ đã bỏ; giờ nhánh
+          // này cũng chạy khi key chính CÓ mặt, nên phải phân biệt hai ca.
+          setApiKeyStatus(!PLATFORM_DEFAULT_GEMINI_KEY && PLATFORM_FALLBACK_GEMINI_KEYS.length > 0
             ? {
                 status: 'Đang dùng key dự phòng',
-                message: `Không có key chính trong .env.local; đang dùng ${PLATFORM_FALLBACK_GEMINI_KEYS.length} key dự phòng (VITE_GEMINI_API_KEY_FALLBACKS).`,
+                message: `Không có key chính; đang dùng ${PLATFORM_FALLBACK_GEMINI_KEYS.length} key dự phòng (VITE_GEMINI_API_KEY_FALLBACKS).`,
                 color: 'text-sky-400'
               }
             : {
                 status: 'Đang dùng Gemini AI Mặc Định',
+                message: PLATFORM_FALLBACK_GEMINI_KEYS.length > 0
+                    ? `Nguồn nền tảng: 1 key chính + ${PLATFORM_FALLBACK_GEMINI_KEYS.length} key dự phòng, tự xoay khi một key hết quota.`
+                    : 'Không cần API Key. Nội dung sẽ được tạo bởi AI của nền tảng.',
                 color: 'text-sky-400'
               });
         }

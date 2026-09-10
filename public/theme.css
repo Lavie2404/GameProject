@@ -141,6 +141,18 @@
 .bg-\[\#233523\].border-\[\#cda45e\] { border-color: var(--paper) !important; }
 .bg-\[\#233523\].text-\[\#e8d3a1\] { color: var(--paper) !important; }
 
+/* ---- nút "đảo màu" khi hover: chữ phải là giấy, không phải mực ----
+   Nguyên bản (dark-fantasy) đây là nút nền VÀNG + chữ ĐEN: 'hover:bg-[#cda45e]
+   hover:text-black'. Theme giấy-mực đổi vàng (#cda45e) -> mực, mà 'text-black'
+   cũng -> mực, nên khi hover nút thành MỰC TRÊN MỰC và chữ biến mất hoàn toàn
+   (user báo 2026-09-11: "nút thử lại khi hover vào thành màu đen không thấy
+   chữ"). Cùng lỗi với ngoại lệ #233523 ngay phía trên: nền đã đảo sang tối thì
+   chữ phải đảo sang sáng theo.
+   Dùng selector ghép (2 class + 1 pseudo = 0,3,0) để thắng rule
+   .hover\:text-black:hover (0,2,0), và chỉ chạm đúng những nút mang CẢ HAI
+   token — 'hover:text-black' ở nơi khác (nền vẫn sáng) giữ nguyên chữ mực. */
+.hover\:bg-\[\#cda45e\].hover\:text-black:hover { color: var(--paper) !important; }
+
 /* Tailwind black -> bg:var(--paper) text/border:var(--ink)  (đen (scrim/nền tối) -> giấy / mực) */
 .bg-black { background-color: var(--paper) !important; }
 .text-black { color: var(--ink) !important; }
