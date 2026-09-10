@@ -34,6 +34,8 @@ import {
     describeViolations,
 } from './src-web/systems/contract/foreignScript';
 import { appendToPromptText, promptTextOf } from './src-web/systems/contract/promptPayload';
+import { describeKeyPool } from './src-web/systems/ai/keyPoolStatus';
+import { quotaModalView } from './src-web/systems/ui/quotaModalView';
 import { makeThucId } from './src-web/systems/equipment/schema';
 import { markEverEquipped } from './src-web/systems/equipment/loadout';
 
@@ -11540,6 +11542,85 @@ const VipWelcomeModal = ({ show, ownerName, onClose }) => {
         </div>
     );
 };
+// Modal riêng cho lỗi hết quota: đồng hồ đếm lùi CHẠY THẬT.
+//
+// Thông báo cũ nhét tình trạng key vào một chuỗi tĩnh, chốt lại ở thời điểm ném
+// lỗi. Nhưng hạn hồi của gói miễn phí thường chỉ vài giây, nên tới lúc người
+// chơi đọc xong thì con số đã sai — và cái người ta cần biết ("đợi được chưa?")
+// lại đúng là con số đó. Ở đây bảng tự tính lại mỗi giây từ
+// aiSessionState.key_cooldown_until, nên key hồi xong là dòng của nó tự đổi
+// sang "còn dùng được" ngay trước mắt, không phải đóng modal ra thử lại.
+//
+// Đọc thẳng cooldown map (không chụp lại vào state) là có chủ đích: requestAi
+// sửa map đó tại chỗ, nên nếu có lệnh gọi nền nào cập nhật thì bảng ăn theo luôn.
+const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, onClose }) => {
+    const [, forceTick] = useState(0);
+    useEffect(() => {
+        if (!show) return undefined;
+        const id = setInterval(() => forceTick(t => t + 1), 1000);
+        return () => clearInterval(id);
+    }, [show]);
+
+    if (!show) return null;
+
+    // Mọi quyết định (nhãn, câu khuyên, chữ trên nút) nằm trong quotaModalView —
+    // module thuần đã có test; ở đây chỉ còn việc vẽ. Gọi lại mỗi lần render, mà
+    // render lại mỗi giây, nên bảng luôn khớp thời gian thật.
+    const view = quotaModalView(keys || [], cooldownUntil || {}, Date.now() / 1000);
+    const toneStyle = {
+        ok: 'text-[#8ba888]',
+        wait: 'text-[#e8d3a1]',
+        bad: 'text-[#ff4d4d]',
+    };
+
+    return (
+      <div className="fixed inset-0 bg-[#0a0f0a]/80 backdrop-blur-sm flex items-center justify-center p-4 z-[500]">
+        <div className="bg-[#162216] p-8 shadow-[0_0_40px_rgba(10,20,10,0.9)] w-full max-w-md border border-[#8b1515] relative max-h-[90vh] overflow-y-auto">
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#8b1515] pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#8b1515] pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#8b1515] pointer-events-none"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#8b1515] pointer-events-none"></div>
+
+            <div className="flex items-center mb-5 border-b border-[#a3b8a3]/20 pb-3">
+                <ExclamationTriangleIcon className="w-7 h-7 mr-3 text-[#ff4d4d]"/>
+                <h3 className="text-2xl font-bold tracking-widest text-[#ff4d4d]" style={{ fontFamily: "'Noto Serif Vietnamese', serif" }}>Hết Quota AI</h3>
+            </div>
+
+            <p className="text-[#a3b8a3] mb-4 leading-relaxed">Nguồn AI mặc định vừa báo hết quota (Lỗi 429).</p>
+
+            <div className="mb-4 border border-[#a3b8a3]/20 divide-y divide-[#a3b8a3]/10">
+                {view.rows.map(r => (
+                    <div key={r.index} className="flex items-baseline justify-between gap-3 px-3 py-2">
+                        <span className="text-[#a3b8a3] scale-text-sm">{r.label}</span>
+                        <span className={`font-bold scale-text-sm text-right ${toneStyle[r.tone]}`}>{r.text}</span>
+                    </div>
+                ))}
+            </div>
+
+            <p className="text-[#a3b8a3] mb-6 leading-relaxed scale-text-sm">
+                {view.advice}
+            </p>
+
+            {googleDetail ? (
+                <details className="mb-6">
+                    <summary className="text-[#8ba888] scale-text-xs uppercase tracking-widest cursor-pointer hover:text-[#cda45e]">Chi tiết từ Google</summary>
+                    <p className="text-[#8ba888] scale-text-xs whitespace-pre-line mt-2 leading-relaxed">{String(googleDetail).trim()}</p>
+                </details>
+            ) : null}
+
+            <button
+                onClick={onClose}
+                className={`w-full border font-bold py-3 uppercase tracking-widest text-sm transition-all ${view.anyReady
+                    ? 'bg-[#cda45e]/10 border-[#cda45e] hover:bg-[#cda45e] hover:text-black text-[#e8d3a1]'
+                    : 'bg-transparent border-[#cda45e] hover:bg-[#cda45e]/10 text-[#cda45e]'}`}
+            >
+                {view.buttonLabel}
+            </button>
+        </div>
+      </div>
+    );
+};
+
 const MessageModal = ({ show, title, content, type, onClose, actionLabel, onAction }) => {
     if (!show) return null;
     let titleColor = 'text-[#e8d3a1]';
@@ -19995,7 +20076,26 @@ const fetchWithRetriesRaw = async (apiUrl, payload, onRetry = null, maxRetries =
             // Vietnamese explanation) — it names the exact quota metric (per-minute vs
             // per-day) instead of forcing a guess every time this fires.
             const googleDetail = result.detail ? `\n\n[Chi tiết từ Google]: ${result.detail}` : '';
-            const quotaError = new Error('Hệ thống AI đã hết lượt sử dụng miễn phí trong thời gian này (Lỗi 429 - Quá giới hạn quota). Vui lòng đợi ít phút rồi thử lại, hoặc vào "Thiết Lập API Key" ở màn hình chính để dùng API Key Gemini miễn phí của riêng ngươi và tiếp tục ngay lập tức.' + googleDetail);
+            // Người dùng giữ 1 key chính + 2 key dự phòng, nhưng thông báo cũ chỉ nói
+            // "hệ thống đã hết lượt" — không cho biết key NÀO hết và key nào còn dùng
+            // được, trong khi phiên làm việc đã ghi sẵn điều đó ở key_cooldown_until.
+            //
+            // Nhãn slot phải tra theo pool CHUẨN [key chính, ...dự phòng], KHÔNG dùng
+            // orderedPlatformKeys: mảng đó đã bị "Key AI Ưu Tiên" xoay thứ tự, nên
+            // phần tử số 0 của nó thường không phải "Key chính" — chính lúc người dùng
+            // có chọn slot ưu tiên là lúc nhãn sẽ sai nếu lấy theo thứ tự đã xoay.
+            const canonicalPlatformKeys = [PLATFORM_DEFAULT_GEMINI_KEY, ...PLATFORM_FALLBACK_GEMINI_KEYS]
+                .filter(k => String(k || '').trim());
+            const quotaMessage = apiMode === 'userKey'
+                ? 'API Key Gemini của riêng ngươi vừa báo hết quota (Lỗi 429). Hãy đợi ít phút rồi thử lại, hoặc vào "Thiết Lập API Key" chọn "Sử Dụng Gemini AI Mặc Định" để chơi tiếp bằng key nền tảng.'
+                : 'Nguồn AI mặc định vừa báo hết quota (Lỗi 429).'
+                  + describeKeyPool(canonicalPlatformKeys, aiSessionState.key_cooldown_until, Date.now() / 1000);
+            const quotaError = new Error(quotaMessage + googleDetail);
+            // Kèm dữ liệu có cấu trúc để QuotaKeyStatusModal vẽ được bảng đếm lùi
+            // sống. Chuỗi quotaMessage ở trên vẫn giữ nguyên làm bản dự phòng cho
+            // bất kỳ chỗ nào còn hiển thị error.message dưới dạng văn bản thuần.
+            quotaError.quotaKeys = apiMode === 'userKey' ? [] : canonicalPlatformKeys;
+            quotaError.googleDetail = googleDetail;
             quotaError.isQuotaError = true;
             quotaError.isModelUnavailable = true;
             throw quotaError;
@@ -21052,6 +21152,16 @@ const [impromptuInput, setImpromptuInput] = useState('');
     message: 'Không cần API Key. Nội dung sẽ được tạo bởi AI của nền tảng.',
     color: 'text-sky-400'
   });
+  // Lỗi hết quota đi vào QuotaKeyStatusModal (có đếm lùi sống) thay vì
+  // MessageModal văn bản tĩnh; mọi lỗi AI khác giữ nguyên đường cũ.
+  const [quotaKeyModal, setQuotaKeyModal] = useState(null);
+  const showAiError = useCallback((error, fallbackTitle = 'Lỗi Giao Tiếp AI') => {
+      if (error?.isQuotaError && Array.isArray(error.quotaKeys) && error.quotaKeys.length > 0) {
+          setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '' });
+          return;
+      }
+      setModalMessage({ show: true, title: fallbackTitle, content: error?.message || String(error), type: 'error' });
+  }, []);
   const [showDonateModal, setShowDonateModal] = useState(false);
   const [currentTurn, setCurrentTurn] = useState(0);
   const [showCraftingModal, setShowCraftingModal] = useState(false);
@@ -28342,7 +28452,7 @@ const callGeminiAPI = async (prompt, isInitialCall = false, options = {}, knowle
             // Symmetric with the hybrid catch below (code review C-1): a failed
             // call must release the Turn Manager, or every later turn is locked out.
             abortSystemsTurn();
-            setModalMessage({ show: true, title: 'Lỗi Giao Tiếp AI', content: error.message, type: 'error' });
+            showAiError(error);
             if (options.isAITurn && activeCombatLoop) setTimeout(() => activeCombatLoop.nextTurn(), 1500);
             return null;
         } finally {
@@ -28737,7 +28847,7 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
     } catch (error) {
         console.error('Lỗi trong quy trình 2 bước Hybrid:', error);
         abortSystemsTurn();
-        setModalMessage({ show: true, title: 'Lỗi Giao Tiếp AI', content: error.message, type: 'error' });
+        showAiError(error);
         return null;
     } finally {
         setIsLoading(false);
@@ -30127,7 +30237,7 @@ const initializeGame = async (forceStart = false) => {
                 console.error("Lỗi khi gọi AI cho intro:", error);
                 setInitializationSteps(["Đấng đang sáng tạo thế giới...", "Và ngươi đã được sinh ra."]);
                 if (error.isQuotaError) {
-                    setModalMessage({ show: true, title: 'Hết Lượt AI Miễn Phí', content: error.message, type: 'error' });
+                    showAiError(error, 'Hết Lượt AI Miễn Phí');
                 }
             } finally {
                 setIsNarrating(false);
@@ -38585,6 +38695,13 @@ const formatStoryText = useCallback((text) => {
         onAction={modalMessage.onAction}
         onClose={() => setModalMessage({ show: false, title: '', content: '', type: 'info' })}
       />
+        <QuotaKeyStatusModal
+            show={!!quotaKeyModal}
+            keys={quotaKeyModal?.keys}
+            cooldownUntil={aiSessionState.key_cooldown_until}
+            googleDetail={quotaKeyModal?.googleDetail}
+            onClose={() => setQuotaKeyModal(null)}
+        />
     <ConfirmationModal
         show={confirmationModal.show}
         title={confirmationModal.title}
