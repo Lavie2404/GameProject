@@ -22,6 +22,18 @@ import {
 import { toCombatHandoff } from './src-web/systems/adapters/combatAdapter';
 import { getSongTuActiveNpcIds } from './src-web/systems/adapters/songTuAdapter';
 import { tierFromLevel } from './src-web/systems/math';
+import {
+    QUOC_NGU_ONLY_NARRATION,
+    QUOC_NGU_ONLY_JSON_FIELDS,
+    QUOC_NGU_ONLY_ANY_OUTPUT,
+    promptHasQuocNguRule,
+} from './src-web/systems/contract/languagePurity';
+import {
+    scanFieldsForForeignScript,
+    correctionInstruction,
+    describeViolations,
+} from './src-web/systems/contract/foreignScript';
+import { appendToPromptText, promptTextOf } from './src-web/systems/contract/promptPayload';
 import { makeThucId } from './src-web/systems/equipment/schema';
 import { markEverEquipped } from './src-web/systems/equipment/loadout';
 
@@ -19822,7 +19834,7 @@ let stickyPreferredModel = null;
  * `globalApiQueue` still sits in FRONT of the call, so its spacing delay stays
  * outside `t_elapsed` (plan.md C-10).
  */
-const fetchWithRetries = async (apiUrl, payload, onRetry = null, maxRetries = 2, retryDelay = 1000, callSite = 'generic', budgetOverrides = null) => {
+const fetchWithRetriesRaw = async (apiUrl, payload, onRetry = null, maxRetries = 2, retryDelay = 1000, callSite = 'generic', budgetOverrides = null) => {
     const urlMatch = (apiUrl || '').match(/\/models\/([^:?]+):generateContent(?:\?key=(.*))?$/);
     const requestedModel = urlMatch ? urlMatch[1] : null;
     const apiKeyFromUrl = urlMatch && urlMatch[2] ? urlMatch[2] : '';
@@ -20036,6 +20048,67 @@ const fetchWithRetries = async (apiUrl, payload, onRetry = null, maxRetries = 2,
     // Ném task vào hàng chờ và trả về Promise, nó sẽ tự động resolve khi chạy xong.
     // Hàng đợi nằm NGOÀI ngân sách thời gian của một logical call (plan.md C-10).
     return globalApiQueue.enqueue(executeFetch);
+};
+
+// --- CHỐT CHẶN LUẬT 1.5 (chỉ viết bằng chữ Quốc ngữ) ------------------------
+// Luật 1.5 đã tồn tại từ lâu nhưng nằm INLINE trong đúng MỘT prompt (khối
+// tường thuật), nên chỉ ràng buộc văn tường thuật/hội thoại/4 gợi ý. Hơn 20
+// lệnh gọi còn lại — hồ sơ NPC, mô tả vật phẩm, kỹ năng, nhiệm vụ, lore thế
+// giới, các trường lúc tạo thế giới — không có ràng buộc ngôn ngữ nào. Đó là
+// đường mà "Dung貌" lọt vào bảng nhân vật (báo lỗi 2026-09-10): đúng loại lỗi
+// mà ví dụ "tâm念" của chính luật 1.5 đã mô tả, nhưng do một prompt mà luật
+// chưa bao giờ với tới sinh ra.
+//
+// Đặt chốt tại fetchWithRetries vì đây là cửa duy nhất mọi lệnh gọi Gemini đi
+// qua: sửa một chỗ là phủ hết, kể cả những lệnh gọi viết về sau. Đổi tên hàm
+// gốc thành ...Raw và bọc lại với CÙNG chữ ký, nên không điểm gọi nào phải sửa.
+//
+// Hai lớp:
+//   1. PHÒNG — chèn luật vào prompt nếu prompt đó chưa có (khối tường thuật đã
+//      tự mang luật nên được bỏ qua, không chèn trùng).
+//   2. CHỮA — nếu model VẪN trả về ký tự ngoại lai thì gọi lại ĐÚNG một lần,
+//      kèm chỉ dẫn nêu đích danh ký tự sai. Nhắc chung chung "hãy viết tiếng
+//      Việt" thì model thường trả về y hệt, nên phải nêu cụ thể.
+//
+// Vì sao cần lớp 2 dù đã có lớp 1: khối tường thuật MANG luật suốt từ đầu mà
+// vẫn rò — lịch sử commit là một chuỗi lần vá thêm phản ví dụ ("физи", "tâm念",
+// "supple"). Luật trong prompt là một lời đề nghị; chốt này là một phép đo.
+const scanResponseForForeignScript = (responseText) => {
+    // Quét trên dữ liệu đã parse để báo được TÊN TRƯỜNG sai; nếu chưa parse nổi
+    // (còn code fence, hoặc câu trả lời là văn xuôi thuần) thì quét chuỗi thô —
+    // thà mất tên trường còn hơn bỏ sót. Khoá JSON toàn ASCII nên không báo nhầm.
+    try {
+        return scanFieldsForForeignScript(JSON.parse(stripJsonCodeFence(responseText)));
+    } catch {
+        return scanFieldsForForeignScript(responseText);
+    }
+};
+
+const fetchWithRetries = async (apiUrl, payload, onRetry = null, maxRetries = 2, retryDelay = 1000, callSite = 'generic', budgetOverrides = null) => {
+    const call = (p) => fetchWithRetriesRaw(apiUrl, p, onRetry, maxRetries, retryDelay, callSite, budgetOverrides);
+
+    // Lớp 1 — phòng. Prompt JSON và prompt văn xuôi dùng câu phạm vi khác nhau.
+    const wantsJson = payload?.generationConfig?.response_mime_type === 'application/json';
+    const guarded = promptHasQuocNguRule(promptTextOf(payload))
+        ? payload
+        : appendToPromptText(payload, wantsJson ? QUOC_NGU_ONLY_JSON_FIELDS : QUOC_NGU_ONLY_ANY_OUTPUT);
+
+    const first = await call(guarded);
+
+    // Lớp 2 — chữa.
+    const bad = scanResponseForForeignScript(first);
+    if (bad.length === 0) return first;
+
+    console.warn(`[Quốc ngữ][${callSite}] AI trả về ký tự ngoài chữ Quốc ngữ — gọi lại 1 lần: ${describeViolations(bad)}`);
+    const second = await call(appendToPromptText(guarded, correctionInstruction(bad)));
+
+    const still = scanResponseForForeignScript(second);
+    if (still.length === 0) return second;
+
+    // Vẫn sai sau khi nhắc: KHÔNG chặn người chơi. Biến một lỗi chính tả thành
+    // lỗi mất lượt chơi thì tệ hơn hẳn bản thân lỗi. Ghi log và lấy bản đỡ tệ hơn.
+    console.warn(`[Quốc ngữ][${callSite}] gọi lại vẫn còn ký tự ngoại lai, giữ kết quả: ${describeViolations(still)}`);
+    return still.length <= bad.length ? second : first;
 };
 
 
@@ -29092,14 +29165,7 @@ ${PILLAR1_DIRECTIVES_NARRATION.map(x => '//    * ' + x).join('\n')}
 //    - LƯU Ý ĐẶC BIỆT: Đại từ "ngươi" KHÔNG PHẢI là tên riêng. TUYỆT ĐỐI KHÔNG đặt từ "ngươi" trong dấu sao (SAI: *ngươi*, ĐÚNG: ngươi). 
 //    - TUYỆT ĐỐI KHÔNG để dấu sao đứng mồ côi (SAI: * áp lưng vào tường..., ĐÚNG: Ngươi áp lưng vào tường...).
 
-// 1.5. CHỈ VIẾT BẰNG CHỮ QUỐC NGỮ (TUYỆT ĐỐI CẤM CHỮ VIẾT NGOÀI TIẾNG VIỆT):
-//    - Toàn bộ văn tường thuật, hội thoại, và 4 gợi ý hành động PHẢI 100% bằng chữ Quốc ngữ (bảng chữ Latin có dấu tiếng Việt). TUYỆT ĐỐI KHÔNG được để lẫn bất kỳ ký tự/từ nào của ngôn ngữ khác vào giữa câu tiếng Việt — kể cả chỉ một chữ Hán/Kana/Hangul/Kirin (Nga) đơn lẻ, dù chỉ một âm tiết, VÀ kể cả một TỪ TIẾNG ANH nguyên vẹn (dù cùng dùng chữ Latin như tiếng Việt) — mọi từ, kể cả từ đơn giản/thông dụng, PHẢI dịch hẳn sang tiếng Việt, không được giữ nguyên văn gốc tiếng Anh.
-//    - Muốn diễn đạt khái niệm gốc Hán (võ công, công pháp, danh xưng, tâm pháp...), BẮT BUỘC dùng từ Hán Việt đã phiên âm sang chữ Quốc ngữ (VD: "niệm", "chiêu thức", "tâm ma"), TUYỆT ĐỐI KHÔNG viết trực tiếp ký tự Hán gốc (VD: 念, 心, 氣).
-//    - VÍ DỤ SAI (lẫn tiếng Nga): "Vận dụng toàn bộ sức mạnh физи thể chất lướt tới áp sát..." — "физи" là ký tự ngoại lai vô nghĩa trong câu, TUYỆT ĐỐI không được xuất hiện.
-//    - VÍ DỤ SAI (lẫn chữ Hán thay vì Hán Việt): "Ngươi tâm念 vừa động, chuôi thần binh... hiện ra" — phải viết trọn "niệm" bằng chữ Quốc ngữ: "Ngươi tâm niệm vừa động".
-//    - VÍ DỤ SAI (lẫn nguyên từ tiếng Anh): "...bọc giáp sáng quắc under sự dẫn dắt của..." (phải viết "dưới sự dẫn dắt của"); "...màn kịch của mình đã đến lúc thu hạ curtains." (phải viết trọn ý bằng tiếng Việt, VD "đã đến lúc hạ màn.", KHÔNG được giữ từ "curtains"); "Supple nhưng lại có chút vết chai mỏng ở lòng bàn tay" (từ tính từ tiếng Anh "supple" đứng đầu câu được viết hoa nên trông như tên riêng — vẫn là lỗi, phải viết "Mềm mại nhưng lại có chút vết chai mỏng ở lòng bàn tay"). ĐẶC BIỆT CẢNH GIÁC với các tính từ tả xúc giác/hình thể (supple, smooth, soft, firm, delicate, graceful...) — chúng hay lọt vào đầu câu miêu tả cơ thể.
-//    - VÍ DỤ ĐÚNG: "Vận dụng toàn bộ sức mạnh thể chất lướt tới áp sát...", "Ngươi tâm niệm vừa động, chuôi thần binh... hiện ra", "...bọc giáp sáng quắc dưới sự dẫn dắt của...", "...màn kịch của mình đã đến lúc hạ màn.", "Mềm mại nhưng lại có chút vết chai mỏng ở lòng bàn tay".
-//    - TỰ KIỂM TRA BẮT BUỘC TRƯỚC KHI TRẢ VỀ PHẢN HỒI: rà lại toàn bộ văn bản một lượt, kể cả những từ trông "vô hại" xen giữa câu tiếng Việt; nếu phát hiện bất kỳ ký tự/từ nào không phải chữ Quốc ngữ (kể cả một từ tiếng Anh thông dụng) hoặc dấu câu thông thường, PHẢI xóa hoặc dịch hẳn sang tiếng Việt trước khi hoàn tất.
+${QUOC_NGU_ONLY_NARRATION}
 
 // 2. ĐỊNH DẠNG HỘI THOẠI (NGHIÊM CẤM ĐỂ TRỐNG SPEAKER):
 //    - Mọi câu nói trực tiếp của nhân vật PHẢI được bọc trong thẻ XML <dialogue>.
