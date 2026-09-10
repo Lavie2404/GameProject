@@ -29,3 +29,68 @@ button, input, textarea, select, a, [role="button"] {
 
 /* Avoid the page rubber-banding behind fixed overlays/modals on iOS. */
 html, body { overscroll-behavior-y: none; }
+
+/* ---- Instant press feedback (added 2026-09-10) ----
+   App.tsx defines no `active:` Tailwind variant anywhere (grep: 0 hits over
+   all 38,713 lines), so the only visual answer to a press used to be whatever
+   React rendered AFTER the click handler ran. On touch devices `hover:` never
+   fires either, so a tap produced literally nothing until the next commit —
+   every button read as delayed, on every screen, no matter what its handler
+   did. (`touch-action: manipulation` above already removed the separate 300ms
+   double-tap delay; this is the other half.)
+
+   These rules are painted straight off the :active pseudo-class: no JS, no
+   React render, no state change, so the button answers within the same frame
+   as pointerdown however long the handler takes afterwards.
+
+   `transition-duration: 0s` on the pressed state is the load-bearing part:
+   most buttons here carry `transition-all duration-300`, which would
+   otherwise animate the press-in over 300ms and put back exactly the lag this
+   is meant to remove. Release still eases back at the normal duration, which
+   is what makes it read as a physical press rather than a flicker. */
+button:active,
+[role="button"]:active,
+a:active,
+.info-button-trigger:active {
+  transform: scale(0.97);
+  filter: brightness(0.93);
+  transition-duration: 0s !important;
+}
+
+/* iOS Safari applies :active only to elements it already treats as clickable.
+   cursor:pointer is the cheapest way to qualify — the alternative is an empty
+   touchstart listener on every control, which costs JS we don't need. */
+button,
+[role="button"],
+.info-button-trigger {
+  cursor: pointer;
+}
+
+/* A disabled control must not pretend to respond. */
+button:disabled:active,
+button[disabled]:active,
+[role="button"][aria-disabled="true"]:active {
+  transform: none;
+  filter: none;
+}
+
+/* ---- Control transitions: 300ms -> 120ms ----
+   44 elements use Tailwind `duration-300` and 108 use `transition-all`. On a
+   button that pair also governs the disabled/loading restyle (opacity-40 +
+   grayscale) that the click itself triggers, so the "button went dim"
+   confirmation landed 300ms after the press even once the state flag flipped
+   synchronously (see App.tsx processPlayerAction). Scoped to controls only:
+   panels, modals and story fade-ins keep their 300/500ms, which is a
+   deliberate look rather than lag.
+
+   Specificity (0,2,0) beats Tailwind's own `.duration-300` (0,1,0), so no
+   !important is needed here. */
+button.duration-300,
+[role="button"].duration-300 {
+  transition-duration: 120ms;
+}
+
+button.duration-500,
+[role="button"].duration-500 {
+  transition-duration: 160ms;
+}
