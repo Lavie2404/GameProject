@@ -9,19 +9,24 @@
          in mobile.css (16px inputs), NOT by user-scalable=no. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
     <title>AI Story Game</title>
-    <!-- Tailwind Play CDN: App.tsx's className strings are plain Tailwind
-         utility classes with no build-time config (as authored in Google AI
-         Studio Canvas). The CDN build matches that runtime exactly without
-         needing a PostCSS pipeline. -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind is now compiled at build time (src-web/tailwind.css via
+         PostCSS, config in tailwind.config.js). The Play CDN <script> that
+         used to sit here re-generated the whole stylesheet on EVERY DOM
+         mutation through a MutationObserver, forcing a full-page style
+         recalc + reflow (~4s) on each click once the story log grew. -->
     <!-- Giấy-mực theme override — approved 2026-08-14, see src-web/gen-theme.mjs.
          Lives in public/ (served as-is): a .css file under src-web/ gets
          wrapped in a JS/HMR module by Vite's dev server when linked via
          <link>, so the browser received JS instead of CSS in dev (worked
          fine in prod builds, broke only locally — found via verification). -->
-    <link rel="stylesheet" href="/theme.css" />
+    <!-- ?v= là cache-busting thủ công: public/*.css được phục vụ nguyên tên (không
+         có hash như bundle của Vite), nên sau mỗi lần sửa theme mà không đổi
+         số này thì trình duyệt/GitHub Pages có thể vẫn dùng bản cũ (2026-09-11:
+         nút hover "đen không thấy chữ" đã sửa trong theme.css nhưng người chơi
+         vẫn thấy lỗi vì CSS cũ còn trong cache). Đổi số này mỗi khi sửa CSS. -->
+    <link rel="stylesheet" href="/theme.css?v=20260911b" />
     <!-- Hand-written mobile/touch fixes (NOT generated) — see public/mobile.css. -->
-    <link rel="stylesheet" href="/mobile.css" />
+    <link rel="stylesheet" href="/mobile.css?v=20260911b" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>

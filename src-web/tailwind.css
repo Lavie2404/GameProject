@@ -1,0 +1,6 @@
+/* Tailwind entry — compiled once by PostCSS at dev/build time (see
+   tailwind.config.js for why this replaced the Play CDN script). Imported
+   from src-web/main.tsx so Vite injects it before the app mounts. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
