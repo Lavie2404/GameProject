@@ -74,4 +74,51 @@ describe('quotaModalView', () => {
     expect(v.rows).toEqual([]);
     expect(v.anyReady).toBe(false);
   });
+
+  it('test_platform_source_is_the_default_headline', () => {
+    const v = quotaModalView(POOL, { KEY_MAIN: NOW + 5 }, NOW);
+    expect(v.headline).toBe('Nguồn AI mặc định vừa báo hết quota (Lỗi 429).');
+  });
+});
+
+// 2026-09-11: the personal-key path now feeds the same modal. The pool it
+// reports on is the one requestAi actually walked: [own key, ...platform keys].
+describe('quotaModalView - userKey source', () => {
+  const USER_POOL = ['KEY_OWN', 'KEY_MAIN', 'KEY_SPARE_1'];
+
+  it('test_userkey_source_labels_row_zero_as_the_players_key', () => {
+    const v = quotaModalView(USER_POOL, { KEY_OWN: NOW + 26 }, NOW, 'userKey');
+    expect(v.headline).toBe('API Key Gemini của riêng ngươi vừa báo hết quota (Lỗi 429).');
+    expect(v.rows.map((r) => r.label)).toEqual([
+      'Key riêng của ngươi',
+      'Key nền tảng (key chính)',
+      'Key nền tảng (key dự phòng 1)',
+    ]);
+    expect(v.rows[0]).toMatchObject({ text: 'hồi sau 26 giây', tone: 'wait' });
+  });
+
+  it('test_userkey_source_advice_never_points_at_the_disabled_dropdown', () => {
+    const ready = quotaModalView(USER_POOL, { KEY_OWN: NOW + 26 }, NOW, 'userKey');
+    expect(ready.anyReady).toBe(true);
+    expect(ready.buttonLabel).toBe('Thử Lại');
+    expect(ready.advice).toContain('"Key nền tảng (key chính)"');
+    expect(ready.advice).not.toContain('Key AI Ưu Tiên');
+
+    const allOut = quotaModalView(
+      USER_POOL,
+      { KEY_OWN: Infinity, KEY_MAIN: Infinity, KEY_SPARE_1: Infinity },
+      NOW,
+      'userKey',
+    );
+    expect(allOut.anyReady).toBe(false);
+    expect(allOut.advice).toContain('kiểm tra lại API Key riêng');
+    expect(allOut.advice).not.toContain('Key AI Ưu Tiên');
+  });
+
+  it('test_userkey_source_with_only_the_own_key_still_counts_down', () => {
+    const v = quotaModalView(['KEY_OWN'], { KEY_OWN: NOW + 3 }, NOW, 'userKey');
+    expect(v.rows).toHaveLength(1);
+    expect(v.advice).toContain('Key hồi sớm nhất là "Key riêng của ngươi"');
+    expect(quotaModalView(['KEY_OWN'], { KEY_OWN: NOW + 3 }, NOW + 3, 'userKey').anyReady).toBe(true);
+  });
 });
