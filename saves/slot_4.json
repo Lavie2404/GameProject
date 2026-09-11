@@ -1,8 +1,8 @@
 {
   "id": "3dacff74-4249-4ea8-a097-c514e95f9812",
-  "currentTurn": 97,
+  "currentTurn": 99,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-11T10:02:00.720Z",
+  "timestamp": "2026-09-11T19:00:44.557Z",
   "gameSettings": {
     "storyTitle": "Tam quốc chí",
     "theme": "Dã sử, Huyền Huyễn, Tu Tiên, Quân sự, Cổ đại, Chiến tranh, Tam quốc",
@@ -126,10 +126,10 @@
     "time": {
       "year": 1,
       "month": 2,
-      "day": 24,
-      "hour": 21
+      "day": 27,
+      "hour": 5
     },
-    "weather": "Đêm thu buốt giá",
+    "weather": "Bình minh tươi sáng",
     "narrativeCombatState": {
       "isActive": false,
       "combatants": []
@@ -399,7 +399,7 @@
         "isPlayer": true,
         "loreId": null,
         "level": 1,
-        "exp": 29.00000000000003,
+        "exp": 29.20000000000003,
         "progressionState": "Tu Luyện Thường",
         "ap": 5,
         "currency": 0,
@@ -584,6 +584,18 @@
             "id": "53b2695f-afca-4339-b6c0-61343a1d797a",
             "quantity": 500,
             "Value": 499995
+          },
+          {
+            "Weight": 1.5,
+            "Name": "Mật Bản Thương Trạm Bưu Điện",
+            "description": "Bản đồ phân bố các tuyến trạm bưu chính và thương đạo bí mật kết nối ba vùng Lạc Dương, Chân Định và Ngô Quận.",
+            "Type": "Tín vật",
+            "Rarity": "Hiếm",
+            "Consumable": true,
+            "Equippable": false,
+            "id": "ed52315b-6013-41ca-89ce-8356bcecb01b",
+            "quantity": 1,
+            "Value": 29999700
           }
         ],
         "pendingSkillsToLearn": [],
@@ -4184,32 +4196,32 @@
         "id": "npc_ton_sach_01",
         "isPlayer": false,
         "loreId": null,
-        "level": 38,
+        "level": 25,
         "exp": 0,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
         "allocatedPoints": {
-          "hp": 107,
-          "atk": 105,
-          "def": 105,
-          "spd": 105
+          "hp": 163,
+          "atk": 158,
+          "def": 158,
+          "spd": 158
         },
         "current_location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
-        "baseHp": 940,
-        "baseAtk": 94,
-        "baseDef": 47,
-        "baseSpd": 67,
+        "baseHp": 680,
+        "baseAtk": 68,
+        "baseDef": 34,
+        "baseSpd": 54,
         "baseCr": 15,
         "baseCdmg": 200,
         "baseDmgAmp": 100,
         "baseDmgRes": 100,
         "baseEvasion": 100,
-        "hp": 22340,
-        "maxhp": 22340,
-        "atk": 1144,
-        "def": 1097,
-        "spd": 1117,
+        "hp": 33280,
+        "maxhp": 33280,
+        "atk": 1648,
+        "def": 1614,
+        "spd": 1634,
         "cr": 15,
         "cdmg": 200,
         "dmgAmp": 100,
@@ -4249,18 +4261,24 @@
         },
         "isCompanion": false,
         "affinity": 15,
-        "description": "Con trưởng của Tôn Kiên, dũng mãnh kiêu hãnh, tự Bá Phù.",
+        "description": "",
         "stance": "Thân thiện",
         "personality": "Hào sảng, dũng cảm",
         "Gender": "Nam",
         "sizeCategory": "2",
         "Name": "Tôn Sách",
         "CourtesyName": "Bá Phù",
-        "realm": "Ngưng Khí",
+        "realm": "Khai Mạch",
         "incomingHealing": 1,
-        "maxExp": 136613,
+        "maxExp": 40500,
         "skills": [],
-        "affinityDirection": "đang ấm lên"
+        "affinityDirection": "đang ấm lên",
+        "Role": "Thiếu chủ Giang Đông, Mãnh Hổ tương lai, tướng quân trẻ tuổi đầy triển vọng",
+        "Appearance": "Một thiếu niên anh tuấn phi phàm, thân hình cao ráo tráng kiện với bờ vai rộng vững chãi. Gương mặt cương nghị, đôi mắt sáng như sao sa tỏa ra khí thế anh dũng kiêu hùng, đôi mày ngài rậm rạp hơi nhếch lên đầy ngạo nghễ. Anh ta mặc chiến giáp nhẹ bằng da thuộc viền đồng đỏ chắc chắn, khoác áo bào đỏ rực như lửa bay khấp phới sau lưng. Tay luôn đặt hờ lên đốc thanh cổ kiếm dắt bên hông, toát ra phong thái của một mãnh tướng bẩm sinh.",
+        "Backstory": "Là con trai trưởng của Giang Đông Mãnh Hổ Tôn Kiên. Ngay từ nhỏ, Tôn Sách đã bộc lộ thiên phú quân sự kiệt xuất và võ nghệ cao cường, sớm theo cha chinh chiến khắp nơi. Hiện tại, một năm trước khi loạn Hoàng Cân bùng nổ, anh ta đang ngấm ngầm rèn luyện binh sĩ, chiêu binh mãi mã ở vùng Giang Đông, nung nấu ý chí tự lập môn hộ, chấn hưng gia tộc và dẹp loạn thiên hạ. Anh ta mang trong mình khát vọng to lớn là thống nhất giang sơn.",
+        "Personality": "Dũng mãnh, kiêu hãnh, trọng tình nghĩa, có chí lớn nhưng đôi khi nóng nảy và quá tự tin vào bản thân.",
+        "Stance": "Có thái độ cởi mở và sảng khoái, đánh giá cao những người có dũng khí, sẵn sàng kết giao bằng hữu nếu người chơi chứng tỏ được bản lĩnh.",
+        "isAppraised": true
       },
       {
         "id": "npc_ton_quyen_01",
@@ -4617,7 +4635,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "a8501365-61e5-4e22-b75d-ad439248d75c",
@@ -4699,7 +4718,8 @@
         "Backstory": "Xuất thân từ thế gia vọng tộc Tuân thị ở Dĩnh Xuyên, từ nhỏ Tuân Úc đã nổi tiếng với trí tuệ thiên bẩm và được mệnh danh là Vương Tá Chi Tài. Nhìn thấu vận nước lung lay, triều đình hủ bại và thiên tai nhân họa sắp giáng xuống, chàng không lựa chọn an dật mà âm thầm ngao du, kết giao hiền tài và nghiên cứu tinh hoa trận pháp cùng thiên văn thuật số. Chàng mang trong mình hoài bão phò tá một vị minh chủ có thể dẹp loạn cứu thế, khôi phục giang sơn thái bình.",
         "Personality": "Điềm tĩnh, thâm trầm, nhìn xa trông rộng và cực kỳ nho nhã. Chàng luôn giữ thái độ khiêm nhường nhưng ẩn chứa sự kiên định không gì lay chuyển nổi. Là người trọng lễ nghĩa, chuộng sạch sẽ và cực kỳ nhạy bén với thời thế.",
         "CourtesyName": "Văn Nhược",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "011415b8-9c8d-4d9d-a03b-30a442af8110",
@@ -4781,7 +4801,8 @@
         "Backstory": "Sinh ra tại quận Nhạn Môn, Trương Liêu từ nhỏ đã quen thuộc với tiếng ngựa hú và lửa đao vùng biên thùy chống quấy nhiễu. Hắn rèn luyện võ nghệ xuất chúng và mưu lược từ sớm, luôn mang tâm nguyện bảo hộ bách tính, bình định thiên hạ.",
         "Personality": "Quả cảm, điềm tĩnh, trượng nghĩa, coi trọng kỷ luật và luôn suy xét đại cuộc.",
         "CourtesyName": "Văn Viễn",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "fa5582d8-6fd7-4215-b88b-8ed08428d3c6",
@@ -4863,7 +4884,8 @@
         "Backstory": "Là con cháu của gia tộc hoạn quan quyền thế, từ nhỏ Tào Tháo đã phải chịu nhiều lời đàm tiếu nhưng cũng nhờ đó mà rèn luyện được ý chí sắt đá. Ông nổi tiếng là kẻ phóng đãng thời trẻ nhưng thực chất lại ôm chí lớn, ngày đêm nghiên cứu binh pháp và kết giao hào kiệt. Nhìn thấy triều đình Đông Hán mục nát, ông thầm tích lũy thế lực để chờ đợi thời cơ cứu thế.",
         "Personality": "Cực kỳ đa nghi, mưu trí vượt trội, quyết đoán và tàn nhẫn khi cần thiết. Ông cũng là người hào sảng, trọng dụng nhân tài không màng xuất thân và rất biết cách thu phục lòng người.",
         "CourtesyName": "Mạnh Đức",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "4542425a-62ea-4b32-9f34-036d651512b9",
@@ -4939,7 +4961,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "8357851c-c3a6-459c-8602-d8c6ea73a4b6",
@@ -5015,7 +5038,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "127fa0e7-1471-495c-9680-df9aabc0e810",
@@ -5091,7 +5115,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "d11290bf-5321-49ca-86e3-36353d7c3e29",
@@ -5176,7 +5201,8 @@
         "Gender": "Nam",
         "titles": [
           "Quỷ Mưu"
-        ]
+        ],
+        "skills": []
       },
       {
         "id": "91b8e1fc-d615-4ab2-9ac4-559b1e62f682",
@@ -5261,7 +5287,8 @@
         "Gender": "Nam",
         "titles": [
           "Phượng Sồ"
-        ]
+        ],
+        "skills": []
       },
       {
         "id": "e0407595-b3d9-47b0-b214-f1806862f095",
@@ -5343,7 +5370,8 @@
         "Backstory": "Xuất thân từ tầng lớp bình dân tại Dĩnh Xuyên, thuở nhỏ Từ Thứ thích múa kiếm hiệp nghĩa. Vì báo thù cho bạn mà ra tay sát hại cường hào, phải bôi vôi đầy mặt để trốn chạy khỏi quan phủ. Sau khi được cứu thoát, hắn quyết định từ bỏ con đường võ phu đơn thuần, đổi tên thành Đơn Phúc để tầm sư học đạo, dốc lòng nghiên cứu binh pháp và học vấn trị quốc.",
         "Personality": "Trọng tình trọng nghĩa, phóng khoáng hiệp khí nhưng cũng rất cẩn trọng và sâu sắc. Hắn căm ghét kẻ ác, hiếu thảo với mẹ già, luôn hành động theo lý tưởng bảo vệ chính nghĩa.",
         "CourtesyName": "Nguyên Trực",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "715c18e4-b4ee-4fa0-892f-c61fe3b5242b",
@@ -5428,7 +5456,8 @@
         "Gender": "Nam",
         "titles": [
           "Nhân Trung Lữ Bố"
-        ]
+        ],
+        "skills": []
       },
       {
         "id": "6aa15207-d971-41c7-bf18-67d9c669ee5f",
@@ -5512,7 +5541,8 @@
         "CourtesyName": "Sơn Quân",
         "titles": [
           "Ác Lai"
-        ]
+        ],
+        "skills": []
       },
       {
         "id": "f94f4769-c6b0-4dc8-85ab-c2890cbbc00d",
@@ -5597,7 +5627,8 @@
         "titles": [
           "Cẩm Mã Siêu"
         ],
-        "affinityDirection": "đang ấm lên"
+        "affinityDirection": "đang ấm lên",
+        "skills": []
       },
       {
         "id": "b9052eac-623f-4a13-9d6d-e57038ee12da",
@@ -5679,7 +5710,8 @@
         "Backstory": "Thái Sử Từ xuất thân tại quận Đông Lai, nổi tiếng là người con hiếu thảo và có tài võ nghệ phi thường, đặc biệt là kỹ năng bắn cung bách phát bách trúng. Thời điểm hiện tại, hắn đang lánh đời ở quê nhà phụng dưỡng mẹ già, đồng thời rèn luyện chí khí để chờ thời cơ ra gánh vác giang sơn.",
         "Personality": "Trọng nghĩa khinh tài, trung hiếu vẹn toàn, coi trọng lời hứa, dũng cảm và thẳng thắn.",
         "CourtesyName": "Tử Nghĩa",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "npc_cam_ninh_01",
@@ -5764,7 +5796,8 @@
         "Backstory": "Cam Ninh thuở trẻ nổi danh là thủ lĩnh của băng thủy tặc Cẩm Y Tặc, chuyên dùng lụa là xa xỉ làm buồm, đi đến đâu tiếng nhạc chuông vang rền đến đó. Sau nhiều năm dọc ngang sông nước, nhận ra kiếp thảo khấu không thể bền lâu và hoài bão lớn lao chưa có đất dụng võ, hắn quyết định quy thuận thế lực chính quy. Gia nhập dưới trướng Chân Định, hắn ôm tham vọng dùng song kích và tài thủy chiến vô song của mình để xoay chuyển cục diện thiên hạ đang buổi lung lay.",
         "Personality": "Tính tình hào sảng, phóng khoáng, cực kỳ kiêu ngạo và hiếu chiến. Hắn vô cùng nóng nảy, ghét sự gò bó của luật lệ cứng nhắc, nhưng lại cực kỳ trọng nghĩa khí và hào phóng với thuộc hạ. Đối với kẻ thù, hắn ra tay tàn nhẫn không chút lưu tình, nhưng với người hắn nể phục, hắn sẵn sàng dốc hết tâm can để phò tá.",
         "Stance": "Hiện tại hắn giữ thái độ vừa trung thành vừa dò xét, sẵn sàng tuân lệnh nhưng vẫn muốn thách thức bản lĩnh lãnh đạo của nhân vật chính để xem người có thực sự xứng đáng với lòng kiêu hãnh của hắn hay không.",
-        "isAppraised": true
+        "isAppraised": true,
+        "skills": []
       },
       {
         "id": "f4a1fd90-c23e-4149-94e2-8e7eb6b122b4",
@@ -5840,7 +5873,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       },
       {
         "id": "npc_ma_van_loc_01",
@@ -5879,7 +5913,60 @@
         "evasion": 0,
         "learnedSkills": [],
         "equippedSkills": {
-          "combat_basic_1": null,
+          "combat_basic_1": {
+            "id": "a95018c1-0579-4378-b56e-d7f69cf6efd2",
+            "skillType": "combat",
+            "Name": "Tật Phong Đột Kích",
+            "description": "Mã Vân Lộc vận dụng linh khí của gió, lướt nhanh về phía trước và tung ra một cú đâm giáo chớp nhoáng, gây sát thương vật lý nhẹ và làm giảm tốc độ di chuyển của mục tiêu trong thời gian ngắn.",
+            "technicaldescription": "Gây sát thương vật lý bằng 120% Tấn Công lên một kẻ địch và giảm 20% Tốc Độ của mục tiêu trong 2 lượt.",
+            "Stats": "",
+            "Rarity": "Thường",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "power_components": [
+                    {
+                      "source_stat": "ATK",
+                      "scale_number": 120,
+                      "based_on": "caster"
+                    }
+                  ],
+                  "visual_effects": {
+                    "vfxType": "strike",
+                    "moveType": "dash",
+                    "color": "#00ffcc"
+                  }
+                }
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "status_to_apply": {
+                    "status_id": "GIAM_TOC",
+                    "status_name": "Giảm Tốc",
+                    "status_type": "debuff"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_down",
+                    "moveType": "stay",
+                    "color": "#00ffcc"
+                  }
+                }
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 200
+          },
           "combat_basic_2": null,
           "combat_basic_3": null,
           "combat_basic_4": null,
@@ -5927,7 +6014,64 @@
         "Stance": "Hiếu kỳ và giữ chút cảnh giác ban đầu, sẵn sàng giao thiệp nếu người chơi thể hiện thái độ đàng hoàng.",
         "CourtesyName": "Vân Anh",
         "isAppraised": true,
-        "inParty": false
+        "inParty": false,
+        "skills": [
+          {
+            "id": "a95018c1-0579-4378-b56e-d7f69cf6efd2",
+            "skillType": "combat",
+            "Name": "Tật Phong Đột Kích",
+            "description": "Mã Vân Lộc vận dụng linh khí của gió, lướt nhanh về phía trước và tung ra một cú đâm giáo chớp nhoáng, gây sát thương vật lý nhẹ và làm giảm tốc độ di chuyển của mục tiêu trong thời gian ngắn.",
+            "technicaldescription": "Gây sát thương vật lý bằng 120% Tấn Công lên một kẻ địch và giảm 20% Tốc Độ của mục tiêu trong 2 lượt.",
+            "Stats": "",
+            "Rarity": "Thường",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "power_components": [
+                    {
+                      "source_stat": "ATK",
+                      "scale_number": 120,
+                      "based_on": "caster"
+                    }
+                  ],
+                  "visual_effects": {
+                    "vfxType": "strike",
+                    "moveType": "dash",
+                    "color": "#00ffcc"
+                  }
+                }
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "status_to_apply": {
+                    "status_id": "GIAM_TOC",
+                    "status_name": "Giảm Tốc",
+                    "status_type": "debuff"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_down",
+                    "moveType": "stay",
+                    "color": "#00ffcc"
+                  }
+                }
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 200
+          }
+        ],
+        "isCompanionSetupDone": true
       },
       {
         "id": "c1de057b-8fd5-43f1-8e0c-b5f3ebf75a5e",
@@ -6003,7 +6147,8 @@
         "Stance": "Trung lập",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": []
       }
     ],
     "sharedCooldowns": {
@@ -6023,15 +6168,15 @@
           "turn": 62
         }
       ],
-      "lastExpResolvedTurn": 96
+      "lastExpResolvedTurn": 98
     },
     "loreQuests": [],
     "pendingCreations": [],
     "deathState": {},
     "isDeathTurn": false,
     "lastLockedResult": {
-      "turn_id": 96,
-      "world_time": 96,
+      "turn_id": 98,
+      "world_time": 98,
       "is_death_turn": false,
       "in_combat": false,
       "battle_active": false,
@@ -6050,16 +6195,16 @@
           "year": 1,
           "month": 2,
           "day": 24,
-          "hour": 18
+          "hour": 21
         },
-        "location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
-        "weather": "Gió thu buốt giá",
+        "location_id": "6dcae545-d922-4917-b228-5a62ad8a5245",
+        "weather": "Đêm thu buốt giá",
         "characters": [
           {
             "id": "player",
             "Name": "Diệp Thần",
             "level": 1,
-            "exp": 28.800000000000026,
+            "exp": 29.00000000000003,
             "hp": 2000,
             "maxhp": 2000,
             "currency": 0,
@@ -6426,10 +6571,10 @@
           {
             "id": "npc_ton_sach_01",
             "Name": "Tôn Sách",
-            "level": 38,
+            "level": 25,
             "exp": 0,
-            "hp": 22340,
-            "maxhp": 22340,
+            "hp": 33280,
+            "maxhp": 33280,
             "currency": 0,
             "inventory": [],
             "longTermStatuses": []
@@ -6639,6 +6784,17 @@
             "exp": 0,
             "hp": 30020,
             "maxhp": 30020,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c1de057b-8fd5-43f1-8e0c-b5f3ebf75a5e",
+            "Name": "Cao Thuận",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
             "currency": 0,
             "inventory": [],
             "longTermStatuses": []
@@ -6660,7 +6816,7 @@
             "id": "player",
             "Name": "Diệp Thần",
             "level": 1,
-            "exp": 28.900000000000027,
+            "exp": 29.10000000000003,
             "hp": 2000,
             "maxhp": 2000,
             "currency": 0,
@@ -6668,6 +6824,10 @@
               {
                 "Name": "Lương Thảo Quân Dụng",
                 "quantity": 500
+              },
+              {
+                "Name": "Mật Bản Thương Trạm Bưu Điện",
+                "quantity": 1
               }
             ],
             "longTermStatuses": []
@@ -7027,10 +7187,10 @@
           {
             "id": "npc_ton_sach_01",
             "Name": "Tôn Sách",
-            "level": 38,
+            "level": 25,
             "exp": 0,
-            "hp": 22340,
-            "maxhp": 22340,
+            "hp": 33280,
+            "maxhp": 33280,
             "currency": 0,
             "inventory": [],
             "longTermStatuses": []
@@ -7240,6 +7400,17 @@
             "exp": 0,
             "hp": 30020,
             "maxhp": 30020,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c1de057b-8fd5-43f1-8e0c-b5f3ebf75a5e",
+            "Name": "Cao Thuận",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
             "currency": 0,
             "inventory": [],
             "longTermStatuses": []
@@ -14241,13 +14412,174 @@
           "content": "*Diệp Thần* nhấp một ngụm trà Long Tĩnh thanh ngọt, ánh mắt sắc bén nhìn ra khoảng trời đêm bao la ngoài Phủ Thái thú *Lạc Dương*. Sự phân công quân sự diễn ra trơn tru, hậu phương *Chân Định* được giao cho *Triệu Vân* và *Từ Thứ* trấn giữ kiên cố, *Lạc Dương* ngày càng phồn vinh thái bình dưới sự cai trị anh minh của hắn, còn dàn dũng tướng và mưu sĩ dưới trướng thì trung thành tuyệt đối. \nToàn bộ bàn cờ Tam Quốc đã hoàn toàn nằm trong tầm tay kiểm soát của vị *Bình Tây Tướng Quân* anh tuấn phi thường. Hắn thắt chặt đai lưng dát đồng, giắt chiếc lệnh bài *Bình Tây Tướng Quân* sáng lấp lóa bên hông, sẵn sàng chờ đón chuyến di giá của các vị phu nhân và bước đi chiến lược mới.\nBạn đang đứng ở chính điện *Phủ Thái thú Lạc Dương* cùng ba vị mưu sĩ *Quách Gia*, *Bàng Thống*, bốn vị nương tử *Triệu Vũ*, *Công Tôn Bảo Nguyệt*, *Tôn Thượng Hương*, *Mã Vân Lộc* và các dũng tướng. Đội hộ tống của *Triệu Vân*, *Điển Vi*, *Thái Sử Từ*, *Từ Thứ* và *Cao Thuận* đã cấp tốc khởi hành trở về *Chân Định* để đưa các phu nhân cùng hai vị nhạc phụ di giá đến *Lạc Dương*. Bạn sẽ lựa chọn bước đi chiến lược tiếp theo ra sao?"
         }
       ]
+    },
+    {
+      "id": "7e7c9477-1ab3-4569-b02a-142cf1c3dae2",
+      "type": "user_choice",
+      "content": "Cùng Quách Gia và Bàng Thống hoạch định kế sách mở rộng mạng lưới thương trạm bưu điện nối liền Lạc Dương - Chân Định - Ngô Quận để kiểm soát hoàn toàn thông thương và mật tin toàn quốc. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Tăng cường tối đa tiềm lực kinh tế và thông tin tình báo chiến lược}"
+    },
+    {
+      "id": "1165eacf-cba9-41c3-a5a2-3801d5fb80c3",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Ánh nến tía lập lòe từ chiếc lư đồng cổ kính hắt bóng ba thân ảnh đang chụm đầu bên bàn án gỗ gụ lớn của thư phòng *Phủ Thái thú Lạc Dương*. Tiếng gió thu rít qua khe cửa gỗ phát ra những âm thanh rờn rợn, mang theo cái lạnh buốt giá thấu xương cốt của đêm thu chín giờ tối tại kinh kỳ hoang phế. Ngươi (*Diệp Thần*) chỉ ngón tay rắn rỏi lên tấm da dê vẽ bản đồ ba vùng trọng điểm, cất giọng trầm ấm dõng dạc:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Phụng Hiếu, Sĩ Nguyên! Hãy nhìn kỹ ba điểm Lạc Dương, Chân Định và Ngô Quận này. Ta muốn các ngươi cùng ta vạch ra một mạng lưới thương trạm bưu điện nối liền ba nơi này để kiểm soát hoàn toàn thông thương và mật tin toàn quốc."
+        },
+        {
+          "type": "narrative",
+          "content": "*Quách Gia* khẽ nhấp một ngụm rượu nếp thơm nồng, đôi mắt sáng như sao đêm bộc phát luồng tuệ nhãn nhìn thấu báu vật thời thế. Hắn khẽ gật đầu, đặt nhẹ bầu rượu xuống bàn án gụ phát ra tiếng \"cạch\" thanh tao, cất giọng trầm ấm nhưng đầy quỷ mưu vạn biến:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Quách Gia",
+          "content": "Chủ công mưu lược thâm sâu! Ba điểm này tạo thành một thế chân vạc ngầm hoàn hảo. Chân Định ở phía Bắc là gốc rễ của quân ta, Ngô Quận ở phía Nam là lãnh thổ của đồng minh Tôn gia, còn Lạc Dương là trung tâm khí vận của đại lục. Nếu chúng ta thiết lập được các thương trạm bưu chính bí mật kết nối ba vùng này, không chỉ vận chuyển thư tín thần tốc mà còn có thể che mắt tai mắt của các chư hầu khác, nắm giữ huyết mạch thông thương ngầm trên toàn quốc."
+        },
+        {
+          "type": "narrative",
+          "content": "*Bàng Thống* vóc dáng nhỏ bé khoác áo bào màu xám tro, đôi mắt rực sáng trí tuệ vô biên cũng gật đầu gù gù tán thưởng sâu sắc. Hắn vươn ngón tay gầy guộc chỉ vào các đường đèo hiểm trở nối liền ba vùng, cười khẩy đầy đĩnh đạc bổ sung:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Bàng Thống",
+          "content": "Đúng vậy! Kế sách này của chủ công thật diệu a! Để mạng lưới này vận hành trơn tru mà không làm dấy lên sự nghi ngờ của đám người Viên, Tào, chúng ta phải cải trang các bưu trạm dưới danh nghĩa các tiêu cục dã chiến, tửu điếm sầm uất hoặc các hiệu buôn tơ lụa lớn. Những thương nhân qua lại sẽ là chiếc vỏ bọc hoàn hảo nhất. Tiền kiếm được từ việc thông thương tơ lụa, chè thơm sẽ tự nuôi sống hệ thống này, biến nó thành một bộ máy tình báo tự vận hành vĩ đại, mang lại cho chúng ta thế thượng phong tuyệt đối!"
+        },
+        {
+          "type": "narrative",
+          "content": "Nghe hai vị quân sư kiệt xuất dâng lời mưu lược thấu triệt, lòng ngươi trào dâng một luồng sinh lực cùng sự viên mãn tột cùng. Ngươi không ngần ngại nhấc bút lông, vận chuyển khí huyết lưu thông toàn thân, tự tay vẽ nên những đường nét thanh thoát, uốn lượn biểu thị các tuyến thương đạo và trạm bưu chính ngầm lên một cuộn lụa nguyệt bạch nguy nga. Từng nét vẽ dứt khoát, chuẩn xác đi qua các địa danh hiểm yếu, kết nối hoàn hảo ba trọng điểm *Lạc Dương*, *Chân Định* và *Ngô Quận*. \nCuộc thảo luận mật thiết diễn ra vô cùng suôn sẻ và tràn đầy sự đồng thuận tuyệt đối. Khi nét mực cuối cùng khô ráo trên mặt lụa, một kiệt tác mưu lược quân sự đã chính thức hoàn thành. Bản đồ này sẽ là chìa khóa vạn năng giúp ngươi nắm giữ huyết mạch thông thương, kiểm soát hoàn toàn mật tin tình báo toàn quốc và thiết lập thế thượng phong tuyệt đối trước mọi chư hầu cát cứ. Ngươi cẩn thận cuộn bức mật đồ lại, cất vào trong nếp áo bào bạch y thơm phức hương mẫu đơn.\nSự phối hợp trí tuệ đỉnh cao giữa ngươi và hai vị đại mưu sĩ đã đặt những viên gạch vững chắc đầu tiên cho mạng lưới tình báo vĩ đại nhất dã sử.\nĐúng lúc cuộc thảo luận mật thiết vừa khép lại viên mãn, tiếng bước chân khẽ khàng nhưng nhịp nhàng bỗng vang lên từ phía hành lang gỗ sơn son ngoài thư phòng. Cánh cửa gỗ đàn hương dày dặn từ từ được đẩy ra hai bên. Một luồng hương thơm ngạt ngào của hoa mộc tê quyện cùng mùi sâm gừng ấm áp lập tức tràn vào mật thất, xua tan hoàn toàn cái lạnh buốt giá của đêm thu *Lạc Dương*.\nBốn vị nương tử xinh đẹp tuyệt trần đi theo sát cánh bên ngươi là *Triệu Vũ*, *Công Tôn Bảo Nguyệt*, *Tôn Thượng Hương* và tân nương tử *Mã Vân Lộc* dịu dàng sải những bước chân uyển chuyển tiến vào bên trong. \n*Tôn Thượng Hương* khoác chiếc áo choàng bằng lụa màu hồng thắm tươi tắn, hai tay bưng khay trà Long Tĩnh nóng hổi bốc khói nghi ngút cùng vài đĩa bánh mứt nhẹ đặt lên bàn án gỗ gụ. Đôi gò má dẻ hồng hào mịn màng của thiếu nữ Giang Đông đỏ rực lên như rặng mây chiều xuân vì thẹn thùng đầy ngọt ngào. Nàng khẽ vén tà áo, đôi mắt phượng to tròn đong đầy nhu tình sâu thẳm nhìn ngươi, cất giọng lanh lót nhưng chứa đựng sự nũng nịu e ấp:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Phu quân vất vả rồi... Đêm thu Lạc Dương gió lạnh cắt da thịt, thiếp và các tỷ tỷ đã nấu sẵn ấm trà sâm gừng này dâng lên phu quân và hai vị quân sư bồi bổ sinh khí. Mong chàng đừng quá lao lực vì đại cục..."
+        },
+        {
+          "type": "narrative",
+          "content": "*Mã Vân Lộc* mặc bộ thường phục bằng lụa mỏng màu nguyệt bạch thanh nhã, mái tóc đen tuyền buộc cao gọn gàng. Nàng nhẹ nhàng tiến lại gần sau lưng ngươi, vươn đôi bàn tay thon dài mềm mại khoác thêm chiếc áo choàng lông cừu ấm áp lên bờ vai rộng rắn rỏi của ngươi. Dung nhan thanh tú tuyệt luân của thiếu nữ Tây Lương rạng rỡ hạnh phúc, nàng khẽ tựa sát vào vai ngươi, thầm thì đầy sự kính phục khôn cùng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Mã Vân Lộc",
+          "content": "Phu quân, thiếp vừa nghe huynh trưởng nói lại kế sách thương trạm bưu điện của chàng. Trí mưu và tầm nhìn của chàng quả thực vượt xa tầm mắt của đám chư hầu ích kỷ ngoài kia. Được phò tá bên cạnh một vị vương giả anh minh như chàng, thiếp thấy vô cùng tự hào..."
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vũ* diện bộ giáp nhẹ viền bạc gọn gàng năng động, tay ôm ngọn ngân thương khảm lam ngọc tỏa ra khí thái dũng mãnh dã sử. Nàng nhón đôi chân ngọc uốn mình tiến lại gần, gò má dẻ hồng hào mịn màng rực sáng dũng khí sa trường, nụ cười tươi tắn nở trên môi:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vũ",
+          "content": "Phu quân! Muội và Bảo Nguyệt tỷ tỷ vừa dẫn kỵ binh đi tuần tra một vòng quanh bốn cổng thành Lạc Dương về. Bách tính khắp nơi đều đang hoan hỉ sửa sang nhà cửa dã chiến, tình hình trị an vô cùng yên bình, không một tên tàn phỉ nào dám bén mảng quấy nhiễu đâu!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Công Tôn Bảo Nguyệt* khoác áo choàng hồng y rực rỡ như ngọn lửa đêm xuân, vỗ nhẹ vào đốc trường đao bên hông, ánh mắt phượng rực sáng chí khí kiêu hãnh ủng hộ phu quân đầy hạnh phúc:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Công Tôn Bảo Nguyệt",
+          "content": "Đúng vậy phu quân. Kỵ binh Bạch Mã Nghĩa Tòng của thiếp đã được rèn luyện trọn vẹn phòng tuyến ngoại ô. Chàng chỉ cần tĩnh tâm lo liệu việc xây dựng mạng lưới bưu trạm này, thiếp và các muội muội nguyện làm thanh đao sa trường vững chắc nhất phò tá phu quân làm chủ thiên hạ!"
+        },
+        {
+          "type": "narrative",
+          "content": "Ngắm nhìn bốn vị nương tử dũng cảm, thông tuệ và đong đầy tình cảm bao dung dành cho mình, lồng ngực ngươi dâng lên một luồng sinh lực cùng sự ấm áp dạt dào tột đỉnh. Ngươi phá lên cười ha hả đầy hào sảng, vươn hai cánh tay rắn rỏi kéo cả bốn nàng vào lòng, đặt lên trán mỗi người một nụ hôn nồng nàn tràn đầy sự chở che giữa đêm thu buốt giá. Tình cảm khăng khít và sự gắn kết tuyệt đối của các nương tử sưởi ấm tâm hồn ngươi, giúp thể trạng của ngươi hoàn toàn phục hồi sung mãn tuyệt đối.\n*Quách Gia* và *Bàng Thống* thấy cảnh tượng hòa hợp ngọt ngào của gia đình ngươi liền khẽ mỉm cười nâng chén trà sâm bồi bổ, trong lòng càng thêm kính phục phong thái phong lưu và dũng khí vô song của vị chủ soái trẻ tuổi.\nHiện tại, kế sách mạng lưới *Mật Bản Thương Trạm Bưu Điện* đã được hoạch định hoàn hảo, lòng dân *Lạc Dương* quy phục tuyệt đối, mười tám lộ chư hầu đã tan rã dời đi, và bốn vị nương tử dũng cảm cùng các mưu sĩ luôn sẵn sàng phò tá bên hông ngươi. Bàn cờ thiên hạ Tam Quốc đã hoàn toàn nằm gọn trong tầm tay kiểm soát của vị *Bình Tây Tướng Quân* anh tuấn phi thường.\nNgươi đứng trong thư phòng ấm áp cùng các mưu sĩ và bốn vị nương tử xinh đẹp tuyệt sắc, cuộn mật đồ đang giắt chặt bên hông. Bạn sẽ lựa chọn bước đi chiến lược tiếp theo ra sao?"
+        }
+      ]
+    },
+    {
+      "id": "fc56743e-6faa-49a9-8496-e5230527fc45",
+      "type": "user_choice",
+      "content": "Triển khai ngay lập tức giai đoạn một của kế sách, sai kỵ binh tinh nhuệ mang mật bản bưu điện thương trạm về Chân Định để Triệu Vân và Từ Thứ lập tức khởi công thiết lập các bưu trạm phía Bắc. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Kích hoạt nhanh chóng mạng lưới tình báo Chân Định và gia tăng tốc độ truyền tin toàn quốc}"
+    },
+    {
+      "id": "361ac37c-848a-419c-b4b4-0ad54bed5a39",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Giữa không gian thâm trầm của thư phòng bên trong *Phủ Thái thú Lạc Dương*, ngọn đèn bấc tía hắt ra luồng ánh sáng vàng cam nồng nàn, chiếu rọi lên cuộn lụa nguyệt bạch chứa vẽ bức mật đồ *Mật Bản Thương Trạm Bưu Điện*. *Diệp Thần* đứng sừng sững bên bàn án gỗ gụ quý giá, tà áo bào màu bạch y rủ xuống mềm mại thắt đai lưng dát đồng oai phong. Hắn cẩn thận đóng triện ấn *Bình Tây Tướng Quân* lên nếp phong sáp đỏ, rồi giao cuộn mật thư cho vị chỉ hữu kỵ binh thám báo tinh nhuệ nhất, cất giọng dõng dạc, uy nghiêm chấn động cả mật thất:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Các ngươi lập tức mang *Mật Bản Thương Trạm Bưu Điện* này phi ngựa thần tốc suốt đêm ngày về hướng Bắc, bàn giao tận tay cho Tử Long và Nguyên Trực tại thành Chân Định. Truyền lệnh của ta: Lập tức khởi công thiết lập các bưu trạm phía Bắc để kích hoạt mạng lưới tình báo và chuẩn bị sẵn sàng cho cuộc di giá của các phu nhân cùng hai vị nhạc phụ!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tướng Lĩnh Thám Báo",
+          "content": "Mạt tướng thề chết hoàn thành quân lệnh!"
+        },
+        {
+          "type": "narrative",
+          "content": "Vị kỵ binh chắp tay nhận lệnh, lập tức quay người hối hả sải bước ra khỏi phủ đệ. Chỉ trong vài nhịp thở, tiếng móng ngựa gõ dồn dập \"cập rập, cập rập\" vang lên rung chuyển đêm thâu. Toán kỵ binh tinh nhuệ mang theo *Mật Bản Thương Trạm Bưu Điện* lập tức rời *Lạc Dương*, phi ngựa thần tốc suốt đêm ngày về hướng Bắc. Bọn họ vượt qua các con đường quan lộ gồ ghề thuộc quận *Hà Nội*, lẩn khuất qua dải núi *Thái Hành Sơn* trập trùng dưới ánh trăng mờ nhạt và những dải sương thu buốt giá.\nBốn guốc sắt nện xuống mặt đá bắn ra những tia lửa sáng rực, các trạm relay đổi ngựa dã chiến liên tục vận hành trơn tru. Chỉ sau hai ngày đêm phi nước đại không nghỉ, hình bóng tường thành đá đồ sộ của *Chân Định Thành* đã hiện ra dưới ánh bình minh vàng óng. Toán kỵ binh lao thẳng qua cổng thành phía Tây, tiến thẳng vào Soái Đường trung quân dâng mật bản cho phó tướng *Triệu Vân* và mưu sĩ *Từ Thứ*.\nTại Soái Đường thành *Chân Định*, *Triệu Vân* khoác bộ ngân giáp giát bạc chính trực, cùng *Từ Thứ* tà áo nho nhã vội vã mở nếp phong sáp đỏ, trải bức *Mật Bản Thương Trạm Bưu Điện* lên bàn án. Bức mật đồ thể hiện vô cùng chi tiết các tuyến thương đạo ngầm, trạm bưu chính và các điểm đặt tai mắt liên kết ba vùng *Lạc Dương*, *Chân Định* và *Ngô Quận*. \n*Từ Thứ* vuốt chòm râu ngắn, đôi mắt rực sáng trí tuệ thâm sâu, phá lên cười khen ngợi:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Từ Thứ",
+          "content": "Chủ công mưu lược quả nhiên thần kỳ! Bản mật đồ này phân định vô cùng tỉ mỉ các tuyến đường ngầm và trạm bưu chính liên kết ba vùng. Tử Long huynh, chúng ta phải lập tức khởi công thiết lập các bưu trạm phía Bắc ngay đợt này!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vân* siết chặt ngọn ngân thương, gật đầu quyết liệt đáp lời:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vân",
+          "content": "Nguyên Trực nói rất đúng! Mạng lưới tình báo phía Bắc này không chỉ gia tăng tốc độ truyền tin toàn quốc mà còn giúp chúng ta bảo đảm an toàn tuyệt đối cho cuộc di giá của các phu nhân cùng hai vị nhạc phụ về Lạc Dương. Ta lập tức điều động Hãm Trận Doanh và thợ tinh nhuệ khởi công!"
+        },
+        {
+          "type": "narrative",
+          "content": "Nhận được mật bản và quân lệnh của chủ soái, *Triệu Vân* cùng *Từ Thứ* lập tức khởi công thiết lập mạng lưới bưu trạm phía Bắc, giúp kết nối thông tin tình báo và chuẩn bị sẵn sàng cho sự di chuyển của các phu nhân cùng hai vị nhạc phụ. Hàng trăm thợ đá, thương nhân dã chiến và kỵ binh thám báo dưới sự dẫn dắt của *Từ Thứ* tỏa đi khắp các ngả đường *Ký Châu*, cải trang các bưu trạm dưới hình thức các tửu điếm sầm uất, tiệm trà và tiêu cục vận chuyển tơ lụa. \nTại khuê viện *Hạ Hầu Khinh Y Các* bên trong *Hạ Hầu Phủ*, sáu vị nương tử gồm *Thái Diễm*, *Hạ Hầu Khinh Y*, *Điêu Thuyền*, *Chân Cơ*, *Kiều Dao* và *Kiều Sương* cùng hai vị nhạc phụ *Thái Ung*, *Hạ Hầu Kiệt* khi nhận được tin tức mạng lưới bưu trạm phía Bắc đang được *Triệu Vân* khẩn trương hoàn thiện liền mừng rỡ tột cùng. Mọi công tác thu xếp hành lý, xe gấm và lực lượng hộ tống di giá về *Lạc Dương* được chuẩn bị vô cùng chu đáo, kiên cố như pháo đài thép.\nTrong khi đó, tại *Phủ Thái thú Lạc Dương*, ánh bình minh tươi sáng xua tan hoàn toàn lớp sương mù buốt giá rủ xuống các dãy hành lang gỗ sơn son. *Diệp Thần* đứng trên đài quan sát chính của phủ đệ, thân khoác bộ ngân giáp giát bạc sáng quắc, hông giắt thanh thần binh *Ỷ Thiên Kiếm* lẫm liệt. Sóng hàng bên hắn là hai vị đại mưu sĩ *Quách Gia*, *Bàng Thống* cùng bốn vị nương tử dũng cảm *Triệu Vũ*, *Công Tôn Bảo Nguyệt*, *Tôn Thượng Hương* và *Mã Vân Lộc*.\n\"Phạch! Phạch! Phạch!\"\nMột con bồ câu đưa tin mang dải lụa đỏ từ hướng Bắc chao lượn trên không trung rồi hạ cánh xuống tay *Quách Gia*. vị quân sư khoác áo xanh trúc thong thả gỡ ống trúc, mở mật thư ra đọc, khóe môi nhếch lên nụ cười lười biếng nhưng đong đầy sự thán phục tột cùng. Hắn bước lại gần *Diệp Thần*, chắp hai tay dâng báo:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Quách Gia",
+          "content": "Khởi bẩm chủ công! Mật báo từ Chân Định vừa gửi về theo tuyến bưu trạm dã chiến đầu tiên! Tử Long và Nguyên Trực đã hoàn thành giai đoạn một, thiết lập xong năm bưu trạm trọng điểm phía Bắc. Tốc độ truyền mật tin giữa Chân Định và Lạc Dương nay đã nhanh gấp ba lần trước đây! Mọi chuẩn bị cho đoàn di giá của các phu nhân và hai vị nhạc phụ đã hoàn tất chỉnh tề, sẵn sàng xuất phát!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Bàng Thống* vóc dáng nhỏ bé khoác áo bào màu xám tro cũng gật đầu gù gù tán thưởng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Bàng Thống",
+          "content": "Tuyệt diệu! Mạng lưới bưu trạm kết nối Lạc Dương - Chân Định - Ngô Quận nay đã chính thức kích hoạt. Tiềm lực kinh tế từ thông thương tơ lụa và tốc độ nắm giữ tình báo toàn quốc của quân ta nay đã đứng đầu thiên hạ. Đám chư hầu mười tám lộ ngoài kia dẫu có chia rẽ hay âm mưu gì cũng hoàn toàn nằm trong lòng bàn tay chủ công!"
+        },
+        {
+          "type": "narrative",
+          "content": "Nghe tin báo thành công rực rỡ từ hậu phương *Chân Định*, lồng ngực *Diệp Thần* trào dâng một luồng sinh lực cùng sự viên mãn tột cùng. Hắn mỉm cười dịu dàng, quay sang ôm trọn bốn vị nương tử bên cạnh vào lòng. \n*Mã Vân Lộc* e ấp tựa sát vào bờ ngực vạm vỡ của hắn, đôi mắt phượng đẹp đẽ đong đầy nhu tình ngọt ngào:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Mã Vân Lộc",
+          "content": "Phu quân mưu lược thần kỳ vô song! Mạng lưới bưu trạm này kích hoạt không chỉ giúp tin tức thông suốt mà các tỷ tỷ từ Chân Định di giá đến đây cũng sẽ được bảo vệ an toàn tuyệt đối. Thiếp thấy hạnh phúc lắm khi được phò tá bên cạnh phu quân..."
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Thượng Hương* khoác chiếc áo choàng màu hồng thắm tươi tắn, đôi gò má e ấp nũng nịu rúc vào lòng hắn:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Đúng đó phu quân! Tin tức từ Ngô Quận ca ca gửi về cũng xác nhận các bưu trạm phía Nam đang được triển khai trơn tru. Phu quân của chúng ta là giỏi nhất thiên hạ rồi!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vũ* và *Công Tôn Bảo Nguyệt* cũng tươi cười rạng rỡ, hai nữ tướng tay ôm ngân thương và trường đao, khí thái sa trường hòa quyện cùng tình cảm gia đình thắm thiết sưởi ấm cả gian chính điện.\n*Diệp Thần* đặt lên trán mỗi nương tử một nụ hôn nồng nàn chở che, rồi thong thả bước lại gần bàn án sa bàn. Kinh thành *Lạc Dương* đang ngày càng hồi sinh phồn vinh dưới sự cai trị anh minh của hắn, bách tính quy phục tuyệt đối, mạng lưới bưu trạm tình báo toàn quốc đã kích hoạt hoàn hảo, và đại gia đình sắp sửa đoàn tụ đông đủ. Bàn cờ thiên hạ Tam Quốc đã hoàn toàn nằm gọn trong tầm tay kiểm soát của vị *Bình Tây Tướng Quân* anh tuấn phi thường.\nBạn đang đứng ở vị trí chủ tọa trong Phủ Thái thú *Lạc Dương* cùng các mưu sĩ và bốn vị nương tử xinh đẹp, mạng lưới bưu trạm phía Bắc đã kích hoạt thành công, thông tin tình báo thông suốt toàn quốc. Bạn sẽ lựa chọn bước đi chiến lược tiếp theo ra sao?"
+        }
+      ]
     }
   ],
   "choices": [
-    "Đích thân dẫn theo kỵ binh ra tận bến đèo ngoại ô Lạc Dương kiểm tra trạm gác và chỉ đạo việc chuẩn bị nghi lễ xa giá tráng lệ đón chào các phu nhân cùng hai vị nhạc phụ. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Gia tăng tối đa sự kính trọng của quân dân Lạc Dương và tình cảm gắn kết gia đình}",
-    "Cùng Quách Gia và Bàng Thống hoạch định kế sách mở rộng mạng lưới thương trạm bưu điện nối liền Lạc Dương - Chân Định - Ngô Quận để kiểm soát hoàn toàn thông thương và mật tin toàn quốc. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Tăng cường tối đa tiềm lực kinh tế và thông tin tình báo chiến lược}",
-    "Dành thời gian trên diễn võ trường Phủ Thái thú trực tiếp rèn luyện tiễn pháp cho Tôn Thượng Hương và truyền dạy kỹ xảo thương pháp cho Mã Vân Lộc. {Tỷ lệ thành công: 92%, Hậu quả/Phần thưởng: Tăng cường mạnh mẽ võ nghệ của hai nương tử và đong đầy tình cảm tình ái nồng nàn}",
-    "Cử thám báo mật gài cắm vào khu vực Trường An để theo dõi sát sao mọi động thái của Đổng Trác, Lữ Bố và triều đình Hán Hiệp Đế. {Tỷ lệ thành công: 88%, Hậu quả/Phần thưởng: Nắm bắt sớm các biến động nội bộ của phe Tây Lương để chủ động đưa ra phương án đối phó}"
+    "Đích thân dẫn một toán kỵ binh tinh nhuệ ra khỏi cửa thành Lạc Dương tiến về phía Bắc để đón chào và bảo vệ đoàn xe di giá của sáu vị phu nhân cùng hai vị nhạc phụ. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Đảm bảo tuyệt đối an toàn cho gia quyến và gia tăng tối đa tình cảm gắn kết gia đình}",
+    "Cùng Quách Gia và Bàng Thống tập trung chỉ đạo công cuộc tái thiết nội thành Lạc Dương, xây dựng thêm các kho lương và chợ xá sầm uất để chuẩn bị đón tiếp đại gia đình. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Gia tăng mạnh mẽ tiềm lực kinh tế và độ trung thành tuyệt đối của bách tính kinh kỳ}",
+    "Sai Mã Siêu, Triệu Vũ và Công Tôn Bảo Nguyệt tổ chức một đợt duyệt binh quy mô lớn tại diễn võ trường Lạc Dương để phô phang sức mạnh quân sự và rèn luyện sĩ khí năm vạn tinh binh. {Tỷ lệ thành công: 92%, Hậu quả/Phần thưởng: Rèn luyện khả năng phối hợp tác chiến và gia tăng uy danh chấn động các châu quận xung quanh}",
+    "Sai các toán kỵ binh thám báo nòng nỗ từ mạng lưới bưu trạm mới lập tức thâm nhập về hướng Tây Quan hướng về Trường An để theo dõi chặt chẽ động thái của Đổng Trác và Lữ Bố. {Tỷ lệ thành công: 88%, Hậu quả/Phần thưởng: Nắm bắt sớm các âm mưu quân sự của phe Tây Lương và giữ vững thế chủ động chiến lược}"
   ],
   "gameMode": "EXPLORATION",
   "activeTrade": {
@@ -14275,5 +14607,5 @@
       "endTurn": 41
     }
   ],
-  "adventureTurnCount": 96
+  "adventureTurnCount": 98
 }
