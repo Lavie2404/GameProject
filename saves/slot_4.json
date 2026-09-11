@@ -1,8 +1,8 @@
 {
   "id": "3dacff74-4249-4ea8-a097-c514e95f9812",
-  "currentTurn": 69,
+  "currentTurn": 72,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-11T01:50:59.776Z",
+  "timestamp": "2026-09-11T04:38:46.084Z",
   "gameSettings": {
     "storyTitle": "Tam quốc chí",
     "theme": "Dã sử, Huyền Huyễn, Tu Tiên, Quân sự, Cổ đại, Chiến tranh, Tam quốc",
@@ -127,7 +127,7 @@
       "year": 1,
       "month": 2,
       "day": 20,
-      "hour": 5
+      "hour": 17
     },
     "weather": "Nắng ban mai",
     "narrativeCombatState": {
@@ -231,6 +231,13 @@
       {
         "id": "4b93c497-d14a-4983-b249-4591386a7129",
         "Name": "Hoàn Thành",
+        "description": "Một địa điểm vừa được khám phá.",
+        "category": "Khu Vực",
+        "tier": 3
+      },
+      {
+        "id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
+        "Name": "Ngô Quận",
         "description": "Một địa điểm vừa được khám phá.",
         "category": "Khu Vực",
         "tier": 3
@@ -348,7 +355,7 @@
         "isPlayer": true,
         "loreId": null,
         "level": 1,
-        "exp": 26.699999999999996,
+        "exp": 26.799999999999997,
         "progressionState": "Tu Luyện Thường",
         "ap": 5,
         "currency": 0,
@@ -358,7 +365,7 @@
           "def": 0,
           "spd": 0
         },
-        "current_location_id": "4b93c497-d14a-4983-b249-4591386a7129",
+        "current_location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
         "baseHp": 2000,
         "baseAtk": 200,
         "baseDef": 100,
@@ -3444,17 +3451,24 @@
           "Dị thường": null
         },
         "isCompanion": false,
-        "affinity": 0,
-        "description": "Ái nữ nhà Kiều gia ở Hoàn Thành, dung nhan diễm lệ, am tường âm luật.",
+        "affinity": 15,
+        "description": "",
         "stance": "Hảo cảm",
         "Gender": "Nữ",
         "sizeCategory": "1",
         "Name": "Đại Kiều",
-        "CourtesyName": "Kiều Dao",
+        "CourtesyName": "Uyển Âm",
         "inParty": false,
         "maxExp": 1118,
         "realm": "Phàm Nhân",
-        "incomingHealing": 1
+        "incomingHealing": 1,
+        "skills": [],
+        "Role": "Trưởng nữ Kiều gia, Khuê tú thông tuệ âm luật",
+        "Appearance": "Mái tóc đen dài mượt như suối, khuôn mặt trái xoan thanh tú cùng đôi mắt trong veo như nước hồ thu. Nàng khoác trên mình bộ váy lụa màu hồng nhạt thêu hoa mẫu đơn tinh xảo, vóc dáng uyển chuyển, toát lên vẻ đài các, dịu dàng và u nhã.",
+        "Backstory": "Là đại tiểu thư nhà Kiều gia ở Hoàn Thành, nổi tiếng khắp vùng bởi dung nhan tuyệt mỹ và tiếng đàn tỳ bà sâu lắng. Tuy sống trong chốn trướng rủ mành che nhưng nàng luôn trăn trở về thời thế nhiễu loạn và khao khát tìm được một người tri âm có thể thấu hiểu tiếng lòng qua điệu đàn.",
+        "Personality": "Dịu dàng, nhã nhặn, đoan trang, tinh tế và sâu sắc.",
+        "Stance": "Giữ lễ nghĩa khuê các, tỏ ra lịch sự và có phần tò mò khi tiếp xúc với người lạ.",
+        "isAppraised": true
       },
       {
         "id": "world_npc_tieu_kieu",
@@ -3691,7 +3705,7 @@
         "isPlayer": false,
         "loreId": null,
         "level": 12,
-        "exp": 0,
+        "exp": 7.482,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
@@ -3867,7 +3881,7 @@
         "isPlayer": false,
         "loreId": null,
         "level": 12,
-        "exp": 0,
+        "exp": 7.482,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
@@ -3892,6 +3906,182 @@
         "atk": 242,
         "def": 221,
         "spd": 241,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": {
+            "id": "7fbeed48-037a-4439-a423-42fbdb5aaa34",
+            "skillType": "combat",
+            "Name": "Sương Hoa Mộng Vũ",
+            "description": "Kiều Sương gẩy khúc đàn triệu hồi làn sóng băng sương huyền ảo quanh bản thân, giúp hồi phục sinh lực cho đồng đội xung quanh và làm chậm tốc độ di chuyển của kẻ địch trong vùng ảnh hưởng.",
+            "technicaldescription": "Hồi phục sinh lực cho toàn đội bằng 120% Công kích của bản thân, đồng thời gây trạng thái Làm Chậm giảm 20% Tốc độ của toàn bộ phe địch trong 2 lượt.",
+            "Stats": "atk_percent:120",
+            "Rarity": "Hiếm",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "heal",
+                  "target": {
+                    "type": "all_allies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_up",
+                    "moveType": "stay",
+                    "color": "#88edf9",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "all_enemies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "magic_circle",
+                    "moveType": "stay",
+                    "color": "#00dfff",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 2000
+          },
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": true,
+        "affinity": 80,
+        "Name": "Kiều Sương",
+        "Stance": "Đang âm thầm quan sát và đánh giá tiềm năng của nhân vật chính thông qua khí vận.",
+        "realm": "Luyện Thể",
+        "incomingHealing": 1,
+        "maxExp": 7482,
+        "Role": "Thứ nữ của Kiều Công vùng Giang Đông",
+        "Appearance": "Vẻ đẹp thanh lệ thoát tục với làn da trắng như tuyết và đôi mắt u buồn tựa khói sương. Nàng mặc bộ y phục lụa xanh nhạt thướt tha, mái tóc dài cài trâm ngọc giản dị nhưng quý phái. Khí chất điềm đạm, mang theo hơi thở của một nữ tử tu tiên thanh tao, thường mang theo một chiếc đoản tiêu bằng bạch ngọc.",
+        "Backstory": "Là nhị tiểu thư nhà họ Kiều ở Hoàn Huyện, nổi danh tài sắc khắp vùng.",
+        "Personality": "Ôn nhu, thông tuệ, thấu tình đạt lý nhưng cũng rất quyết đoán khi cần thiết. Nàng có lòng trắc ẩn sâu sắc và luôn giữ thái độ chừng mực với người lạ.",
+        "CourtesyName": "Mộng Dao",
+        "isAppraised": true,
+        "inParty": true,
+        "skills": [
+          {
+            "id": "7fbeed48-037a-4439-a423-42fbdb5aaa34",
+            "skillType": "combat",
+            "Name": "Sương Hoa Mộng Vũ",
+            "description": "Kiều Sương gẩy khúc đàn triệu hồi làn sóng băng sương huyền ảo quanh bản thân, giúp hồi phục sinh lực cho đồng đội xung quanh và làm chậm tốc độ di chuyển của kẻ địch trong vùng ảnh hưởng.",
+            "technicaldescription": "Hồi phục sinh lực cho toàn đội bằng 120% Công kích của bản thân, đồng thời gây trạng thái Làm Chậm giảm 20% Tốc độ của toàn bộ phe địch trong 2 lượt.",
+            "Stats": "atk_percent:120",
+            "Rarity": "Hiếm",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "heal",
+                  "target": {
+                    "type": "all_allies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_up",
+                    "moveType": "stay",
+                    "color": "#88edf9",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "all_enemies"
+                  },
+                  "visual_effects": {
+                    "vfxType": "magic_circle",
+                    "moveType": "stay",
+                    "color": "#00dfff",
+                    "vfxCount": 1
+                  }
+                },
+                "conditions": null
+              }
+            ],
+            "skillCategory": "basic",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 2000
+          }
+        ],
+        "isCompanionSetupDone": true
+      },
+      {
+        "id": "lore_npc_ton_kien",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 1,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 6,
+          "atk": 3,
+          "def": 3,
+          "spd": 3
+        },
+        "current_location_id": "4b93c497-d14a-4983-b249-4591386a7129",
+        "baseHp": 200,
+        "baseAtk": 20,
+        "baseDef": 10,
+        "baseSpd": 30,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 1400,
+        "maxhp": 1400,
+        "atk": 50,
+        "def": 40,
+        "spd": 60,
         "cr": 15,
         "cdmg": 200,
         "dmgAmp": 100,
@@ -3929,20 +4119,13 @@
           "Trữ vật": null,
           "Dị thường": null
         },
-        "isCompanion": true,
-        "affinity": 80,
-        "Name": "Kiều Sương",
-        "Stance": "Đang âm thầm quan sát và đánh giá tiềm năng của nhân vật chính thông qua khí vận.",
+        "isCompanion": false,
+        "affinity": 0,
+        "description": "Mãnh Hổ Giang Đông, mãnh tướng dũng mãnh kiệt xuất đang tích trữ binh mã tại Ngô Quận.",
+        "Name": "Tôn Kiên",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 7482,
-        "Role": "Thứ nữ của Kiều Công vùng Giang Đông",
-        "Appearance": "Vẻ đẹp thanh lệ thoát tục với làn da trắng như tuyết và đôi mắt u buồn tựa khói sương. Nàng mặc bộ y phục lụa xanh nhạt thướt tha, mái tóc dài cài trâm ngọc giản dị nhưng quý phái. Khí chất điềm đạm, mang theo hơi thở của một nữ tử tu tiên thanh tao, thường mang theo một chiếc đoản tiêu bằng bạch ngọc.",
-        "Backstory": "Là nhị tiểu thư nhà họ Kiều ở Hoàn Huyện, nổi danh tài sắc khắp vùng.",
-        "Personality": "Ôn nhu, thông tuệ, thấu tình đạt lý nhưng cũng rất quyết đoán khi cần thiết. Nàng có lòng trắc ẩn sâu sắc và luôn giữ thái độ chừng mực với người lạ.",
-        "CourtesyName": "Mộng Dao",
-        "isAppraised": true,
-        "inParty": true
+        "maxExp": 100
       }
     ],
     "sharedCooldowns": {
@@ -3962,15 +4145,15 @@
           "turn": 62
         }
       ],
-      "lastExpResolvedTurn": 0
+      "lastExpResolvedTurn": 70
     },
     "loreQuests": [],
     "pendingCreations": [],
     "deathState": {},
     "isDeathTurn": false,
     "lastLockedResult": {
-      "turn_id": 0,
-      "world_time": 0,
+      "turn_id": 70,
+      "world_time": 70,
       "is_death_turn": false,
       "in_combat": false,
       "battle_active": false,
@@ -3979,335 +4162,13 @@
         "winner_id": null,
         "loser_id": null
       },
-      "fields": {}
+      "fields": {
+        "exp_delta_player": 0.1,
+        "exp_delta_e5b3fb1d-8329-43ef-915b-80c17cb8c0c5": 7.482,
+        "exp_delta_e167e886-9449-43ab-b3ae-b8c0d6d39832": 7.482
+      }
     },
     "stateHistory": [
-      {
-        "time": {
-          "year": 1,
-          "month": 2,
-          "day": 6,
-          "hour": 5
-        },
-        "location_id": "0798887b-9f03-418a-8f45-7b9cf9666678",
-        "weather": "Nắng ban mai",
-        "characters": [
-          {
-            "id": "player",
-            "Name": "Diệp Thần",
-            "level": 1,
-            "exp": 26.39999999999999,
-            "hp": 2000,
-            "maxhp": 2000,
-            "currency": 0,
-            "inventory": [
-              {
-                "Name": "Lương Thảo Quân Dụng",
-                "quantity": 500
-              }
-            ],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_dieu_thuyen",
-            "Name": "Điêu Thuyền",
-            "level": 1,
-            "exp": 22.499999999999993,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_tham_tu_khan_vang_01",
-            "Name": "Thám Tử Khăn Vàng",
-            "level": 2,
-            "exp": 0,
-            "hp": 1020,
-            "maxhp": 1020,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_ha_hau_khinh_y",
-            "Name": "Hạ Hầu Khinh Y",
-            "level": 8,
-            "exp": 467.288,
-            "hp": 2740,
-            "maxhp": 2740,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "f0bb2066-67fc-4529-9547-bed96b71615c",
-            "Name": "Hạ Hầu Kiệt",
-            "level": 18,
-            "exp": 0,
-            "hp": 7140,
-            "maxhp": 7140,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c2f54fda-d99a-4425-a0c0-6912abafe521",
-            "Name": "Chu Đội Trưởng",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "a77f8d3a-71d6-4e93-82d2-18bb2f7de558",
-            "Name": "Thương Nhân 1",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "bd300959-34f0-4b71-b8dd-29716e94c95f",
-            "Name": "Thương Nhân 2",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "d49463ec-7bf4-4982-b3db-5a7b2e502a7f",
-            "Name": "Gia Nhân Gác Cửa",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c20fdbe3-c0ff-409b-8f49-e8e4e075aa33",
-            "Name": "Tướng Lĩnh Vết Sẹo",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c76a4b0e-be02-4430-bd13-83a12399d126",
-            "Name": "Vệ Sĩ Quân Doanh",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_trieu_van_01",
-            "Name": "Triệu Vân",
-            "level": 45,
-            "exp": 0,
-            "hp": 34480,
-            "maxhp": 34480,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "45150f2d-91a1-4f7e-9e6f-ac09ee9cba25",
-            "Name": "Thống Lĩnh Quân Tiên Phong",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "89c47e57-b671-4453-bcce-7d608253ac09",
-            "Name": "Binh Lính Khăn Vàng",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "d2de40b5-6f05-4792-b7d6-7290229f6fc7",
-            "Name": "Phó Tướng Vương",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "3212a582-1ed3-4a78-b66f-5503186aea0c",
-            "Name": "Gia Tướng Lý",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_trieu_vu_01",
-            "Name": "Triệu Vũ",
-            "level": 18,
-            "exp": 967.968,
-            "hp": 12028740,
-            "maxhp": 12028740,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "2667ab51-3d9c-48a8-8a9d-8a6dbd1453c1",
-            "Name": "Công Tôn Toản",
-            "level": 35,
-            "exp": 0,
-            "hp": 20680,
-            "maxhp": 20680,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "64203aaa-96d0-4889-968c-5bcb93391c70",
-            "Name": "Công Tôn Bảo Nguyệt",
-            "level": 28,
-            "exp": 2500,
-            "hp": 13540,
-            "maxhp": 13540,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_ung_01",
-            "Name": "Thái Ung",
-            "level": 48,
-            "exp": 0,
-            "hp": 33940,
-            "maxhp": 33940,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_van_co_01",
-            "Name": "Thái Diễm",
-            "level": 15,
-            "exp": 806.0029999999999,
-            "hp": 7280,
-            "maxhp": 7280,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_thu_nghiep_thanh",
-            "Name": "Thái thú Nghiệp Thành",
-            "level": 35,
-            "exp": 0,
-            "hp": 25280,
-            "maxhp": 25280,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "97872d38-7de1-4bed-8842-0439008ced55",
-            "Name": "Vệ Sĩ Cổng Thành",
-            "level": 1,
-            "exp": 0,
-            "hp": 1200,
-            "maxhp": 1200,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "94161dc0-1dd7-4827-b7d0-295e7aa6cb4a",
-            "Name": "Chân Cơ",
-            "level": 12,
-            "exp": 516,
-            "hp": 5220,
-            "maxhp": 5220,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_quan_hoi_01",
-            "Name": "Quản Hợi",
-            "level": 21,
-            "exp": 0,
-            "hp": 0,
-            "maxhp": 9600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": [
-              {
-                "status_id": "TRONG_THUONG_CANH_GIOI",
-                "id": "TRONG_THUONG_CANH_GIOI",
-                "name": "Trọng Thương (Cảnh Giới Suy Giảm)",
-                "type": "injury",
-                "description": "Cựu thương chưa lành: gân cốt tổn hại, khí huyết suy kiệt, sức lực không thể phát huy trọn vẹn. Tu vi thật của người này vốn cao hơn nhiều, nhưng vết thương cũ đang đè nén cảnh giới xuống mức hiện tại. Có thể hồi phục hoàn toàn nhờ linh đan diệu dược, một cơ duyên lớn, hoặc bàn tay của bậc danh y — thời gian trôi qua KHÔNG tự chữa lành nó.",
-                "source": "Cựu thương chưa lành",
-                "duration": null,
-                "expiresAt": null
-              }
-            ]
-          },
-          {
-            "id": "bc2deedf-8f32-4bda-ad46-64f85823cc45",
-            "Name": "Bách Tính Chân Định",
-            "level": 1,
-            "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "8f2afbb3-f2f1-486a-974a-522b6e3c5c90",
-            "Name": "Chủ Tiệm Gấm Vóc",
-            "level": 1,
-            "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          }
-        ],
-        "quests": []
-      },
       {
         "time": {
           "year": 1,
@@ -4649,6 +4510,376 @@
             "exp": 1.118,
             "hp": 2480,
             "maxhp": 2480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          }
+        ],
+        "quests": []
+      },
+      {
+        "time": {
+          "year": 1,
+          "month": 2,
+          "day": 20,
+          "hour": 5
+        },
+        "location_id": "4b93c497-d14a-4983-b249-4591386a7129",
+        "weather": "Nắng ban mai",
+        "characters": [
+          {
+            "id": "player",
+            "Name": "Diệp Thần",
+            "level": 1,
+            "exp": 26.699999999999996,
+            "hp": 2000,
+            "maxhp": 2000,
+            "currency": 0,
+            "inventory": [
+              {
+                "Name": "Lương Thảo Quân Dụng",
+                "quantity": 500
+              }
+            ],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_dieu_thuyen",
+            "Name": "Điêu Thuyền",
+            "level": 1,
+            "exp": 22.499999999999993,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_tham_tu_khan_vang_01",
+            "Name": "Thám Tử Khăn Vàng",
+            "level": 2,
+            "exp": 0,
+            "hp": 1020,
+            "maxhp": 1020,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ha_hau_khinh_y",
+            "Name": "Hạ Hầu Khinh Y",
+            "level": 8,
+            "exp": 467.288,
+            "hp": 2740,
+            "maxhp": 2740,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "f0bb2066-67fc-4529-9547-bed96b71615c",
+            "Name": "Hạ Hầu Kiệt",
+            "level": 18,
+            "exp": 0,
+            "hp": 7140,
+            "maxhp": 7140,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c2f54fda-d99a-4425-a0c0-6912abafe521",
+            "Name": "Chu Đội Trưởng",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "a77f8d3a-71d6-4e93-82d2-18bb2f7de558",
+            "Name": "Thương Nhân 1",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "bd300959-34f0-4b71-b8dd-29716e94c95f",
+            "Name": "Thương Nhân 2",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "d49463ec-7bf4-4982-b3db-5a7b2e502a7f",
+            "Name": "Gia Nhân Gác Cửa",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c20fdbe3-c0ff-409b-8f49-e8e4e075aa33",
+            "Name": "Tướng Lĩnh Vết Sẹo",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c76a4b0e-be02-4430-bd13-83a12399d126",
+            "Name": "Vệ Sĩ Quân Doanh",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_trieu_van_01",
+            "Name": "Triệu Vân",
+            "level": 45,
+            "exp": 0,
+            "hp": 34480,
+            "maxhp": 34480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "45150f2d-91a1-4f7e-9e6f-ac09ee9cba25",
+            "Name": "Thống Lĩnh Quân Tiên Phong",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "89c47e57-b671-4453-bcce-7d608253ac09",
+            "Name": "Binh Lính Khăn Vàng",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "d2de40b5-6f05-4792-b7d6-7290229f6fc7",
+            "Name": "Phó Tướng Vương",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "3212a582-1ed3-4a78-b66f-5503186aea0c",
+            "Name": "Gia Tướng Lý",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_trieu_vu_01",
+            "Name": "Triệu Vũ",
+            "level": 18,
+            "exp": 967.968,
+            "hp": 12028740,
+            "maxhp": 12028740,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "2667ab51-3d9c-48a8-8a9d-8a6dbd1453c1",
+            "Name": "Công Tôn Toản",
+            "level": 35,
+            "exp": 0,
+            "hp": 20680,
+            "maxhp": 20680,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "64203aaa-96d0-4889-968c-5bcb93391c70",
+            "Name": "Công Tôn Bảo Nguyệt",
+            "level": 28,
+            "exp": 2500,
+            "hp": 13540,
+            "maxhp": 13540,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_ung_01",
+            "Name": "Thái Ung",
+            "level": 48,
+            "exp": 0,
+            "hp": 33940,
+            "maxhp": 33940,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_van_co_01",
+            "Name": "Thái Diễm",
+            "level": 15,
+            "exp": 806.0029999999999,
+            "hp": 7280,
+            "maxhp": 7280,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_thu_nghiep_thanh",
+            "Name": "Thái thú Nghiệp Thành",
+            "level": 35,
+            "exp": 0,
+            "hp": 25280,
+            "maxhp": 25280,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "97872d38-7de1-4bed-8842-0439008ced55",
+            "Name": "Vệ Sĩ Cổng Thành",
+            "level": 1,
+            "exp": 0,
+            "hp": 1200,
+            "maxhp": 1200,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "94161dc0-1dd7-4827-b7d0-295e7aa6cb4a",
+            "Name": "Chân Cơ",
+            "level": 12,
+            "exp": 516,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_quan_hoi_01",
+            "Name": "Quản Hợi",
+            "level": 21,
+            "exp": 0,
+            "hp": 0,
+            "maxhp": 9600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": [
+              {
+                "status_id": "TRONG_THUONG_CANH_GIOI",
+                "id": "TRONG_THUONG_CANH_GIOI",
+                "name": "Trọng Thương (Cảnh Giới Suy Giảm)",
+                "type": "injury",
+                "description": "Cựu thương chưa lành: gân cốt tổn hại, khí huyết suy kiệt, sức lực không thể phát huy trọn vẹn. Tu vi thật của người này vốn cao hơn nhiều, nhưng vết thương cũ đang đè nén cảnh giới xuống mức hiện tại. Có thể hồi phục hoàn toàn nhờ linh đan diệu dược, một cơ duyên lớn, hoặc bàn tay của bậc danh y — thời gian trôi qua KHÔNG tự chữa lành nó.",
+                "source": "Cựu thương chưa lành",
+                "duration": null,
+                "expiresAt": null
+              }
+            ]
+          },
+          {
+            "id": "bc2deedf-8f32-4bda-ad46-64f85823cc45",
+            "Name": "Bách Tính Chân Định",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "8f2afbb3-f2f1-486a-974a-522b6e3c5c90",
+            "Name": "Chủ Tiệm Gấm Vóc",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "world_npc_dai_kieu",
+            "Name": "Đại Kiều",
+            "level": 5,
+            "exp": 3.354,
+            "hp": 2480,
+            "maxhp": 2480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "world_npc_tieu_kieu",
+            "Name": "Tiểu Kiều",
+            "level": 12,
+            "exp": 3.354,
+            "hp": 6420,
+            "maxhp": 6420,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "e5b3fb1d-8329-43ef-915b-80c17cb8c0c5",
+            "Name": "Kiều Dao",
+            "level": 12,
+            "exp": 0,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "e167e886-9449-43ab-b3ae-b8c0d6d39832",
+            "Name": "Kiều Sương",
+            "level": 12,
+            "exp": 0,
+            "hp": 5220,
+            "maxhp": 5220,
             "currency": 0,
             "inventory": [],
             "longTermStatuses": []
@@ -9332,11 +9563,6 @@
       ]
     },
     {
-      "id": "114dd6d9-4022-4a3b-8393-507419c08e56",
-      "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Đi. Chúng ta đi Hoàn Thành\"\n[Đoạn 2 - Tường thuật]: \"Nói xong ngươi dẫn 2 nàng đến thẳng Hoàn Thành. Nghe nói nhị Kiều đều đam mê âm luật và thi ca, ngươi bèn đến tòa nhà cao nhất Hoàn Thành - Quan Tinh Đài, leo lên đỉnh gảy 2 khúc Quảng Lăng Tán và Thập Diện Mai Phục sau đó đưa Triệu Vũ và Điêu Thuyền về khách điếm nghỉ ngơi. 5 ngày đều đặn gảy đàn xong bỏ đi. Dân chúng sớm đã đồn đoán khắp thành. Tin tức nhanh chóng đến tai nhị Kiều. 2 chị em sai người đi thăm dò tin tức xem người đánh đàn là ai. Sau nhiều ngày không thu hoạch được gì, 2 chị em tự mình đến tầng cao nhất của Quan Tinh Đài đợi. Đúng như ngươi dự đoán. Không quá 7 ngày 2 chị em Đại Kiều, Tiểu Kiều sẽ xuất hiện. Ngươi mặc 1 bộ trường bào bạch y, hông đeo Ỷ Thiên Kiếm, lưng mang Tiêu Vĩ Cầm ung dung bước vào. Nhị Kiều trông thấy ngươi chỉ hơi ngạc nhiên vì vẻ đẹp trai 1 chút. Mấy ngày này người mang đàn giả vờ trên Quan Tinh Đài bắt chước ngươi không ít nên 2 nàng chẳng để tâm đến ngươi. Ngươi tìm 1 chỗ trống sau đó ngồi xuống gảy Quảng Lăng Tán. Ngay khi những âm thanh đầu tiên vàng lên, nhị Kiều đã ngay lập tức xông đến chỗ ngươi chiếm 2 vị trí ngồi tốt nhất nghe chăm chú. Sau khúc Quảng Lăng Tán là Thập Diện Mai Phục. Gảy xong 2 khúc, ngươi thong thả đứng lên định trở về thì nhị Kiều đồng thanh giữ lại\"\n[Đoạn 3 - Lời Đại Kiều]: \"Công tử xin dừng bước. Tiểu nữ Kiều Dao kính xin công tử di giá đến Kiều gia 1 chuyến để trao đổi thêm về 2 khúc đàn vừa rồi có được không?\"\n[Đoạn 4 - Tường thuật]: \"Tên thật của Đại Kiều là Kiều Dao, Tiểu Kiều là Kiều Sương. Dân chúng bình thường không biết tên các nàng nên chỉ gọi chị là Đại Kiều, em là Tiểu Kiều.\"\n[Đoạn 5 - Lời Diệp Thần]: \"Nếu Kiều cô nương đã có ý thì tại hạ từ chối là bất kính. Mời\"\n[Đoạn 6 - Tường thuật]: \"Ngươi theo Kiều Dao và Kiều Sương đến Kiều phủ đàm đạo âm luật. Thoáng cái 3 người đã nói chuyện đến nửa đêm. 2 nàng không biết từ lúc nào đã ngủ. Ngươi cũng không bỏ lỡ cơ hội mà đưa 2 nàng vào 1 tẩm phòng không có ai liền 'sủng ái' cả 2 người. 2 nàng không tỉnh lại mà chỉ rên rỉ theo bản năng. Sáng hôm sau, Kiều Dao và Kiều Sương tỉnh dậy thấy đang trần truồng nằm trên ngực ngươi bèn thét lớn.\"\n[Đoạn 7 - Lời Kiều Dao]: \"A... Ưm...\"\n[Đoạn 8 - Lời Kiếu Sương]: \"A... Ưm...\"\n[Đoạn 9 - Tường thuật]: \"Không để 2 nàng hét, ngươi bật dậy lấy môi chặn môi 1 người, người còn lại thì bị ngươi dùng tay đưa miệng nàng bú con cặc của ngươi. Sau đó, ngươi tiếp tục ân ái các nàng 10 hiệp. Cả 2 chỉ biết rên rỉ không còn sức để kêu. Xong việc ngươi mới giải thích mục đích của ngươi đến là để hỏi cưới 2 nàng. Chỉ là không kìm được trước vẻ đẹp của 2 người nên đành tiền động phòng hậu cưới. 2 nàng cũng mê vẻ đẹp trai của ngươi và quan trọng nhất là quá trình vừa rồi cả 2 đều rất sướng nên đã đồng ý. Phụ thân 2 người nghe xong cũng không làm gì khác được nên đành đồng ý cho ngươi mang 2 nàng về Chân Định\""
-    },
-    {
       "id": "e8dd83c6-3640-4367-a44d-17c7a450a85a",
       "type": "user_custom_action",
       "content": "[Đoạn 1 - Lời Diệp Thần]: \"Đi. Chúng ta đi Hoàn Thành\"\n[Đoạn 2 - Tường thuật]: \"Nói xong ngươi dẫn 2 nàng đến thẳng Hoàn Thành. Nghe nói nhị Kiều đều đam mê âm luật và thi ca, ngươi bèn đến tòa nhà cao nhất Hoàn Thành - Quan Tinh Đài, leo lên đỉnh gảy 2 khúc Quảng Lăng Tán và Thập Diện Mai Phục sau đó đưa Triệu Vũ và Điêu Thuyền về khách điếm nghỉ ngơi. 5 ngày đều đặn gảy đàn xong bỏ đi. Dân chúng sớm đã đồn đoán khắp thành. Tin tức nhanh chóng đến tai nhị Kiều. 2 chị em sai người đi thăm dò tin tức xem người đánh đàn là ai. Sau nhiều ngày không thu hoạch được gì, 2 chị em tự mình đến tầng cao nhất của Quan Tinh Đài đợi. Đúng như ngươi dự đoán. Không quá 7 ngày 2 chị em Đại Kiều, Tiểu Kiều sẽ xuất hiện. Ngươi mặc 1 bộ trường bào bạch y, hông đeo Ỷ Thiên Kiếm, lưng mang Tiêu Vĩ Cầm ung dung bước vào. Nhị Kiều trông thấy ngươi chỉ hơi ngạc nhiên vì vẻ đẹp trai 1 chút. Mấy ngày này người mang đàn giả vờ trên Quan Tinh Đài bắt chước ngươi không ít nên 2 nàng chẳng để tâm đến ngươi. Ngươi tìm 1 chỗ trống sau đó ngồi xuống gảy Quảng Lăng Tán. Ngay khi những âm thanh đầu tiên vàng lên, nhị Kiều đã ngay lập tức xông đến chỗ ngươi chiếm 2 vị trí ngồi tốt nhất nghe chăm chú. Sau khúc Quảng Lăng Tán là Thập Diện Mai Phục. Gảy xong 2 khúc, ngươi thong thả đứng lên định trở về thì nhị Kiều đồng thanh giữ lại\"\n[Đoạn 3 - Lời Đại Kiều]: \"Công tử xin dừng bước. Tiểu nữ Kiều Dao kính xin công tử di giá đến Kiều gia 1 chuyến để trao đổi thêm về 2 khúc đàn vừa rồi có được không?\"\n[Đoạn 4 - Tường thuật]: \"Tên thật của Đại Kiều là Kiều Dao, Tiểu Kiều là Kiều Sương. Dân chúng bình thường không biết tên các nàng nên chỉ gọi chị là Đại Kiều, em là Tiểu Kiều.\"\n[Đoạn 5 - Lời Diệp Thần]: \"Nếu Kiều cô nương đã có ý thì tại hạ từ chối là bất kính. Mời\"\n[Đoạn 6 - Tường thuật]: \"Ngươi theo Kiều Dao và Kiều Sương đến Kiều phủ đàm đạo âm luật. Thoáng cái 3 người đã nói chuyện đến nửa đêm. 2 nàng không biết từ lúc nào đã ngủ. Ngươi cũng không bỏ lỡ cơ hội mà đưa 2 nàng vào 1 tẩm phòng không có ai liền 'sủng ái' cả 2 người. 2 nàng không tỉnh lại mà chỉ rên rỉ theo bản năng. Sáng hôm sau, Kiều Dao và Kiều Sương tỉnh dậy thấy đang trần truồng nằm trên ngực ngươi bèn thét lớn.\"\n[Đoạn 7 - Lời Kiều Dao]: \"A... Ưm...\"\n[Đoạn 8 - Lời Kiếu Sương]: \"A... Ưm...\"\n[Đoạn 9 - Tường thuật]: \"Không để 2 nàng hét, ngươi bật dậy lấy môi chặn môi 1 người, người còn lại thì bị ngươi dùng tay đưa miệng nàng bú con cặc của ngươi. Sau đó, ngươi tiếp tục ân ái các nàng 10 hiệp. Cả 2 chỉ biết rên rỉ không còn sức để kêu. Xong việc ngươi mới giải thích mục đích của ngươi đến là để hỏi cưới 2 nàng. Chỉ là không kìm được trước vẻ đẹp của 2 người nên đành tiền động phòng hậu cưới. 2 nàng cũng mê vẻ đẹp trai của ngươi và quan trọng nhất là quá trình vừa rồi cả 2 đều rất sướng nên đã đồng ý. Phụ thân 2 người nghe xong cũng không làm gì khác được nên đành đồng ý cho ngươi mang 2 nàng về Chân Định\""
@@ -9428,14 +9654,92 @@
           "content": "Cuộc hôn sự được quyết định ngay lập tức. Sau vài ngày chuẩn bị hành lý và sính lễ tượng trưng, *Diệp Thần* dẫn theo hai tân nương tử tuyệt sắc cùng *Triệu Vũ* và *Điêu Thuyền* rầm rộ rời khỏi *Hoàn Thành*, hướng thẳng về phương Bắc.\nSau màn \"tiền động phòng hậu cưới\" đầy mãnh liệt kéo dài 10 hiệp cùng tài năng âm luật xuất chúng của *Diệp Thần*, hai tỷ muội *Kiều gia* đã hoàn toàn bị chinh phục cả về thể xác lẫn tâm hồn. *Kiều Công* sau khi chứng kiến sự việc đã rồi và nhận thấy khí thái bất phàm cùng danh tiếng *Bình Tây Tướng Quân* của *Diệp Thần* nên đã vui vẻ chấp thuận gả hai con gái, chuẩn bị hành lý để họ theo chàng về *Chân Định*.\nHiện tại, đoàn người đã ra khỏi cổng *Hoàn Thành*. *Diệp Thần* ngồi trên lưng chiến mã *Dạ Chiếu Ngọc Sư Tử*, hai bên là xe ngựa gấm vóc chở nhị Kiều. *Triệu Vũ* và *Điêu Thuyền* cưỡi ngựa đi sát hai bên, thỉnh thoảng lại trêu chọc hai người chị em mới bằng những tiếng cười khúc khích. Gió *Giang Đông* thổi qua tà áo bạch y, *Diệp Thần* nheo mắt nhìn về phía chân trời, lòng thầm tính toán những bước đi tiếp theo khi trở về *Chân Định*."
         }
       ]
+    },
+    {
+      "id": "2eb8dce2-ea13-4b99-8109-c4bdbe35a5e6",
+      "type": "user_custom_action",
+      "content": "Ngươi không vội trở về mà đến bái phỏng Tôn Kiên ở Ngô Quận"
+    },
+    {
+      "id": "f48eca05-d618-4c33-acb0-233ea2ab9961",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Mặt trời ban mai chiếu rạng rỡ xuống những bến thuyền sông nước của *Hoàn Thành*, xua tan lớp sương mù mỏng manh vương trên những nhành trúc ven bờ. Đoàn người của *Diệp Thần* chính thức nhổ neo rời khỏi thành trì. Thay vì lập tức thúc ngựa thu quân trở về *Chân Định*, *Diệp Thần* giắt chiếc lệnh bài *Bình Tây Tướng Quân* bên hông, uy nghi ngồi trên lưng thần mã *Dạ Chiếu Ngọc Sư Tử*, dẫn theo hai vị tân nương tử *Kiều Dao* (*Đại Kiều*), *Kiều Sương* (*Tiểu Kiều*) cùng *Triệu Vũ* và *Điêu Thuyền*, trực tiếp chuyển hướng hành trình nhắm thẳng *Ngô Quận* để bái phỏng \"Mãnh Hổ Giang Đông\" *Tôn Kiên*.\nNgồi trên lưng chiến mã tuyết trắng, *Diệp Thần* quay sang nhìn hai cỗ xe gấm vóc cùng các nương tử đi bên cạnh, cất giọng trầm ấm, dõng dạc giải thích ý định:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Chúng ta chưa vội trở về Chân Định. Giang Đông là vùng đất địa linh nhân kiệt, Tôn Kiên ở Ngô Quận đang chiêu binh mãi mã, tích trữ lương thảo quy mô lớn. Ta muốn đích thân tới Ngô Quận bái phỏng vị 'Mãnh Hổ Giang Đông' này một chuyến để quan sát thực hư thế lực của hắn."
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vũ* tay ôm ngọn ngân thương khảm lam ngọc, gò má dẻ hồng hào rạng rỡ dũng khí, gật đầu tán đồng ngay lập tức:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vũ",
+          "content": "Diệp huynh nói rất phải! Muội cũng nghe danh *Tôn Kiên* dũng mãnh phi thường, tay sử dụng thanh *Cổ Đĩnh Đao* khét tiếng. Đến *Ngô Quận* một chuyến vừa xem được thực lực quân đội Giang Đông, vừa giúp hai vị tỷ tỷ nhà họ Kiều ngắm nhìn cảnh sắc sông nước!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* nhí nhảnh rúc đầu bên cửa sổ xe gấm, nụ cười tươi tắn như hoa xuân:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Đúng đó phu quân! *Tú Nhi* đi đâu cũng được, miễn là được ở bên cạnh Diệp ca ca!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Kiều Dao* và *Kiều Sương* e ấp vén rèm lụa xe ngựa, ánh mắt đong đầy nhu tình nhìn *Diệp Thần*. *Kiều Dao* dịu dàng cất giọng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Kiều Dao",
+          "content": "Phu quân tính toán sâu rộng, thiếp và *Mộng Dao* muội muội xin nguyện đi theo phu quân."
+        },
+        {
+          "type": "narrative",
+          "content": "Chặng đường từ *Hoàn Thành* tiến về *Ngô Quận* trải dài qua những cánh đồng lúa chín vàng ươm và những nhánh sông uốn lượn thuộc vùng đất *Giang Đông* trù phú. Sau gần mười hai giờ di chuyển thong thả, hình bóng *Ngô Quận* — thủ phủ quân sự sùng sững của *Tôn Kiên* — đã hiện ra rõ mùng một dưới ánh nắng chiều tà. \nTường thành *Ngô Quận* được đắp bằng đá tảng xám xịt vững chãi, phía trên cờ hiệu thêu chữ *Tôn* màu đỏ rực tung bay phấp phới trước gió sông. Dưới chân thành, đồn trại quân sự giăng khắp các bờ sông, hàng trăm chiến thuyền chiến đấu dấp dờn trên mặt nước, tiếng binh sĩ hô luyện tập vang vọng rung chuyển cả một vùng biên ải.\nKhi *Diệp Thần* cưỡi trên *Dạ Chiếu Ngọc Sư Tử*, khoác thường phục bạch y nho nhã nhưng hông giắt *Ỷ Thiên Kiếm* và chiếc lệnh bài *Bình Tây Tướng Quân* sáng quắc tiến đến cổng chính *Ngô Quận*, toán binh sĩ gác cổng lập tức kinh ngạc. Tên vệ sĩ gác cổng thấy khí thái vương giả cùng chiếc lệnh bài quân vụ triều đình, vội vã chạy lên bậc thềm đá quỳ gối xin xem xét, rồi hộc tốc chạy vào trung quân đại trướng báo cáo.\nChỉ vài nhịp thở sau, từ trong phủ đệ *Ngô Quận*, tiếng bước chân dồn dập vang lên chát chúa. Một vị võ tướng trung niên vóc dáng đồ sộ như gấu rừng, vai rộng ngực nở, mặt đỏ râu dài, ánh mắt sắc bén như cọp dữ, thân khoác chiến bào mảng hổ rực rỡ, hông đeo thanh *Cổ Đĩnh Đao* cổ kính, đĩnh đạc dẫn theo các danh tướng như *Trình Phổ*, *Hoàng Cái*, *Hàn Đương* đích thân hối hả bước ra cổng thành nghênh đón.\nĐó chính là \"Mãnh Hổ Giang Đông\" *Tôn Kiên* (tự *Văn Đài*)!\nVừa nhìn thấy *Diệp Thần* tuấn tú phi thường, phong thái ung dung tự tại đứng bên thần mã tuyết trắng, *Tôn Kiên* lập tức mở to đôi mắt phượng, phá lên cười lớn đầy hào sảng, hai tay chắp lại vái chào cực kỳ nể phục:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Ha ha ha! Quả nhiên là anh hùng xuất thiếu niên! Uy danh *Bình Tây Tướng Quân* Diệp Thần một thương trảm Trương Mạn Thành, vô hiệu hóa tà thuật diệt Quản Hợi bảo vệ Chân Định đã chấn động cả thiên hạ! Hôm nay Tướng quân hạ cố ghé thăm Ngô Quận nhỏ hẹp này, thật là niềm vinh hạnh tột cùng cho Tôn Kiên ta cùng toàn thể quân sĩ Giang Đông!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* thong thả bước xuống lưng ngựa, chắp tay nghiêng mình đáp lễ vị \"Mãnh Hổ Giang Đông\" với phong thái lịch thiệp, đĩnh đạc:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tôn Thái thú quá khen rồi. Ta nghe danh Mãnh Hổ Giang Đông dũng mãnh kiệt xuất, chiêu binh mãi mã vì sự an nguy của bách tính, nên nhân chuyến đi qua đây đặc biệt ghé qua Ngô Quận bái phỏng ngài."
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Kiên* nghe vậy liền vỗ mạnh vào bả vai *Diệp Thần*, ánh mắt ngập tràn sự thán phục và yêu mến thực sự. Lão đĩnh đạc phất tay áo mời:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Tướng quân khách khí quá! Mau! Mời Tướng quân cùng các vị phu nhân tiến vào đại sảnh trung quân dùng tiệc rượu! Đêm nay Tôn Kiên ta nhất định phải cùng Tướng quân uống một trận thật sảng khoái!"
+        },
+        {
+          "type": "narrative",
+          "content": "Dưới sự tiếp đón nồng hậu và kính trọng tuyệt đối của *Tôn Kiên*, *Diệp Thần* cùng hai vị tân nương tử nhị Kiều, *Triệu Vũ* và *Điêu Thuyền* được dẫn vào bên trong chính điện *Ngô Quận*. Tiệc rượu thịnh soạn nhanh chóng được bày ra với các món sơn hào hải vị cùng rượu nếp nồng nàn. *Tôn Kiên* cùng các danh tướng *Trình Phổ*, *Hoàng Cái* vây quanh *Diệp Thần*, không tiếc lời ca ngợi chiến tích đánh tan tà giáo *Khăn Vàng* ở phương Bắc của hắn. *Diệp Thần* điềm tĩnh đối đáp, phân tích thế cục thiên hạ sắc bén khiến *Tôn Kiên* càng thêm tâm phục khẩu phục.\nBầu không khí tại phủ đệ *Ngô Quận* trở nên vô cùng ấm áp và rộn rã, đánh dấu cuộc gặp gỡ lịch sử giữa *Bình Tây Tướng Quân* phương Bắc và *Mãnh Hổ Giang Đông*."
+        }
+      ]
+    },
+    {
+      "id": "3e569a4b-6378-4f1b-8e3b-a51a672ca737",
+      "type": "user_custom_action",
+      "content": "Tôn Kiên giới thiệu 3 người con cho ngươi gặp mặt. Tôn Sách, Tôn Quyền và Tôn Thượng Hương"
     }
   ],
-  "choices": [
-    "Dẫn nhị Kiều cùng các nương tử đi thong thả dọc theo sông *Trường Giang* để hai nàng vơi bớt nỗi nhớ nhà trước khi rời hẳn miền Nam. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Gia tăng sự gắn kết tình cảm và niềm tin của nhị Kiều dành cho ngươi.}",
-    "Tăng tốc hành quân để nhanh chóng trở về *Chân Định* nhằm ổn định nội chính và giới thiệu các nương tử mới với gia đình. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Đảm bảo an toàn cho đoàn người, tránh các tai mắt của phe phái chư hầu tại miền Nam.}",
-    "Ghé vào một trạm dừng chân lớn gần biên giới để mua thêm các vật dụng cần thiết và trang sức quý giá dành tặng cho nhị Kiều. {Tỷ lệ thành công: 85%, Hậu quả/Phần thưởng: Thể hiện sự hào sảng và cưng chiều, khiến nhị Kiều cảm thấy được trân trọng.}",
-    "Tranh thủ thời gian nghỉ chân để tiếp tục \"bồi đắp\" tình cảm với nhị Kiều bằng cách giảng giải thêm về binh pháp và lý tưởng của mình. {Tỷ lệ thành công: 80%, Hậu quả/Phần thưởng: Nâng cao sự ngưỡng mộ của hai nàng về tầm vóc trí tuệ của ngươi.}"
-  ],
+  "choices": [],
   "gameMode": "EXPLORATION",
   "activeTrade": {
     "trader": null,
@@ -9455,5 +9759,5 @@
       "endTurn": 21
     }
   ],
-  "adventureTurnCount": 68
+  "adventureTurnCount": 71
 }
