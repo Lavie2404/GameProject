@@ -1,8 +1,8 @@
 {
   "id": "3dacff74-4249-4ea8-a097-c514e95f9812",
-  "currentTurn": 72,
+  "currentTurn": 79,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-11T04:38:46.084Z",
+  "timestamp": "2026-09-11T06:35:49.513Z",
   "gameSettings": {
     "storyTitle": "Tam quốc chí",
     "theme": "Dã sử, Huyền Huyễn, Tu Tiên, Quân sự, Cổ đại, Chiến tranh, Tam quốc",
@@ -126,8 +126,8 @@
     "time": {
       "year": 1,
       "month": 2,
-      "day": 20,
-      "hour": 17
+      "day": 21,
+      "hour": 7
     },
     "weather": "Nắng ban mai",
     "narrativeCombatState": {
@@ -323,6 +323,24 @@
         "NPC": "Tiểu Kiều",
         "Standing": "Yêu thích",
         "Reason": "Say mê tài năng, dung mạo cùng sự sủng ái dũng mãnh của ngươi"
+      },
+      {
+        "id": "22b4a513-17d5-4682-8cb3-70f76dd17b10",
+        "NPC": "Tôn Kiên",
+        "Standing": "Kính nể",
+        "Reason": "Hòa hợp đàm đạo và gia tăng thân tình giữa hai thế lực"
+      },
+      {
+        "id": "cb71a4fb-dbfa-416a-9229-e4ce1f0c1e1b",
+        "NPC": "Tôn Sách",
+        "Standing": "Kính nể",
+        "Reason": "Khâm phục thương pháp tuyệt luân và sự chỉ giáo tận tình tại diễn võ trường"
+      },
+      {
+        "id": "a5be9be5-63c2-4a28-b90b-64dbec8a0ba1",
+        "NPC": "Tôn Thượng Hương",
+        "Standing": "Yêu thích",
+        "Reason": "Rung động trước phong thái anh tuấn và bản lĩnh thương pháp kinh thế tại diễn võ trường"
       }
     ],
     "quests": [],
@@ -355,7 +373,7 @@
         "isPlayer": true,
         "loreId": null,
         "level": 1,
-        "exp": 26.799999999999997,
+        "exp": 27,
         "progressionState": "Tu Luyện Thường",
         "ap": 5,
         "currency": 0,
@@ -3705,7 +3723,7 @@
         "isPlayer": false,
         "loreId": null,
         "level": 12,
-        "exp": 7.482,
+        "exp": 14.964,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
@@ -3825,7 +3843,7 @@
         "Personality": "Điềm tĩnh, nhân hậu nhưng vô cùng quyết đoán. Nàng có cái nhìn sắc sảo về thế cuộc và lòng người, không dễ bị lay chuyển bởi những lời đường mật.",
         "CourtesyName": "Thanh Nhã",
         "isAppraised": true,
-        "inParty": true,
+        "inParty": false,
         "isCompanionSetupDone": true,
         "skills": [
           {
@@ -3881,7 +3899,7 @@
         "isPlayer": false,
         "loreId": null,
         "level": 12,
-        "exp": 7.482,
+        "exp": 14.964,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
@@ -4001,7 +4019,7 @@
         "Personality": "Ôn nhu, thông tuệ, thấu tình đạt lý nhưng cũng rất quyết đoán khi cần thiết. Nàng có lòng trắc ẩn sâu sắc và luôn giữ thái độ chừng mực với người lạ.",
         "CourtesyName": "Mộng Dao",
         "isAppraised": true,
-        "inParty": true,
+        "inParty": false,
         "skills": [
           {
             "id": "7fbeed48-037a-4439-a423-42fbdb5aaa34",
@@ -4120,12 +4138,374 @@
           "Dị thường": null
         },
         "isCompanion": false,
-        "affinity": 0,
+        "affinity": 5,
         "description": "Mãnh Hổ Giang Đông, mãnh tướng dũng mãnh kiệt xuất đang tích trữ binh mã tại Ngô Quận.",
         "Name": "Tôn Kiên",
         "realm": "Phàm Nhân",
         "incomingHealing": 1,
-        "maxExp": 100
+        "maxExp": 100,
+        "skills": [],
+        "affinityDirection": "đang ấm lên"
+      },
+      {
+        "id": "npc_ton_sach_01",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 38,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 107,
+          "atk": 105,
+          "def": 105,
+          "spd": 105
+        },
+        "current_location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
+        "baseHp": 940,
+        "baseAtk": 94,
+        "baseDef": 47,
+        "baseSpd": 67,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 22340,
+        "maxhp": 22340,
+        "atk": 1144,
+        "def": 1097,
+        "spd": 1117,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 0,
+        "description": "Con trưởng của Tôn Kiên, dũng mãnh kiêu hãnh, tự Bá Phù.",
+        "stance": "Thân thiện",
+        "personality": "Hào sảng, dũng cảm",
+        "Gender": "Nam",
+        "sizeCategory": "2",
+        "Name": "Tôn Sách",
+        "CourtesyName": "Bá Phù",
+        "realm": "Ngưng Khí",
+        "incomingHealing": 1,
+        "maxExp": 136613
+      },
+      {
+        "id": "npc_ton_quyen_01",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 30,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 73,
+          "atk": 69,
+          "def": 69,
+          "spd": 69
+        },
+        "current_location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
+        "baseHp": 780,
+        "baseAtk": 78,
+        "baseDef": 39,
+        "baseSpd": 59,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 15380,
+        "maxhp": 15380,
+        "atk": 768,
+        "def": 729,
+        "spd": 749,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 0,
+        "description": "Con thứ của Tôn Kiên, điềm tĩnh thông tuệ, tự Trọng Mưu.",
+        "stance": "Thân thiện",
+        "personality": "Trầm ổn, sâu sắc",
+        "Gender": "Nam",
+        "sizeCategory": "2",
+        "Name": "Tôn Quyền",
+        "CourtesyName": "Trọng Mưu",
+        "realm": "Khai Mạch",
+        "incomingHealing": 1,
+        "maxExp": 53238
+      },
+      {
+        "id": "npc_ton_thuong_huong_01",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 12,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 79,
+          "atk": 74,
+          "def": 74,
+          "spd": 74
+        },
+        "current_location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
+        "baseHp": 420,
+        "baseAtk": 42,
+        "baseDef": 21,
+        "baseSpd": 41,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 16220,
+        "maxhp": 16220,
+        "atk": 782,
+        "def": 761,
+        "spd": 781,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": {
+            "id": "c3d86a1d-f9a4-4f9c-9fc4-a33fe7ddea53",
+            "skillType": "combat",
+            "Name": "Tật Phong Tiễn",
+            "description": "Tụ hội luồng phong khí mãnh liệt vào mũi thần tiễn, bắn ra một phát bắn xé toạc không trung, vừa gây sát thương tầm xa khủng khiếp lên một mục tiêu vừa tạo ra trận gió quấn chân khiến đối thủ suy giảm tốc độ di chuyển.",
+            "technicaldescription": "Gây sát thương bằng 350% Công vật lý lên một kẻ địch và giảm 30% tốc độ của mục tiêu trong 2 lượt.",
+            "Stats": "atk_percent:350",
+            "Rarity": "Thường",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "power_components": [
+                    {
+                      "source_stat": "ATK",
+                      "scale_number": 350,
+                      "based_on": "caster"
+                    }
+                  ],
+                  "visual_effects": {
+                    "vfxType": "curved_projectile",
+                    "moveType": "stay",
+                    "color": "#00ff7f",
+                    "vfxCount": 1
+                  }
+                }
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "status_to_apply": {
+                    "status_id": "GIAM_TOC",
+                    "status_name": "Giảm Tốc",
+                    "status_type": "debuff"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_down",
+                    "moveType": "stay",
+                    "color": "#00ff7f",
+                    "vfxCount": 1
+                  }
+                }
+              }
+            ],
+            "skillCategory": "ultimate",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 200
+          },
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": true,
+        "affinity": 50,
+        "stance": "Yêu thích",
+        "personality": "Kiêu kỳ, lanh lợi, hiếu thắng",
+        "Gender": "Nữ",
+        "sizeCategory": "2",
+        "Name": "Tôn Thượng Hương",
+        "realm": "Luyện Thể",
+        "incomingHealing": 1,
+        "maxExp": 7482,
+        "Role": "Tiểu thư Tôn gia Giang Đông",
+        "Appearance": "Thiếu nữ có vóc dáng thon thả, nhanh nhẹn và tràn đầy năng lượng. Mái tóc đen dài được buộc cao gọn gàng bằng dải lụa đỏ. Nàng mặc giáp nhẹ may bằng da hổ kết hợp dải lụa gấm thêu hoa văn tinh xảo, hông đeo cặp song kiếm sáng quắc. Ánh mắt nồng nhiệt, sắc sảo và luôn đong đầy vẻ bướng bỉnh, tinh nghịch.",
+        "Backstory": "Là ái nữ duy nhất của Mãnh Hổ Giang Đông Tôn Kiên, Tôn Thượng Hương từ nhỏ đã được nuôi dưỡng trong môi trường võ biền. Thay vì học thêu thùa may vá như các tiểu thư khuê các, nàng lại thích luyện tập cung kiếm, dàn trận cùng các thị nữ. Trong bối cảnh thiên hạ bắt đầu loạn lạc trước làn sóng Hoàng Cân, nàng luôn khao khát được xông pha trận mạc để chứng minh bản thân không hề kém cạnh các huynh trưởng.",
+        "Personality": "Hiếu thắng, thẳng thắn, hào sảng, bướng bỉnh nhưng rất trượng nghĩa và yêu thương gia đình.",
+        "Stance": "Tò mò và hứng thú, muốn thử tài võ nghệ của nhân vật chính.",
+        "CourtesyName": "Linh Cơ",
+        "isAppraised": true,
+        "inParty": false,
+        "isCompanionSetupDone": true,
+        "skills": [
+          {
+            "id": "c3d86a1d-f9a4-4f9c-9fc4-a33fe7ddea53",
+            "skillType": "combat",
+            "Name": "Tật Phong Tiễn",
+            "description": "Tụ hội luồng phong khí mãnh liệt vào mũi thần tiễn, bắn ra một phát bắn xé toạc không trung, vừa gây sát thương tầm xa khủng khiếp lên một mục tiêu vừa tạo ra trận gió quấn chân khiến đối thủ suy giảm tốc độ di chuyển.",
+            "technicaldescription": "Gây sát thương bằng 350% Công vật lý lên một kẻ địch và giảm 30% tốc độ của mục tiêu trong 2 lượt.",
+            "Stats": "atk_percent:350",
+            "Rarity": "Thường",
+            "cooldown": 0,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "power_components": [
+                    {
+                      "source_stat": "ATK",
+                      "scale_number": 350,
+                      "based_on": "caster"
+                    }
+                  ],
+                  "visual_effects": {
+                    "vfxType": "curved_projectile",
+                    "moveType": "stay",
+                    "color": "#00ff7f",
+                    "vfxCount": 1
+                  }
+                }
+              },
+              {
+                "action": {
+                  "type": "apply_status",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "status_to_apply": {
+                    "status_id": "GIAM_TOC",
+                    "status_name": "Giảm Tốc",
+                    "status_type": "debuff"
+                  },
+                  "visual_effects": {
+                    "vfxType": "aura_down",
+                    "moveType": "stay",
+                    "color": "#00ff7f",
+                    "vfxCount": 1
+                  }
+                }
+              }
+            ],
+            "skillCategory": "ultimate",
+            "currentCooldown": 0,
+            "exp": 0,
+            "maxExp": 200
+          }
+        ]
       }
     ],
     "sharedCooldowns": {
@@ -4145,15 +4525,15 @@
           "turn": 62
         }
       ],
-      "lastExpResolvedTurn": 70
+      "lastExpResolvedTurn": 75
     },
     "loreQuests": [],
     "pendingCreations": [],
     "deathState": {},
     "isDeathTurn": false,
     "lastLockedResult": {
-      "turn_id": 70,
-      "world_time": 70,
+      "turn_id": 75,
+      "world_time": 75,
       "is_death_turn": false,
       "in_combat": false,
       "battle_active": false,
@@ -4163,9 +4543,7 @@
         "loser_id": null
       },
       "fields": {
-        "exp_delta_player": 0.1,
-        "exp_delta_e5b3fb1d-8329-43ef-915b-80c17cb8c0c5": 7.482,
-        "exp_delta_e167e886-9449-43ab-b3ae-b8c0d6d39832": 7.482
+        "exp_delta_player": 0.1
       }
     },
     "stateHistory": [
@@ -4173,365 +4551,17 @@
         "time": {
           "year": 1,
           "month": 2,
-          "day": 13,
-          "hour": 5
-        },
-        "location_id": "4b93c497-d14a-4983-b249-4591386a7129",
-        "weather": "Nắng ban mai",
-        "characters": [
-          {
-            "id": "player",
-            "Name": "Diệp Thần",
-            "level": 1,
-            "exp": 26.499999999999993,
-            "hp": 2000,
-            "maxhp": 2000,
-            "currency": 0,
-            "inventory": [
-              {
-                "Name": "Lương Thảo Quân Dụng",
-                "quantity": 500
-              }
-            ],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_dieu_thuyen",
-            "Name": "Điêu Thuyền",
-            "level": 1,
-            "exp": 22.499999999999993,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_tham_tu_khan_vang_01",
-            "Name": "Thám Tử Khăn Vàng",
-            "level": 2,
-            "exp": 0,
-            "hp": 1020,
-            "maxhp": 1020,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_ha_hau_khinh_y",
-            "Name": "Hạ Hầu Khinh Y",
-            "level": 8,
-            "exp": 467.288,
-            "hp": 2740,
-            "maxhp": 2740,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "f0bb2066-67fc-4529-9547-bed96b71615c",
-            "Name": "Hạ Hầu Kiệt",
-            "level": 18,
-            "exp": 0,
-            "hp": 7140,
-            "maxhp": 7140,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c2f54fda-d99a-4425-a0c0-6912abafe521",
-            "Name": "Chu Đội Trưởng",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "a77f8d3a-71d6-4e93-82d2-18bb2f7de558",
-            "Name": "Thương Nhân 1",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "bd300959-34f0-4b71-b8dd-29716e94c95f",
-            "Name": "Thương Nhân 2",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "d49463ec-7bf4-4982-b3db-5a7b2e502a7f",
-            "Name": "Gia Nhân Gác Cửa",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c20fdbe3-c0ff-409b-8f49-e8e4e075aa33",
-            "Name": "Tướng Lĩnh Vết Sẹo",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c76a4b0e-be02-4430-bd13-83a12399d126",
-            "Name": "Vệ Sĩ Quân Doanh",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_trieu_van_01",
-            "Name": "Triệu Vân",
-            "level": 45,
-            "exp": 0,
-            "hp": 34480,
-            "maxhp": 34480,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "45150f2d-91a1-4f7e-9e6f-ac09ee9cba25",
-            "Name": "Thống Lĩnh Quân Tiên Phong",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "89c47e57-b671-4453-bcce-7d608253ac09",
-            "Name": "Binh Lính Khăn Vàng",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "d2de40b5-6f05-4792-b7d6-7290229f6fc7",
-            "Name": "Phó Tướng Vương",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "3212a582-1ed3-4a78-b66f-5503186aea0c",
-            "Name": "Gia Tướng Lý",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_trieu_vu_01",
-            "Name": "Triệu Vũ",
-            "level": 18,
-            "exp": 967.968,
-            "hp": 12028740,
-            "maxhp": 12028740,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "2667ab51-3d9c-48a8-8a9d-8a6dbd1453c1",
-            "Name": "Công Tôn Toản",
-            "level": 35,
-            "exp": 0,
-            "hp": 20680,
-            "maxhp": 20680,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "64203aaa-96d0-4889-968c-5bcb93391c70",
-            "Name": "Công Tôn Bảo Nguyệt",
-            "level": 28,
-            "exp": 2500,
-            "hp": 13540,
-            "maxhp": 13540,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_ung_01",
-            "Name": "Thái Ung",
-            "level": 48,
-            "exp": 0,
-            "hp": 33940,
-            "maxhp": 33940,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_van_co_01",
-            "Name": "Thái Diễm",
-            "level": 15,
-            "exp": 806.0029999999999,
-            "hp": 7280,
-            "maxhp": 7280,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_thu_nghiep_thanh",
-            "Name": "Thái thú Nghiệp Thành",
-            "level": 35,
-            "exp": 0,
-            "hp": 25280,
-            "maxhp": 25280,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "97872d38-7de1-4bed-8842-0439008ced55",
-            "Name": "Vệ Sĩ Cổng Thành",
-            "level": 1,
-            "exp": 0,
-            "hp": 1200,
-            "maxhp": 1200,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "94161dc0-1dd7-4827-b7d0-295e7aa6cb4a",
-            "Name": "Chân Cơ",
-            "level": 12,
-            "exp": 516,
-            "hp": 5220,
-            "maxhp": 5220,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_quan_hoi_01",
-            "Name": "Quản Hợi",
-            "level": 21,
-            "exp": 0,
-            "hp": 0,
-            "maxhp": 9600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": [
-              {
-                "status_id": "TRONG_THUONG_CANH_GIOI",
-                "id": "TRONG_THUONG_CANH_GIOI",
-                "name": "Trọng Thương (Cảnh Giới Suy Giảm)",
-                "type": "injury",
-                "description": "Cựu thương chưa lành: gân cốt tổn hại, khí huyết suy kiệt, sức lực không thể phát huy trọn vẹn. Tu vi thật của người này vốn cao hơn nhiều, nhưng vết thương cũ đang đè nén cảnh giới xuống mức hiện tại. Có thể hồi phục hoàn toàn nhờ linh đan diệu dược, một cơ duyên lớn, hoặc bàn tay của bậc danh y — thời gian trôi qua KHÔNG tự chữa lành nó.",
-                "source": "Cựu thương chưa lành",
-                "duration": null,
-                "expiresAt": null
-              }
-            ]
-          },
-          {
-            "id": "bc2deedf-8f32-4bda-ad46-64f85823cc45",
-            "Name": "Bách Tính Chân Định",
-            "level": 1,
-            "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "8f2afbb3-f2f1-486a-974a-522b6e3c5c90",
-            "Name": "Chủ Tiệm Gấm Vóc",
-            "level": 1,
-            "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "world_npc_dai_kieu",
-            "Name": "Đại Kiều",
-            "level": 5,
-            "exp": 1.118,
-            "hp": 2480,
-            "maxhp": 2480,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "world_npc_tieu_kieu",
-            "Name": "Tiểu Kiều",
-            "level": 5,
-            "exp": 1.118,
-            "hp": 2480,
-            "maxhp": 2480,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          }
-        ],
-        "quests": []
-      },
-      {
-        "time": {
-          "year": 1,
-          "month": 2,
           "day": 20,
-          "hour": 5
+          "hour": 17
         },
-        "location_id": "4b93c497-d14a-4983-b249-4591386a7129",
+        "location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
         "weather": "Nắng ban mai",
         "characters": [
           {
             "id": "player",
             "Name": "Diệp Thần",
             "level": 1,
-            "exp": 26.699999999999996,
+            "exp": 26.799999999999997,
             "hp": 2000,
             "maxhp": 2000,
             "currency": 0,
@@ -4866,7 +4896,7 @@
             "id": "e5b3fb1d-8329-43ef-915b-80c17cb8c0c5",
             "Name": "Kiều Dao",
             "level": 12,
-            "exp": 0,
+            "exp": 7.482,
             "hp": 5220,
             "maxhp": 5220,
             "currency": 0,
@@ -4877,9 +4907,434 @@
             "id": "e167e886-9449-43ab-b3ae-b8c0d6d39832",
             "Name": "Kiều Sương",
             "level": 12,
-            "exp": 0,
+            "exp": 7.482,
             "hp": 5220,
             "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "lore_npc_ton_kien",
+            "Name": "Tôn Kiên",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          }
+        ],
+        "quests": []
+      },
+      {
+        "time": {
+          "year": 1,
+          "month": 2,
+          "day": 20,
+          "hour": 17
+        },
+        "location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
+        "weather": "Nắng ban mai",
+        "characters": [
+          {
+            "id": "player",
+            "Name": "Diệp Thần",
+            "level": 1,
+            "exp": 26.9,
+            "hp": 2000,
+            "maxhp": 2000,
+            "currency": 0,
+            "inventory": [
+              {
+                "Name": "Lương Thảo Quân Dụng",
+                "quantity": 500
+              }
+            ],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_dieu_thuyen",
+            "Name": "Điêu Thuyền",
+            "level": 1,
+            "exp": 22.499999999999993,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_tham_tu_khan_vang_01",
+            "Name": "Thám Tử Khăn Vàng",
+            "level": 2,
+            "exp": 0,
+            "hp": 1020,
+            "maxhp": 1020,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ha_hau_khinh_y",
+            "Name": "Hạ Hầu Khinh Y",
+            "level": 8,
+            "exp": 467.288,
+            "hp": 2740,
+            "maxhp": 2740,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "f0bb2066-67fc-4529-9547-bed96b71615c",
+            "Name": "Hạ Hầu Kiệt",
+            "level": 18,
+            "exp": 0,
+            "hp": 7140,
+            "maxhp": 7140,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c2f54fda-d99a-4425-a0c0-6912abafe521",
+            "Name": "Chu Đội Trưởng",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "a77f8d3a-71d6-4e93-82d2-18bb2f7de558",
+            "Name": "Thương Nhân 1",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "bd300959-34f0-4b71-b8dd-29716e94c95f",
+            "Name": "Thương Nhân 2",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "d49463ec-7bf4-4982-b3db-5a7b2e502a7f",
+            "Name": "Gia Nhân Gác Cửa",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c20fdbe3-c0ff-409b-8f49-e8e4e075aa33",
+            "Name": "Tướng Lĩnh Vết Sẹo",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c76a4b0e-be02-4430-bd13-83a12399d126",
+            "Name": "Vệ Sĩ Quân Doanh",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_trieu_van_01",
+            "Name": "Triệu Vân",
+            "level": 45,
+            "exp": 0,
+            "hp": 34480,
+            "maxhp": 34480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "45150f2d-91a1-4f7e-9e6f-ac09ee9cba25",
+            "Name": "Thống Lĩnh Quân Tiên Phong",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "89c47e57-b671-4453-bcce-7d608253ac09",
+            "Name": "Binh Lính Khăn Vàng",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "d2de40b5-6f05-4792-b7d6-7290229f6fc7",
+            "Name": "Phó Tướng Vương",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "3212a582-1ed3-4a78-b66f-5503186aea0c",
+            "Name": "Gia Tướng Lý",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_trieu_vu_01",
+            "Name": "Triệu Vũ",
+            "level": 18,
+            "exp": 967.968,
+            "hp": 12028740,
+            "maxhp": 12028740,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "2667ab51-3d9c-48a8-8a9d-8a6dbd1453c1",
+            "Name": "Công Tôn Toản",
+            "level": 35,
+            "exp": 0,
+            "hp": 20680,
+            "maxhp": 20680,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "64203aaa-96d0-4889-968c-5bcb93391c70",
+            "Name": "Công Tôn Bảo Nguyệt",
+            "level": 28,
+            "exp": 2500,
+            "hp": 13540,
+            "maxhp": 13540,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_ung_01",
+            "Name": "Thái Ung",
+            "level": 48,
+            "exp": 0,
+            "hp": 33940,
+            "maxhp": 33940,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_van_co_01",
+            "Name": "Thái Diễm",
+            "level": 15,
+            "exp": 806.0029999999999,
+            "hp": 7280,
+            "maxhp": 7280,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_thu_nghiep_thanh",
+            "Name": "Thái thú Nghiệp Thành",
+            "level": 35,
+            "exp": 0,
+            "hp": 25280,
+            "maxhp": 25280,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "97872d38-7de1-4bed-8842-0439008ced55",
+            "Name": "Vệ Sĩ Cổng Thành",
+            "level": 1,
+            "exp": 0,
+            "hp": 1200,
+            "maxhp": 1200,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "94161dc0-1dd7-4827-b7d0-295e7aa6cb4a",
+            "Name": "Chân Cơ",
+            "level": 12,
+            "exp": 516,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_quan_hoi_01",
+            "Name": "Quản Hợi",
+            "level": 21,
+            "exp": 0,
+            "hp": 0,
+            "maxhp": 9600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": [
+              {
+                "status_id": "TRONG_THUONG_CANH_GIOI",
+                "id": "TRONG_THUONG_CANH_GIOI",
+                "name": "Trọng Thương (Cảnh Giới Suy Giảm)",
+                "type": "injury",
+                "description": "Cựu thương chưa lành: gân cốt tổn hại, khí huyết suy kiệt, sức lực không thể phát huy trọn vẹn. Tu vi thật của người này vốn cao hơn nhiều, nhưng vết thương cũ đang đè nén cảnh giới xuống mức hiện tại. Có thể hồi phục hoàn toàn nhờ linh đan diệu dược, một cơ duyên lớn, hoặc bàn tay của bậc danh y — thời gian trôi qua KHÔNG tự chữa lành nó.",
+                "source": "Cựu thương chưa lành",
+                "duration": null,
+                "expiresAt": null
+              }
+            ]
+          },
+          {
+            "id": "bc2deedf-8f32-4bda-ad46-64f85823cc45",
+            "Name": "Bách Tính Chân Định",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "8f2afbb3-f2f1-486a-974a-522b6e3c5c90",
+            "Name": "Chủ Tiệm Gấm Vóc",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "world_npc_dai_kieu",
+            "Name": "Đại Kiều",
+            "level": 5,
+            "exp": 3.354,
+            "hp": 2480,
+            "maxhp": 2480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "world_npc_tieu_kieu",
+            "Name": "Tiểu Kiều",
+            "level": 12,
+            "exp": 3.354,
+            "hp": 6420,
+            "maxhp": 6420,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "e5b3fb1d-8329-43ef-915b-80c17cb8c0c5",
+            "Name": "Kiều Dao",
+            "level": 12,
+            "exp": 14.964,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "e167e886-9449-43ab-b3ae-b8c0d6d39832",
+            "Name": "Kiều Sương",
+            "level": 12,
+            "exp": 14.964,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "lore_npc_ton_kien",
+            "Name": "Tôn Kiên",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ton_sach_01",
+            "Name": "Tôn Sách",
+            "level": 38,
+            "exp": 0,
+            "hp": 22340,
+            "maxhp": 22340,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ton_quyen_01",
+            "Name": "Tôn Quyền",
+            "level": 30,
+            "exp": 0,
+            "hp": 15380,
+            "maxhp": 15380,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ton_thuong_huong_01",
+            "Name": "Tôn Thượng Hương",
+            "level": 12,
+            "exp": 0,
+            "hp": 16220,
+            "maxhp": 16220,
             "currency": 0,
             "inventory": [],
             "longTermStatuses": []
@@ -4912,6 +5367,12 @@
         "npc_thai_ung_01": {
           "save_life": {
             "last_event_turn": 40,
+            "streak": 1
+          }
+        },
+        "lore_npc_ton_kien": {
+          "gift": {
+            "last_event_turn": 73,
             "streak": 1
           }
         }
@@ -9734,9 +10195,206 @@
       ]
     },
     {
-      "id": "3e569a4b-6378-4f1b-8e3b-a51a672ca737",
+      "id": "17099232-901f-4c63-8a12-1afeed417e51",
       "type": "user_custom_action",
       "content": "Tôn Kiên giới thiệu 3 người con cho ngươi gặp mặt. Tôn Sách, Tôn Quyền và Tôn Thượng Hương"
+    },
+    {
+      "id": "1ec55cba-61b9-46a6-a13c-8a1e69eee719",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Giữa gian đại yến phòng rộng lớn và tráng lệ của phủ Thái thú *Ngô Quận*, khói hương trầm ngào ngạt lan tỏa từ chiếc đỉnh đồng ba chân chạm hình kỳ lân cổ kính, hòa quyện cùng mùi rượu nếp nồng nàn và hương vị đậm đà của các món sơn hào hải vị vùng sông nước *Giang Đông*. Ánh đèn lồng đỏ lung linh hắt những luồng ánh sáng màu vàng cam ấm áp lên những chiếc bàn án bằng gỗ gụ quý giá. \n*Tôn Kiên* vỗ mạnh hai bàn tay to lớn vào nhau, bật ra tiếng cười hào sảng làm rung động cả gian sảnh, rồi quay sang *Diệp Thần* với ánh mắt ngập tràn sự tự hào và niềm hân hoan khó giấu. Lão phất mạnh vạt gấm bào màu tía, vui vẻ hào sảng cất giọng giới thiệu ba người con thân yêu vừa bước qua ngưỡng cửa chính điện cho *Diệp Thần*:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Ha ha ha! Khởi Minh tướng quân! Nhân buổi yến tiệc vui vẻ hôm nay, Tôn Kiên ta xin được giới thiệu ba đứa con hổ tử của ta với ngài! Đã lâu bọn trẻ nghe danh uy chấn thiên hạ của *Bình Tây Tướng Quân*, hôm nay mới có dịp ra bái kiến chân nhân!"
+        },
+        {
+          "type": "narrative",
+          "content": "Dứt lời, từ phía hành lang gỗ lát đá cẩm thạch phía sau tấm rèm lụa thêu hình mãnh hổ, ba thân ảnh trẻ tuổi hiên ngang, phi phàm nối gót nhau sải bước tiến vào bên trong đại sảnh.\nĐi đầu hàng ngũ là *Tôn Sách*. Thiếu niên tướng quân mười tám tuổi sở hữu vóc dáng cao ráo, vạm vỡ, bờ vai rộng rắn rỏi khoác trên mình bộ chiến giáp giát đồng xám thẫm lấp lánh. Gương mặt hắn góc cạnh kiên định, đôi mắt sáng như chim ưng tỏa ra luồng khí thái dũng mãnh, kiêu hãnh của một mãnh tướng sa trường thực thụ. Hắn bước đi dũng mãnh như rồng cuộn hổ ngồi, tay tựa nhẹ vào chuôi đoản đao bên hông, toát lên sự tự tin và dũng khí phi thường.\nNgay sau lưng hắn là *Tôn Quyền*. Thiếu niên mười bốn tuổi lại mang một phong thái hoàn toàn mây nước trái ngược với người anh trai. Hắn khoác bộ trường bào tơ tằm màu xanh ngọc bích thanh nhã, gương mặt vuông vức chính trực, vầng trán rộng thể hiện sự điềm tĩnh, trầm ổn và trí tuệ thâm sâu vượt xa tuổi tác. Đôi mắt màu xanh biếc kỳ ảo của hắn nhìn xoáy vào không gian với sự sâu sắc, chín chắn của một bậc mưu sĩ nắm giữ đại cục.\nVà bước ở vị trí sau cùng chính là ái nữ duy nhất của *Tôn Kiên* — *Tôn Thượng Hương*. Thiếu nữ mười lăm tuổi khoác trên mình bộ chiến giáp nhẹ bằng da thuộc viền đỏ rực rỡ tựa như ngọn lửa xuân, tôn lên thân hình thon thả, săn chắc và căng tràn nhựa sống dẻo dai của người luyện võ từ nhỏ. Mái tóc đen tuyền dài mượt được buộc cao thành đuôi ngựa năng động đung đưa theo từng bước đi, để lộ vầng trán thanh tú và đôi mắt phượng to tròn, sắc sảo. Hông nàng giắt một thanh đoản kiếm khảm xà cừ, đôi gò má dẻ hồng hào mịn màng toát lên vẻ lanh lợi, kiêu kỳ, hiếu thắng nhưng cũng cực kỳ diễm lệ.\nVừa bước qua ngưỡng cửa, nhìn thấy *Diệp Thần* đang ngồi ở vị trí thượng khách trân quý, *Tôn Thượng Hương* đột ngột khựng nhẹ bước chân. Đôi mắt phượng to tròn của nàng mở to ngơ ngác, toàn thân như có một luồng điện nhẹ chạy qua.\nTrước mắt nàng không phải là một vị võ tướng thô kệch, bặm trợn, vai u thịt bắp như nàng vẫn hằng tưởng tượng về các vị tướng quân sa trường. Ngồi bên cạnh phụ thân nàng là một thiếu niên anh tuấn phi thường, gương mặt góc cạnh hoàn mỹ tựa như tạc từ bạch ngọc, sống mũi cao thanh tú cùng đôi mắt sáng ngời chứa đựng khí thái vương giả bá đạo áp đảo quần hùng. Hắn khoác trên mình bộ thường phục bạch y bằng lụa tơ tằm mềm mại, hông đeo thanh thần binh *Ỷ Thiên Kiếm* lẫm liệt cùng chiếc lệnh bài *Bình Tây Tướng Quân* sáng quắc. Phong thái nho nhã thoát tục kết hợp cùng uy danh lẫm liệt một thương trảm *Trương Mạn Thành*, diệt *Quản Hợi* cứu vớt hàng vạn bách tính mà nàng nghe đồn bấy lâu nay, lập tức tạo thành một sức hút chí mạng. Trái tim nhỏ bé của *Tôn Thượng Hương* đập liên hồi rộn ràng trong lồng ngực, gò má nàng trong chớp mắt đỏ rực lên như rặng mây chiều xuân vì bị thu hút hoàn toàn trước dung mạo và khí thái của hắn.\n*Tôn Sách* sải bước tiến lên trước bàn án, chắp hai tay cúi đầu thật thấp trước *Diệp Thần*, cất giọng trầm hùng đầy vẻ kiêu hãnh và kính trọng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Sách",
+          "content": "Bái kiến *Bình Tây Tướng Quân*! *Tôn Sách* ta nghe danh thương pháp *Bách Điểu Triều Phụng* tuyệt luân cùng uy danh tiễu trừ tàn tặc *Khăn Vàng* của Tướng quân đã lâu! Hôm nay tận mắt chứng kiến phong thái của ngài, *Bá Phù* ta thực sự tâm phục khẩu phục!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Quyền* cũng tiến lên một bước, lễ phép nghiêng mình thực hiện nghi lễ văn gia chuẩn mực, giọng nói điềm tĩnh, thông tuệ vang lên:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Quyền",
+          "content": "*Tôn Quyền* bái kiến Tướng quân. Nghe tin Tướng quân tọa trấn *Chân Định*, không tham gánh chiến sự *Trung Nguyên* để bảo toàn lực lượng và chăm lo cho bách tính, *Trọng Mưu* ta vô cùng thán phục tầm nhìn chiến lược sâu rộng của ngài."
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Thượng Hương* đứng bên cạnh hai ca ca, dù cố giữ vẻ kiêu kỳ, ngang bướng thường ngày nhưng đôi mắt phượng vẫn không thể rời khỏi gương mặt anh tuấn của *Diệp Thần*. Nàng khẽ hắng giọng, hai tay siết nhẹ đốc đoản kiếm bên hông để che giấu sự bối rối dạt dào, cất giọng lanh lót nhưng e ấp:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Thiếp... thiếp là *Tôn Thượng Hương*. Thiếp nghe người ta đồn Tướng quân võ nghệ vô song, lại am hiểu âm luật... Không biết... không biết Tướng quân có thực sự giỏi như những lời đồn đại ngoài kia không?"
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Kiên* thấy dáng vẻ thẹn thùng rồi lại nổi tính hiếu thắng trêu chọc của ái nữ, liền khẽ lắc đầu cười trừ đầy bất lực, cất giọng mắng yêu:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Ha ha ha! Hương nhi, con thật là vô lễ! *Diệp* Tướng quân là bậc anh hùng cái thế trảm tướng diệt tà, sao con lại dám nghi ngờ bản lĩnh của ngài?"
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* thong thả đặt chén rượu ngọc xuống bàn án gỗ gụ, phong thái ung dung tự tại, khóe môi nhếch lên một nụ cười dịu dàng đầy cuốn hút. Hắn nhìn ba người con của *Tôn Kiên*, ánh mắt đập nhảy luồng nhiệt năng tán thưởng bước chân xuống thềm đá, tiến lại gần bọn họ:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tôn Thái thú quá lời rồi. Ba vị công tử và tiểu thư đây quả thực là rồng phượng trong loài người! *Bá Phù* công tử dũng mãnh kiêu hãnh, *Trọng Mưu* công tử điềm tĩnh thông tuệ, còn *Thượng Hương* cô nương lại xinh đẹp, lanh lợi và dũng cảm phi thường. Được gặp mặt ba người, *Diệp Thần* ta vô cùng vinh hạnh."
+        },
+        {
+          "type": "narrative",
+          "content": "Lời khen ngợi vừa ấm áp vừa chứa đựng sự chân thành của *Diệp Thần* làm cả gian đại yến phòng trào dâng bầu không khí vô cùng hòa hợp, vui vẻ. *Tôn Thượng Hương* nghe hắn khen mình xinh đẹp và dũng cảm, gò má càng thêm đỏ bừng rực rỡ. Nàng khẽ chớp đôi mắt phượng, lén lút nhìn làn da trắng ngần và bờ vai rộng rắn rỏi của hắn, trái tim dâng lên một luồng cảm xúc tình ái ngọt ngào, rạo rực chưa từng có.\nLúc này, bốn vị nương tử xinh đẹp đi theo *Diệp Thần* là *Triệu Vũ*, *Điêu Thuyền*, *Kiều Dao* (*Đại Kiều*) và *Kiều Sương* (*Tiểu Kiều*) cũng đang an tọa bên bàn án gụ. *Triệu Vũ* tay ôm ngân thương, ánh mắt sắc sảo đánh giá sự dũng mãnh của *Tôn Sách* và vẻ hiếu thắng của *Tôn Thượng Hương*. Nàng khẽ mỉm cười, thì xầm vào tai *Điêu Thuyền*:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vũ",
+          "content": "Thuyền nhi muội xem kìa, cô nàng *Tôn Thượng Hương* kia vừa nhìn thấy phu quân chúng ta là mắt đã dính chặt lấy chàng rồi. Dáng vẻ kiêu kỳ đó hệt như muội ngày xưa vậy!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* nhí nhảnh che miệng cười khúc khích, nụ cười tươi tắn như hoa xuân nở ban mai:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Hì hì, Diệp ca ca của chúng ta anh tuấn lẫm liệt như vậy, cô gái nào nhìn thấy mà chẳng mê mẩn chứ! Thêm một người tỷ tỷ nữa gia nhập gia đình chúng ta càng đông vui mà Vũ Nhi tỷ!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Kiều Dao* và *Kiều Sương* dịu dàng rót rượu, đôi mắt trong veo ngập tràn hạnh phúc nhìn phu quân của mình đang tỏa sáng rực rỡ giữa các tướng lĩnh *Giang Đông*.\n*Tôn Kiên* thấy sự hòa hợp chân thành giữa hai bên thế lực, trong lòng dâng lên sự kính nể và ngạc nhiên tột độ dành cho *Diệp Thần*. Lão nâng cao chén rượu bạc, hào sảng lên tiếng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Khởi Minh Tướng Quân! Trận đàm đạo hôm nay thực sự làm Tôn Kiên ta vô cùng tâm phục khẩu phục! Tướng quân vừa có đức lớn thương dân, vừa có uy danh chấn động thiên hạ, lại chỉ dạy cho các con ta những lời quý giá. Tôn Kiên ta xin kính Tướng quân một ly, mong hai nhà *Chân Định* và *Ngô Quận* chúng ta từ nay về sau mãi vĩnh kết đồng minh, kề vai sát cánh!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Được! Xin nâng chén cùng Tôn Thái thú! Vì sự bình yên của bách tính thiên hạ!"
+        },
+        {
+          "type": "narrative",
+          "content": "Hai người cùng nâng chén cạn ly trong tiếng hô vang chúc tụng cuồng nhiệt của các danh tướng *Trình Phổ*, *Hoàng Cái*, *Hàn Đương* và toàn thể sĩ đồn. Mối quan hệ thân tình giữa *Diệp Thần* và *Tôn Kiên* lập tức gia tăng mạnh mẽ, thắt chặt mối liên minh quân sự vững chắc giữa hai khu vực *Chân Định* và *Ngô Quận*.\nTrong suốt buổi yến tiệc, *Tôn Thượng Hương* liên tục tìm cơ hội tiến lại gần bàn án của *Diệp Thần*. Nàng rót rượu dâng lên tận tay hắn, đôi bàn tay ngọc thạch khẽ chạm nhẹ vào ngón tay hắn làm nàng run lên một nhịp thẹn thùng đầy ngọt ngào. Nàng hăng hái hỏi hắn về kỹ xảo cưỡi ngựa, về trận múa thương trảm *Trương Mạn Thành*, đôi mắt phượng lấp lánh sự ngưỡng mộ sâu sắc không thể che giấu. *Diệp Thần* điềm tĩnh đối đáp, trò chuyện ôn nhu làm thiếu nữ *Giang Đông* hoàn toàn xiêu lòng, chìm đắm trong luồng lửa tình vừa chớm nở.\nĐêm về sâu, ánh đèn lồng đỏ lung linh hắt bóng xuống dòng sông *Trường Giang* cuồn cuộn sóng nước. Buổi yến tiệc tiễn chân và ra mắt khép lại trong sự viên mãn tột cùng. *Diệp Thần* cùng các nương tử được *Tôn Kiên* và ba người con kính cẩn tiễn về gian phòng khách sang trọng nhất trong phủ đệ *Ngô Quận* để nghỉ ngơi.\nBên trong gian phòng khách ngạt ngào hương hoa mộc tê và khói trầm ấm áp, *Diệp Thần* đứng tựa lưng vào ban công gỗ, giắt chiếc lệnh bài *Bình Tây Tướng Quân* sáng lấp lóa bên hông. *Triệu Vũ*, *Điêu Thuyền*, *Đại Kiều* và *Tiểu Kiều* vây quanh hắn, nụ cười rạng rỡ đong đầy hạnh phúc. Mối quan hệ với thế lực *Tôn Kiên* đã hoàn toàn vững chắc, sự chú ý của thiếu nữ *Tôn Thượng Hương* đã hướng trọn về hắn, mở ra những triển vọng vĩ đại cho tương lai.\nBạn đang đứng trên ban công phòng khách phủ đệ *Ngô Quận* cùng các nương tử, *Tôn Kiên* và ba người con *Tôn Sách*, *Tôn Quyền*, *Tôn Thượng Hương* vô cùng kính trọng bạn. Bạn sẽ lựa chọn bước đi tiếp theo ra sao?"
+        }
+      ]
+    },
+    {
+      "id": "289557ad-9ae1-4737-b20f-7a0a0b93cf45",
+      "type": "user_choice",
+      "content": "Chấp nhận lời mời của Tôn Sách và Tôn Thượng Hương ra diễn võ trường Ngô Quận sáng hôm sau để giao lưu võ nghệ và chỉ giáo thương pháp cho hai người. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Thu phục hoàn toàn sự thán phục của Tôn Sách và gia tăng mạnh mẽ tình cảm tình ái của Tôn Thượng Hương}"
+    },
+    {
+      "id": "09983187-42f6-489e-9fcb-179087465209",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Ánh nắng sớm rực rỡ và hanh hao của buổi bình minh xua tan lớp sương mù mỏng manh vương trên những rặng trúc xanh ngắt quanh *Diễn Võ Trường Ngô Quận*. Luồng gió thu miền sông nước thổi qua làm tung bay vạt áo bào màu bạch y tinh khôi và mái tóc đen tuyền của *Diệp Thần*. Ngay từ sáng sớm hôm sau, *Diệp Thần* đã khoác trên mình bộ ngân giáp giát bạc sáng quắc như tuyết, hông đeo thanh thần binh *Ỷ Thiên Kiếm*, tay cầm ngọn *Bách Điểu Triều Phụng Thương* tỏa ra hàn quang rực rỡ, cùng *Tôn Sách* và *Tôn Thượng Hương* tiến ra giữa khoảng sân đá rộng lớn của diễn võ trường.\nTrên đài quan sát bằng gỗ gụ phía trên, \"Mãnh Hổ Giang Đông\" *Tôn Kiên* cùng *Tôn Quyền* và sáu vị nương tử xinh đẹp tuyệt trần của *Diệp Thần* là *Hạ Hầu Khinh Y*, *Điêu Thuyền*, *Triệu Vũ*, *Công Tôn Bảo Nguyệt*, *Thái Diễm*, *Chân Cơ* cùng nhị Kiều (*Đại Kiều*, *Tiểu Kiều*) đều an tọa thưởng trà, háo hức dõi theo màn giao lưu võ nghệ giữa ba người.\n*Tôn Sách* bước ra giữa diễn võ trường, vóc dáng cao ráo vạm vỡ khoác giáp đồng xám thẫm lấp lánh. Đôi mắt hắn rực lên chí khí sa trường mãnh liệt, hai tay lăm lăm ngọn trường thương thép thô ráp. Hắn chắp tay thi lễ với *Diệp Thần*, rồi vặn mạnh thắt lưng, vung thương đâm thẳng ra một đòn xé gió dữ dội:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Sách",
+          "content": "Khởi Minh tướng quân! *Bá Phù* ta từ lâu đã ngưỡng mộ thương pháp *Bách Điểu Triều Phụng* chấn động thiên hạ của ngài! Xin ngài hãy ra tay, chỉ giáo cho ta vài chiêu!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* đứng giữa sân với phong thái ung dung tự tại, khóe môi nhếch lên nụ cười điềm tĩnh. Hắn không hề lùi bước hay tỏ ra nao núng, thân hình uyển chuyển như rồng lướt sóng nhẹ nhàng nghiêng người sang trái một tấc, dễ dàng né tránh mũi thương dữ dội của *Tôn Sách*. Ngay khoảnh khắc *Tôn Sách* xoay hông quét thương ngang hông, *Diệp Thần* khẽ nâng thân *Bách Điểu Triều Phụng Thương* lên đón đỡ.\n\"Keng—!\"\nTiếng va chạm thanh thoát, giòn giã vang vọng khắp diễn võ trường. Lực chấn động cuồng bạo của *Tôn Sách* khi chạm vào thân thương của *Diệp Thần* liền bị hóa giải trọn vẹn tựa như đá ném xuống ao sâu. *Diệp Thần* nương theo đà thương của đối phương, khẽ xoay nhẹ cổ tay, dùng mũi thương chỉ thẳng vào điểm yếu nơi khuỷu tay và bộ pháp đang loạng oạng của *Tôn Sách*, cất giọng trầm ấm chỉ giáo tận tình:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Bá Phù huynh, lực đao thương của huynh dũng mãnh phi thường, mang hào khí của mãnh thú hạ sơn. Tuy nhiên, huynh quá dồn lực vào cánh tay mà quên mất sự phối hợp giữa nhịp thở và thắt lưng. Khi vung thương, nếu dồn hết lực vào đòn đánh đầu tiên, bộ pháp phía dưới sẽ bị hổng, tạo ra khoảng trống chết người cho kẻ địch phản kích!"
+        },
+        {
+          "type": "narrative",
+          "content": "Dứt lời, *Diệp Thần* vận chuyển chân nguyên cuồn cuộn chảy khắp kinh mạch, thi triển ra chiêu thức chuẩn mực của *Bách Điểu Triều Phụng*. Mũi *Bách Điểu Triều Phụng Thương* rung lên mãnh liệt, tạo ra muôn vàn thương ảnh lộng lẫy ngập trời tựa như trăm loài chim triều bái phượng hoàng. Luồng thương khí nhu hòa tựa mây cuộn vây hãm lấy ngọn thương của *Tôn Sách*, khéo léo gạt nhẹ làm ngọn thương sắt trên tay hắn tuột khỏi lòng bàn tay, cắm phập xuống nền đá!\n*Tôn Sách* nhìn bàn tay tê dại và ngọn thương cắm dưới đất, rồi lại nhìn những đường thương ảo mộng, tinh diệu đến cảnh giới tối cao cùng sự chỉ giáo tận tình của *Diệp Thần*. Sự kiêu hãnh của một mãnh tướng sa trường trong hắn hoàn toàn bị khuất phục. *Tôn Sách* đại ngộ, đôi mắt rực sáng sự kính nể tột cùng. Hắn lập tức tiến lại gần, quỳ một gối xuống nền đá, chắp hai tay cúi đầu tâm phục khẩu phục hoàn toàn:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Sách",
+          "content": "Thương pháp thần kỳ! Sự chỉ giáo của *Khởi Minh* tướng quân như ánh sáng xua tan sương mù trong lòng ta! *Bá Phù* ta từ nay xin tâm phục khẩu phục hoàn toàn trước bản lĩnh và đức độ của ngài!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* mỉm cười dịu dàng, bước lại gần nâng *Tôn Sách* dậy, vỗ nhẹ vào bả vai vạm vỡ của hắn:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Bá Phù huynh quá lời rồi. Ngài có tư chất võ học cực cao, chỉ cần rèn luyện thêm sự trầm ổn trong bộ pháp, tương lai nhất định sẽ là vị đại tướng vô song thiên hạ!"
+        },
+        {
+          "type": "narrative",
+          "content": "Đứng bên cạnh, *Tôn Thượng Hương* chứng kiến toàn bộ màn thể hiện thương pháp tuyệt mĩ cùng sự chỉ giáo rộng lượng của *Diệp Thần* dành cho ca ca mình, trái tim thiếu nữ của nàng đập liên hồi rộn ràng trong lồng ngực. Nàng khoác bộ chiến giáp nhẹ bằng da thuộc viền đỏ rực rỡ, mái tóc đuôi ngựa đung đưa năng động, gò má dẻ hồng hào ửng lên vệt thẹn thùng e ấp. \nThấy ca ca lùi lại, *Tôn Thượng Hương* hít một hơi thật sâu để lấy lại dũng khí. Nàng tuốt thanh đoản kiếm khảm xà cừ bên hông, đôi mắt phượng to tròn ngập tràn sự tình ái và ngưỡng mộ ngước nhìn *Diệp Thần*, cất giọng lanh lót nhưng chứa đựng sự nũng nịu e ấp:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Diệp... Diệp ca ca! Tới lượt thiếp rồi! Thiếp cũng muốn được phu quân chỉ giáo kiếm pháp!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* khẽ nhướng mày, nụ cười phong lưu ấm áp xuất hiện trên gương mặt góc cạnh anh tuấn. Hắn thu hồi ngọn *Bách Điểu Triều Phụng Thương* ra sau lưng, chỉ dùng một tay không bước lại gần nàng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Được chứ. Thượng Hương cô nương cứ việc ra chiêu, ta sẽ nương theo đòn đánh của nàng."
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Thượng Hương* cắn bờ môi đào chúm chím, vung đoản kiếm lao tới. Đường kiếm của nàng nhanh nhẹn, lanh lợi nhưng lại thiếu đi sự kiên định. *Diệp Thần* không hề vung thương đón đỡ, mà lướt nhẹ bộ pháp áp sát ngay sau lưng nàng. Hắn vươn bàn tay to lớn, rắn rỏi khẽ nắm lấy cổ tay thon dài mềm mại của *Tôn Thượng Hương*, tay kia nhẹ nhàng ôm lấy bờ eo thon gọn, săn chắc ẩn sau lớp giáp da của nàng để uốn nắn tư thế ra đòn.\nHơi ấm nam tính cuồn cuộn từ lồng ngực vạm vỡ của *Diệp Thần* phả nhẹ vào vành tai và gò má nõn nà của nàng. Mùi hương lụa tơ tằm bạch y nồng nàn quyện cùng khí thái vương giả bá đạo của hắn bao trùm lấy toàn bộ giác quan của thiếu nữ *Giang Đông*. \n\"Ưm...\"\n*Tôn Thượng Hương* toàn thân run lên một nhịp tê dại. Cảm giác được bàn tay rắn rỏi của *Diệp Thần* trực tiếp đụng chạm vào bờ eo và cổ tay mình làm luồng nhiệt năng rạo rực chạy thẳng vào đại não. Đôi mắt phượng của nàng mờ dại đi vì khoái cảm ngọt ngào, trái tim đập dồn dập như trống trận. Nàng hoàn toàn quên mất việc vung kiếm, chỉ biết e ấp rúc đầu vào lồng ngực vạm vỡ của hắn, đôi gò má đỏ bừng rực rỡ như rặng mây chiều xuân. Tình cảm tình ái trong lòng *Tôn Thượng Hương* dành cho *Diệp Thần* bộc phát gia tăng mạnh mẽ đến mức cực hạn, nàng ngước đôi mắt tròn xoe đong đầy sự e ấp và ngưỡng mộ tột cùng nhìn hắn:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Diệp ca ca... Người chàng nóng quá... Bàn tay chàng ấm thật đấy... Thiếp... thiếp từ nay xin nguyện nghe lời chỉ giáo của một mình chàng..."
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* cúi đầu nhìn thiếu nữ dũng mãnh đang nũng nịu trong lòng mình, khẽ mỉm cười cúi sát tai nàng thầm thì ôn nhu:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Thượng Hương nương tử ngoan. Nàng có thiên phú kiếm pháp rất tốt, chỉ cần dịu dàng và tập trung hơn một chút là hoàn hảo rồi."
+        },
+        {
+          "type": "narrative",
+          "content": "Trên đài quan sát, \"Mãnh Hổ Giang Đông\" *Tôn Kiên* thấy cảnh tượng con trai *Tôn Sách* tâm phục khẩu phục, còn ái nữ *Tôn Thượng Hương* thì e ấp rúc vào lòng *Diệp Thần* với tình cảm tình ái dạt dào, liền phá lên cười lớn đầy hào sảng. Lão vuốt chòm râu dài, vỗ tay bôm bốp khen ngợi:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Ha ha ha! Quá tuyệt vời! *Bình Tây Tướng Quân* quả thực là kỳ tài văn võ song toàn! Không chỉ khuất phục được *Bá Phù* nhà ta, mà đến con gái bướng bỉnh *Thượng Hương* cũng bị ngài thu phục hoàn toàn rồi!"
+        },
+        {
+          "type": "narrative",
+          "content": "Các nương tử *Triệu Vũ*, *Điêu Thuyền*, *Đại Kiều*, *Tiểu Kiều* đứng trên đài cũng che miệng cười khúc khích trước dáng vẻ thẹn thùng đáng yêu của *Tôn Thượng Hương*. \nMàn giao lưu võ nghệ tại *Diễn Võ Trường Ngô Quận* khép lại trong sự viên mãn và thán phục tuyệt đối. *Tôn Sách* coi *Diệp Thần* như bậc thầy kính nể nhất, còn *Tôn Thượng Hương* đã hoàn toàn trao trọn trái tim và tình cảm tình ái mãnh liệt cho vị *Bạch Y Tướng Quân* anh tuấn phi thường.\nCả đoàn người trở về đại yến phòng của phủ đệ *Ngô Quận*. Nắng trưa hanh hao chiếu rọi lên gian sảnh ngạt ngào hương trà Long Tĩnh. *Tôn Thượng Hương* không còn giữ vẻ kiêu kỳ ban đầu, nàng ngoan ngoãn ngồi bên cạnh *Diệp Thần*, liên tục gắp những món ăn ngon nhất dâng tận miệng phu quân, đôi mắt phượng đong đầy nhu tình ngọt ngào. Mối liên minh quân sự giữa *Chân Định* và *Ngô Quận* càng thêm thắt chặt vững chắc như bàn thạch.\nBạn đang ngồi tại đại sảnh phủ đệ *Ngô Quận* cùng *Tôn Kiên*, *Tôn Sách*, *Tôn Thượng Hương* và các vị nương tử, tình cảm của *Tôn Thượng Hương* và sự kính nể của *Tôn Sách* đã đạt mức tối đa. Bạn sẽ lựa chọn bước đi chiến lược tiếp theo ra sao?"
+        }
+      ]
+    },
+    {
+      "id": "b5285ae3-83a3-45a0-bef7-a9d67da246d1",
+      "type": "user_choice",
+      "content": "Ngỏ lời với Tôn Kiên chính thức xin đính hôn nạp Tôn Thượng Hương làm thiếp thất và ngỏ ý mời Tôn Sách cùng sang Chân Định giao lưu quân vụ thời gian ngắn. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Đạt được sự đồng ý tuyệt đối của Tôn Kiên, thắt chặt mối quan hệ thông gia hai nhà và gia tăng sức mạnh quân sự}"
     }
   ],
   "choices": [],
@@ -9759,5 +10417,5 @@
       "endTurn": 21
     }
   ],
-  "adventureTurnCount": 71
+  "adventureTurnCount": 78
 }
