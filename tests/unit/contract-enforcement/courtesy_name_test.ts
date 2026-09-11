@@ -52,13 +52,32 @@ describe('courtesy name scrub - generic tier (no roster)', () => {
     for (const s of inputs) expect(scrubCourtesyNames(s)).toBe(s);
   });
 
-  it('test_dialogue_is_returned_untouched', () => {
+  it('test_dialogue_introduction_and_direct_address_are_returned_untouched', () => {
     const input =
       'Tôn Kiên (tự Văn Đài) chắp tay: <dialogue speaker="Tôn Kiên">Tại hạ Tôn Kiên, tự Văn Đài. Văn Đài xin bái kiến!</dialogue> Hắn cười.';
     const out = scrubCourtesyNamesOutsideDialogue(input, ROSTER);
     expect(out.text).toBe(
       'Tôn Kiên chắp tay: <dialogue speaker="Tôn Kiên">Tại hạ Tôn Kiên, tự Văn Đài. Văn Đài xin bái kiến!</dialogue> Hắn cười.',
     );
+  });
+
+  it('test_reported_case_bracketed_gloss_inside_dialogue_is_removed', () => {
+    // Player rule 2026-09-11: in speech a courtesy name introduces or addresses,
+    // it never glosses a third party in brackets.
+    const input =
+      '<dialogue speaker="Bàng Thống">Đúng vậy. Lữ Bố (tự Phụng Tiên) tuy dũng mãnh kiệt xuất, tay sử dụng Phương Thiên Họa Kích, cưỡi Xích Thố xông pha vạn quân.</dialogue>';
+    const out = scrubCourtesyNamesOutsideDialogue(input, ROSTER);
+    expect(out.text).toBe(
+      '<dialogue speaker="Bàng Thống">Đúng vậy. Lữ Bố tuy dũng mãnh kiệt xuất, tay sử dụng Phương Thiên Họa Kích, cưỡi Xích Thố xông pha vạn quân.</dialogue>',
+    );
+    expect(out.changes).toEqual(['xoá "(tự Phụng Tiên)" trong lời thoại']);
+  });
+
+  it('test_dialogue_keeps_courtesy_address_and_ho_plus_tu_forms', () => {
+    // Direct address by courtesy name (superior -> subordinate, family) is speech, not a gloss.
+    const input =
+      '<dialogue speaker="Tào Tháo">Khởi Minh, ngươi cùng Phụng Hiếu và Nguyên Trực đi trước.</dialogue><dialogue speaker="Điêu Thuyền">Khởi Minh ca, thiếp đợi chàng.</dialogue>';
+    expect(scrubCourtesyNames(input, ROSTER)).toBe(input);
   });
 
   it('test_empty_and_non_string_input_do_not_crash', () => {

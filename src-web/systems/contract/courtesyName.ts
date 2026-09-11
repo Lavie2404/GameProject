@@ -127,7 +127,8 @@ function applyRoster(text: string, roster: readonly RosterEntry[], changes: stri
 
 /**
  * Scrub courtesy-name usage from every part of `text` that is NOT inside a
- * <dialogue> tag. Dialogue is returned byte-for-byte.
+ * <dialogue> tag. Inside dialogue only the bracketed gloss "(tự X)" is
+ * removed; introductions and direct address are left exactly as spoken.
  */
 export function scrubCourtesyNamesOutsideDialogue(
   text: string,
@@ -143,12 +144,23 @@ export function scrubCourtesyNamesOutsideDialogue(
     return out;
   };
 
+  // Inside dialogue (2026-09-11, player rule): a courtesy name may be used to
+  // INTRODUCE ("Tôn Kiên, tự Văn Đài") or to ADDRESS someone directly — never
+  // as a bracketed gloss on a third party ("Lữ Bố (tự Phụng Tiên) tuy dũng
+  // mãnh..."). Only the bracketed form is removed here; the appositive
+  // introduction is legitimate speech and stays.
+  const scrubDialogue = (block: string): string =>
+    block.replace(PAREN_GENERIC, (mm) => {
+      changes.push(`xoá "${mm.trim()}" trong lời thoại`);
+      return '';
+    });
+
   let result = '';
   let last = 0;
   DIALOGUE_RE.lastIndex = 0;
   let m: RegExpExecArray | null;
   while ((m = DIALOGUE_RE.exec(text)) !== null) {
-    result += scrubPart(text.slice(last, m.index)) + m[0];
+    result += scrubPart(text.slice(last, m.index)) + scrubDialogue(m[0]);
     last = m.index + m[0].length;
   }
   result += scrubPart(text.slice(last));
