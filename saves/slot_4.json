@@ -1,8 +1,8 @@
 {
   "id": "3dacff74-4249-4ea8-a097-c514e95f9812",
-  "currentTurn": 79,
+  "currentTurn": 83,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-11T06:35:49.513Z",
+  "timestamp": "2026-09-11T07:53:26.602Z",
   "gameSettings": {
     "storyTitle": "Tam quốc chí",
     "theme": "Dã sử, Huyền Huyễn, Tu Tiên, Quân sự, Cổ đại, Chiến tranh, Tam quốc",
@@ -127,9 +127,9 @@
       "year": 1,
       "month": 2,
       "day": 21,
-      "hour": 7
+      "hour": 12
     },
-    "weather": "Nắng ban mai",
+    "weather": "Nắng rực rỡ",
     "narrativeCombatState": {
       "isActive": false,
       "combatants": []
@@ -327,20 +327,20 @@
       {
         "id": "22b4a513-17d5-4682-8cb3-70f76dd17b10",
         "NPC": "Tôn Kiên",
-        "Standing": "Kính nể",
-        "Reason": "Hòa hợp đàm đạo và gia tăng thân tình giữa hai thế lực"
+        "Standing": "Thân thiết",
+        "Reason": "Đính hôn nạp Tôn Thượng Hương và liên minh thông gia hai nhà"
       },
       {
         "id": "cb71a4fb-dbfa-416a-9229-e4ce1f0c1e1b",
         "NPC": "Tôn Sách",
         "Standing": "Kính nể",
-        "Reason": "Khâm phục thương pháp tuyệt luân và sự chỉ giáo tận tình tại diễn võ trường"
+        "Reason": "Mời sang Chân Định giao lưu quân vụ"
       },
       {
         "id": "a5be9be5-63c2-4a28-b90b-64dbec8a0ba1",
         "NPC": "Tôn Thượng Hương",
         "Standing": "Yêu thích",
-        "Reason": "Rung động trước phong thái anh tuấn và bản lĩnh thương pháp kinh thế tại diễn võ trường"
+        "Reason": "Danh chính ngôn thuận đính hôn làm thiếp thất"
       }
     ],
     "quests": [],
@@ -373,7 +373,7 @@
         "isPlayer": true,
         "loreId": null,
         "level": 1,
-        "exp": 27,
+        "exp": 27.300000000000004,
         "progressionState": "Tu Luyện Thường",
         "ap": 5,
         "currency": 0,
@@ -383,7 +383,7 @@
           "def": 0,
           "spd": 0
         },
-        "current_location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
+        "current_location_id": "loc_chan_dinh",
         "baseHp": 2000,
         "baseAtk": 200,
         "baseDef": 100,
@@ -4074,32 +4074,32 @@
         "id": "lore_npc_ton_kien",
         "isPlayer": false,
         "loreId": null,
-        "level": 1,
+        "level": 52,
         "exp": 0,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
         "allocatedPoints": {
-          "hp": 6,
-          "atk": 3,
-          "def": 3,
-          "spd": 3
+          "hp": 191,
+          "atk": 188,
+          "def": 188,
+          "spd": 188
         },
         "current_location_id": "4b93c497-d14a-4983-b249-4591386a7129",
-        "baseHp": 200,
-        "baseAtk": 20,
-        "baseDef": 10,
-        "baseSpd": 30,
+        "baseHp": 1220,
+        "baseAtk": 122,
+        "baseDef": 61,
+        "baseSpd": 81,
         "baseCr": 15,
         "baseCdmg": 200,
         "baseDmgAmp": 100,
         "baseDmgRes": 100,
         "baseEvasion": 100,
-        "hp": 1400,
-        "maxhp": 1400,
-        "atk": 50,
-        "def": 40,
-        "spd": 60,
+        "hp": 39420,
+        "maxhp": 39420,
+        "atk": 2002,
+        "def": 1941,
+        "spd": 1961,
         "cr": 15,
         "cdmg": 200,
         "dmgAmp": 100,
@@ -4139,13 +4139,20 @@
         },
         "isCompanion": false,
         "affinity": 5,
-        "description": "Mãnh Hổ Giang Đông, mãnh tướng dũng mãnh kiệt xuất đang tích trữ binh mã tại Ngô Quận.",
+        "description": "",
         "Name": "Tôn Kiên",
-        "realm": "Phàm Nhân",
+        "realm": "Kim Đan",
         "incomingHealing": 1,
-        "maxExp": 100,
+        "maxExp": 708545,
         "skills": [],
-        "affinityDirection": "đang ấm lên"
+        "affinityDirection": "đang ấm lên",
+        "Role": "Huyện Úy Ngô Quận, Mãnh Hổ Giang Đông",
+        "Appearance": "Thân hình cao lớn vạm vỡ, bờ vai rộng xẻ núi, ánh mắt sắc lẹm như mãnh thú săn mồi. Ông khoác trên mình bộ chiến giáp sắt đen dầm sương gió, áo phong phong hỏa màu đỏ rực như ngọn lửa. Gương mặt cương nghị với bộ râu hùm uy nghi, khí thái trẫm lặng nhưng tỏa ra sát khí dũng mãnh của một mãnh tướng dạn dày chiến trường.",
+        "Backstory": "Tôn Kiên xuất thân từ đất Phú Xuân, từng nổi danh thiên hạ nhờ một mình cầm đao tiêu diệt toán cướp biển trên sông khi mới mười bảy tuổi. Trải qua nhiều trận chiến dẹp loạn thủy đạo và thổ cẩm, ông được triều đình phong chức quan địa phương. Hiện tại, nhận thấy triều đình nhà Hán ngày càng hủ bại, thiên hạ sắp lâm vào cảnh đại loạn, Tôn Kiên bí mật tích trữ lương thảo, chiêu mộ binh mã võ sĩ giỏi tại Ngô Quận để chuẩn bị cho biến cố lớn.",
+        "Personality": "Dũng cảm vượt trội, thẳng thắn, hào sảng, trọng nghĩa khí nhưng đôi khi quá nóng nảy và kiêu hãnh vào sức mạnh cá nhân.",
+        "Stance": "Quan sát và đánh giá thực lực của người chơi, sẵn sàng trọng dụng nếu tỏ ra có bản lĩnh.",
+        "CourtesyName": "Văn Đài",
+        "isAppraised": true
       },
       {
         "id": "npc_ton_sach_01",
@@ -4225,7 +4232,8 @@
         "CourtesyName": "Bá Phù",
         "realm": "Ngưng Khí",
         "incomingHealing": 1,
-        "maxExp": 136613
+        "maxExp": 136613,
+        "skills": []
       },
       {
         "id": "npc_ton_quyen_01",
@@ -4305,14 +4313,15 @@
         "CourtesyName": "Trọng Mưu",
         "realm": "Khai Mạch",
         "incomingHealing": 1,
-        "maxExp": 53238
+        "maxExp": 53238,
+        "skills": []
       },
       {
         "id": "npc_ton_thuong_huong_01",
         "isPlayer": false,
         "loreId": null,
         "level": 12,
-        "exp": 0,
+        "exp": 22.446,
         "progressionState": "Tu Luyện Thường",
         "ap": 0,
         "currency": 0,
@@ -4446,7 +4455,7 @@
         "Stance": "Tò mò và hứng thú, muốn thử tài võ nghệ của nhân vật chính.",
         "CourtesyName": "Linh Cơ",
         "isAppraised": true,
-        "inParty": false,
+        "inParty": true,
         "isCompanionSetupDone": true,
         "skills": [
           {
@@ -4506,6 +4515,398 @@
             "maxExp": 200
           }
         ]
+      },
+      {
+        "id": "b109b1c0-9314-4051-9950-10ed673b3a5a",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 1,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 6,
+          "atk": 3,
+          "def": 3,
+          "spd": 3
+        },
+        "current_location_id": "loc_chan_dinh",
+        "baseHp": 200,
+        "baseAtk": 20,
+        "baseDef": 10,
+        "baseSpd": 30,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 1400,
+        "maxhp": 1400,
+        "atk": 50,
+        "def": 40,
+        "spd": 60,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 0,
+        "Name": "Tất Cả Tướng Lĩnh",
+        "description": "Một nhân vật xuất hiện trong câu chuyện.",
+        "Stance": "Trung lập",
+        "realm": "Phàm Nhân",
+        "incomingHealing": 1,
+        "maxExp": 100
+      },
+      {
+        "id": "a8501365-61e5-4e22-b75d-ad439248d75c",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 35,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 100,
+          "atk": 95,
+          "def": 95,
+          "spd": 95
+        },
+        "current_location_id": "loc_chan_dinh",
+        "baseHp": 880,
+        "baseAtk": 88,
+        "baseDef": 44,
+        "baseSpd": 64,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 20880,
+        "maxhp": 20880,
+        "atk": 1038,
+        "def": 994,
+        "spd": 1014,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 15,
+        "Name": "Tuân Úc",
+        "description": "",
+        "Stance": "Ôn hòa, lễ độ nhưng có sự quan sát và dò xét kín đáo đối với tiềm năng của nhân vật chính.",
+        "realm": "Phàm Nhân",
+        "incomingHealing": 1,
+        "maxExp": 120759,
+        "Role": "Truyền nhân kiệt xuất của Dĩnh Xuyên Tuân thị, danh sĩ mưu lược có thiên tư Vương Tá",
+        "Appearance": "Vẻ ngoài phong nhã, tuấn tú phi phàm, khí chất cao khiết như tùng cúc mùa thu. Chàng thường vận đạo y màu xanh trúc tao nhã, tà áo thêu chỉ bạc tinh tế. Gương mặt thanh tú với đôi mắt sáng ngời như chứa đựng cả tinh hà trí tuệ, nụ cười ôn hòa luôn thường trực trên môi. Mỗi bước đi của chàng đều thoang thoảng hương thơm thanh khiết của một loại trầm hương đặc chế, biểu hiện của sự nho nhã và tôn nghiêm quý phái.",
+        "Backstory": "Xuất thân từ thế gia vọng tộc Tuân thị ở Dĩnh Xuyên, từ nhỏ Tuân Úc đã nổi tiếng với trí tuệ thiên bẩm và được mệnh danh là Vương Tá Chi Tài. Nhìn thấu vận nước lung lay, triều đình hủ bại và thiên tai nhân họa sắp giáng xuống, chàng không lựa chọn an dật mà âm thầm ngao du, kết giao hiền tài và nghiên cứu tinh hoa trận pháp cùng thiên văn thuật số. Chàng mang trong mình hoài bão phò tá một vị minh chủ có thể dẹp loạn cứu thế, khôi phục giang sơn thái bình.",
+        "Personality": "Điềm tĩnh, thâm trầm, nhìn xa trông rộng và cực kỳ nho nhã. Chàng luôn giữ thái độ khiêm nhường nhưng ẩn chứa sự kiên định không gì lay chuyển nổi. Là người trọng lễ nghĩa, chuộng sạch sẽ và cực kỳ nhạy bén với thời thế.",
+        "CourtesyName": "Văn Nhược",
+        "isAppraised": true
+      },
+      {
+        "id": "011415b8-9c8d-4d9d-a03b-30a442af8110",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 18,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 37,
+          "atk": 34,
+          "def": 34,
+          "spd": 34
+        },
+        "current_location_id": "loc_chan_dinh",
+        "baseHp": 540,
+        "baseAtk": 54,
+        "baseDef": 27,
+        "baseSpd": 47,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 7940,
+        "maxhp": 7940,
+        "atk": 394,
+        "def": 367,
+        "spd": 387,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 10,
+        "Name": "Trương Liêu",
+        "description": "",
+        "Stance": "Cảnh giác dò xét nhưng coi trọng kẻ có chí hướng, sẵn sàng kết giao nếu nhận thấy bản lĩnh.",
+        "realm": "Phàm Nhân",
+        "incomingHealing": 1,
+        "maxExp": 13746,
+        "Role": "Thiếu niên dũng sĩ Nhạn Môn",
+        "Appearance": "Dáng người cao ráo tráng kiện, lông mày sắc như kiếm và đôi mắt sáng quắc như chim ưng. Dù còn trẻ nhưng cơ thể đã săn chắc, khoác bộ giáp da pha sắt vùng biên thùy, sau lưng đeo trường đao. Toát ra khí chất điềm tĩnh, dũng mãnh và tràn đầy uy phong.",
+        "Backstory": "Sinh ra tại quận Nhạn Môn, Trương Liêu từ nhỏ đã quen thuộc với tiếng ngựa hú và lửa đao vùng biên thùy chống quấy nhiễu. Hắn rèn luyện võ nghệ xuất chúng và mưu lược từ sớm, luôn mang tâm nguyện bảo hộ bách tính, bình định thiên hạ.",
+        "Personality": "Quả cảm, điềm tĩnh, trượng nghĩa, coi trọng kỷ luật và luôn suy xét đại cuộc.",
+        "CourtesyName": "Văn Viễn",
+        "isAppraised": true
+      },
+      {
+        "id": "fa5582d8-6fd7-4215-b88b-8ed08428d3c6",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 1,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 6,
+          "atk": 3,
+          "def": 3,
+          "spd": 3
+        },
+        "current_location_id": "loc_chan_dinh",
+        "baseHp": 200,
+        "baseAtk": 20,
+        "baseDef": 10,
+        "baseSpd": 30,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 1400,
+        "maxhp": 1400,
+        "atk": 50,
+        "def": 40,
+        "spd": 60,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 0,
+        "Name": "Tào Tháo",
+        "description": "Một nhân vật xuất hiện trong câu chuyện.",
+        "Stance": "Trung lập",
+        "realm": "Phàm Nhân",
+        "incomingHealing": 1,
+        "maxExp": 100
+      },
+      {
+        "id": "4542425a-62ea-4b32-9f34-036d651512b9",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 1,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 6,
+          "atk": 3,
+          "def": 3,
+          "spd": 3
+        },
+        "current_location_id": "loc_chan_dinh",
+        "baseHp": 200,
+        "baseAtk": 20,
+        "baseDef": 10,
+        "baseSpd": 30,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 1400,
+        "maxhp": 1400,
+        "atk": 50,
+        "def": 40,
+        "spd": 60,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 0,
+        "Name": "Viên Thiệu",
+        "description": "Một nhân vật xuất hiện trong câu chuyện.",
+        "Stance": "Trung lập",
+        "realm": "Phàm Nhân",
+        "incomingHealing": 1,
+        "maxExp": 100
       }
     ],
     "sharedCooldowns": {
@@ -4525,15 +4926,15 @@
           "turn": 62
         }
       ],
-      "lastExpResolvedTurn": 75
+      "lastExpResolvedTurn": 82
     },
     "loreQuests": [],
     "pendingCreations": [],
     "deathState": {},
     "isDeathTurn": false,
     "lastLockedResult": {
-      "turn_id": 75,
-      "world_time": 75,
+      "turn_id": 82,
+      "world_time": 82,
       "is_death_turn": false,
       "in_combat": false,
       "battle_active": false,
@@ -4543,7 +4944,8 @@
         "loser_id": null
       },
       "fields": {
-        "exp_delta_player": 0.1
+        "exp_delta_player": 0.1,
+        "exp_delta_npc_ton_thuong_huong_01": 7.482
       }
     },
     "stateHistory": [
@@ -4551,8 +4953,8 @@
         "time": {
           "year": 1,
           "month": 2,
-          "day": 20,
-          "hour": 17
+          "day": 21,
+          "hour": 7
         },
         "location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
         "weather": "Nắng ban mai",
@@ -4561,388 +4963,7 @@
             "id": "player",
             "Name": "Diệp Thần",
             "level": 1,
-            "exp": 26.799999999999997,
-            "hp": 2000,
-            "maxhp": 2000,
-            "currency": 0,
-            "inventory": [
-              {
-                "Name": "Lương Thảo Quân Dụng",
-                "quantity": 500
-              }
-            ],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_dieu_thuyen",
-            "Name": "Điêu Thuyền",
-            "level": 1,
-            "exp": 22.499999999999993,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_tham_tu_khan_vang_01",
-            "Name": "Thám Tử Khăn Vàng",
-            "level": 2,
-            "exp": 0,
-            "hp": 1020,
-            "maxhp": 1020,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_ha_hau_khinh_y",
-            "Name": "Hạ Hầu Khinh Y",
-            "level": 8,
-            "exp": 467.288,
-            "hp": 2740,
-            "maxhp": 2740,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "f0bb2066-67fc-4529-9547-bed96b71615c",
-            "Name": "Hạ Hầu Kiệt",
-            "level": 18,
-            "exp": 0,
-            "hp": 7140,
-            "maxhp": 7140,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c2f54fda-d99a-4425-a0c0-6912abafe521",
-            "Name": "Chu Đội Trưởng",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "a77f8d3a-71d6-4e93-82d2-18bb2f7de558",
-            "Name": "Thương Nhân 1",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "bd300959-34f0-4b71-b8dd-29716e94c95f",
-            "Name": "Thương Nhân 2",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "d49463ec-7bf4-4982-b3db-5a7b2e502a7f",
-            "Name": "Gia Nhân Gác Cửa",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c20fdbe3-c0ff-409b-8f49-e8e4e075aa33",
-            "Name": "Tướng Lĩnh Vết Sẹo",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "c76a4b0e-be02-4430-bd13-83a12399d126",
-            "Name": "Vệ Sĩ Quân Doanh",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_trieu_van_01",
-            "Name": "Triệu Vân",
-            "level": 45,
-            "exp": 0,
-            "hp": 34480,
-            "maxhp": 34480,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "45150f2d-91a1-4f7e-9e6f-ac09ee9cba25",
-            "Name": "Thống Lĩnh Quân Tiên Phong",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "89c47e57-b671-4453-bcce-7d608253ac09",
-            "Name": "Binh Lính Khăn Vàng",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "d2de40b5-6f05-4792-b7d6-7290229f6fc7",
-            "Name": "Phó Tướng Vương",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "3212a582-1ed3-4a78-b66f-5503186aea0c",
-            "Name": "Gia Tướng Lý",
-            "level": 1,
-            "exp": 0,
-            "hp": 600,
-            "maxhp": 600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_trieu_vu_01",
-            "Name": "Triệu Vũ",
-            "level": 18,
-            "exp": 967.968,
-            "hp": 12028740,
-            "maxhp": 12028740,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "2667ab51-3d9c-48a8-8a9d-8a6dbd1453c1",
-            "Name": "Công Tôn Toản",
-            "level": 35,
-            "exp": 0,
-            "hp": 20680,
-            "maxhp": 20680,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "64203aaa-96d0-4889-968c-5bcb93391c70",
-            "Name": "Công Tôn Bảo Nguyệt",
-            "level": 28,
-            "exp": 2500,
-            "hp": 13540,
-            "maxhp": 13540,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_ung_01",
-            "Name": "Thái Ung",
-            "level": 48,
-            "exp": 0,
-            "hp": 33940,
-            "maxhp": 33940,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_van_co_01",
-            "Name": "Thái Diễm",
-            "level": 15,
-            "exp": 806.0029999999999,
-            "hp": 7280,
-            "maxhp": 7280,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_thai_thu_nghiep_thanh",
-            "Name": "Thái thú Nghiệp Thành",
-            "level": 35,
-            "exp": 0,
-            "hp": 25280,
-            "maxhp": 25280,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "97872d38-7de1-4bed-8842-0439008ced55",
-            "Name": "Vệ Sĩ Cổng Thành",
-            "level": 1,
-            "exp": 0,
-            "hp": 1200,
-            "maxhp": 1200,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "94161dc0-1dd7-4827-b7d0-295e7aa6cb4a",
-            "Name": "Chân Cơ",
-            "level": 12,
-            "exp": 516,
-            "hp": 5220,
-            "maxhp": 5220,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "npc_quan_hoi_01",
-            "Name": "Quản Hợi",
-            "level": 21,
-            "exp": 0,
-            "hp": 0,
-            "maxhp": 9600,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": [
-              {
-                "status_id": "TRONG_THUONG_CANH_GIOI",
-                "id": "TRONG_THUONG_CANH_GIOI",
-                "name": "Trọng Thương (Cảnh Giới Suy Giảm)",
-                "type": "injury",
-                "description": "Cựu thương chưa lành: gân cốt tổn hại, khí huyết suy kiệt, sức lực không thể phát huy trọn vẹn. Tu vi thật của người này vốn cao hơn nhiều, nhưng vết thương cũ đang đè nén cảnh giới xuống mức hiện tại. Có thể hồi phục hoàn toàn nhờ linh đan diệu dược, một cơ duyên lớn, hoặc bàn tay của bậc danh y — thời gian trôi qua KHÔNG tự chữa lành nó.",
-                "source": "Cựu thương chưa lành",
-                "duration": null,
-                "expiresAt": null
-              }
-            ]
-          },
-          {
-            "id": "bc2deedf-8f32-4bda-ad46-64f85823cc45",
-            "Name": "Bách Tính Chân Định",
-            "level": 1,
-            "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "8f2afbb3-f2f1-486a-974a-522b6e3c5c90",
-            "Name": "Chủ Tiệm Gấm Vóc",
-            "level": 1,
-            "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "world_npc_dai_kieu",
-            "Name": "Đại Kiều",
-            "level": 5,
-            "exp": 3.354,
-            "hp": 2480,
-            "maxhp": 2480,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "world_npc_tieu_kieu",
-            "Name": "Tiểu Kiều",
-            "level": 12,
-            "exp": 3.354,
-            "hp": 6420,
-            "maxhp": 6420,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "e5b3fb1d-8329-43ef-915b-80c17cb8c0c5",
-            "Name": "Kiều Dao",
-            "level": 12,
-            "exp": 7.482,
-            "hp": 5220,
-            "maxhp": 5220,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "e167e886-9449-43ab-b3ae-b8c0d6d39832",
-            "Name": "Kiều Sương",
-            "level": 12,
-            "exp": 7.482,
-            "hp": 5220,
-            "maxhp": 5220,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          },
-          {
-            "id": "lore_npc_ton_kien",
-            "Name": "Tôn Kiên",
-            "level": 1,
-            "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          }
-        ],
-        "quests": []
-      },
-      {
-        "time": {
-          "year": 1,
-          "month": 2,
-          "day": 20,
-          "hour": 17
-        },
-        "location_id": "cd6b0e8e-4b2b-49bc-a28a-6f6e7cf70b9a",
-        "weather": "Nắng ban mai",
-        "characters": [
-          {
-            "id": "player",
-            "Name": "Diệp Thần",
-            "level": 1,
-            "exp": 26.9,
+            "exp": 27.1,
             "hp": 2000,
             "maxhp": 2000,
             "currency": 0,
@@ -5298,10 +5319,10 @@
           {
             "id": "lore_npc_ton_kien",
             "Name": "Tôn Kiên",
-            "level": 1,
+            "level": 52,
             "exp": 0,
-            "hp": 1400,
-            "maxhp": 1400,
+            "hp": 39420,
+            "maxhp": 39420,
             "currency": 0,
             "inventory": [],
             "longTermStatuses": []
@@ -5332,7 +5353,421 @@
             "id": "npc_ton_thuong_huong_01",
             "Name": "Tôn Thượng Hương",
             "level": 12,
+            "exp": 7.482,
+            "hp": 16220,
+            "maxhp": 16220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          }
+        ],
+        "quests": []
+      },
+      {
+        "time": {
+          "year": 1,
+          "month": 2,
+          "day": 21,
+          "hour": 12
+        },
+        "location_id": "loc_chan_dinh",
+        "weather": "Nắng rực rỡ",
+        "characters": [
+          {
+            "id": "player",
+            "Name": "Diệp Thần",
+            "level": 1,
+            "exp": 27.200000000000003,
+            "hp": 2000,
+            "maxhp": 2000,
+            "currency": 0,
+            "inventory": [
+              {
+                "Name": "Lương Thảo Quân Dụng",
+                "quantity": 500
+              }
+            ],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_dieu_thuyen",
+            "Name": "Điêu Thuyền",
+            "level": 1,
+            "exp": 22.499999999999993,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_tham_tu_khan_vang_01",
+            "Name": "Thám Tử Khăn Vàng",
+            "level": 2,
             "exp": 0,
+            "hp": 1020,
+            "maxhp": 1020,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ha_hau_khinh_y",
+            "Name": "Hạ Hầu Khinh Y",
+            "level": 8,
+            "exp": 467.288,
+            "hp": 2740,
+            "maxhp": 2740,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "f0bb2066-67fc-4529-9547-bed96b71615c",
+            "Name": "Hạ Hầu Kiệt",
+            "level": 18,
+            "exp": 0,
+            "hp": 7140,
+            "maxhp": 7140,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c2f54fda-d99a-4425-a0c0-6912abafe521",
+            "Name": "Chu Đội Trưởng",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "a77f8d3a-71d6-4e93-82d2-18bb2f7de558",
+            "Name": "Thương Nhân 1",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "bd300959-34f0-4b71-b8dd-29716e94c95f",
+            "Name": "Thương Nhân 2",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "d49463ec-7bf4-4982-b3db-5a7b2e502a7f",
+            "Name": "Gia Nhân Gác Cửa",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c20fdbe3-c0ff-409b-8f49-e8e4e075aa33",
+            "Name": "Tướng Lĩnh Vết Sẹo",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "c76a4b0e-be02-4430-bd13-83a12399d126",
+            "Name": "Vệ Sĩ Quân Doanh",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_trieu_van_01",
+            "Name": "Triệu Vân",
+            "level": 45,
+            "exp": 0,
+            "hp": 34480,
+            "maxhp": 34480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "45150f2d-91a1-4f7e-9e6f-ac09ee9cba25",
+            "Name": "Thống Lĩnh Quân Tiên Phong",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "89c47e57-b671-4453-bcce-7d608253ac09",
+            "Name": "Binh Lính Khăn Vàng",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "d2de40b5-6f05-4792-b7d6-7290229f6fc7",
+            "Name": "Phó Tướng Vương",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "3212a582-1ed3-4a78-b66f-5503186aea0c",
+            "Name": "Gia Tướng Lý",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_trieu_vu_01",
+            "Name": "Triệu Vũ",
+            "level": 18,
+            "exp": 967.968,
+            "hp": 12028740,
+            "maxhp": 12028740,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "2667ab51-3d9c-48a8-8a9d-8a6dbd1453c1",
+            "Name": "Công Tôn Toản",
+            "level": 35,
+            "exp": 0,
+            "hp": 20680,
+            "maxhp": 20680,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "64203aaa-96d0-4889-968c-5bcb93391c70",
+            "Name": "Công Tôn Bảo Nguyệt",
+            "level": 28,
+            "exp": 2500,
+            "hp": 13540,
+            "maxhp": 13540,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_ung_01",
+            "Name": "Thái Ung",
+            "level": 48,
+            "exp": 0,
+            "hp": 33940,
+            "maxhp": 33940,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_van_co_01",
+            "Name": "Thái Diễm",
+            "level": 15,
+            "exp": 806.0029999999999,
+            "hp": 7280,
+            "maxhp": 7280,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_thai_thu_nghiep_thanh",
+            "Name": "Thái thú Nghiệp Thành",
+            "level": 35,
+            "exp": 0,
+            "hp": 25280,
+            "maxhp": 25280,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "97872d38-7de1-4bed-8842-0439008ced55",
+            "Name": "Vệ Sĩ Cổng Thành",
+            "level": 1,
+            "exp": 0,
+            "hp": 1200,
+            "maxhp": 1200,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "94161dc0-1dd7-4827-b7d0-295e7aa6cb4a",
+            "Name": "Chân Cơ",
+            "level": 12,
+            "exp": 516,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_quan_hoi_01",
+            "Name": "Quản Hợi",
+            "level": 21,
+            "exp": 0,
+            "hp": 0,
+            "maxhp": 9600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": [
+              {
+                "status_id": "TRONG_THUONG_CANH_GIOI",
+                "id": "TRONG_THUONG_CANH_GIOI",
+                "name": "Trọng Thương (Cảnh Giới Suy Giảm)",
+                "type": "injury",
+                "description": "Cựu thương chưa lành: gân cốt tổn hại, khí huyết suy kiệt, sức lực không thể phát huy trọn vẹn. Tu vi thật của người này vốn cao hơn nhiều, nhưng vết thương cũ đang đè nén cảnh giới xuống mức hiện tại. Có thể hồi phục hoàn toàn nhờ linh đan diệu dược, một cơ duyên lớn, hoặc bàn tay của bậc danh y — thời gian trôi qua KHÔNG tự chữa lành nó.",
+                "source": "Cựu thương chưa lành",
+                "duration": null,
+                "expiresAt": null
+              }
+            ]
+          },
+          {
+            "id": "bc2deedf-8f32-4bda-ad46-64f85823cc45",
+            "Name": "Bách Tính Chân Định",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "8f2afbb3-f2f1-486a-974a-522b6e3c5c90",
+            "Name": "Chủ Tiệm Gấm Vóc",
+            "level": 1,
+            "exp": 0,
+            "hp": 1400,
+            "maxhp": 1400,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "world_npc_dai_kieu",
+            "Name": "Đại Kiều",
+            "level": 5,
+            "exp": 3.354,
+            "hp": 2480,
+            "maxhp": 2480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "world_npc_tieu_kieu",
+            "Name": "Tiểu Kiều",
+            "level": 12,
+            "exp": 3.354,
+            "hp": 6420,
+            "maxhp": 6420,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "e5b3fb1d-8329-43ef-915b-80c17cb8c0c5",
+            "Name": "Kiều Dao",
+            "level": 12,
+            "exp": 14.964,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "e167e886-9449-43ab-b3ae-b8c0d6d39832",
+            "Name": "Kiều Sương",
+            "level": 12,
+            "exp": 14.964,
+            "hp": 5220,
+            "maxhp": 5220,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "lore_npc_ton_kien",
+            "Name": "Tôn Kiên",
+            "level": 52,
+            "exp": 0,
+            "hp": 39420,
+            "maxhp": 39420,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ton_sach_01",
+            "Name": "Tôn Sách",
+            "level": 38,
+            "exp": 0,
+            "hp": 22340,
+            "maxhp": 22340,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ton_quyen_01",
+            "Name": "Tôn Quyền",
+            "level": 30,
+            "exp": 0,
+            "hp": 15380,
+            "maxhp": 15380,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ton_thuong_huong_01",
+            "Name": "Tôn Thượng Hương",
+            "level": 12,
+            "exp": 14.964,
             "hp": 16220,
             "maxhp": 16220,
             "currency": 0,
@@ -7119,7 +7554,8 @@
     {
       "id": "bad3f5eb-c907-4005-887c-7437fbd72bc7",
       "type": "user_custom_action",
-      "content": "Cùng Hạ Hầu Khinh Y và Điêu Thuyền tiến vào tẩm phòng thưởng thức trận hoan lạc mừng chiến thắng trước khi chính thức xuất phủ tiếp quản quân doanh Cổng Tây. Vì phải đánh trận nên nhiều ngày không được gần gũi 2 nàng, đêm đó ngươi đặc biệt ra sức. Mỗi người 10 hiệp mới nghỉ. Đến sáng, Điêu Thuyền đang nằm sấp trên cơ thể ngươi tỉnh lại lại tự nhún người. Ngươi cũng tỉnh lại chiều 2 nàng thêm 10 hiệp nữa mới lưu luyến mặc giáp ra trận"
+      "content": "Cùng Hạ Hầu Khinh Y và Điêu Thuyền tiến vào tẩm phòng thưởng thức trận hoan lạc mừng chiến thắng trước khi chính thức xuất phủ tiếp quản quân doanh Cổng Tây. Vì phải đánh trận nên nhiều ngày không được gần gũi 2 nàng, đêm đó ngươi đặc biệt ra sức. Mỗi người 10 hiệp mới nghỉ. Đến sáng, Điêu Thuyền đang nằm sấp trên cơ thể ngươi tỉnh lại lại tự nhún người. Ngươi cũng tỉnh lại chiều 2 nàng thêm 10 hiệp nữa mới lưu luyến mặc giáp ra trận",
+      "summarized": true
     },
     {
       "id": "b1165343-a524-4ae1-a07e-a0ef2a15ddcb",
@@ -7203,12 +7639,14 @@
           "type": "narrative",
           "content": "*Diệp Thần* khẽ gật đầu, khí thái tự tin và uy nghiêm của một vị tướng cầm quân hiện rõ trên gương mặt góc cạnh. Hắn chính thức đặt chân vào quân doanh *Cổng Tây*, sẵn sàng tiếp quản ba ngàn quân sĩ và chuẩn bị lực lượng cho trận chiến sinh tử sắp tới.\nBạn đứng trước cổng quân doanh *Cổng Tây*, ba ngàn quân sĩ cùng các phó tướng đang chờ đợi sự chỉ huy của bạn. Bạn sẽ lựa chọn bước đi tiếp theo ra sao?"
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "50961791-8fbd-4324-b0f3-68933f94cc42",
       "type": "user_choice",
-      "content": "Triệu tập toàn bộ phó tướng và gia tướng dưới quyền Cổng Tây để họp bàn phương án gia cố trận địa phòng thủ {Tỷ lệ thành công: 85% Hậu quả/Phần thưởng: Xây dựng tuyến phòng thủ kiên cố trước đợt tấn công của giặc Khăn Vàng}"
+      "content": "Triệu tập toàn bộ phó tướng và gia tướng dưới quyền Cổng Tây để họp bàn phương án gia cố trận địa phòng thủ {Tỷ lệ thành công: 85% Hậu quả/Phần thưởng: Xây dựng tuyến phòng thủ kiên cố trước đợt tấn công của giặc Khăn Vàng}",
+      "summarized": true
     },
     {
       "id": "dd187045-72f8-4d2a-9d91-6b006b185652",
@@ -7264,12 +7702,14 @@
           "type": "narrative",
           "content": "*Diệp Thần* tiếp lấy cuốn thư da dê, nheo mắt nhìn về phía chân trời xa xăm phía Tây. Ngọn lửa chiến sự đã cận kề ngay trước mắt, trận địa phòng thủ *Cổng Tây* dưới sự chỉ đạo của hắn đã trở thành một pháo đài thép kiên cố, sẵn sàng giáng một đòn chí mạng vào bất kỳ toán quân phản loạn nào. \nChiếc lệnh bài Thống Lĩnh dát đồng giắt bên hông hắn lóe lên ánh hào quang rực rỡ dưới nắng trưa. Thế cục chiến loạn đã bước vào giai đoạn quyết liệt, và *Diệp Thần* nắm trọn quyền chỉ hữu *Cổng Tây*, sẵn sàng cho những bước đi chiến lược tiếp theo."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "e166e922-310f-4b5b-b620-156a7db3f565",
       "type": "user_custom_action",
-      "content": "Ngươi ra lệnh mở cổng thành, 1 mình 1 ngựa tiến đến trại 300 quân tiên phong lớn giọng khiêu chiến tướng địch. Thống lĩnh quân tiên phong đáp ứng xuất chiến. Chưa đầy 1 hiệp, đầu hắn lìa khỏi cổ. Đám lính lác còn lại không kịp thu dọn mà bỏ chạy tán loạn. Ngươi xách đầu tên thống lĩnh cưỡi ngựa trở về. Từ xa, thân ảnh ngươi cưỡi Dạ Chiếu Ngọc Sư Tử, mặc ngân giáp toàn thân bạch y tiến về cổng thành phía Tây. Đám Phó tướng truyền tai nhau cái tên Bạch Y tướng quân. Chẳng mấy chốc, cả Chân Định đều biết đến cái tên này"
+      "content": "Ngươi ra lệnh mở cổng thành, 1 mình 1 ngựa tiến đến trại 300 quân tiên phong lớn giọng khiêu chiến tướng địch. Thống lĩnh quân tiên phong đáp ứng xuất chiến. Chưa đầy 1 hiệp, đầu hắn lìa khỏi cổ. Đám lính lác còn lại không kịp thu dọn mà bỏ chạy tán loạn. Ngươi xách đầu tên thống lĩnh cưỡi ngựa trở về. Từ xa, thân ảnh ngươi cưỡi Dạ Chiếu Ngọc Sư Tử, mặc ngân giáp toàn thân bạch y tiến về cổng thành phía Tây. Đám Phó tướng truyền tai nhau cái tên Bạch Y tướng quân. Chẳng mấy chốc, cả Chân Định đều biết đến cái tên này",
+      "summarized": true
     },
     {
       "id": "0a9a3831-8eb8-47ca-93bb-0078052c270e",
@@ -7329,12 +7769,14 @@
           "type": "narrative",
           "content": "Trận chiến dẹp tan ba trăm quân tiên phong và cái tên *Bạch Y tướng quân* nhanh chóng như cơn lốc cuốn qua khắp các ngõ ngách của *Chân Định Thành*. Từ phủ Thái thú *Hạ Hầu Kiệt* cho đến các tửu lâu, gian phố thị dân, đâu đâu cũng rộn ràng bàn tán về chiến tích thần kỳ của vị tân Thống Lĩnh *Cổng Tây*. \nTại *Uyển Nhu Các*, *Hạ Hầu Khinh Y* và *Điêu Thuyền* khi nghe tin báo trận thắng áp đảo từ các gia nhân chạy về cũng vỡ òa trong hạnh phúc và tự hào. Hai tuyệt thế mỹ nhân e ấp nhìn nhau, trái tim đập liên hồi vì người đàn ông mà mình trao trọn con tim nay đã trở thành vị anh hùng lừng danh thiên hạ.\nSĩ khí của ba ngàn quân sĩ *Cổng Tây* lên tới đỉnh điểm chưa từng có. *Triệu Vân* tỏ ra vô cùng tâm đắc, nguyện ý sát cánh cùng *Diệp Thần* để nghiên cứu phương án tác chiến phòng thủ. Nắng chiều nhuộm vàng toàn bộ thành *Chân Định*, đại quân chính thức của giặc Khăn Vàng do *Trương Mạn Thành* chỉ huy đang tiến sát biên giới, nhưng với *Bạch Y tướng quân* cùng *Triệu Vân* trấn giữ *Cổng Tây*, nơi này đã trở thành một thành lũy bất khả xâm phạm."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "d4bc3aad-6e56-4069-b516-9728a4694781",
       "type": "user_custom_action",
-      "content": "Ngươi ngỏ ý mời Triệu Vân ở lại làm phó tướng cho mình, cùng kiến công lập nghiệp. Triệu Vân đáp ứng không chút do dự. Ngoài ra, hắn còn nói ngày mai muội muội Triệu Vũ cũng sẽ đến đầu quân. Ngươi hơi kinh ngạc khi biết Triệu Vân có muội muội nhưng cũng không để tâm, chỉ liên tục khen tốt. Hôm sau, cô nàng Triệu Vũ đến quân doanh đã nghe danh Bạch Y tướng quân truyền khắp thành thì nghĩ đó là Triệu Vân mình liền tự hào nhận Bạch Y tướng quân là ca ca mình. Đến dưới trướng soái ra mắt, nàng mới biết mình nhận nhầm người. Không cần người khác nói. Chỉ mới nhìn thấy ngươi trong bộ ngân giáp ngồi ở vị trí chủ soái nàng đã biết mình nhận nhầm. Ngươi cũng kinh ngạc vì vẻ đẹp của Triệu Vũ. Nàng mang nét khỏe mạnh và có chút ngang ngạnh của nữ tướng không giống Điêu Thuyền và Hạ Hầu Khinh Y. Triệu Vân giới thiệu nàng cho ngươi và đặc biệt khen thương pháp của nàng. Nói nếu chỉ luận kỹ xảo thì nàng còn mạnh hơn hắn. Ngươi trầm trồ khen và hứa hẹn có dịp sẽ thử lĩnh giáo"
+      "content": "Ngươi ngỏ ý mời Triệu Vân ở lại làm phó tướng cho mình, cùng kiến công lập nghiệp. Triệu Vân đáp ứng không chút do dự. Ngoài ra, hắn còn nói ngày mai muội muội Triệu Vũ cũng sẽ đến đầu quân. Ngươi hơi kinh ngạc khi biết Triệu Vân có muội muội nhưng cũng không để tâm, chỉ liên tục khen tốt. Hôm sau, cô nàng Triệu Vũ đến quân doanh đã nghe danh Bạch Y tướng quân truyền khắp thành thì nghĩ đó là Triệu Vân mình liền tự hào nhận Bạch Y tướng quân là ca ca mình. Đến dưới trướng soái ra mắt, nàng mới biết mình nhận nhầm người. Không cần người khác nói. Chỉ mới nhìn thấy ngươi trong bộ ngân giáp ngồi ở vị trí chủ soái nàng đã biết mình nhận nhầm. Ngươi cũng kinh ngạc vì vẻ đẹp của Triệu Vũ. Nàng mang nét khỏe mạnh và có chút ngang ngạnh của nữ tướng không giống Điêu Thuyền và Hạ Hầu Khinh Y. Triệu Vân giới thiệu nàng cho ngươi và đặc biệt khen thương pháp của nàng. Nói nếu chỉ luận kỹ xảo thì nàng còn mạnh hơn hắn. Ngươi trầm trồ khen và hứa hẹn có dịp sẽ thử lĩnh giáo",
+      "summarized": true
     },
     {
       "id": "04551dba-e8c9-4beb-a47e-7adceb1f671c",
@@ -7416,12 +7858,14 @@
           "type": "narrative",
           "content": "Thái độ vừa ngang ngạnh dũng mãnh vừa có chút bướng bỉnh đáng yêu của nàng làm cả soái đường phá lên cười vui vẻ. Sự gắn kết khăng khít và thiện cảm ban đầu giữa ngươi và *Triệu Vũ* đã được thắt chặt hoàn hảo.\nTrong những ngày tiếp theo tại quân doanh *Cổng Tây*, bầu không khí huấn luyện diễn ra vô cùng khẩn trương và nghiêm cẩn. Với sự hỗ trợ đắc lực của hai anh em nhà họ Triệu, ba ngàn quân sĩ phòng thủ được tổ chức vô cùng chặt chẽ. *Triệu Vân* trầm ổn chính trực, đảm nhận việc huấn luyện kỵ binh cơ động, còn *Triệu Vũ* với tính cách ngang ngạnh dũng mãnh, trực tiếp thống lĩnh bộ binh hạng nặng gia cố hệ thống cự mã và rào chông ngoài quan ải.\nCứ mỗi buổi chiều tà, khi nắng hoàng hôn trải dài trên các tháp canh bằng đá, ngươi lại đứng trên bờ thành cao, lặng lẽ quan sát bóng dáng khỏe khoắn của *Triệu Vũ* đang vung vẩy ngọn trường thương bạc chỉ huy binh sĩ dưới sân. Những động tác dứt khoát, tiếng hô vang lảnh lót cùng mồ hôi đọng trên gò má sạm nắng của nàng toát lên một sức hút nguyên sơ khó tả. Thỉnh thoảng, cảm nhận được ánh mắt ấm áp của ngươi dõi theo từ trên cao, *Triệu Vũ* lại khẽ dừng thương, ngước mặt lên chạm mắt với ngươi. Nàng khẽ chun chiếc mũi thanh tú, nở một nụ cười đầy kiêu hãnh thách thức rồi lại tiếp tục lao vào luyện tập, khiến trái tim ngươi không khỏi rạo rực một luồng sóng tình dạt dào.\nTình cảm và sự thấu hiểu giữa ngươi cùng hai anh em *Triệu Vân*, *Triệu Vũ* ngày càng thắt chặt tuyệt đối. Thế nhưng, tin tức thám báo gửi về liên tục cho thấy đại quân chính thức của giặc Khăn Vàng dưới sự dẫn dắt của *Trương Mạn Thành* đang tiến gần hơn bao giờ hết, đe dọa trực tiếp đến sự bình yên của thành *Chân Định*.\nBạn đứng bên bờ thành cùng *Triệu Vân* và *Triệu Vũ*, chiếc lệnh bài Thống Lĩnh dát đồng giắt bên hông lấp lánh dưới nắng chiều. Hãy quyết định bước đi tiếp theo:"
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "df230f4f-3a69-4d8a-a665-cbf46e4f6d24",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Tường thuật]: \"Trong khoảng thời gian đợi quân địch đánh tới, ngươi sai người gia cố tường thành, tăng cường đào hào, chuẩn bị tên, bẫy rập, dầu nóng, đá, nước sôi,...\nTrong lúc đó, ngươi cùng anh em Triệu Vân giao lưu thương pháp. Đầu tiên, ngươi đánh với Triệu Vân sau đó mới đánh với Triệu Vũ. Điều kỳ lạ là, thương pháp của Triệu Vân bình thường không phải đặc biệt mạnh như trong dã sử. Còn thương pháp Triệu Vũ lại vô cùng linh hoạt, biến hóa khôn lường. Ngươi thầm nghĩ\"\n[Đoạn 2 - Lời Diệp Thần]: \"Chẳng lẽ dã sử có sai sót, vị tướng quân trong ngũ hổ thượng tướng là Triệu Vũ chứ không phải Triệu Vân?\"\n[Đoạn 3 - Tường thuật]: \"Nghĩ thì nghĩ vậy nhưng ngươi cũng không biểu lộ điều gì ra khuôn mặt. Sau khi giao lưu với cả 2 người, Triệu Vũ càng nể phục ngươi. Cách xưng hô cũng thân thiết hơn, không còn e ngại như lúc đầu. Triệu Vân thấy muội muội mình tùy ý như vậy chỉ biết xin lỗi ngươi, mong ngươi không chấp nhặt với nàng. Ngươi thì cười vui vẻ. Ngươi cũng rất thích sự thân thiết này của Triệu Vũ. Như thể nàng coi ngươi là người nhà mà đối đãi chứ không phải chủ tướng\""
+      "content": "[Đoạn 1 - Tường thuật]: \"Trong khoảng thời gian đợi quân địch đánh tới, ngươi sai người gia cố tường thành, tăng cường đào hào, chuẩn bị tên, bẫy rập, dầu nóng, đá, nước sôi,...\nTrong lúc đó, ngươi cùng anh em Triệu Vân giao lưu thương pháp. Đầu tiên, ngươi đánh với Triệu Vân sau đó mới đánh với Triệu Vũ. Điều kỳ lạ là, thương pháp của Triệu Vân bình thường không phải đặc biệt mạnh như trong dã sử. Còn thương pháp Triệu Vũ lại vô cùng linh hoạt, biến hóa khôn lường. Ngươi thầm nghĩ\"\n[Đoạn 2 - Lời Diệp Thần]: \"Chẳng lẽ dã sử có sai sót, vị tướng quân trong ngũ hổ thượng tướng là Triệu Vũ chứ không phải Triệu Vân?\"\n[Đoạn 3 - Tường thuật]: \"Nghĩ thì nghĩ vậy nhưng ngươi cũng không biểu lộ điều gì ra khuôn mặt. Sau khi giao lưu với cả 2 người, Triệu Vũ càng nể phục ngươi. Cách xưng hô cũng thân thiết hơn, không còn e ngại như lúc đầu. Triệu Vân thấy muội muội mình tùy ý như vậy chỉ biết xin lỗi ngươi, mong ngươi không chấp nhặt với nàng. Ngươi thì cười vui vẻ. Ngươi cũng rất thích sự thân thiết này của Triệu Vũ. Như thể nàng coi ngươi là người nhà mà đối đãi chứ không phải chủ tướng\"",
+      "summarized": true
     },
     {
       "id": "40eac183-a29d-4a24-bb66-0ec4fa631b9b",
@@ -7500,12 +7944,14 @@
           "type": "narrative",
           "content": "*Triệu Vũ* tươi cười rạng rỡ, hai mắt nheo lại thành hình bán nguyệt, sự nể phục và tình cảm chân thành dành cho *Diệp Thần* dâng cao đến mức tuyệt đối. *Triệu Vân* nhìn thấy vậy cũng đành lắc đầu cười trừ, trong lòng tràn ngập sự thán phục trước tấm lòng bao dung và khí thái vương giả của vị chủ soái trẻ tuổi.\nÁnh hoàng hôn đỏ ối bắt đầu buông xuống nhuộm rực toàn bộ trận địa *Cổng Tây*. Hệ thống phòng thủ hào sâu, cọc chông, bẫy rập cùng đá tảng, dầu sôi đã hoàn toàn kiên cố. *Diệp Thần* đứng giữa hai anh em nhà họ Triệu, cảm nhận tình huynh đệ và sự gắn kết gia đình dạt dào, sẵn sàng đón nhận đợt bão táp giặc Khăn Vàng sắp sửa kéo đến."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "f69a7995-ac57-481b-9ffe-cb045e0d51e0",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Tường thuật]: \"Sau trận đấu giao lưu với 2 anh em họ Triệu, ngươi ngâm mình trong phòng tắm tại phủ tướng quân được xây tạm gần cổng phía Tây. Nghe tiếng bước chân vào, ngươi tưởng là gia nhân bèn nói vọng ra gọi hắn vào kỳ lưng. Không ngờ người này lại là Triệu Vũ. Ngươi đang nhắm mắt ngồi ngâm bồn nên không biết điều đó. Triệu Vũ cởi đồ, bước vào kỳ lưng cho ngươi\"\n[Đoạn 2 - Lời Diệp Thần]: \"Đúng đúng đúng. Chỗ đó mạnh tay hơn 1 chút\"\n[Đoạn 3 - Tường thuật]: \"Ngươi vừa tận hưởng vừa chỉ đạo nàng kỳ vị trí nào. Đột nhiên, nàng không kỳ nữa mà nhảy thẳng vào bồn tắm của ngươi. Ngươi giật mình quay lại thì bị nàng chặn môi bằng nụ hôn mãnh liệt. Ngươi hơi ngẩn người thì Triệu Vũ đã tấn công tới, nàng đưa cái hang động hồng hào không lông đút thẳng vào cây thương của ngươi. 1 dòng máu chảy ra hòa với nước trong bồn tắm. Sau đó nàng khóa chặt ngươi lại rồi tự nhấp. Sau phút bàng hoàng, ngươi chiếm lại quyền chủ động bắt nàng làm đủ mọi tư thế. Sau 1 hồi nồng nhiệt trong phòng tắm, ngươi xuất ra bên trong tử cung nàng. Tinh dịch, dâm thủy và nước tắm hòa lẫn vào nhau\""
+      "content": "[Đoạn 1 - Tường thuật]: \"Sau trận đấu giao lưu với 2 anh em họ Triệu, ngươi ngâm mình trong phòng tắm tại phủ tướng quân được xây tạm gần cổng phía Tây. Nghe tiếng bước chân vào, ngươi tưởng là gia nhân bèn nói vọng ra gọi hắn vào kỳ lưng. Không ngờ người này lại là Triệu Vũ. Ngươi đang nhắm mắt ngồi ngâm bồn nên không biết điều đó. Triệu Vũ cởi đồ, bước vào kỳ lưng cho ngươi\"\n[Đoạn 2 - Lời Diệp Thần]: \"Đúng đúng đúng. Chỗ đó mạnh tay hơn 1 chút\"\n[Đoạn 3 - Tường thuật]: \"Ngươi vừa tận hưởng vừa chỉ đạo nàng kỳ vị trí nào. Đột nhiên, nàng không kỳ nữa mà nhảy thẳng vào bồn tắm của ngươi. Ngươi giật mình quay lại thì bị nàng chặn môi bằng nụ hôn mãnh liệt. Ngươi hơi ngẩn người thì Triệu Vũ đã tấn công tới, nàng đưa cái hang động hồng hào không lông đút thẳng vào cây thương của ngươi. 1 dòng máu chảy ra hòa với nước trong bồn tắm. Sau đó nàng khóa chặt ngươi lại rồi tự nhấp. Sau phút bàng hoàng, ngươi chiếm lại quyền chủ động bắt nàng làm đủ mọi tư thế. Sau 1 hồi nồng nhiệt trong phòng tắm, ngươi xuất ra bên trong tử cung nàng. Tinh dịch, dâm thủy và nước tắm hòa lẫn vào nhau\"",
+      "summarized": true
     },
     {
       "id": "e53bb0e4-ff68-4bab-9bab-fd30e8c35203",
@@ -7560,12 +8006,14 @@
           "type": "narrative",
           "content": "Bầu không khí trong quân doanh lập tức chùng xuống đầy áp lực trước mối hiểm họa bạo loạn cận kề. *Diệp Thần* nheo mắt nhìn về phía chân trời xa xăm, chiếc lệnh bài Thống Lĩnh dát đồng giắt bên hông tỏa ra ánh hào quang kiên định. Trận chiến sinh tử bảo vệ *Chân Định Thành* đã thực sự bắt đầu."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "b96a9958-2690-4d59-8392-88936fb3565c",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Sai người gọi Triệu Vân, Triệu Vũ 2 vị phó tướng đến doanh trướng của ta bàn bạc\"\n[Đoạn 2 - Lời Vệ Sĩ Quân Doanh]: \"Dạ\"\n[Đoạn 3 - Tường thuật]: \"1 lát sau, 2 huynh muội Triệu Vân, Triệu Vũ đến doanh trướng của ngươi. Triệu Vũ tinh nghịch sà thẳng vào lòng ngươi ngồi trong sự ngỡ ngàng của Triệu Vân. Ngươi khẽ xoa đầu nàng nói\"\n[Đoạn 4 - Lời Diệp Thần]: \"Cho gợi huynh muội 2 người là vì Trương Mạn Thành đã dẫn binh đóng tại chân núi phía Tây cách cổng thành 10 dặm. Tên này tính cách háo thắng, ngày mai khi hắn xuất binh chắc chắn sẽ khiêu chiến trước trận. Ta muốn hỏi 2 người ai muốn đi?\"\n[Đoạn 5 - Tường thuật]: \"Triệu Vũ nghe đến đánh tướng trước trận liền sáng mắt\"\n[Đoạn 6 - Lời Triệu Vũ]: \"Muội, muội muốn đi\"\n[Đoạn 7 - Tường thuật]: \"Triệu Vân đứng bên cạnh nói\"\n[Đoạn 8 - Lời Triệu Vân]: \"Muội bớt gây phiền phức lại đi. Trận này để ta đánh\"\n[Đoạn 9 - Tường thuật]: \"Triệu Vũ biết ca ca coi trọng công danh còn nàng đơn thuần chỉ muốn đánh nhau nên phụng phịu nhường\"\n[Đoạn 10 - Lời Triệu Vũ]: \"Thôi được, nhường cho ca ca đó. Nhưng trở về huynh phải mua đồ ngon cho muội\"\n[Đoạn 11 - Lời Diệp Thần]: \"Được, vậy thì ngày mai Tử Long sẽ tiếp chiến. Giết được hắn chúng ta sẽ cho quân xung phong đánh bại đám giặc Khăn Vàng này\""
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Sai người gọi Triệu Vân, Triệu Vũ 2 vị phó tướng đến doanh trướng của ta bàn bạc\"\n[Đoạn 2 - Lời Vệ Sĩ Quân Doanh]: \"Dạ\"\n[Đoạn 3 - Tường thuật]: \"1 lát sau, 2 huynh muội Triệu Vân, Triệu Vũ đến doanh trướng của ngươi. Triệu Vũ tinh nghịch sà thẳng vào lòng ngươi ngồi trong sự ngỡ ngàng của Triệu Vân. Ngươi khẽ xoa đầu nàng nói\"\n[Đoạn 4 - Lời Diệp Thần]: \"Cho gợi huynh muội 2 người là vì Trương Mạn Thành đã dẫn binh đóng tại chân núi phía Tây cách cổng thành 10 dặm. Tên này tính cách háo thắng, ngày mai khi hắn xuất binh chắc chắn sẽ khiêu chiến trước trận. Ta muốn hỏi 2 người ai muốn đi?\"\n[Đoạn 5 - Tường thuật]: \"Triệu Vũ nghe đến đánh tướng trước trận liền sáng mắt\"\n[Đoạn 6 - Lời Triệu Vũ]: \"Muội, muội muốn đi\"\n[Đoạn 7 - Tường thuật]: \"Triệu Vân đứng bên cạnh nói\"\n[Đoạn 8 - Lời Triệu Vân]: \"Muội bớt gây phiền phức lại đi. Trận này để ta đánh\"\n[Đoạn 9 - Tường thuật]: \"Triệu Vũ biết ca ca coi trọng công danh còn nàng đơn thuần chỉ muốn đánh nhau nên phụng phịu nhường\"\n[Đoạn 10 - Lời Triệu Vũ]: \"Thôi được, nhường cho ca ca đó. Nhưng trở về huynh phải mua đồ ngon cho muội\"\n[Đoạn 11 - Lời Diệp Thần]: \"Được, vậy thì ngày mai Tử Long sẽ tiếp chiến. Giết được hắn chúng ta sẽ cho quân xung phong đánh bại đám giặc Khăn Vàng này\"",
+      "summarized": true
     },
     {
       "id": "3e44979b-abf3-4b0f-9482-460fc81c2940",
@@ -7634,12 +8082,14 @@
           "speaker": "Diệp Thần",
           "content": "Được, vậy thì ngày mai *Tử Long* sẽ tiếp chiến. Giết được hắn chúng ta sẽ cho quân xung phong đánh bại đám giặc *Khăn Vàng* này!"
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "4577f8b9-50fb-4e22-8e07-b0095087eda4",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Tường thuật]: \"Sáng hôm sau, đúng như ngươi dự liệu, Trương Mạn Thành dẫn binh tới đánh liền gõ trống khiêu chiến trước trận. Triệu Vân xách thương nghênh chiến. Khác với dã sử, thực lực Triệu Vân không hề mạnh mẽ như vậy. Đánh tới hơn 100 hiệp vẫn chỉ chiếm thượng phong nho nhỏ trước Trương Mạn Thành. Ngươi cau mày thầm nghĩ\"\n[Đoạn 2 - Lời Diệp Thần]: \"Dã sử chắc chắn sai rồi. Người mang danh Ngũ Hổ Thượng Tướng của Thục Hán phải là Triệu Vũ mới đúng. Hoặc là đây vốn là 1 thế giới song song khác không phải thế giới ban đầu, hoặc là có ẩn tình gì đó mà dã sử không ghi chép lại hay nói đúng hơn là bị che giấu không ghi chép lại\"\n[Đoạn 3 - Tường thuật]: \"Đánh thêm gần 50 hiệp nữa, Trương Mạn Thành thua dứt khoát xoay ngựa bỏ chạy. Ngươi ra lệnh toàn quân xuất kích. Trương Mạn Thành ra lệnh toàn quân bỏ chạy hướng U Châu.\"\n[Đoạn 4 - Lời Diệp Thần]: \"Tử Long ở lại duy trì đại cục, ta dẫn 3000 kỵ binh tinh nhuệ truy sát hắn\"\n[Đoạn 5 - Lời Triệu Vũ]: \"Muội cũng muốn đi\"\n[Đoạn 6 - Lời Diệp Thần]: \"Được, vậy muội đi cùng ta\"\n[Đoạn 7 - Tường thuật]: \"Dứt lời, ngươi và Triệu Vũ dẫn theo 3000 kỵ binh tách khỏi đại quân đang giằng co với đám giặc Khăn Vàng rớt lại phía sau mà đuổi theo tàn binh Trương Mạn Thành chạy hướng U Châu. 2 bên 1 chạy 1 đuổi liên tục mãi đến quan đạo thông vào Bắc Bình ngươi mới đuổi kịp và chém đầu Trương Mạn Thành. Sau nhiều ngày truy đuổi, ngươi dẫn binh tới trước thành Bắc Bình nghỉ ngơi. Trước cửa thành, ngươi hô lớn\"\n[Đoạn 8 - Lời Diệp Thần]: \"Khởi Minh - Thống Lĩnh cổng Tây Chân Định truy sát Hoàng Cân đầu lĩnh Trương Mạn Thành đi qua nơi này. Mong Công Tôn thái thú cho tá túc vài ngày\"\n[Đoạn 9 - Tường thuật]: \"1 lúc sau, cổng thành mở ra, sứ giả mời ngươi và Triệu Vũ đến phủ Công Tôn thái thú làm khách còn 3000 kỵ binh được an bài tại 1 góc doanh trại\""
+      "content": "[Đoạn 1 - Tường thuật]: \"Sáng hôm sau, đúng như ngươi dự liệu, Trương Mạn Thành dẫn binh tới đánh liền gõ trống khiêu chiến trước trận. Triệu Vân xách thương nghênh chiến. Khác với dã sử, thực lực Triệu Vân không hề mạnh mẽ như vậy. Đánh tới hơn 100 hiệp vẫn chỉ chiếm thượng phong nho nhỏ trước Trương Mạn Thành. Ngươi cau mày thầm nghĩ\"\n[Đoạn 2 - Lời Diệp Thần]: \"Dã sử chắc chắn sai rồi. Người mang danh Ngũ Hổ Thượng Tướng của Thục Hán phải là Triệu Vũ mới đúng. Hoặc là đây vốn là 1 thế giới song song khác không phải thế giới ban đầu, hoặc là có ẩn tình gì đó mà dã sử không ghi chép lại hay nói đúng hơn là bị che giấu không ghi chép lại\"\n[Đoạn 3 - Tường thuật]: \"Đánh thêm gần 50 hiệp nữa, Trương Mạn Thành thua dứt khoát xoay ngựa bỏ chạy. Ngươi ra lệnh toàn quân xuất kích. Trương Mạn Thành ra lệnh toàn quân bỏ chạy hướng U Châu.\"\n[Đoạn 4 - Lời Diệp Thần]: \"Tử Long ở lại duy trì đại cục, ta dẫn 3000 kỵ binh tinh nhuệ truy sát hắn\"\n[Đoạn 5 - Lời Triệu Vũ]: \"Muội cũng muốn đi\"\n[Đoạn 6 - Lời Diệp Thần]: \"Được, vậy muội đi cùng ta\"\n[Đoạn 7 - Tường thuật]: \"Dứt lời, ngươi và Triệu Vũ dẫn theo 3000 kỵ binh tách khỏi đại quân đang giằng co với đám giặc Khăn Vàng rớt lại phía sau mà đuổi theo tàn binh Trương Mạn Thành chạy hướng U Châu. 2 bên 1 chạy 1 đuổi liên tục mãi đến quan đạo thông vào Bắc Bình ngươi mới đuổi kịp và chém đầu Trương Mạn Thành. Sau nhiều ngày truy đuổi, ngươi dẫn binh tới trước thành Bắc Bình nghỉ ngơi. Trước cửa thành, ngươi hô lớn\"\n[Đoạn 8 - Lời Diệp Thần]: \"Khởi Minh - Thống Lĩnh cổng Tây Chân Định truy sát Hoàng Cân đầu lĩnh Trương Mạn Thành đi qua nơi này. Mong Công Tôn thái thú cho tá túc vài ngày\"\n[Đoạn 9 - Tường thuật]: \"1 lúc sau, cổng thành mở ra, sứ giả mời ngươi và Triệu Vũ đến phủ Công Tôn thái thú làm khách còn 3000 kỵ binh được an bài tại 1 góc doanh trại\"",
+      "summarized": true
     },
     {
       "id": "c7607344-b81b-4d1c-bc72-050b3c585f88",
@@ -7694,17 +8144,20 @@
           "type": "narrative",
           "content": "Nghe những lời nũng nịu dạt dào tình ái của nữ tướng quân dũng mãnh, luồng lửa tình cuồn cuộn trong đan điền ngươi lập tức bùng cháy dữ dội. Ngươi ôm chặt lấy bờ eo thon thả của nàng, cúi đầu ngập tràn yêu thương sẵn sàng bước vào một đêm hoan lạc triền miên để củng cố tình cảm khăng khít giữa hai người."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "64cdcb4e-37dd-4ad9-acde-6387efe5a4b5",
       "type": "user_choice",
-      "content": "Đồng ý cùng Triệu Vũ thưởng thức một đêm hoan lạc nồng nàn dập dồn ngay tại phòng khách phủ Thái thú để thắt chặt tình cảm và phục hồi hoàn toàn thể trạng sau ba ngày dài truy sát giặc. {Tỷ lệ thành công: 100% Hậu quả/Phần thưởng: Tăng cường sự gắn kết tình cảm dạt dào của Triệu Vũ và khôi phục hoàn toàn sinh lực cho cả hai}"
+      "content": "Đồng ý cùng Triệu Vũ thưởng thức một đêm hoan lạc nồng nàn dập dồn ngay tại phòng khách phủ Thái thú để thắt chặt tình cảm và phục hồi hoàn toàn thể trạng sau ba ngày dài truy sát giặc. {Tỷ lệ thành công: 100% Hậu quả/Phần thưởng: Tăng cường sự gắn kết tình cảm dạt dào của Triệu Vũ và khôi phục hoàn toàn sinh lực cho cả hai}",
+      "summarized": true
     },
     {
       "id": "431d88c1-f9a0-422d-8f2d-8ca41161c313",
       "type": "user_custom_action",
-      "content": "Đồng ý cùng Triệu Vũ thưởng thức một đêm hoan lạc nồng nàn dập dồn ngay tại phòng khách phủ Thái thú để thắt chặt tình cảm và phục hồi hoàn toàn thể trạng sau ba ngày dài truy sát giặc. Cả đêm ngươi thưởng cho nàng 10 hiệp khiến nàng hôm sau không thể xuống giường. Sáng hôm sau, ngươi 1 mình đến gặp Công Tôn Toản, xin phép cho Triệu Vũ mệt mỏi vì nhiều ngày truy sát nên không đến. Sau đó ngươi và Công Tôn Toản nói đủ chuyện trên trời dưới đất rất vui vẻ. Đang lúc nói về tình hình giặc Khăn Vàng ở U Châu thì Công Tôn Bảo Nguyệt - con gái Công Tôn Toản mặc hồng y chiến giáp tay cầm trường đao đi tới. Nàng nghe nói phủ có khách từ Chân Định tới. Là vị Bạch Y tướng quân trong lời đồn của dân chúng thì tò mò đến xem. Tính cách Công Tôn Bảo Nguyệt cũng ngang bướng không kém Triệu Vũ khiến Công Tôn Toản cũng đau đầu như Triệu Vân. Vừa nhìn thấy ngươi nàng liền ngẩn người vì lần đầu thấy người đẹp trai như vậy. Tuy không mặc ngân giáp uy nghiêm nhưng bộ bạch y ngươi đang mặc lại khiến ngươi giống các vị mưu sĩ. Đặc biệt là mưu sĩ đẹp trai"
+      "content": "Đồng ý cùng Triệu Vũ thưởng thức một đêm hoan lạc nồng nàn dập dồn ngay tại phòng khách phủ Thái thú để thắt chặt tình cảm và phục hồi hoàn toàn thể trạng sau ba ngày dài truy sát giặc. Cả đêm ngươi thưởng cho nàng 10 hiệp khiến nàng hôm sau không thể xuống giường. Sáng hôm sau, ngươi 1 mình đến gặp Công Tôn Toản, xin phép cho Triệu Vũ mệt mỏi vì nhiều ngày truy sát nên không đến. Sau đó ngươi và Công Tôn Toản nói đủ chuyện trên trời dưới đất rất vui vẻ. Đang lúc nói về tình hình giặc Khăn Vàng ở U Châu thì Công Tôn Bảo Nguyệt - con gái Công Tôn Toản mặc hồng y chiến giáp tay cầm trường đao đi tới. Nàng nghe nói phủ có khách từ Chân Định tới. Là vị Bạch Y tướng quân trong lời đồn của dân chúng thì tò mò đến xem. Tính cách Công Tôn Bảo Nguyệt cũng ngang bướng không kém Triệu Vũ khiến Công Tôn Toản cũng đau đầu như Triệu Vân. Vừa nhìn thấy ngươi nàng liền ngẩn người vì lần đầu thấy người đẹp trai như vậy. Tuy không mặc ngân giáp uy nghiêm nhưng bộ bạch y ngươi đang mặc lại khiến ngươi giống các vị mưu sĩ. Đặc biệt là mưu sĩ đẹp trai",
+      "summarized": true
     },
     {
       "id": "248a96bc-0427-463f-a411-7746521d18e8",
@@ -7786,12 +8239,14 @@
           "type": "narrative",
           "content": "Lời thốt ra vô cùng ôn nhu, lịch thiệp nhưng lại ẩn chứa một uy áp điềm tĩnh đầy cuốn hút. Sự tiếp cận gần gũi của ngươi khiến hơi ấm nam tính phả nhẹ vào mặt *Công Tôn Bảo Nguyệt*, làm gò má nàng đỏ bừng lan xuống tận bờ cổ trắng nõn. Nàng lúng túng lùi lại nửa bước, đôi mắt bướng bỉnh khẽ chớp động, tiếng tim đập dồn dập rộn ràng trong lồng ngực dường như càng lúc càng rõ rệt trước khí chất nho nhã, cuốn hút tột cùng của vị Bạch Y tướng quân truyền kỳ.\nMối duyên gặp gỡ bất ngờ giữa ngươi và ái nữ của Thái thú Bắc Bình đã mở ra một bầu không khí đầy thú vị và nồng nàn tình ái bên trong phủ đệ *Bắc Bình*.\nBạn đứng đối diện với *Công Tôn Bảo Nguyệt* đang bối rối đỏ mặt và Thái thú *Công Tôn Toản* đang mỉm cười đăm chiêu bên cạnh bàn ăn. Hãy quyết định bước đi tiếp theo:"
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "e58de48f-427c-46f0-9e10-4169366a68a5",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Công Tôn Bảo Nguyệt]: \"Không được, hiếm lắm mới có dịp gặp được ngươi. Chọn ngày không bằng gặp ngày. Hôm nay chúng ta phải giao lưu võ nghệ.\"\n[Đoạn 2 - Lời Diệp Thần]: \"Nếu cô nương đã có nhã hứng, ta từ chối là bất kính. Mời\"\n[Đoạn 3 - Lời Công Tôn Toản]: \"Hay lắm, vậy chúng ta đến võ trường phía Nam quân doanh. Người đâu, mang theo giáp trụ và binh khí của Diệp thống lĩnh đến võ trường phía Nam quân doanh\"\n[Đoạn 4 - Tường thuật]: \"Sau đó, cả đoàn người lục tục kéo đến võ trường. Ngươi mặc lại ngân giáp, tay cầm Bách Điểu Triều Phụng thương. Dáng vẻ Bạch Y tướng quân lại hiện ra trước mặt Công Tôn Bảo Nguyệt khiến nàng lại thất thần 1 lần nữa. Nàng thầm nghĩ 'Làm mưu sĩ thì là mưu sĩ đẹp trai, làm tướng quân cũng là tướng quân đẹp trai. Quả nhiên người đẹp trai thì mặc gì cũng đẹp trai.'\"\n[Đoạn 5 - Lời Diệp Thần]: \"Bảo Nguyệt cô nương, ta chuẩn bị xong rồi\"\n[Đoạn 6 - Tường thuật]: \"Lúc này, Công Tôn Bảo Nguyệt mới hoàn hồn.\"\n[Đoạn 7 - Lời Công Tôn Bảo Nguyệt]: \"Được, vậy ta tới đây\"\n[Đoạn 8 - Tường thuật]: \"Dứt lời, nàng múa trường đao lao tới. Ngươi né tránh, đỡ đòn nhường nàng đủ 50 hiệp mới bắt đầu phản kích. Dù tấn công nhưng ngươi vẫn hơi nương tay để nàng chống đỡ thêm 20 hiệp mới xuất kỹ năng Bách Điểu Triều Phụng tước vũ khí của nàng\""
+      "content": "[Đoạn 1 - Lời Công Tôn Bảo Nguyệt]: \"Không được, hiếm lắm mới có dịp gặp được ngươi. Chọn ngày không bằng gặp ngày. Hôm nay chúng ta phải giao lưu võ nghệ.\"\n[Đoạn 2 - Lời Diệp Thần]: \"Nếu cô nương đã có nhã hứng, ta từ chối là bất kính. Mời\"\n[Đoạn 3 - Lời Công Tôn Toản]: \"Hay lắm, vậy chúng ta đến võ trường phía Nam quân doanh. Người đâu, mang theo giáp trụ và binh khí của Diệp thống lĩnh đến võ trường phía Nam quân doanh\"\n[Đoạn 4 - Tường thuật]: \"Sau đó, cả đoàn người lục tục kéo đến võ trường. Ngươi mặc lại ngân giáp, tay cầm Bách Điểu Triều Phụng thương. Dáng vẻ Bạch Y tướng quân lại hiện ra trước mặt Công Tôn Bảo Nguyệt khiến nàng lại thất thần 1 lần nữa. Nàng thầm nghĩ 'Làm mưu sĩ thì là mưu sĩ đẹp trai, làm tướng quân cũng là tướng quân đẹp trai. Quả nhiên người đẹp trai thì mặc gì cũng đẹp trai.'\"\n[Đoạn 5 - Lời Diệp Thần]: \"Bảo Nguyệt cô nương, ta chuẩn bị xong rồi\"\n[Đoạn 6 - Tường thuật]: \"Lúc này, Công Tôn Bảo Nguyệt mới hoàn hồn.\"\n[Đoạn 7 - Lời Công Tôn Bảo Nguyệt]: \"Được, vậy ta tới đây\"\n[Đoạn 8 - Tường thuật]: \"Dứt lời, nàng múa trường đao lao tới. Ngươi né tránh, đỡ đòn nhường nàng đủ 50 hiệp mới bắt đầu phản kích. Dù tấn công nhưng ngươi vẫn hơi nương tay để nàng chống đỡ thêm 20 hiệp mới xuất kỹ năng Bách Điểu Triều Phụng tước vũ khí của nàng\"",
+      "summarized": true
     },
     {
       "id": "e7ec192f-befc-4272-90d3-2af72ea56e04",
@@ -7869,12 +8324,14 @@
           "type": "narrative",
           "content": "Nói rồi, lão sai người chuẩn bị nước ấm và khăn lau cho ngươi cùng ái nữ. Sau buổi tỷ võ sảng khoái, cả đoàn người trở về sảnh chính của phủ Thái thú để tiếp tục đàm đạo chuyện đại sự quân doanh. *Công Tôn Bảo Nguyệt* không còn ngang bướng như trước, nàng lặng lẽ đi theo sau ngươi, ánh mắt thỉnh thoảng lại lén lút nhìn vào gương mặt anh tuấn phi phàm của ngươi với luồng tình cảm mến mộ nồng nàn không thể che giấu.\nLúc này, trong gian phòng khách thượng hạng ở khu viện phía Bắc, *Triệu Vũ* cũng đã tỉnh giấc sau giấc ngủ sâu phục hồi thể trạng. Trận mây mưa mười hiệp kịch liệt đêm qua của ngươi quả thực đã vắt kiệt sức lực non nớt của nàng, khiến hai chân ngọc của nàng bủn rủn, run rẩy không vững nổi. Nàng khẽ ngồi dậy trên chiếc giường gấm, khoác lên mình chiếc áo mỏng, cảm nhận sự tràn trề nóng hổi của dòng tinh trùng vẫn còn lưu đọng trong tử cung mình rỉ ra ngoài đùi ngọc đầy dâm mị. Gò má nàng ửng hồng thẹn thùng khi nhớ lại những đợt dồn dập hoang dại đêm qua, thầm mong chờ phu quân sớm trở về bên mình.\nTại sảnh chính phủ Thái thú, cuộc thảo luận về động thái của giặc Khăn Vàng ở *U Châu* đang diễn ra vô cùng nghiêm cẩn. Ngươi ngồi bên bàn trà, lắng nghe *Công Tôn Toản* phân tích bản đồ địa hình. *Công Tôn Bảo Nguyệt* khéo léo dâng trà cho ngươi, bàn tay ngọc khẽ chạm vào tay ngươi làm nàng run lên một nhịp thẹn thùng đầy ngọt ngào.\nThế cuộc chiến sự đang ngày một cấp bách, đại quân của *Trương Mạn Thành* tuy đã bị dẹp tan tiên phong nhưng tàn dư của bọn chúng vẫn còn ẩn náu rải rác khắp các huyện của *U Châu*. Ngươi cần phải đưa ra quyết định chiến lược tiếp theo để vừa củng cố thực lực quân sự của kỵ binh *Chân Định*, vừa bảo vệ sự bình yên cho hai mỹ nhân bên cạnh mình."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "17a17118-8bc5-4553-b5b1-32a64360304c",
       "type": "user_custom_action",
-      "content": "Sau cuộc thảo luận nhanh chóng, ngươi trở về phòng 'chăm sóc' Triệu Vũ 10 hiệp. Ngươi không biết rằng Công Tôn Bảo Nguyệt lén đi theo. Nàng đục 1 lỗ trên giấy dán cửa sổ nhìn vào trong thấy ngươi đang 'chăm sóc' Triệu Vũ liền cảm thấy toàn thân nóng bừng. Ngồi ngoài nghe tiếng Triệu Vũ rên, nàng không kìm được mà tự xử. Nhưng không thỏa mãn, nàng mở cửa xông vào yêu cầu ngươi cho gia nhập. Ngươi hơi sững sờ nhưng cũng không từ chối. Thế là thay vì 'chăm sóc' 1 mình Triệu Vũ thì ngươi 'chăm sóc' cả Triệu Vũ và Công Tôn Bảo Nguyệt"
+      "content": "Sau cuộc thảo luận nhanh chóng, ngươi trở về phòng 'chăm sóc' Triệu Vũ 10 hiệp. Ngươi không biết rằng Công Tôn Bảo Nguyệt lén đi theo. Nàng đục 1 lỗ trên giấy dán cửa sổ nhìn vào trong thấy ngươi đang 'chăm sóc' Triệu Vũ liền cảm thấy toàn thân nóng bừng. Ngồi ngoài nghe tiếng Triệu Vũ rên, nàng không kìm được mà tự xử. Nhưng không thỏa mãn, nàng mở cửa xông vào yêu cầu ngươi cho gia nhập. Ngươi hơi sững sờ nhưng cũng không từ chối. Thế là thay vì 'chăm sóc' 1 mình Triệu Vũ thì ngươi 'chăm sóc' cả Triệu Vũ và Công Tôn Bảo Nguyệt",
+      "summarized": true
     },
     {
       "id": "4a9bdbb5-105d-4cd5-9b88-a9adcd2979f7",
@@ -7947,12 +8404,14 @@
           "type": "narrative",
           "content": "*Diệp Thần* ôm chặt hai nương tử vào lòng, đặt lên trán mỗi nàng một nụ hôn tràn đầy sự chở che. Thật kỳ diệu, nhờ sự giao hòa của chân nguyên cuồn cuộn và tình cảm dạt dào, thể lực của cả ba người không những không suy giảm mà còn hồi phục hoàn toàn sung mãn, tinh thần sảng khoái tràn đầy sinh lực.\nTrời đã sáng rõ trên thành *Bắc Bình*, ánh nắng hanh hao chiếu rọi lên gian phòng khách thượng hạng. *Diệp Thần*, *Triệu Vũ* và *Công Tôn Bảo Nguyệt* cùng thức dậy, vệ sinh cá nhân rồi thay vào những bộ y phục tươi mới. Tình hình chiến sự giặc *Khăn Vàng* ở vùng *U Châu* vẫn đang diễn biến phức tạp, và ba người họ cần tính toán cho những bước đi tiếp theo."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "4459720f-3757-4197-a62c-e9ba4d9ef431",
       "type": "user_custom_action",
-      "content": "Ngươi đến gặp Công Tôn Toản để từ biệt. Đã ở lại đây khá lâu, ngươi cần trở về báo cáo kết quả. Công Tôn Toản sảng khoái đáp ứng. Công Tôn Bảo Nguyệt xin cha cho đi theo ngươi nhưng không được chấp nhận. Ngươi từ biệt 2 người cùng Triệu Vũ dẫn 3000 kỵ binh trở về Chân Định. Đi được 2 ngày đường thì từ xa Công Tôn Bảo Nguyệt cưỡi ngựa đuổi theo. Ngươi biết nàng là trốn khỏi nhà để đi theo ngươi nhưng cũng không có cách nào khuyên bảo nàng chỉ đành dẫn nàng theo. Trở về Chân Định, ngươi mang đầu Trương Mạn Thành đi gặp Hạ Hầu Kiệt và được phong Bình Tây Tướng Quân. Lúc này Hạ Hầu Kiệt liền hỏi ngươi có thích Khinh Y và muốn cưới nàng không. Ngươi không do dự liền đồng ý nhưng với điều kiện là ngươi sẽ nạp rất nhiều vợ. Hạ Hầu Khinh Y không quan tâm mà đáp ứng ngay. Hạ Hầu Kiệt cũng hết cách bèn đồng ý"
+      "content": "Ngươi đến gặp Công Tôn Toản để từ biệt. Đã ở lại đây khá lâu, ngươi cần trở về báo cáo kết quả. Công Tôn Toản sảng khoái đáp ứng. Công Tôn Bảo Nguyệt xin cha cho đi theo ngươi nhưng không được chấp nhận. Ngươi từ biệt 2 người cùng Triệu Vũ dẫn 3000 kỵ binh trở về Chân Định. Đi được 2 ngày đường thì từ xa Công Tôn Bảo Nguyệt cưỡi ngựa đuổi theo. Ngươi biết nàng là trốn khỏi nhà để đi theo ngươi nhưng cũng không có cách nào khuyên bảo nàng chỉ đành dẫn nàng theo. Trở về Chân Định, ngươi mang đầu Trương Mạn Thành đi gặp Hạ Hầu Kiệt và được phong Bình Tây Tướng Quân. Lúc này Hạ Hầu Kiệt liền hỏi ngươi có thích Khinh Y và muốn cưới nàng không. Ngươi không do dự liền đồng ý nhưng với điều kiện là ngươi sẽ nạp rất nhiều vợ. Hạ Hầu Khinh Y không quan tâm mà đáp ứng ngay. Hạ Hầu Kiệt cũng hết cách bèn đồng ý",
+      "summarized": true
     },
     {
       "id": "e17889e8-3af4-44e6-aa51-d380ec2cc0e1",
@@ -8070,12 +8529,14 @@
           "type": "narrative",
           "content": "Hôn sự đại sự được định đoạt một cách trọn vẹn và êm đẹp 100%. Ngay sau khi rời khỏi sảnh chính, ngươi dẫn cả ba mỹ nhân là *Hạ Hầu Khinh Y*, *Điêu Thuyền* (tự *Tú Nhi*), *Triệu Vũ* và *Công Tôn Bảo Nguyệt* quay trở về khuê viện riêng tư *Uyển Nhu Các*. Tại đây, cánh cổng viện được khóa chặt, ngăn cách hoàn toàn với mọi tai mắt ngoài phủ đệ.\nTrong gian tẩm phòng ngạt ngào hương hoa mộc tê quyện cùng mùi trầm hương ấm áp, một trận hoan lạc cuồng nhiệt và dập dồn bậc nhất dã sử bùng nổ suốt cả ngày lẫn đêm để ăn mừng chiến thắng và hôn sự thành đại cục. Ngươi không thiên vị bất kỳ ai, lần lượt sủng ái và \"chăm sóc\" trọn vẹn cả bốn tuyệt thế mỹ nhân một cách công bằng và nồng nàn nhất.\nTinh dịch nóng hổi đặc quánh hòa cùng dâm thủy trong suốt phun trào ạt dạt chảy đầm đìa xuống chiếc giường gấm quý giá, bốc lên hương vị tình ái đặc trưng nồng nàn, đắm say tột đỉnh. Tình cảm và sự gắn kết khăng khít tuyệt đối giữa ngươi cùng bốn vị nương tử xinh đẹp qua đêm hoan lạc triền miên càng thêm thắt chặt vững chắc như bàn thạch, chuẩn bị sẵn sàng tâm thế và sinh lực dồi dào cho những dự định vĩ đại tiếp theo giữa thời thế bạo loạn Hoàng Cân sắp tới.\nSáng hôm sau, khi ánh bình minh tươi sáng rạng rỡ xua tan hoàn toàn làn sương mù dốc núi trên thành *Chân Định*, ngươi bước ra ban công tầng hai *Uyển Nhu Các*, một tay ôm bờ eo thon thả của *Hạ Hầu Khinh Y*, tay kia nắm lấy bàn tay nhỏ nhắn của *Điêu Thuyền*, trong khi *Triệu Vũ* và *Công Tôn Bảo Nguyệt* đang mỉm cười rạng rỡ tựa sát bên hông ngươi. Khí thế của vị Bình Tây Tướng Quân lẫm liệt chấn động cả cõi trời đất biên ải."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "60754ef0-b557-431e-ae20-1ebd724f3ac3",
       "type": "user_choice",
-      "content": "Ngươi phái sứ giả mang theo sính lễ trọng hậu đến phủ Thái thú Bắc Bình để chính thức dâng thư cầu hôn nạp thiếp Công Tôn Bảo Nguyệt dưới sự đồng thuận vui vẻ của Công Tôn Toản. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Thắt chặt mối liên minh quân sự vững chắc giữa hai thế lực Chân Định và Bắc Bình để chuẩn bị đối phó đại quân Hoàng Cân}"
+      "content": "Ngươi phái sứ giả mang theo sính lễ trọng hậu đến phủ Thái thú Bắc Bình để chính thức dâng thư cầu hôn nạp thiếp Công Tôn Bảo Nguyệt dưới sự đồng thuận vui vẻ của Công Tôn Toản. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Thắt chặt mối liên minh quân sự vững chắc giữa hai thế lực Chân Định và Bắc Bình để chuẩn bị đối phó đại quân Hoàng Cân}",
+      "summarized": true
     },
     {
       "id": "e149f8a3-503d-4875-baab-c9ec746a01cf",
@@ -8145,12 +8606,14 @@
           "type": "narrative",
           "content": "Trận hoan lạc tay tư dập dồn và mãnh liệt kéo dài suốt cả đêm thâu, luân phiên sủng ái cả ba mỹ nhân một cách công bằng và nồng nàn nhất. Mỗi người đều được ngươi thưởng đủ mười hiệp hoan lạc cuồng nhiệt, tinh dịch đặc quánh nóng hổi bắn tràn ngập tử cung của ba nàng, hòa quyện cùng dâm thủy chảy lênh láng đầm đìa xuống chiếc giường gấm quý giá, bốc lên mùi hương đặc trưng dâm mị nồng nàn tột đỉnh.\nSáng hôm sau, khi ánh nắng ban mai rực rỡ chiếu rọi qua khung cửa sổ, trận mây mưa mới chính thức khép lại. Nhờ có chân nguyên cuồn cuộn luân chuyển khắp cơ thể cùng tình cảm gắn kết dạt dào, thể lực và sinh lực của cả bốn người đều được hồi phục hoàn toàn sung mãn, tinh thần sảng khoái dạt dào sức sống. Ba nương tử nằm quấn quýt bên ngươi trên chiếc giường gấm, gương mặt ngập tràn hạnh phúc, cùng nhau bàn bạc về việc chuẩn bị dọn dẹp khuê phòng để chào đón nương tử thứ tư là *Công Tôn Bảo Nguyệt* nhập phủ, thiết lập mối giao hảo bền chặt vững chắc cho tương lai.\nBạn đứng bên bờ ban công *Uyển Nhu Các* lộng gió cùng ba vị nương tử xinh đẹp, chiếc lệnh bài Bình Tây Tướng Quân giắt bên hông lấp lóa dưới nắng sớm. Hãy quyết định bước đi tiếp theo:"
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "be5a65db-0cf6-4637-8b75-fb98a20f8695",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Ta nghe nói Thái Ung tiên sinh chuẩn bị dẫn gia quyến đi qua Chân Định. Ta muốn nạp Thái Văn Cơ làm thiếp. Các muội giúp ta chuẩn bị 1 chút. Làm sao để tiếp cận và chiếm được cảm tình của nàng ấy\""
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Ta nghe nói Thái Ung tiên sinh chuẩn bị dẫn gia quyến đi qua Chân Định. Ta muốn nạp Thái Văn Cơ làm thiếp. Các muội giúp ta chuẩn bị 1 chút. Làm sao để tiếp cận và chiếm được cảm tình của nàng ấy\"",
+      "summarized": true
     },
     {
       "id": "c60a0fa1-ae0a-4ba9-91f8-26b8960fb1f9",
@@ -8214,12 +8677,14 @@
           "type": "narrative",
           "content": "Nói là làm, ngay trong buổi sáng sớm hôm đó, dưới sự sắp xếp khéo léo của *Hạ Hầu Khinh Y*, một bức thiệp mời bọc lụa thêu hoa mẫu đơn sang trọng đại diện cho phủ Thái thú *Chân Định* đã được sứ giả phi ngựa cấp báo mang đi hướng về phía biên giới, nhằm chính thức ngỏ lời mời gia quyến danh sĩ *Thái Ung* ghé qua làm khách. \nCùng lúc đó, để thưởng cho sự hiểu chuyện, thông tuệ và những mưu kế tuyệt vời của các nương tử, ngươi quyết định đóng chặt cánh cửa gỗ đàn hương của tẩm phòng *Uyển Nhu Các*, bắt đầu một trận hoan lạc dập dồn và mãnh liệt bậc nhất kéo dài suốt cả buổi sáng và chiều muộn để bồi bổ sinh lực và thắt chặt tình cảm dạt dào giữa ba người. Ngươi không thiên vị bất kỳ ai, lần lượt sủng ái và \"chăm sóc\" trọn vẹn cả bốn tuyệt thế mỹ nhân một cách công bằng, nồng nàn nhất. \nTinh dịch đặc quánh nóng hổi hòa cùng dâm thủy trong suốt phun trào ào ạt, chảy đầm đìa xuống chiếc giường gấm quý giá, bốc lên mùi hương đặc trưng dâm mị, nồng nặc tột đỉnh của tình yêu đôi lứa. Thể lực và sinh lực của cả năm người không những không suy giảm mà còn được phục hồi hoàn toàn sung mãn nhờ sự giao hòa của chân nguyên cuồn cuộn lưu chuyển khắp cơ thể.\nNgày hôm sau, khi ánh nắng ban mai rực rỡ xua tan hoàn toàn làn sương mù dốc núi trên thành *Chân Định*, kế hoạch tiếp cận mỹ nhân chính thức được bắt đầu. \nNgươi khoác lên mình bộ ngân giáp giát bạc sáng quắc như tuyết, thắt đai lưng dát đồng oai phong, hông đeo thanh bảo kiếm *Ỷ Thiên Kiếm* lấp lánh, sải bước dũng mãnh ra sân quân doanh để tập hợp lực lượng. *Triệu Vũ* mặc giáp nhẹ viền bạc năng động cầm trường thương, và *Công Tôn Bảo Nguyệt* khoác hồng y chiến giáp kiêu hãnh cầm trường đao cùng dẫn theo ba ngàn kỵ binh tinh nhuệ *Cổng Tây* rầm rộ xuất kích ngoài quan ải, đóng vai trò đội kỵ binh tuần tra biên giới \"vô tình\" hộ tống xe ngựa của *Thái Ung* tiên sinh. \nTrong khi đó, tại nội viện *Uyển Nhu Các*, *Hạ Hầu Khinh Y* và *Điêu Thuyền* đã chuẩn bị sẵn sàng một tiệc trà đàm đạo thơ ca và âm luật vô cùng tinh tế dưới mái hiên thanh tịnh, nơi có hai đại trận pháp *Bát Quái Trận* và *Cửu Cung Trận* vận hành êm ả, sẵn sàng chào đón tuyệt thế tài nữ *Thái Văn Cơ* bước vào thiên đường riêng tư của ba người họ.\nThế cục chiến loạn Hoàng Cân ngoài kia vẫn đang nhen nhóm những tàn lửa bạo loạn, nhưng với mưu kế liên hoàn chặt chẽ cùng sự đồng lòng của bốn vị nương tử xinh đẹp, ngươi đứng trước cổng thành, giắt chiếc lệnh bài Bình Tây Tướng Quân dát đồng bên hông, sẵn sàng cho những bước đi chiến lược tiếp theo để chiếm trọn trái tim của mỹ nhân lừng danh dã sử.\nNgươi đứng trước cổng thành cùng *Triệu Vũ* và *Công Tôn Bảo Nguyệt*, ba ngàn kỵ binh tinh nhuệ đã sẵn sàng xuất kích. Hãy quyết định bước đi tiếp theo:"
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "78606e58-15e7-4e0e-b9a8-ab3015fa96dd",
       "type": "user_custom_action",
-      "content": "Ngươi bố cục để 'vô tình' cứu được gia quyến Thái Ung và mời ở lại phủ Thái Thú làm khách. Sau đó 4 vị nương tử của ngươi lại trờ chuyện với Thái Văn Cơ và mời nàng đến Uyển Nhu Các uống trà đàm đạo về âm nhạc. Trong lĩnh vực này chỉ có Điêu Thuyền là am hiểu nhất mới miễn cưỡng góp vui được với Thái Văn Cơ. Xong việc ở chính điện, ngươi quay về Uyển Nhu Các tham gia đàm đạo cùng các nàng. Ngươi dùng tài đánh đàn để biểu diễn khúc Quảng Lăng Tán khiến Thái Văn Cơ bội phục. Nàng bị vẻ đẹp trai của ngươi cùng tài năng văn võ song toàn chinh phục mà đem thân trao cho ngươi ngay lúc đó. Ngươi không ngần ngại nhận lấy và ân ái cùng 5 vị mỹ nhân trên nhã gian lầu 2 của Uyển Nhu Các"
+      "content": "Ngươi bố cục để 'vô tình' cứu được gia quyến Thái Ung và mời ở lại phủ Thái Thú làm khách. Sau đó 4 vị nương tử của ngươi lại trờ chuyện với Thái Văn Cơ và mời nàng đến Uyển Nhu Các uống trà đàm đạo về âm nhạc. Trong lĩnh vực này chỉ có Điêu Thuyền là am hiểu nhất mới miễn cưỡng góp vui được với Thái Văn Cơ. Xong việc ở chính điện, ngươi quay về Uyển Nhu Các tham gia đàm đạo cùng các nàng. Ngươi dùng tài đánh đàn để biểu diễn khúc Quảng Lăng Tán khiến Thái Văn Cơ bội phục. Nàng bị vẻ đẹp trai của ngươi cùng tài năng văn võ song toàn chinh phục mà đem thân trao cho ngươi ngay lúc đó. Ngươi không ngần ngại nhận lấy và ân ái cùng 5 vị mỹ nhân trên nhã gian lầu 2 của Uyển Nhu Các",
+      "summarized": true
     },
     {
       "id": "50665b4d-2362-4f1d-94e3-793a486f8fb7",
@@ -8256,7 +8721,8 @@
           "type": "narrative",
           "content": "Nghe tin báo, ngươi khẽ nhếch môi nở một nụ cười đầy tự tin và kiêu hãnh. Việc thu phục được lòng tin của bậc túc nho đại diện cho văn chương triều đình như *Thái Ung* tiên sinh sẽ là một bước đi chiến lược vô giá để ngươi củng cố vị thế chính trị vững chắc của mình trong thời buổi loạn lạc này. Hắn thong thả quay lại phòng dặn dò khẽ khàng với năm vị nương tử vừa tỉnh giấc, mặc vào bộ chiến giáp giát bạc oai phong rồi sải bước tiến về phía đại sảnh chính điện."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "7336fb5d-2620-47be-82a8-e6cc25a0e3d6",
@@ -8267,7 +8733,8 @@
     {
       "id": "3b3cd9d1-5557-47d3-bc6e-05025413328a",
       "type": "user_custom_action",
-      "content": "Dẫn theo năm vị nương tử cùng tiến ra đại sảnh diện kiến nhạc phụ Thái Ung để chính thức dâng trà cầu hôn nạp thiếp Thái Diễm trước mặt Thái thú Hạ Hầu Kiệt. {Tỷ lệ thành công: 90% Hậu quả/Phần thưởng: Hoàn tất nghi lễ đại sự gia đình một cách long trọng, thiết lập mối liên minh gia tộc vững chắc và gia tăng hảo cảm của Thái Diễm lên mức tối đa}"
+      "content": "Dẫn theo năm vị nương tử cùng tiến ra đại sảnh diện kiến nhạc phụ Thái Ung để chính thức dâng trà cầu hôn nạp thiếp Thái Diễm trước mặt Thái thú Hạ Hầu Kiệt. {Tỷ lệ thành công: 90% Hậu quả/Phần thưởng: Hoàn tất nghi lễ đại sự gia đình một cách long trọng, thiết lập mối liên minh gia tộc vững chắc và gia tăng hảo cảm của Thái Diễm lên mức tối đa}",
+      "summarized": true
     },
     {
       "id": "4b3561c3-1bd1-4ced-90ee-5694b94a971f",
@@ -8336,12 +8803,14 @@
           "type": "narrative",
           "content": "Bầu không khí trong khuê viện bỗng chốc trở nên trang nghiêm và sục sôi khí thế chiến đấu tột đỉnh. Ngươi nheo mắt nhìn ra ngoài cửa sổ, chiếc lệnh bài Bình Tây Tướng Quân giắt bên hông tỏa ra ánh hào quang kiên định dưới nắng sớm. Trận chiến sinh tử bảo vệ thành *Chân Định* đã thực sự bắt đầu, và ngươi đã sẵn sàng lãnh đạo quân đội nghiền nát quân phản loạn."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "5b74cd27-687c-4e5b-8bfa-acbf4a25478c",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Tử Long có nghe nhầm chiến báo không? Trương Mạn Thành đã bị ta chém ở U Châu rồi mà\""
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Tử Long có nghe nhầm chiến báo không? Trương Mạn Thành đã bị ta chém ở U Châu rồi mà\"",
+      "summarized": true
     },
     {
       "id": "ce290ac4-c782-4fb0-9693-ae862762b331",
@@ -8495,12 +8964,14 @@
           "type": "narrative",
           "content": "\"Ầm ầm ầm!\"\nCổng thành phía Tây mở rộng, ba ngàn kỵ binh tinh nhuệ Chân Định dưới sự dẫn dắt của các phó tướng dũng mãnh tràn ra như thác lũ, quét sạch toàn bộ tàn dư giặc Khăn Vàng ngoài quan ải. Trận chiến sinh tử bảo vệ thành *Chân Định* đã khép lại bằng một chiến thắng áp đảo, lẫm liệt và toàn diện nhất dã sử.\nNắng chiều nhuộm vàng toàn bộ tường thành đá cổ kính của *Cổng Tây*. *Diệp Thần* đứng trên bờ thành cao vút, chiếc lệnh bài Bình Tây Tướng Quân giắt bên hông lấp lánh rực rỡ, sẵn sàng cho những trang sử vương giả vĩ đại tiếp theo."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "6bd16b25-a6cf-4c3e-a35a-6b70fbe5e4e8",
       "type": "user_custom_action",
-      "content": "Trực tiếp dẫn kỵ binh xông ra thung lũng để truy quét sạch sẽ những tên chỉ huy phản loạn tàn dư, thu giữ toàn bộ kho lương thảo và chiến ma của giặc Khăn Vàng. Đồng thời sai người tung tin Trương Mạn Thành đã bị chém ở U Châu, những kẻ khác tự nhận là Trương Mạn Thành đều là giả mạo."
+      "content": "Trực tiếp dẫn kỵ binh xông ra thung lũng để truy quét sạch sẽ những tên chỉ huy phản loạn tàn dư, thu giữ toàn bộ kho lương thảo và chiến ma của giặc Khăn Vàng. Đồng thời sai người tung tin Trương Mạn Thành đã bị chém ở U Châu, những kẻ khác tự nhận là Trương Mạn Thành đều là giả mạo.",
+      "summarized": true
     },
     {
       "id": "76ff0b31-2730-4f91-b0c8-58e00d44eca8",
@@ -8578,12 +9049,14 @@
           "type": "narrative",
           "content": "Và *Thái Diễm* (tự *Chiêu Cơ*) trong bộ váy nguyệt bạch thanh nhã, đôi mắt u sầu chứa đựng linh khí thiên địa nay ngập tràn hạnh phúc dạt dào, nhẹ nhàng đặt ngón tay ngọc thạch lên dây cổ cầm, cất giọng dịu dàng hát khúc ca mừng chiến thắng dành riêng cho ngươi.\nNgươi ôm chặt cả năm vị nương tử vào lòng, cảm nhận hơi ấm dạt dào và sự gắn kết tình cảm tuyệt đối giữa sáu người. Mối đe dọa từ giặc *Khăn Vàng* quanh vùng *Chân Định* đã bị quét sạch hoàn toàn, uy danh *Bình Tây Tướng Quân* của ngươi chấn động cả đại lục, cùng năm vị nương tử xinh đẹp kiệt xuất bên cạnh, thế lực của ngươi đã trở thành một ngọn núi lớn bất khả lay chuyển.\nĐêm buông xuống trên thành *Chân Định*, ánh nến lung linh hắt lên nhã gian tầng hai *Uyển Nhu Các*. Trận hoan lạc mừng chiến thắng giữa ngươi cùng năm vị nương tử lại bùng nổ nồng nàn và dập dồn kéo dài suốt đêm thâu, thắt chặt tình cảm gia đình ngọt ngào.\nSáng hôm sau, khi ánh bình minh tươi sáng xua tan sương mù dốc núi, ngươi bước ra ban công *Uyển Nhu Các*, hít thở không khí trong lành của buổi sớm mai. Thành *Chân Định* đã khôi phục sự thanh bình nhộn nhịp, mười vạn quân sĩ dưới quyền ngươi sĩ khí dâng cao cực hạn. \nBạn đứng bên các nương tử trên ban công *Uyển Nhu Các*, chiếc lệnh bài *Bình Tây Tướng Quân* sáng lấp lóa dưới nắng sớm. Hãy quyết định bước đi tiếp theo:"
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "4948dc78-e868-4666-bbb8-004cb0731e09",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Giặc Khăn Vàng ở đây đã tan nhưng đám người Trương Giác chắc chắn sẽ không bỏ cuộc. Triệu Vũ, muội sai người thu thập tình báo khắp nơi, để cho binh lính nâng cao cảnh giác cấp 1. Thay phiên nhau canh gác cổng thành. Cứ 10 trượng 1 trạm canh, mỗi trạm 2 người. Cứ 2 canh giờ đổi gác 1 lần. Bất kỳ bất thường nào đều phải báo ngay cho ta\""
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Giặc Khăn Vàng ở đây đã tan nhưng đám người Trương Giác chắc chắn sẽ không bỏ cuộc. Triệu Vũ, muội sai người thu thập tình báo khắp nơi, để cho binh lính nâng cao cảnh giác cấp 1. Thay phiên nhau canh gác cổng thành. Cứ 10 trượng 1 trạm canh, mỗi trạm 2 người. Cứ 2 canh giờ đổi gác 1 lần. Bất kỳ bất thường nào đều phải báo ngay cho ta\"",
+      "summarized": true
     },
     {
       "id": "557d507e-6d1a-489b-b5e8-9b4a12b3d877",
@@ -8647,12 +9120,14 @@
           "type": "narrative",
           "content": "*Diệp Thần* nheo mắt nhìn tờ thư da dê, ánh mắt lóe lên tia sáng kiên định. Việc thiết lập mạng lưới trạm gác và thám báo cấp 1 do hắn chỉ đạo đã phát huy tác dụng tức thì, giúp quân ta nắm bắt trước mọi âm mưu của kẻ địch.\nNgươi đứng trên bờ thành cao vút, tay siết chặt chuôi kiếm *Ỷ Thiên Kiếm*, nhìn ra màn đêm bao la ngoài thành trì. *Triệu Vân* và *Triệu Vũ* đứng bên cạnh, sẵn sàng chờ lệnh chỉ huy của ngươi."
         }
-      ]
+      ],
+      "summarized": true
     },
     {
       "id": "6f8e117d-091c-40e2-972d-00dc77f8091c",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Triệu Vũ, muội dán cáo thị tuyển kỳ tài. Mưu sĩ, Tướng lĩnh đều được. Không màng xuất thân chỉ xem tài năng. Mưu sĩ thì trực tiếp báo tên và quê quán cho ta, còn tướng lĩnh thì muội và Hạo Anh tự kiểm tra thực lực của họ sau đó báo cho ta là được. Triệu Vân, ngươi sai người đi tìm tin tức của Nam Hoa Lão Tiên. Có tin tức lập tức báo ngay cho ta\""
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Triệu Vũ, muội dán cáo thị tuyển kỳ tài. Mưu sĩ, Tướng lĩnh đều được. Không màng xuất thân chỉ xem tài năng. Mưu sĩ thì trực tiếp báo tên và quê quán cho ta, còn tướng lĩnh thì muội và Hạo Anh tự kiểm tra thực lực của họ sau đó báo cho ta là được. Triệu Vân, ngươi sai người đi tìm tin tức của Nam Hoa Lão Tiên. Có tin tức lập tức báo ngay cho ta\"",
+      "summarized": true
     },
     {
       "id": "bed6791d-6130-42c3-ab1e-2075c483ecfb",
@@ -10392,12 +10867,366 @@
       ]
     },
     {
-      "id": "b5285ae3-83a3-45a0-bef7-a9d67da246d1",
+      "id": "eea5a111-6786-4899-8350-34b897eec6de",
       "type": "user_choice",
       "content": "Ngỏ lời với Tôn Kiên chính thức xin đính hôn nạp Tôn Thượng Hương làm thiếp thất và ngỏ ý mời Tôn Sách cùng sang Chân Định giao lưu quân vụ thời gian ngắn. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Đạt được sự đồng ý tuyệt đối của Tôn Kiên, thắt chặt mối quan hệ thông gia hai nhà và gia tăng sức mạnh quân sự}"
+    },
+    {
+      "id": "5fa13857-1d4f-4eb7-800c-3f1f387763e6",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Giữa gian đại yến phòng rộng lớn ngạt ngào hương Long Tĩnh trà và rượu nếp nồng nàn của phủ Thái thú *Ngô Quận*, *Diệp Thần* thong thả buông chén rượu ngọc xuống bàn án gỗ gụ. Hắn đứng sừng sững với phong thái nho nhã nhưng tỏa ra uy áp vương giả áp đảo quần hùng. Ánh mắt hắn lướt qua \"Mãnh Hổ Giang Đông\" *Tôn Kiên* đang rạng rỡ niềm vui, rồi dừng lại trên thân ảnh kiều diễm, thẹn thùng của *Tôn Thượng Hương* và dáng vẻ dũng mãnh của *Tôn Sách*. *Diệp Thần* dõng dạc cất giọng, chính thức ngỏ lời xin đính hôn nạp *Tôn Thượng Hương* làm thiếp thất và mời *Tôn Sách* cùng sang *Chân Định* giao lưu quân vụ:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tôn Thái thú, ta cùng Thượng Hương cô nương ý hợp tâm đầu, tâm ý tương thông. Hôm nay nhân buổi yến tiệc vui vẻ này, Diệp Thần ta xin chính thức ngỏ lời xin đính hôn, nạp Thượng Hương làm thiếp thất. Đồng thời, ta cũng muốn trân trọng kính mời Bá Phù huynh cùng ta sang Chân Định giao lưu quân vụ thời gian ngắn, để binh sĩ hai nhà thêm phần gắn kết. Không biết ý Tôn Thái thú thế nào?"
+        },
+        {
+          "type": "narrative",
+          "content": "Lời cầu hôn danh chính ngôn thuận vừa dứt, toàn bộ đại sảnh chính điện phủ đệ *Ngô Quận* bỗng chốc lặng đi trong một nhịp thở, rồi lập tức bùng nổ bầu không khí hân hoan tột đỉnh. \"Mãnh Hổ Giang Đông\" *Tôn Kiên* vỗ mạnh hai bàn tay to lớn vào nhau, gương mặt đỏ rực vì niềm vui sướng vô bờ bến. Lão phất mạnh tà gấm bào màu tía, phá lên cười lớn đầy hào sảngvang vọng khắp các xà nhà:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Ha ha ha! Tốt! Tốt lắm! Khởi Minh tướng quân uy danh chấn động thiên hạ, thương pháp vô song, lại là bậc anh hùng trọng nghĩa khí! Ái nữ Thượng Hương của ta gả cho ngươi làm thiếp chính là phúc phần lớn nhất đời nó! Tôn Kiên ta vô cùng mừng rỡ và chân thành chấp thuận hôn sự này! Từ nay hai nhà Chân Định và Ngô Quận chúng ta sẽ vĩnh kết đồng minh, thắt chặt mối quan hệ thông gia hai nhà vững chắc như bàn thạch!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Sách* đứng bên cạnh nghe thấy lời mời giao lưu quân vụ của *Diệp Thần*, đôi mắt phượng lập tức rực sáng lên chí khí sa trường sục sôi. Thiếu niên danh tướng vội vã tiến lên một bước, hăng hái chắp hai tay cúi đầu nhận lời không chút do dự:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Sách",
+          "content": "Mạt tướng cầu còn không được! Được theo *Bình Tây Tướng Quân* sang *Chân Định* giao lưu thương pháp và học hỏi phương án dàn trận, *Bá Phù* ta nguyện hăng hái đi theo ngài ngay lập tức!"
+        },
+        {
+          "type": "narrative",
+          "content": "Đứng phía sau hai ca ca, *Tôn Thượng Hương* nghe phu quân chính thức dâng lời đính ước với phụ thân, đôi gò má dẻ hồng hào lập tức đỏ rực lên như rặng mây chiều xuân. Trái tim nhỏ bé trong lồng ngực nàng đập liên hồi rộn rã, sự kiêu kỳ, bướng bỉnh ngày thường hoàn toàn tan biến, nhường chỗ cho niềm hạnh phúc ngọt ngào vô bờ bến. Nàng thẹn thùng e ấp cúi thấp đầu, hai tay siết chặt lấy dải lụa đỏ ngang eo, khẽ lén liếc nhìn gương mặt anh tuấn phi thường của *Diệp Thần*, cất giọng nhỏ nhẹ rớt mật:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Chàng... phu quân... Thiếp thẹn thùng nhưng vô cùng hạnh phúc khi được chính thức đính ước cùng chàng... Cả đời này thiếp nguyện dâng trọn trái tim và tấm thân này cho một mình phu quân..."
+        },
+        {
+          "type": "narrative",
+          "content": "Sự đồng thuận tuyệt đối của *Tôn Kiên* cùng niềm hân hoan của *Tôn Sách* và *Tôn Thượng Hương* làm bầu không khí yến tiệc trào dâng luồng nhiệt năng mừng hỷ sự. Các danh tướng Giang Đông như *Trình Phổ*, *Hoàng Cái*, *Hàn Đương* đồng loạt nâng cao chung rượu bạc, hò reo chúc tụng mối duyên lành giữa hai thế lực hùng mạnh nhất hai miền Nam Bắc.\n*Diệp Thần* nâng ly rượu cúc, uống cạn cùng *Tôn Kiên* trong tiếng vỗ tay rầm rộ. Các vị nương tử đi theo hắn là *Triệu Vũ*, *Điêu Thuyền*, *Kiều Dao* (*Đại Kiều*) và *Kiều Sương* (*Tiểu Kiều*) cũng mỉm cười rạng rỡ, chủ động tiến lại gần nắm lấy bàn tay ngọc thạch của *Tôn Thượng Hương*, dịu dàng chúc mừng muội muội mới gia nhập đại gia đình. *Triệu Vũ* vỗ nhẹ vào vai *Tôn Thượng Hương*, lanh lót trêu chọc:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vũ",
+          "content": "Thượng Hương muội muội, chúc mừng muội đã danh chính ngôn thuận trở thành nương tử của phu quân! Từ nay chúng ta vừa là tỷ muội một nhà, vừa là nữ tướng cùng xông pha sa trường rồi!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* nhí nhảnh ôm lấy cánh tay *Tôn Thượng Hương*, nụ cười tươi tắn như hoa nở ban mai:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Đúng đó Thượng Hương tỷ tỷ! Diệp ca ca chiều chuộng các nương tử lắm, tỷ tỷ vào nhà rồi sẽ thấy hạnh phúc nhất thế gian!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Thượng Hương* nghe các chị em trò chuyện hòa thuận, sự ngượng ngùng ban đầu tan biến sạch sẽ, nàng mỉm cười hạnh phúc, gật đầu đón nhận tình cảm dạt dào của mọi người.\nĐêm đó, để chính thức thắt chặt tình cảm giao hòa trước ngày khởi hành trở về phương Bắc, *Tôn Kiên* đích thân thu xếp cho *Diệp Thần* cùng các nương tử nghỉ ngơi tại gian *Thượng Tẩm Viện* sang trọng và tĩnh mịch nhất trong phủ đệ *Ngô Quận*. \nCánh cửa gỗ đàn hương dày dặn khép lại, trả lại không gian yên tĩnh hoàn toàn. Trong gian tẩm phòng ngạt ngào hương hoa mộc tê quyện cùng mùi trầm hương ấm áp tỏa ra từ đỉnh đồng nhỏ góc phòng, ánh nến lung linh hắt bóng những màn lụa gấm đung đưa. *Diệp Thần* trút bỏ bộ thường phục bạch y, để lộ cơ thể vạm vỡ cuồn cuộn sức sống cùng cây cặc thô to dài dằng dặc đang cương cứng ngắc. Hắn dịu dàng tiến lại gần giường gấm, trút sạch bộ chiến giáp da nhẹ màu đỏ trên người *Tôn Thượng Hương*, phô bày trọn vẹn tòa thiên nhiên trần trụi, nõn nà tuyệt mỹ của thiếu nữ Giang Đông dưới ánh đèn.\nLàn da nàng dẻ hồng hào khỏe mạnh, săn chắc và căng tràn nhựa sống dẻo dai của một nữ tướng quân thích luyện tập cung kiếm. Hai bầu ngực tuyết lê căng tròn nhô cao, lắc lư đầy khiêu khích với hai hạt nhũ hoa hồng hào nhỏ nhắn tựa nụ hoa đào. Vòng eo thon gọn uốn lượn xuống bờ mông cong cớn mượt mà, và nơi khe háng hồng hào sạch sẽ, khít khao không một cọng lông đang rung động rỉ ra những luồng dâm thủy trong suốt, ngọt ngào."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Thượng Hương nương tử, đêm nay nàng đã chính thức là vị đính ước thê thiếp của ta. Hãy để phu quân sủng ái nàng thật trọn vẹn!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Phu quân... Thiếp nguyện cả đời này thuộc về một mình chàng... Xin chàng hãy thương xót thiếp..."
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* đè *Tôn Thượng Hương* nằm ngửa ra nệm gấm, cúi đầu ngậm chặt lấy đôi môi đào mọng nước của nàng mà hôn sâu ngấu nghiến. Chiếc lưỡi nóng bỏng lách qua kẽ răng, cuốn lấy chiếc lưỡi nhỏ nhắn thơm tho của nàng càn quét mãnh liệt. Các nương tử *Triệu Vũ*, *Điêu Thuyền*, *Đại Kiều* và *Tiểu Kiều* cũng quây quần bên giường, dịu dàng vuốt ve và hỗ trợ khơi dậy luồng dục vọng cuồng nhiệt cho tân nương tử. \nCảm thấy âm hộ nàng đã mềm nhũn dạt dào dâm thủy, *Diệp Thần* căn chỉnh đầu khấc to tròn áp sát vào cửa lồn khít khao trinh nguyên của *Tôn Thượng Hương*. Hắn dồn lực thắt lưng, thúc một đòn dũng mãnh lút cán!\n\"Phập! Sột!\"\nMột tiếng rách nhẹ vang lên. Cây cặc thô dài cắm ngập sâu vào tận cùng tử cung ấm áp của nữ tướng Giang Đông, xé tan bức tường trinh tiết mỏng manh! Một dòng máu trinh đỏ tươi tuôn ra, chảy dọc thân cặc hòa cùng dâm thủy lênh láng."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Aaa... Đau... Phu quân ơi... Sướng thót tim! Cặc chàng to quá... Đâm rách tử cung thiếp rồi... Ức... Sướng quá chàng ơi..."
+        },
+        {
+          "type": "narrative",
+          "content": "Cơn đau xé rách nhanh chóng bị luồng khoái cảm cuồng nhiệt thế chỗ. *Diệp Thần* bắt đầu dồn lực nhấp hông liên tục với tốc độ nghẹt thở. Tiếng va chạm thịt thà \"phạch phạch phạch\" vang lên liên hồi chát chúa giữa gian tẩm phòng. Trận hoan lạc đính hôn diễn ra mãnh liệt và dập dồn suốt đêm thâu. Ngươi không thiên vị bất kỳ ai, luân phiên cày xới và sủng ái trọn vẹn cả *Tôn Thượng Hương* cùng các nương tử đi theo, thưởng cho mỗi người đủ mười hiệp cuồng nhiệt. \nTinh dịch đặc quánh nóng hổi liên tục bộc phát phun trào xé tan đêm tối, lấp đầy tử cung ướt đẫm của *Tôn Thượng Hương* và các nàng, hòa quyện cùng dâm thủy chảy lênh láng đầm đìa xuống chiếc giường gấm quý giá. Thể lực và sinh lực của cả năm người không những không suy giảm mà còn được hồi phục hoàn toàn sung mãn nhờ sự giao hòa của chân nguyên cuồn cuộn.\nSáng hôm sau, khi ánh bình minh tươi sáng xua tan lớp sương mù dốc núi trên đất *Ngô Quận*, đoàn quân chuẩn bị lên đường trở về phương Bắc.\n*Tôn Sách* khoác chiến giáp giát đồng xám thẫm oai phong, dẫn theo một ngàn kỵ binh tinh nhuệ nhất của Giang Đông đã tập hợp sẵn sàng trước cổng thành. *Tôn Kiên* cùng *Tôn Quyền* đứng tiễn đoàn người ra tận con đường quan lộ. *Tôn Thượng Hương* mặc bộ y phục lụa mới màu hồng thắm, dung nhan rạng rỡ ngập tràn hạnh phúc, e ấp cưỡi ngựa sát bên hông *Diệp Thần*.\n\"Mãnh Hổ Giang Đông\" *Tôn Kiên* nắm chặt tay *Diệp Thần*, mắt rực lên luồng sáng tin tưởng tuyệt đối:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Khởi Minh! Ta giao phó Bá Phù và Thượng Hương cho ngươi! Hai nhà Ngô Quận và Chân Định chúng ta từ nay về sau cùng sinh cùng tử, mãi vĩnh kết đồng minh!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tôn Thái thú yên tâm. Có Diệp Thần ta ở đây, Bá Phù huynh sẽ được trau dồi binh pháp tốt nhất, và Thượng Hương sẽ là vị nương tử được ta thương yêu trọn đời!"
+        },
+        {
+          "type": "narrative",
+          "content": "\"Cập rập! Cập rập! Cập rập!\"\nTiếng móng ngựa nện xuống con đường đá cổ kính vang lên dồn dập giòn giã. *Diệp Thần* cưỡi trên thần mã *Dạ Chiếu Ngọc Sư Tử*, dẫn đầu đoàn người gồm năm vị nương tử xinh đẹp (*Triệu Vũ*, *Điêu Thuyền*, *Đại Kiều*, *Tiểu Kiều*, *Tôn Thượng Hương*) cùng *Tôn Sách* và một ngàn kỵ binh Giang Đông rầm rộ rời khỏi *Ngô Quận*, thẳng hướng bắc tiến phát trở về thành *Chân Định*.\nHành trình vượt sông *Trường Giang* và băng qua vùng đồng bằng *Ký Châu* diễn ra vô cùng thuận lợi. Sự có mặt của *Tôn Sách* cùng kỵ binh Giang Đông làm gia tăng mạnh mẽ sức mạnh quân sự cho đoàn quân. Sau nhiều ngày đêm di chuyển cấp tốc, hình bóng tường thành đá đồ sộ của *Chân Định Thành* đã hiện ra rực rỡ dưới ánh nắng chiều tà.\nBa ngàn kỵ binh gác cổng Tây vừa nhìn thấy thân ảnh khoác ngân giáp bạch y của *Bình Tây Tướng Quân* *Diệp Thần* trở về cùng *Tôn Sách* và tân nương tử *Tôn Thượng Hương* liền đồng loạt buông binh khí, quỳ rạp một gối hô vang tung hô uy danh chấn động trời đất:\n\"Bái kiến Bình Tây Tướng Quân!\"\n\"Uy danh Bạch Y Tướng Quân vạn quế! Hoan nghênh Giang Đông đồng minh!\"\n*Diệp Thần* dẫn đoàn người tiến thẳng vào khuê viện riêng tư *Hạ Hầu Khinh Y Các* bên trong *Hạ Hầu Phủ*. Cánh cổng gỗ lim khép lại, hai đại trận *Bát Quái Trận* và *Cửu Cung Trận* lập tức vận hành, mang lại bầu không khí vô cùng tĩnh mịch và riêng tư.\nTại ban công tầng hai của lầu chính, hai vị nương tử *Hạ Hầu Khinh Y*, *Thái Diễm* và *Chân Cơ* cùng phó tướng *Triệu Vân* và hai vị nhạc phụ *Thái Ung*, *Hạ Hầu Kiệt* đã đứng chờ đón từ trước. Thấy phu quân trở về mang theo nương tử thứ bảy *Tôn Thượng Hương* cùng danh tướng *Tôn Sách*, cả đại gia đình vỡ òa hạnh phúc, ùa ra đón mừng.\n*Hạ Hầu Khinh Y* tiến lại gần dịu dàng đỡ lấy tay *Tôn Thượng Hương*, đôi mắt mùa thu đong đầy sự chân thành và hòa nhã:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Hạ Hầu Khinh Y",
+          "content": "Muội muội chắc là Thượng Hương tiểu thư nhà Mãnh Hổ Giang Đông rồi! Phu quân đã nhắn tin về từ trước. Từ nay muội là người một nhà, chúng ta sẽ cùng nhau chung sống hòa thuận như chị em ruột thịt!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Thái Diễm* và *Chân Cơ* cũng ân cần vây quanh trò chuyện, giúp *Tôn Thượng Hương* mau chóng hòa nhập vào đại gia đình. Nhìn thấy các tỷ tỷ xinh đẹp, thông tuệ và đong đầy tình cảm bao dung dành cho mình, sự e ấp ban đầu trong lòng *Tôn Thượng Hương* hoàn toàn tan biến, thay vào đó là niềm hạnh phúc ngọt ngào vô bờ bến.\n*Triệu Vân* bước lại gần *Tôn Sách*, hai vị thiếu niên danh tướng nhìn nhau bằng ánh mắt thán phục tài năng võ nghệ của đối phương, chắp tay chào hỏi thân tình. *Tôn Sách* tận mắt chứng kiến sự kỷ luật nghiêm cẩn cùng quy mô mười vạn tinh binh *Chân Định* liền vô cùng trầm ồ kinh ngạc, càng thêm kính phục tầm nhìn và bản lĩnh của *Diệp Thần*.\nMối quan hệ thông gia hai nhà *Chân Định* và *Ngô Quận* chính thức được thắt chặt hoàn hảo. Sức mạnh quân sự của *Diệp Thần* nay có thêm sự hỗ trợ đắc lực từ kỵ binh Giang Đông và danh tướng *Tôn Sách*, sẵn sàng đập tan mọi biến động chiến tranh ngoài quan ải.\nSáng hôm sau, khi ánh bình minh tươi sáng chiếu rọi lên gian *Soái Đường* thuộc *Cổng Tây*, *Diệp Thần* khoác lên mình bộ ngân giáp giát bạc sáng quắc, hông giắt chiếc lệnh bài *Bình Tây Tướng Quân* và thanh *Ỷ Thiên Kiếm* lẫm liệt. Phó tướng *Triệu Vân*, *Tôn Sách* cùng hai vị nữ tướng *Triệu Vũ*, *Công Tôn Bảo Nguyệt* và *Tôn Thượng Hương* đã đứng chờ sẵn từ trước, chắp hai tay cúi đầu chờ lệnh chỉ huy tiếp theo của vị chủ soái anh minh.\nBạn đang đứng trong *Soái Đường* quân doanh *Cổng Tây* thành *Chân Định* cùng *Triệu Vân*, *Tôn Sách*, các nương tử và toàn thể tướng lĩnh, lực lượng quân sự hai nhà đã hợp nhất kiên cố. Bạn sẽ lựa chọn bước đi chiến lược tiếp theo ra sao?"
+        }
+      ]
+    },
+    {
+      "id": "2a23ec19-aeb2-4975-9cdb-9ab6201dde84",
+      "type": "user_custom_action",
+      "content": "Tổ chức 1 buổi giao lưu võ nghệ cho Tôn Sách, Triệu Vân, Triệu Vũ và Công Tôn Bảo Nguyệt"
+    },
+    {
+      "id": "7195f186-053e-4182-bbfa-334c7d83edda",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Ánh bình minh hanh hao và rực rỡ của buổi sáng năm giờ xua tan hoàn toàn dải sương mù dốc núi, trải dài những vệt sáng màu vàng óng tựa tơ lụa lên khoảng sân đá rộng lớn của *Diễn Võ Trường* thuộc khu quân doanh *Cổng Tây* thành *Chân Định*. Gió thu lồng lộng thổi qua các vọng gác bằng đá đồ sộ, làm tung bay phấp phới những ngọn cờ hiệu thêu chữ *Hạ Hầu*, *Diệp* và *Tôn* trên nền trời xanh bao la. Không khí nơi trung tâm diễn võ trường vô cùng sục sôi, trang nghiêm nhưng cũng ngập tràn hào khí mãnh liệt của những bậc anh hùng võ gia chân chính.\nHôm nay, *Diệp Thần* đích thân đứng ra tổ chức một buổi giao lưu võ nghệ đặc biệt dành cho bốn vị tướng trẻ kiệt xuất dưới trướng và thuộc liên minh: *Tôn Sách*, *Triệu Vân*, *Triệu Vũ* và *Công Tôn Bảo Nguyệt*. \nTrên đài quan sát bằng gỗ gụ quý giá phía trên, Thái thú *Hạ Hầu Kiệt*, đại danh sĩ *Thái Ung*, \"Mãnh Hổ Giang Đông\" *Tôn Kiên* cùng sáu vị nương tử xinh đẹp tuyệt trần của *Diệp Thần* là *Hạ Hầu Khinh Y*, *Điêu Thuyền*, *Thái Diễm*, *Chân Cơ*, *Kiều Dao* (*Đại Kiều*) và *Kiều Sương* (*Tiểu Kiều*) đều an tọa thưởng trà, háo hức dõi theo buổi đọ sức. *Diệp Thần* khoác bộ thường phục bạch y bằng lụa tơ tằm thanh nhã, hông đeo thanh thần binh *Ỷ Thiên Kiếm* lẫm liệt, đứng ở vị trí chủ tọa quan sát, nụ cười phong lưu ấm áp luôn đọng trên môi.\nDưới sân đá nén bằng phẳng, bốn vị tướng trẻ đứng thành bốn góc. *Tôn Sách* vóc dáng cao ráo vạm vỡ, khoác bộ chiến giáp giát đồng xám thẫm lấp lánh, tay lăm lăm ngọn thương thép thô ráp. *Triệu Vân* phong thái chính trực, trầm ổn trong bộ ngân giáp sáng quắc, tay cầm ngọn trường thương bạc. *Triệu Vũ* dũng mãnh, nhanh nhẹn trong bộ giáp nhẹ viền bạc, tay nắm ngọn ngân thương khảm lam ngọc. Và *Công Tôn Bảo Nguyệt* kiêu hãnh khoác bộ hồng y chiến giáp rực rỡ như ngọn lửa bùng cháy, tay vung thanh trường đao sáng quắc.\n*Tôn Sách* vung ngọn thương thép, cất giọng trầm hùng vang vọng khắp khoảng sân đá:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Sách",
+          "content": "Hôm nay được chủ soái tổ chức buổi giao lưu võ nghệ này, Bá Phù ta thực sự vô cùng hào hứng! Tử Long huynh, Vũ Nhi muội muội, Hạo Anh cô nương, bốn chúng ta hãy thi triển trọn vẹn tuyệt kỹ để đọ sức một trận thật sảng khoái!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vân* mỉm cười điềm tĩnh, xoay nhẹ cổ tay, ngọn ngân thương bạc rung lên rù rù xé gió:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vân",
+          "content": "Bá Phù huynh nói rất hợp ý ta. Hãy để thương pháp Thường Sơn và võ nghệ Giang Đông cùng lên tiếng!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vũ* nhón đôi chân ngọc, uốn mình trên sân đá, lanh lót reo lên:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vũ",
+          "content": "Vũ Nhi sẽ không nương tay đâu nha! Hạo Anh tỷ tỷ, chúng ta cùng ra chiêu nào!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Công Tôn Bảo Nguyệt* tuốt đao khỏi vỏ, ánh mắt phượng rực sáng chí khí kiêu hãnh:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Công Tôn Bảo Nguyệt",
+          "content": "Đội kỵ binh Bạch Mã Nghĩa Tòng chưa từng biết sợ hãi! Đến đây!"
+        },
+        {
+          "type": "narrative",
+          "content": "\"Keng—!\"\nTiếng binh khí va chạm đòn đầu tiên vang lên chát chúa giữa không trung, chính thức mở màn cho buổi giao lưu võ nghệ sôi nổi bậc nhất. \nTrận đọ sức đầu tiên diễn ra giữa *Tôn Sách* và *Triệu Vân*. *Tôn Sách* thi triển ra lối đánh cuồng bạo đặc trưng của vùng Giang Đông. Ngọn thương thép trên tay hắn vung ra những đường thương nặng nề tựa như núi lở biển trào, đâm diện mạo, quét ngang hông với tốc độ nghẹt thở. Tiếng thương xé gió \"ù ù\" ghê rợn như tiếng mãnh thú hạ sơn. Trong khi đó, *Triệu Vân* lại thi triển ra bộ pháp uyển chuyển, đường thương chuẩn mực của tuyệt kỹ *Bách Điểu Triều Phụng*. Thân hình anh lướt nhẹ như một bóng ma mờ ảo, nghiêng người né tránh từng đòn đánh tàn bạo của *Tôn Sách*, rồi khéo léo nâng thân thương lên đón đỡ.\n\"Keng! Keng! Keng! Keng!\"\nTia lửa bắn ra xối xả dưới ánh nắng ban mai. Hai thân ảnh bạc và đồng quấn quýt lấy nhau giữa làn bụi đất cuộn bay. *Tôn Sách* vặn mạnh thắt lưng, gầm lên một tiếng dũng mãnh, thi triển chiêu *Mãnh Hổ Đầm Giang* đâm thẳng vào ngực *Triệu Vân*. *Triệu Vân* không hề hoảng hốt, rung mạnh cổ tay tạo thành hàng trăm luồng thương ảnh lộng lẫy để hóa giải trọn vẹn lực đạo cuồng bạo của đối phương."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Sách",
+          "content": "Thương pháp của Tử Long huynh thật sự quá tinh diệu! Lực đón đỡ thật là hoàn hảo!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vân",
+          "content": "Bá Phù huynh lực tay phi thường, mãnh liệt như bão táp! Rất sảng khoái!"
+        },
+        {
+          "type": "narrative",
+          "content": "Đúng lúc đó, *Triệu Vũ* và *Công Tôn Bảo Nguyệt* cũng lao vào cuộc đọ sức riêng. *Triệu Vũ* với thương pháp biến hóa quỷ mị như ngân xà xuất động, liên tục xoay hông, múa thương ngược qua những góc chết hiểm trở. Ngân thương khảm lam ngọc trên tay nàng uốn lượn ngoằn ngoèo, tạo nên những đường đâm ảo mộng. *Công Tôn Bảo Nguyệt* cũng không hề kém cạnh, nàng vung thanh trường đao tạo thành màng đao quang đỏ rực rỡ như ngọn lửa bùng cháy, dũng mãnh gạt phắt từng đòn đâm sắc bén của *Triệu Vũ*.\n\"Phạch! Phạch! Keng!\"\nHai nữ tướng quân vừa đánh vừa cười nói rạng rỡ, tà áo bào viền bạc và dải lụa đỏ tung bay lồng lộng trong gió thu. Mồ hôi đọng nhẹ trên gò má dẻ hồng hào, tôn lên sức sống dẻo dai, khỏe khoắn của hai thiếu nữ luyện võ."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vũ",
+          "content": "Hạo Anh tỷ tỷ, đỡ lấy chiêu Ngân Xà Trốn Tuyết này của Vũ Nhi!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Công Tôn Bảo Nguyệt",
+          "content": "Đến rất tốt! Xem đao Hồng Y Quét Tuyết của ta đây!"
+        },
+        {
+          "type": "narrative",
+          "content": "Không dừng lại ở những màn đọ sức hai người, cả bốn vị tướng trẻ sau đó liền hòa vào một trận giao lưu hỗn chiến tứ phương đỉnh cao! *Tôn Sách* phối hợp cùng *Công Tôn Bảo Nguyệt* tạo thành thế công cuồng bạo bằng đao thương hạng nặng, trong khi hai anh em *Triệu Vân* và *Triệu Vũ* tạo thành màng phòng thủ và phản kích ảo mộng bằng thương pháp Thường Sơn.\nTiếng va chạm binh khí \"keng keng xoảng xoảng\" vang lên liên hồi như một bản hòa tấu sa trường sục sôi. Cả bốn người đều thi triển hết tuyệt kỹ gia truyền, không hề giấu giếm hay nương tay, trao đổi chiêu thức dập dồn với nhịp độ nghẹt thở. Càng đánh, bọn họ lại càng nhận ra những điểm tinh hoa trong bộ pháp và lực đạo của nhau. *Tôn Sách* học được sự trầm ổn và cách tiết chế nhịp thở từ *Triệu Vân*; *Triệu Vân* hấp thụ thêm lực bộc phát cuồng bạo nơi thắt lưng của *Tôn Sách*; *Công Tôn Bảo Nguyệt* học được sự biến ảo quỷ mị trong bộ pháp của *Triệu Vũ*; còn *Triệu Vũ* lại rèn luyện thêm sự dứt khoát, uy lực trong các đòn gạt đao của *Công Tôn Bảo Nguyệt*.\nSau hơn hai canh giờ đọ sức cuồng nhiệt, cả bốn người đồng loạt thu binh khí, lùi lại bốn góc sân. Bụi đất dần lắng xuống. Cả *Tôn Sách*, *Triệu Vân*, *Triệu Vũ* và *Công Tôn Bảo Nguyệt* trán đều đầm đìa mồ hôi, hơi thở dồn dập nhưng đôi mắt ai nấy đều rực lên luồng nhiệt năng phấn khởi, nụ cười rạng rỡ nở trên môi.\nTrình độ thương pháp và đao pháp của cả bốn vị tướng sau buổi giao lưu dập dồn đã ngày càng tiến bộ vượt bậc. Sự thông hiểu về lối đánh của nhau giúp tình huynh đệ, tình chị em và sự gắn kết quân ngũ giữa bọn họ càng thêm thắt chặt vững chắc như bàn thạch.\n*Diệp Thần* từ trên đài quan sát bước xuống, hai tay vỗ bôm bốp đầy tự hào, cất giọng khen ngợi hào sảng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tuyệt vời! Cả bốn vị tướng quân hôm nay đã thi triển hết tuyệt kỹ, chiêu thức dập dồn sắc bén vô cùng! Trận giao lưu này không chỉ giúp võ nghệ của các ngươi ngày càng tiến bộ, mà còn thắt chặt tình huynh đệ và sự gắn kết quân ngũ giữa Chân Định và Giang Đông chúng ta!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Sách* quệt mồ hôi trên trán, phá lên cười lớn, bước lại gần khoác tay lên vai *Triệu Vân*:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Sách",
+          "content": "Chủ soái nói rất đúng! Hôm nay được đọ sức cùng Tử Long huynh và hai vị nữ tướng, Bá Phù ta mới thấy thương pháp phương Bắc quả thực thâm sâu khôn lường! Từ nay chúng ta chính là huynh đệ vào sinh ra tử!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vân* chắp tay cười đáp:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Triệu Vân",
+          "content": "Bá Phù huynh quá lời. Được sát cánh cùng một vị dũng tướng như huynh, Tử Long ta vô cùng vinh hạnh!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Triệu Vũ* và *Công Tôn Bảo Nguyệt* cũng ôm lấy vai nhau vui vẻ, hai nữ tướng nũng nịu tiến lại gần *Diệp Thần*, nụ cười rạng rỡ đong đầy hạnh phúc. \nTrên đài quan sát, \"Mãnh Hổ Giang Đông\" *Tôn Kiên* cùng Thái thủ *Hạ Hầu Kiệt* và *Thái Ung* nâng chén trà thưởng thức, gật đầu thán phục trước sự đoàn kết và khí thế sục sôi của lực lượng trẻ tuổi dưới trướng *Diệp Thần*. Sáu vị nương tử xinh đẹp dâng khăn ấm và nước mát xuống tận sân cho các tướng sĩ lau mồ hôi, bầu không khí quân doanh tràn ngập niềm vui mừng chiến thắng và sự hòa hợp tuyệt đối.\nSự gắn kết quân ngũ và tình huynh đệ giữa *Tôn Sách*, *Triệu Vân*, *Triệu Vũ* và *Công Tôn Bảo Nguyệt* nay đã đạt đến độ vững chắc nhất. Mười vạn tinh binh thành *Chân Định* cùng lực lượng kỵ binh Giang Đông hợp thành một khối pháo đài thép kiên cố, sẵn sàng cho mọi quyết định chiến lược vĩ đại tiếp theo của *Bình Tây Tướng Quân* *Diệp Thần*.\nÁnh nắng trưa rực rỡ chiếu rọi lên toàn bộ khu vực *Cổng Tây*. *Diệp Thần* khoác tà bạch y, hông giắt chiếc lệnh bài *Bình Tây Tướng Quân* sáng lấp lóa, cùng sáu vị nương tử và các tướng lĩnh trở về *Soái Đường* trung quân để tiếp tục thương thảo đại sự thiên hạ.\nBạn đang đứng trong *Soái Đường* quân doanh *Cổng Tây* thành *Chân Định* cùng các tướng lĩnh và sáu vị nương tử xinh đẹp, sĩ khí mười vạn quân sĩ và mối gắn kết giữa các danh tướng đã đạt mức đỉnh điểm. Bạn sẽ lựa chọn bước đi tiếp theo ra sao?"
+        }
+      ]
+    },
+    {
+      "id": "d805ddff-d256-4212-888a-df7cfa4783a5",
+      "type": "user_custom_action",
+      "content": "Thời gian thấm thoắt trôi qua, kỳ nhân đến đầu quân cho ngươi ngày càng nhiều. Mưu sĩ có Quách Gia, Tuân Úc, Bàng Thống, Thủy Kính, Từ Thứ. Võ tướng có Điển Vi, Trương Liêu, Mã Siêu, Hoàng Trung, Cao Thuận, Thái Sử Từ, Cam Ninh, Tôn Sách, Triệu Vân, Triệu Vũ, Công Tôn Bảo Nguyệt. Giặc Khăn Vàng cũng đã dẹp yên. Đổng Trác vào triều ép Thiên tử lệnh chư hầu. Tào Tháo viết cáo trạng mời các lộ chư hầu đến thảo phạt Đổng Trác. Ngươi và Tôn Kiên đều được mời. Thay vì 18 lộ chư hầu thì nay thêm ngươi là 19 lộ. Ngươi dẫn theo Quách Gia, Bàng Thống, Từ Thứ theo làm mưu sĩ, Điển Vi làm hộ vệ, Mã Siêu, Tôn Sách, Triệu Vân, Triệu Vũ và Công Tôn Bảo Nguyệt dẫn binh tham gia hội nghị 19 lộ chư hầu. Những người còn lại bảo vệ Chân Định"
+    },
+    {
+      "id": "44cd9ede-5da0-4747-a280-7ddeebee89d8",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Thời gian thấm thoắt trôi qua như bóng câu qua cửa sổ, mảnh đất *Chân Định* dưới sự cai trị anh minh và uy danh chấn động thiên hạ của *Bình Tây Tướng Quân* *Diệp Thần* ngày càng trở nên phồn vinh, trù phú tột đỉnh. Tiếng lành đồn xa, khí thái vương giả cùng tấm lòng chiêu hiền đãi sĩ của ngươi lan truyền khắp bốn phương tám hướng, khiến các kỳ tài, mưu sĩ cùng danh tướng khắp nơi lũ lượt kéo về đầu quân dưới trướng. \nTại *Soái Đường* trung quân thuộc khu vực *Cổng Tây*, không khí ngày ngày rầm rộ, tấp nạp những bậc hiền tài tìm đến bái phỏng. Về hàng ngũ mưu sĩ, thần toán *Quách Gia* khoác tà áo xanh ngắt, tay cầm bình rượu nếp, phong thái lãng tử nhưng ánh mắt chứa đựng quỷ mưu vạn biến; *Tuân Úc* nho nhã đài các, vầng trán rộng tỏa ra khí thái quân tử giúp định quốc an dân; *Bàng Thống* - tức \"Phượng Sồ\" lừng danh - tuy ngoại hình kỳ dị nhưng nhãn quan chiến lược độc mạo thiên hạ; bậc đại ẩn sĩ *Thủy Kính* *Tư Mã Huy* phong thái tiên phong đạo cốt; cùng *Từ Thứ* nghĩa khí ngút trời, mưu lược sâu thẳm. \nVề hàng ngũ võ tướng, không khí luyện quân trên diễn võ trường càng thêm sục sôi khi có sự gia nhập của *Điển Vi* - gã ác lai sức mạnh nhổ cổng thành, hai tay lăm lăm cặp song kích nặng hàng trăm cân; *Trương Liêu* dũng mẫn kiên cường; \"Cẩm Mã Siêu\" *Mã Siêu* tuổi trẻ tài cao, giáp bạc bào trắng, tay cầm *Khát Huyết Thương* kiêu hãnh; lão tướng *Hoàng Trung* bách phát bách trúng; *Cao Thuận* trầm ổn dẫn dắt lực lượng Hãm Trận Doanh; *Thái Sử Từ* dũng liệt vô song; cùng *Cam Ninh* phóng khoáng thủy chiến. Bọn họ cùng với *Tôn Sách*, *Triệu Vân*, *Triệu Vũ* và *Công Tôn Bảo Nguyệt* hợp thành một dàn hổ tướng hùng hậu chưa từng có trong lịch sử.\nDưới sự chỉ huy kiệt xuất của ngươi cùng dũng lực của chư tướng, tàn dư giặc *Khăn Vàng* tại các quận huyện phụ cận hoàn toàn bị dẹp yên sạch sẽ. Mầm mống tà giáo lụi tàn, bách tính *Chân Định* và toàn vùng *Ký Châu* được sống trong cảnh thái bình, no ấm.\nThế nhưng, khi ngọn lửa bạo loạn *Khăn Vàng* vừa dịu xuống, sóng gió chính trị nơi triều đình trung ương lại bùng lên dữ dội. Mật tin từ các toán thám báo tinh nhuệ dồn dập gửi về *Chân Định*: Hán Linh Đế băng hà, hoạn quan và ngoại thích chém giết lẫn nhau làm kinh đô *Lạc Dương* chìm trong biển máu. Tây Lương Thái thú *Đổng Trác* nhân cơ hội dẫn vạn kỵ binh hung hãn tiến vào triều đình, thao túng quyền lực, phế lập Thiên tử, tự phong làm Tướng quốc, tàn hại trung thần và ép buộc chư hầu khắp nơi phải quy phục.\nSự lộng quyền tàn bạo của *Đổng Trác* làm cả thiên hạ sục sôi căm hận. *Tào Tháo* sau khi ám sát *Đổng Trác* bất thành đã trốn khỏi *Lạc Dương*, trở về quê nhà phát cáo trạng truyền đi khắp các quận huyện, kêu gọi các lộ chư hầu chung sức lập liên minh thảo phạt gian thần.\nMột ngày nọ, sứ giả mang cáo trạng bọc lụa đỏ hộc tốc phi ngựa tiến vào *Soái Đường* thành *Chân Định*, dâng thư lên trước mặt *Diệp Thần*. Ngồi trên ghế chủ tọa, *Diệp Thần* thong thả mở thư ra đọc, khóe môi nhếch lên nụ cười điềm tĩnh, ngạo nghễ. Đồng thời, tin tức từ *Ngô Quận* gửi tới cũng xác nhận \"Mãnh Hổ Giang Đông\" *Tôn Kiên* đã nhận lời tham gia liên minh. Với uy danh *Bình Tây Tướng Quân* chấn động thiên hạ cùng lực lượng mười vạn tinh binh kiên cố, *Diệp Thần* cùng *Tôn Kiên* đều nhận được thiếp mời trân quý. Thay vì mười tám lộ chư hầu như nguyên tác dã sử, nay chính sự xuất hiện của ngươi đã tạo nên lộ chư hầu thứ mười chín — lộ chư hầu có thực lực hùng mạnh và danh tiếng lẫy lừng nhất!\nBên trong *Soái Đường*, *Diệp Thần* triệu tập toàn bộ mưu sĩ và danh tướng để bàn thảo việc quân. Ánh đèn dầu chiếu sáng tấm bản đồ *Trung Nguyên* trải rộng trên bàn án gỗ gụ. *Diệp Thần* đứng sừng sững, thân khoác bộ ngân giáp giát bạc sáng quắc, tà áo bào bạch y tung bay lồng lộng, hông đeo *Ỷ Thiên Kiếm* lẫm liệt, cất giọng dõng dạc phân công lực lượng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Chư vị! *Đổng Trác* lộng quyền, tàn hại Thiên tử và bách tính, *Tào Tháo* phát cáo trạng kêu gọi thảo phạt. *Chân Định* chúng ta chính thức tham gia với vị thế là lộ chư hầu thứ mười chín! Lần này ta sẽ đích thân dẫn binh hội quân cùng các chư hầu tại *Hội Binh Cốc*!"
+        },
+        {
+          "type": "narrative",
+          "content": "Toàn thể võ tướng và mưu sĩ đồng loạt bước lên một bước, giáp sắt va chạm chát chúa, chắp hai tay cúi đầu dõng dạc:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tất Cả Tướng Lĩnh",
+          "content": "Mạt tướng nguyện liều chết theo bước Bình Tây Tướng Quân!"
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi chỉ tay vào bản đồ, tiếp tục phân công danh sách đi theo và giữ thành:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Theo ta xuất chinh lần này: về mưu sĩ có *Quách Gia*, *Bàng Thống* và *Từ Thứ* làm quân sư dâng mưu tính kế; *Điển Vi* dẫn lực lượng thân vệ làm hộ vệ thân cận cho ta; võ tướng xông pha trận tiền gồm có *Mã Siêu*, *Tôn Sách*, *Triệu Vân*, *Triệu Vũ* và *Công Tôn Bảo Nguyệt* dẫn theo năm vạn kỵ binh và bộ binh tinh nhuệ nhất! Những người còn lại: *Tuân Úc*, *Thủy Kính* tiên sinh cùng các tướng *Trương Liêu*, *Hoàng Trung*, *Cao Thuận*, *Thái Sử Từ*, *Cam Ninh* ở lại phối hợp với Thái thú *Hạ Hầu Kiệt* và *Thái Ung* nhạc phụ, trấn giữ năm vạn quân còn lại để bảo vệ tuyệt đối an toàn cho *Chân Định*!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tuân Úc",
+          "content": "Chủ soái yên tâm! *Văn Nhược* ta cùng các tướng nhất định sẽ giữ vững hậu phương Chân Định kiên cố như bàn thạch, tích trữ lương thảo đầy đủ chờ ngày chủ soái thắng trận trở về!"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Trương Liêu",
+          "content": "Mạt tướng thề bảo vệ Chân Định, không để một kẻ địch nào xâm phạm!"
+        },
+        {
+          "type": "narrative",
+          "content": "Sau khi phân công xong quân vụ, *Diệp Thần* trở về khuê viện riêng tư *Hạ Hầu Khinh Y Các* để từ biệt sáu vị nương tử xinh đẹp tuyệt trần. Gian tẩm phòng trên tầng hai ngạt ngào hương hoa mẫu đơn quyện cùng khói trầm ấm áp. *Hạ Hầu Khinh Y*, *Điêu Thuyền*, *Thái Diễm*, *Chân Cơ*, *Kiều Dao* (*Đại Kiều*), *Kiều Sương* (*Tiểu Kiều*) và *Tôn Thượng Hương* (nàng vừa từ Ngô Quận sang cùng ca ca) đều vây quanh ngươi. \n*Hạ Hầu Khinh Y* dịu dàng thắt đai lưng dát đồng cho phu quân, đôi mắt mùa thu đong đầy nhu tình sâu thẳm:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Hạ Hầu Khinh Y",
+          "content": "Phu quân... Trận chiến thảo phạt Đổng Trác lần này quy tụ chư hầu khắp thiên hạ, đao thương không có mắt. Chàng ra trận nhớ tuyệt đối bảo trọng thân thể. Thiếp cùng các muội muội sẽ ở lại khuê viện ngày đêm cầu an cho chàng."
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* nhí nhảnh ôm lấy thắt lưng vạm vỡ của hắn, nụ cười tươi tắn như hoa nở:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Diệp ca ca cố lên! Đánh bại gã Đổng Trác xấu xa đó rồi về nhà, bọn muội sẽ lại thưởng lớn cho phu quân!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Thái Diễm* nhẹ nhàng đặt tay lên bờ giáp bạc của hắn, cất giọng êm dịu như tiếng suối reo:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Thái Diễm",
+          "content": "Thiếp sẽ gảy khúc ca mừng chiến thắng, mong phu quân giương cao uy danh Bình Tây Tướng Quân làm chấn động quần hùng Lạc Dương."
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Thượng Hương* tay vỗ nhẹ vào đốc đoản kiếm, dũng cảm nói:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Thượng Hương",
+          "content": "Phu quân nhớ dặn *Bá Phù* ca ca và *Vũ Nhi* muội muội đánh trận phải cẩn thận nha! Thiếp ở đây chờ tin chiến thắng của chàng!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* ôm chặt các vị nương tử vào lòng, trao cho mỗi nàng một nụ hôn nồng nàn chở che, rồi dứt khoát xoay người, khoác tà áo bào bạch y, bước ra ngoài đại đền.\nSáng hôm sau, tiếng tù và bằng sừng trâu âm vang, trầm đục vang vọng khắp *Chân Định Thành*. Hai cánh cổng sắt đồ sộ của *Cổng Tây* mở rộng. Ngồi trên thần mã *Dạ Chiếu Ngọc Sư Tử*, *Diệp Thần* khoác giáp bạc bạch y, hông đeo *Ỷ Thiên Kiếm*, tay lăm lăm *Bách Điểu Triều Phụng Thương*, giắt chiếc lệnh bài *Bình Tây Tướng Quân* sáng lấp lóa. Sóng hàng hai bên hắn là ba vị đại mưu sĩ *Quách Gia*, *Bàng Thống*, *Từ Thứ*; gã ác lai *Điển Vi* vóc dáng đồ sộ như quả núi cầm song kích; cùng năm vị dũng tướng kiệt xuất *Mã Siêu*, *Tôn Sách*, *Triệu Vân*, *Triệu Vũ* và *Công Tôn Bảo Nguyệt*. \nPhía sau bọn họ, năm vạn tinh binh giáp sắt sáng quắc, cờ hiệu thêu chữ *Diệp* đỏ rực tung bay phấp phới trước gió thu, rầm rộ tiến ra khỏi thành trì. Mười vạn quân dân *Chân Định* đứng hai bên đường hoan hô tung hô uy danh chấn động trời đất:\n\"Bái kiến Bình Tây Tướng Quân!\"\n\"Uy danh Bạch Y Tướng Quân vạn quế! Tiêu diệt gian thần Đổng Trác, bình định thiên hạ!\"\nĐoàn quân thảo phạt hùng hậu của lộ chư hầu thứ mười chín rầm rộ nam tiến, xé gió băng rừng hướng về phía *Hội Binh Cốc* — nơi mười tám lộ chư hầu do *Viên Thiệu*, *Tào Tháo*, *Tôn Kiên* cầm đầu đang hội quân.\nSau ba ngày đêm di chuyển cấp tốc, bóng dáng thung lũng *Hội Binh Cốc* đồ sộ đã hiện ra dưới ánh nắng trưa hanh hao. Hàng vạn túp lều bạt dã chiến của mười tám lộ chư hầu giăng khắp các triền đồi, cờ hiệu của các chư hầu như Viên, Tào, Tôn, Lưu, Khổng, Đào... tung bay ngợp trời. \nKhi đoàn quân năm vạn tinh binh của *Diệp Thần* tiến vào cửa thung lũng, tiếng tù và chào mừng rầm rộ vang lên. Thấy một binh đoàn giáp bạc rực rỡ, kỵ binh hùng hậu, khí thế áp đảo cùng sự hiện diện của danh tướng *Mã Siêu*, *Tôn Sách*, *Triệu Vân* và dàn mưu sĩ kiệt xuất *Quách Gia*, *Bàng Thống*, quân sĩ của mười tám lộ chư hầu hai bên đường đều trợn tròn mắt kinh ngạc, trố mắt thán phục trước uy phong lẫm liệt của vị *Bình Tây Tướng Quân*.\n*Tào Tháo* cùng *Viên Thiệu* và *Tôn Kiên* hay tin lộ chư hầu thứ mười chín đến hội quân, liền đích thân dẫn theo hàng loạt chư hầu vội vã sải bước ra tận cổng trung quân đại trướng để nghênh đón.\n*Tào Tháo* đôi mắt ti hí rực lên luồng sáng sắc bén, nhìn thấy *Diệp Thần* khoác ngân giáp bạch y, phong thái vương giả bá đạo tiến lại gần, liền phá lên cười lớn đầy hào sảng, hai tay chắp lại vái chào cực kỳ nể phục:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tào Tháo",
+          "content": "Ha ha ha! *Bình Tây Tướng Quân* Diệp Thần! Uy danh một thương trảm Trương Mạn Thành, vô hiệu hóa tà thuật diệt Quản Hợi của Tướng quân đã chấn động cả đại lục! Hôm nay Tướng quân dẫn năm vạn tinh binh đến hội quân làm lộ chư hầu thứ mười chín, liên minh thảo phạt Đổng Trác chúng ta như rồng mọc thêm cánh, gian thần Đổng Trác tất yếu sẽ bị san bằng!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Viên Thiệu* khoác gấm bào lộng lẫy, gương mặt kiêu hãnh cũng phải nghiêng mình chào hỏi:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Viên Thiệu",
+          "content": "Bái kiến *Diệp* Tướng quân! Sự góp mặt của Tướng quân chính là niềm vinh hạnh lớn cho toàn thể liên minh chúng ta!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Tôn Kiên* tiến lại gần vỗ mạnh vào bả vai *Diệp Thần*, nụ cười mừng rỡ:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Tôn Kiên",
+          "content": "Khởi Minh! Ngươi đến rồi! Hôm nay hai nhà chúng ta lại cùng nhau kề vai sát cánh chiến đấu rồi!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Diệp Thần* thong thả bước xuống lưng ngựa *Dạ Chiếu Ngọc Sư Tử*, chắp tay nghiêng mình đáp lễ các chư hầu với phong thái ung dung tự tại, điềm tĩnh tột cùng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Mạnh Đức huynh, Bản Sơ huynh, Văn Đài huynh! Diệp Thần ta dẫn binh đến đây là vì sự an nguy của Thiên tử và bách tính thiên hạ. Chúng ta hãy cùng vào đại trướng đàm đạo phương án diệt tặc!"
+        },
+        {
+          "type": "narrative",
+          "content": "Dưới sự chủ trì của *Tào Tháo* và *Viên Thiệu*, *Diệp Thần* cùng ba vị mưu sĩ *Quách Gia*, *Bàng Thống*, *Từ Thứ* và gã hộ vệ *Điển Vi* đĩnh đạc bước vào trung quân đại trướng của liên minh mười chín lộ chư hầu. Vị trí của *Diệp Thần* được sắp xếp ở hàng ghế thượng khách trân quý nhất, ngang hàng với Minh chủ *Viên Thiệu*.\nBên trong đại trướng, bầu không khí vô cùng trang nghiêm. Mười tám vị chư hầu đang tranh luận xao động về việc cử ai làm Minh chủ và ai sẽ dẫn quân làm tiên phong đánh đồn *T Thủy Quan* (hoặc *Tùy Lăng Quan*) — cửa ngõ kiên cố nhất do đại tướng *Hoa Hùng* của *Đổng Trác* trấn giữ.\n*Viên Thiệu* đứng ở vị trí chủ tọa, vuốt râu cất giọng hỏi lớn trước toàn thể chư hầu:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Viên Thiệu",
+          "content": "Chư vị! Gian thần Đổng Trác đã sai đại tướng *Hoa Hùng* dẫn năm vạn kỵ binh Tây Lương đóng giữ *T Thủy Quan*, kiêu ngạo khiêu chiến trước trận. Ai dám dẫn quân làm tiên phong, tiến đánh *T Thủy Quan* để trảm thủ *Hoa Hùng*, mở đường cho đại quân tiến vào Lạc Dương?"
+        },
+        {
+          "type": "narrative",
+          "content": "Lời *Viên Thiệu* vừa dứt, các chư hầu trong đại trướng xầm xì nhìn nhau, một số tỏ ra e ngại trước uy danh tàn bạo của kỵ binh Tây Lương và sức mạnh phi thường của *Hoa Hùng*. \n*Diệp Thần* ngồi trên ghế gụ, nhấp một ngụm trà Long Tĩnh thơm nức, ánh mắt sắc bén lướt qua dàn tướng sĩ dưới trướng mình (*Mã Siêu*, *Tôn Sách*, *Triệu Vân*, *Triệu Vũ*, *Công Tôn Bảo Nguyệt*). Thế cục thảo phạt *Đổng Trác* đã chính thức mở màn, và bước đi tiếp theo của lộ chư hầu thứ mười chín sẽ quyết định cục diện thiên hạ.\nBạn đang ngồi trong trung quân đại trướng của liên minh mười chín lộ chư hầu tại *Hội Binh Cốc*, *Viên Thiệu* đang hỏi ai sẽ làm tiên phong đánh *T Thủy Quan* trảm *Hoa Hùng*. Bạn sẽ lựa chọn hành động tiếp theo ra sao?"
+        }
+      ]
     }
   ],
-  "choices": [],
+  "choices": [
+    "Để Mã Siêu dũng mãnh dẫn ba ngàn kỵ binh tinh nhuệ Chân Định làm tiên phong xông ra T Thủy Quan khiêu chiến trảm thủ Hoa Hùng ngay đòn đầu tiên để giương cao uy danh lộ chư hầu thứ 19. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Trảm thủ đại tướng địch trong chớp mắt, đoạt lấy công đầu tiên phong và làm chấn động toàn bộ 18 lộ chư hầu}",
+    "Tiến cử Tôn Sách và Tôn Kiên dẫn kỵ binh Giang Đông làm tiên phong tiến đánh T Thủy Quan, đồng thời cử Quách Gia và Từ Thứ đi cùng làm quân sư hỗ trợ cung cấp lương thảo để bảo đảm chiến thắng. {Tỷ lệ thành công: 85%, Hậu quả/Phần thưởng: Thắt chặt mối liên minh với Tôn Kiên, bảo toàn lực lượng chủ lực của Chân Định và thu phục lòng tin của quân sĩ Giang Đông}",
+    "Mở lời đề nghị cùng Tào Tháo và Viên Thiệu hợp binh thành ba mũi nhọn tấn công, sử dụng mưu lược của Bàng Thống để bao vây cô lập T Thủy Quan, ép Hoa Hùng phải tự động đầu hàng. {Tỷ lệ thành công: 80%, Hậu quả/Phần thưởng: Bộc lộ tài năng mưu lược xuất chúng của dàn quân sư Chân Định và gia tăng ảnh hưởng chính trị trong liên minh}",
+    "Giữ thái độ điềm tĩnh quan sát phản ứng của các chư hầu khác (như Bào Tín, Tôn Kiên, Lưu Bị), chờ đợi Hoa Hùng trảm liên tiếp vài tướng giặc gây hoảng loạn rồi mới cho Triệu Vân ra tay kết liễu để tạo hiệu ứng chấn động tối đa. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Tọa sơn quan hổ đấu, làm lộ rõ sự yếu kém của các chư hầu khác trước khi khẳng định vị thế vô song của Chân Định}"
+  ],
   "gameMode": "EXPLORATION",
   "activeTrade": {
     "trader": null,
@@ -10415,7 +11244,14 @@
       "level": 1,
       "startTurn": 1,
       "endTurn": 21
+    },
+    {
+      "id": "08d23093-7dd2-4424-be70-9739c0196ba1",
+      "content": "**DIỄN BIẾN**\nDiệp Thần tiếp quản quân doanh Cổng Tây, một mình một ngựa chém đầu tiên phong Khăn Vàng dẹp tan quân giặc, thu phục Triệu Vân làm phó tướng. Tiếp đó, chàng giao lưu thương pháp cùng Triệu Vân và muội muội Triệu Vũ tại quân doanh. Khi Trương Mạn Thành dẫn một vạn quân tới khiêu chiến, Triệu Vân ra trận giằng co trăm hiệp, Diệp Thần liền thúc quân xuất kích, dẫn kỵ binh truy sát kẻ địch suốt ba ngày đêm đến quan đạo Bắc Bình để trảm thủ Trương Mạn Thành. Tại Bắc Bình, chàng kết giao với Công Tôn Toản, tỷ thí và thu phục Công Tôn Bảo Nguyệt. Trở về Chân Định dâng thủ cấp, Diệp Thần được phong Bình Tây Tướng Quân thống lĩnh mười vạn quân và định hôn với Hạ Hầu Khinh Y. Tiếp đó, chàng mưu tính cứu gia quyến Thái Ung, dùng khúc cổ cầm Quảng Lăng Tán chinh phục tài nữ Thái Diễm. Khi một vạn tàn binh Khăn Vàng do tên giả mạo Trương Mạn Thành áp sát Cổng Tây, Diệp Thần bêu đầu thật của Trương Mạn Thành lên tường thành, búng đá hạ sát kẻ giả mạo khiến quân giặc sụp đổ, kỵ binh quét sạch thung lũng, thu giữ năm ngàn bao lương thảo cùng ba trăm chiến mã. Cuối cùng, Diệp Thần ban lệnh cảnh giác cấp một, dán cáo thị tuyển mộ hiền tài và lệnh cho Triệu Vân truy tìm Nam Hoa Lão Tiên.\n\n**NHÂN VẬT & QUAN HỆ**\nHạ Hầu Khinh Y, Điêu Thuyền, Triệu Vũ, Công Tôn Bảo Nguyệt và Thái Diễm đều đã dâng hiến trinh nguyên, trở thành thê thiếp trung thành, chung sống hòa thuận tại Uyển Nhu Các và dành cho Diệp Thần sự sùng bái tuyệt đối. Triệu Vân giữ lòng trung dũng phò tá Diệp Thần trong vai trò phó tướng. Các nhạc phụ gồm Thái thủ Hạ Hầu Kiệt, Thái thủ Công Tôn Toản và đại nho Thái Ung đều vô cùng kính trọng, tin tưởng và ủng hộ danh thế của chàng.\n\n**MANH MỐI & BÍ ẨN**\nThực lực thương pháp của Triệu Vân vốn khá bình thường so với sự biến hóa quỷ mị vượt trội của Triệu Vũ, dấy lên nghi vấn dã sử bị sai lệch hoặc đây là thế giới song song. Bên cạnh đó là tung tích chưa rõ của Nam Hoa Lão Tiên đang được tìm kiếm, cùng mối đe dọa từ Trương Giác đang ngầm triệu tập các đạo sĩ Thái Bình Đạo chuẩn bị cuộc bạo loạn mới tại biên cương phía Bắc.\n\n**ĐỊA ĐIỂM**\nSự kiện diễn ra tuần tự tại Uyển Nhu Các thuộc Hạ Hầu phủ, quân doanh Cổng Tây thành Chân Định, thung lũng phía Tây, quan lộ đi U Châu và thành Bắc Bình bao gồm phủ Công Tôn Toản cùng võ trường phía Nam.\n\n**TÀI SẢN & TU VI**\nDiệp Thần thăng làm Bình Tây Tướng Quân nắm mười vạn quân, sở hữu Bách Điểu Triều Phụng Thương, bảo kiếm Ỷ Thiên Kiếm, trữ vật giới chỉ và thần mã Dạ Chiếu Ngọc Sư Tử. Quân đội thu giữ năm ngàn bao lương thảo cùng ba trăm chiến mã khỏe mạnh. Uyển Nhu Các được bảo vệ bằng Bát Quái Trận và Cửu Cung Trận. Tu vi, thể lực của Diệp Thần luôn sung mãn dồi dào nhờ luồng chân nguyên giao hòa âm dương cùng năm vị thê tử qua các trận hoan lạc dập dồn.",
+      "level": 1,
+      "startTurn": 22,
+      "endTurn": 41
     }
   ],
-  "adventureTurnCount": 78
+  "adventureTurnCount": 82
 }
