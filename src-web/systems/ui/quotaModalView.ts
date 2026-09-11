@@ -43,6 +43,8 @@ export interface QuotaModalRow {
   /** Right-hand text, already formatted for display. */
   text: string;
   tone: QuotaRowTone;
+  /** Optional small second line: how much of this key's minute bucket we used. */
+  sub?: string;
 }
 
 export interface QuotaModalView {
@@ -63,11 +65,22 @@ export interface QuotaModalView {
   anyReady: boolean;
 }
 
+/** Token telemetry from the session, so the hint can quote real sizes. */
+export interface QuotaUsageInfo {
+  /** `promptTokenCount` of the most recent successful call, if any. */
+  lastPromptTokens?: number | null;
+  /** Serialized length of the most recent request (the one that got 429). */
+  lastRequestChars?: number | null;
+  /** Prompt tokens Google accepted per key in the trailing 60s (floor: rejected calls are not counted). */
+  tokensLastMinuteByKey?: Record<string, number>;
+}
+
 export interface QuotaModalExtra {
   /** `aiSessionState.key_quota_scope`: which bucket each key's last 429 named. */
   scopeByKey?: Record<string, QuotaScope>;
   /** What the failing call's 429 body said (the `quota` field of the AiResult). */
   quotaInfo?: QuotaErrorInfo | null;
+  usage?: QuotaUsageInfo | null;
 }
 
 const TONE: Record<KeySlotStatus['state'], QuotaRowTone> = {
@@ -128,6 +141,29 @@ function bucketPhrase(info: QuotaErrorInfo): string {
   return info.limit !== undefined ? `${formatInt(info.limit)} ${unit}/${per}${model}` : `${unit}/${per}${model}`;
 }
 
+/** Rough token size of a request from its serialized length (~3 chars/token for Vietnamese). */
+function estimateTokens(chars: number | null | undefined): number | null {
+  return typeof chars === 'number' && chars > 0 ? Math.round(chars / 3) : null;
+}
+
+/**
+ * The measured-size sentence: what this client actually sent, so the player
+ * can see whether one turn alone fills the bucket. Empty when nothing was measured.
+ */
+export function usageSentence(usage: QuotaUsageInfo | null | undefined, info: QuotaErrorInfo | null | undefined): string {
+  if (!usage) return '';
+  const parts: string[] = [];
+  const est = estimateTokens(usage.lastRequestChars);
+  if (est !== null) parts.push(`lệnh gọi vừa bị từ chối dài ${formatInt(usage.lastRequestChars as number)} ký tự (ước chừng ${formatInt(est)} token)`);
+  if (typeof usage.lastPromptTokens === 'number') parts.push(`lệnh gọi thành công gần nhất tốn ${formatInt(usage.lastPromptTokens)} token đầu vào theo Google`);
+  if (parts.length === 0) return '';
+  const limitNote =
+    info && info.scope === 'minute' && typeof info.limit === 'number' && /token/i.test(info.metric || '')
+      ? ` so với hạn mức ${formatInt(info.limit)} token/phút`
+      : '';
+  return `Số đo thực tế: ${parts.join('; ')}${limitNote}.`;
+}
+
 /** The paragraph that explains what the countdown can and cannot promise. */
 export function quotaHint(info: QuotaErrorInfo | null | undefined, nowSec: number): string {
   if (!info) return '';
@@ -171,14 +207,20 @@ export function quotaModalView(
     label: quotaRowLabel(r.index, source),
     scope: scopeByKey[keys[r.index]] as QuotaScope | undefined,
   }));
-  const rows = status.map((r) => ({
-    index: r.index,
-    label: r.label,
-    text: rowText(r, r.scope),
-    tone: r.scope === 'day' && r.state !== 'rejected' ? 'bad' : TONE[r.state],
-  }));
+  const perKeyTokens = extra.usage?.tokensLastMinuteByKey || {};
+  const rows = status.map((r) => {
+    const used = perKeyTokens[keys[r.index]];
+    const row: QuotaModalRow = {
+      index: r.index,
+      label: r.label,
+      text: rowText(r, r.scope),
+      tone: r.scope === 'day' && r.state !== 'rejected' ? 'bad' : TONE[r.state],
+    };
+    if (typeof used === 'number' && used > 0) row.sub = `đã gửi ${formatInt(used)} token trong 60 giây qua`;
+    return row;
+  });
   const headline = HEADLINE[source];
-  const hint = quotaHint(extra.quotaInfo, nowSec);
+  const hint = [quotaHint(extra.quotaInfo, nowSec), usageSentence(extra.usage, extra.quotaInfo)].filter(Boolean).join(' ');
 
   // A key whose DAY bucket is gone is not "ready" just because its breaker
   // expired — the next request would answer 429 again.

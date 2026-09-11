@@ -86,7 +86,7 @@ import { makeAppStateUndoable } from './src-web/systems/turn/undoAppState';
 // `sanitizeCommandBlock` is now reached through `turnGlue.sanitizeCommandBlockForApply`
 // (code review C-8), which owns the fail-closed degradation ladder.
 import { createSessionLeakLog, leakCheckAndRecord } from './src-web/systems/contract/leakDetector';
-import { createAiSessionState, requestAi } from './src-web/systems/ai/requestAi';
+import { createAiSessionState, requestAi, promptTokensInWindow } from './src-web/systems/ai/requestAi';
 import { DEFAULT_AI_CONFIG, SAFETY_SETTINGS_BLOCK_NONE, parseKeyList, resolveCallBudget } from './src-web/systems/ai/config';
 import { AI_KNOBS, PERSISTENCE_KNOBS } from './src-web/systems/registry';
 import * as turnGlue from './src-web/systems/glue/turnGlue';
@@ -11597,7 +11597,7 @@ const VipWelcomeModal = ({ show, ownerName, onClose }) => {
 // `scopeByKey` / `quotaInfo` (2026-09-11): bucket nào đã cạn (phút hay NGÀY) —
 // key cạn hạn mức ngày không "còn dùng được" khi hết đếm ngược, và bảng phải nói
 // rõ điều đó thay vì để đồng hồ ngầm hứa "hết giờ là gọi được".
-const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, scopeByKey, quotaInfo, onClose }) => {
+const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, scopeByKey, quotaInfo, usage, onClose }) => {
     const [, forceTick] = useState(0);
     useEffect(() => {
         if (!show) return undefined;
@@ -11610,7 +11610,7 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, 
     // Mọi quyết định (nhãn, câu khuyên, chữ trên nút) nằm trong quotaModalView —
     // module thuần đã có test; ở đây chỉ còn việc vẽ. Gọi lại mỗi lần render, mà
     // render lại mỗi giây, nên bảng luôn khớp thời gian thật.
-    const view = quotaModalView(keys || [], cooldownUntil || {}, Date.now() / 1000, source === 'userKey' ? 'userKey' : 'platform', { scopeByKey: scopeByKey || {}, quotaInfo: quotaInfo || null });
+    const view = quotaModalView(keys || [], cooldownUntil || {}, Date.now() / 1000, source === 'userKey' ? 'userKey' : 'platform', { scopeByKey: scopeByKey || {}, quotaInfo: quotaInfo || null, usage: usage || null });
     const toneStyle = {
         ok: 'text-[#8ba888]',
         wait: 'text-[#e8d3a1]',
@@ -11634,9 +11634,12 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, 
 
             <div className="mb-4 border border-[#a3b8a3]/20 divide-y divide-[#a3b8a3]/10">
                 {view.rows.map(r => (
-                    <div key={r.index} className="flex items-baseline justify-between gap-3 px-3 py-2">
-                        <span className="text-[#a3b8a3] scale-text-sm">{r.label}</span>
-                        <span className={`font-bold scale-text-sm text-right ${toneStyle[r.tone]}`}>{r.text}</span>
+                    <div key={r.index} className="px-3 py-2">
+                        <div className="flex items-baseline justify-between gap-3">
+                            <span className="text-[#a3b8a3] scale-text-sm">{r.label}</span>
+                            <span className={`font-bold scale-text-sm text-right ${toneStyle[r.tone]}`}>{r.text}</span>
+                        </div>
+                        {r.sub ? <div className="text-[#8ba888] scale-text-xs text-right mt-0.5">{r.sub}</div> : null}
                     </div>
                 ))}
             </div>
@@ -20109,7 +20112,12 @@ const fetchWithRetriesRaw = async (apiUrl, payload, onRetry = null, maxRetries =
         // Diagnostic (2026-08-28): one line per LOGICAL AI call (not per HTTP attempt),
         // with a running session total, so "1 lượt tốn mấy lệnh gọi?" is answerable by
         // reading the console during play instead of guessed at from code.
-        console.log(`[Gemini] Lệnh gọi #${aiSessionState.log.length} — loại=${callSite} nền=${background ? 'có' : 'không'} kết quả=${result.ok ? `OK (model=${result.model}, attempts=${result.attempts})` : `${result.label} (attempts=${result.attempts})`} mất ${(result.elapsed_ms / 1000).toFixed(1)}s`);
+        // Token telemetry (2026-09-11): Google's own promptTokenCount per call, so
+        // "một lượt gửi bao nhiêu token so với 250k/phút?" đọc được ngay từ console.
+        const usageNote = result.ok && result.usage && result.usage.prompt_tokens !== null
+            ? ` token_vào=${result.usage.prompt_tokens.toLocaleString('vi-VN')}${result.usage.output_tokens !== null ? ` token_ra=${result.usage.output_tokens.toLocaleString('vi-VN')}` : ''}`
+            : (aiSessionState.last_request_chars ? ` body≈${aiSessionState.last_request_chars.toLocaleString('vi-VN')} ký tự` : '');
+        console.log(`[Gemini] Lệnh gọi #${aiSessionState.log.length} — loại=${callSite} nền=${background ? 'có' : 'không'} kết quả=${result.ok ? `OK (model=${result.model}, attempts=${result.attempts})` : `${result.label} (attempts=${result.attempts})`} mất ${(result.elapsed_ms / 1000).toFixed(1)}s${usageNote}`);
 
         // Ladder health snapshot (2026-08-31, user request): printed whenever it
         // carries information — a failed call, or at least one model cooling down —
@@ -20170,6 +20178,21 @@ const fetchWithRetriesRaw = async (apiUrl, payload, onRetry = null, maxRetries =
             // giải thích đếm ngược nghĩa là gì thay vì để người chơi tưởng hết giờ
             // là chắc chắn gọi được.
             quotaError.quotaInfo = result.quota || null;
+            // Số đo thật của phiên: lệnh gọi thành công gần nhất tốn bao nhiêu token,
+            // lệnh vừa bị từ chối dài bao nhiêu, và mỗi key đã gửi bao nhiêu token
+            // trong 60 giây qua — để bảng trả lời được "một lượt có vượt 250k/phút?".
+            {
+                const nowSecUsage = Date.now() / 1000;
+                const usageLog = aiSessionState.usage_log || [];
+                const lastUsage = usageLog.length ? usageLog[usageLog.length - 1] : null;
+                const tokensLastMinuteByKey = {};
+                for (const k of quotaPool) tokensLastMinuteByKey[k] = promptTokensInWindow(aiSessionState, k, nowSecUsage);
+                quotaError.quotaUsage = {
+                    lastPromptTokens: lastUsage ? lastUsage.prompt_tokens : null,
+                    lastRequestChars: aiSessionState.last_request_chars ?? null,
+                    tokensLastMinuteByKey,
+                };
+            }
             quotaError.googleDetail = googleDetail;
             quotaError.isQuotaError = true;
             quotaError.isModelUnavailable = true;
@@ -21240,7 +21263,7 @@ const [impromptuInput, setImpromptuInput] = useState('');
   const [quotaKeyModal, setQuotaKeyModal] = useState(null);
   const showAiError = useCallback((error, fallbackTitle = 'Lỗi Giao Tiếp AI') => {
       if (error?.isQuotaError && Array.isArray(error.quotaKeys) && error.quotaKeys.length > 0) {
-          setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '', source: error.quotaSource || 'platform', quotaInfo: error.quotaInfo || null });
+          setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '', source: error.quotaSource || 'platform', quotaInfo: error.quotaInfo || null, usage: error.quotaUsage || null });
           return;
       }
       setModalMessage({ show: true, title: fallbackTitle, content: error?.message || String(error), type: 'error' });
@@ -38804,6 +38827,7 @@ const formatStoryText = useCallback((text) => {
             source={quotaKeyModal?.source}
             scopeByKey={aiSessionState.key_quota_scope}
             quotaInfo={quotaKeyModal?.quotaInfo}
+            usage={quotaKeyModal?.usage}
             onClose={() => setQuotaKeyModal(null)}
         />
     <ConfirmationModal

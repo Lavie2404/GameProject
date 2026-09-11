@@ -8,7 +8,13 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { parseQuotaErrorBody, requestAi } from '../../../src-web/systems/ai/requestAi';
+import {
+  estimateTokensFromChars,
+  parseQuotaErrorBody,
+  promptTokensInWindow,
+  requestAi,
+  usageOf,
+} from '../../../src-web/systems/ai/requestAi';
 import { AI_KNOBS } from '../../../src-web/systems/registry';
 import { lockedFixture, makeHarness, okBody } from './fixtures';
 import type { FetchInit } from '../../../src-web/systems/ai/requestAi';
@@ -108,6 +114,58 @@ describe('parseQuotaErrorBody', () => {
     expect(parseQuotaErrorBody('')).toEqual({ scope: 'unknown' });
     expect(parseQuotaErrorBody('Resource has been exhausted (e.g. check quota).')).toEqual({ scope: 'unknown' });
     expect(parseQuotaErrorBody(42)).toEqual({ scope: 'unknown' });
+  });
+});
+
+describe('requestAi - token telemetry from usageMetadata', () => {
+  const withUsage = (text: string, prompt: number) => ({
+    ...(okBody(text) as Record<string, unknown>),
+    usageMetadata: { promptTokenCount: prompt, candidatesTokenCount: 900, totalTokenCount: prompt + 900 },
+  });
+
+  it('test_200_with_usage_metadata_is_logged_per_key_and_exposed_on_the_result', async () => {
+    const h = makeHarness([{ status: 200, body: withUsage('ok', 187000) }], LADDER, { credentials: POOL });
+    const nowSec = h.clock.now() / 1000;
+
+    const r = await requestAi(narration, h.deps);
+
+    expect(r).toMatchObject({ ok: true, usage: { prompt_tokens: 187000, output_tokens: 900, total_tokens: 187900 } });
+    expect(h.deps.session.usage_log).toEqual([{ at_sec: nowSec, key: MAIN, model: 'A', prompt_tokens: 187000 }]);
+    expect(promptTokensInWindow(h.deps.session, MAIN, nowSec)).toBe(187000);
+    expect(promptTokensInWindow(h.deps.session, SPARE_1, nowSec)).toBe(0);
+    // Outside the trailing minute the entry no longer counts.
+    expect(promptTokensInWindow(h.deps.session, MAIN, nowSec + 61)).toBe(0);
+  });
+
+  it('test_two_calls_inside_a_minute_add_up_which_is_how_a_turn_overflows_the_bucket', async () => {
+    const h = makeHarness([{ status: 200, body: withUsage('ok', 150000) }], LADDER, { credentials: POOL });
+    await requestAi(narration, h.deps);
+    h.clock.advance(20_000);
+    await requestAi(narration, h.deps);
+    expect(promptTokensInWindow(h.deps.session, MAIN, h.clock.now() / 1000)).toBe(300000);
+  });
+
+  it('test_last_request_chars_is_recorded_even_when_the_attempt_is_rejected', async () => {
+    const h = makeHarness([{ status: 429, errorBody: JSON.stringify(TPM_BODY) }], LADDER, { credentials: POOL });
+    await requestAi(narration, h.deps);
+    const sent = h.calls[0].init.body.length;
+    expect(h.deps.session.last_request_chars).toBe(sent);
+    expect(sent).toBeGreaterThan(0);
+  });
+
+  it('test_200_without_usage_metadata_adds_nothing', async () => {
+    const h = makeHarness([{ status: 200, body: okBody('ok') }], LADDER, { credentials: POOL });
+    const r = await requestAi(narration, h.deps);
+    expect((r as { usage?: unknown }).usage).toBeUndefined();
+    expect(h.deps.session.usage_log).toEqual([]);
+  });
+
+  it('test_usageOf_and_estimateTokensFromChars_tolerate_missing_data', () => {
+    expect(usageOf(null)).toBeNull();
+    expect(usageOf({ usageMetadata: {} })).toBeNull();
+    expect(usageOf({ usageMetadata: { promptTokenCount: 12 } })).toEqual({ prompt_tokens: 12, output_tokens: null, total_tokens: null });
+    expect(estimateTokensFromChars(null)).toBeNull();
+    expect(estimateTokensFromChars(300)).toBe(100);
   });
 });
 

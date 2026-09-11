@@ -166,6 +166,14 @@ export interface AiSessionState {
    * instead of showing a countdown that ends in another 429.
    */
   key_quota_scope: Record<string, QuotaScope>;
+  /**
+   * Token telemetry (2026-09-11): Google's `usageMetadata` for every 200, so
+   * "is one turn bigger than the 250k tokens/minute bucket?" is answerable
+   * from data instead of guessed. Pruned to the last two minutes.
+   */
+  usage_log: AiUsageEntry[];
+  /** Size in characters of the most recent request body (any status). */
+  last_request_chars: number | null;
   /** Sticky preferred model - ported from `App.tsx:17962`. */
   preferred_model: string | null;
   log: AiLogEntry[];
@@ -178,6 +186,8 @@ export function createAiSessionState(): AiSessionState {
     cooldown_until: {},
     key_cooldown_until: {},
     key_quota_scope: {},
+    usage_log: [],
+    last_request_chars: null,
     preferred_model: null,
     log: [],
     state: 'idle',
@@ -217,6 +227,20 @@ export interface AiRequest {
   overrides?: CallBudgetOverrides;
 }
 
+/** Google's `usageMetadata`, normalised. */
+export interface AiUsage {
+  prompt_tokens: number | null;
+  output_tokens: number | null;
+  total_tokens: number | null;
+}
+
+export interface AiUsageEntry {
+  at_sec: number;
+  key: string;
+  model: string;
+  prompt_tokens: number;
+}
+
 export type AiResult =
   | {
       ok: true;
@@ -227,6 +251,8 @@ export type AiResult =
       attempts: number;
       elapsed_ms: number;
       truncated?: boolean;
+      /** Token accounting of the successful attempt, when Google reported it. */
+      usage?: AiUsage;
       /** False for background calls (C-9): the caller must not count them. */
       counted: boolean;
     }
@@ -433,6 +459,43 @@ export function finishReasonOf(data: unknown): string | null {
   return reply.candidates?.[0]?.finishReason ?? null;
 }
 
+/** `usageMetadata` of a 200 body, or null when Google sent none. */
+export function usageOf(data: unknown): AiUsage | null {
+  const meta = (data as { usageMetadata?: Record<string, unknown> } | null)?.usageMetadata;
+  if (!meta || typeof meta !== 'object') return null;
+  const num = (v: unknown): number | null => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+  const usage: AiUsage = {
+    prompt_tokens: num(meta.promptTokenCount),
+    output_tokens: num(meta.candidatesTokenCount),
+    total_tokens: num(meta.totalTokenCount),
+  };
+  return usage.prompt_tokens === null && usage.output_tokens === null && usage.total_tokens === null ? null : usage;
+}
+
+/** How long `usage_log` entries are kept. */
+export const USAGE_LOG_RETENTION_SEC = 120;
+
+/**
+ * Prompt tokens Google accepted from `key` in the trailing `windowSec` —
+ * i.e. how much of that key's per-minute token bucket this client itself
+ * used. Rejected (429) requests are not in the log, so this is a floor.
+ */
+export function promptTokensInWindow(
+  session: Pick<AiSessionState, 'usage_log'>,
+  key: string,
+  nowSec: number,
+  windowSec = 60,
+): number {
+  return (session.usage_log || [])
+    .filter((e) => e.key === key && e.at_sec > nowSec - windowSec && e.at_sec <= nowSec)
+    .reduce((sum, e) => sum + e.prompt_tokens, 0);
+}
+
+/** Rough size of a request in tokens from its byte length; Vietnamese prose runs ~3 chars/token. */
+export function estimateTokensFromChars(chars: number | null | undefined): number | null {
+  return typeof chars === 'number' && chars > 0 ? Math.round(chars / 3) : null;
+}
+
 // ---------------------------------------------------------------------------
 // Orchestrator
 // ---------------------------------------------------------------------------
@@ -450,6 +513,8 @@ interface AttemptOutcome {
   detail?: string;
   /** Parsed from a 429 body (see `parseQuotaErrorBody`). */
   quota?: QuotaErrorInfo;
+  /** Serialized request body length, for size telemetry. */
+  requestChars?: number;
 }
 
 /** Non-200 bodies are truncated before they reach a log or a UI string. */
@@ -744,6 +809,7 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
         emit({ type: 'request_start', model, elapsed_ms: deps.clock() - t_start });
         const t_attempt = deps.clock();
         const outcome = await httpAttempt(deps, cfg, model, body, key, perRequestSec, timer);
+        if (typeof outcome.requestChars === 'number') session.last_request_chars = outcome.requestChars;
         emit({
           type: 'attempt_end',
           model,
@@ -773,6 +839,16 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
 
             if (text !== '') {
               session.preferred_model = model;
+              // Token telemetry (2026-09-11): keep what Google charged this key
+              // for the prompt, so the quota modal can compare a turn's real
+              // size with the per-minute bucket instead of guessing.
+              const usage = usageOf(outcome.data);
+              if (usage && usage.prompt_tokens !== null) {
+                if (!session.usage_log) session.usage_log = [];
+                const at = nowSec();
+                session.usage_log = session.usage_log.filter((e) => e.at_sec > at - USAGE_LOG_RETENTION_SEC);
+                session.usage_log.push({ at_sec: at, key, model, prompt_tokens: usage.prompt_tokens });
+              }
               if (req.call_type === 'narration_call') {
                 return finish({
                   ok: true,
@@ -782,6 +858,7 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
                   attempts,
                   elapsed_ms: deps.clock() - t_start,
                   truncated: finishReason === 'MAX_TOKENS' ? true : undefined,
+                  ...(usage ? { usage } : {}),
                   counted: !background,
                 });
               }
@@ -796,6 +873,7 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
                   model,
                   attempts,
                   elapsed_ms: deps.clock() - t_start,
+                  ...(usage ? { usage } : {}),
                   counted: !background,
                 });
               }
@@ -997,12 +1075,14 @@ async function httpAttempt(
   const url = cfg.endpoint_base + '/' + model + ':generateContent';
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (key) headers['x-goog-api-key'] = key;
+  const serialized = JSON.stringify(body);
+  const requestChars = serialized.length;
 
   try {
     const res = await deps.fetchImpl(url, {
       method: 'POST',
       headers,
-      body: JSON.stringify(body),
+      body: serialized,
       signal: controller.signal,
     });
     let data: unknown = null;
@@ -1027,10 +1107,10 @@ async function httpAttempt(
       typeof headerRetryAfter === 'number' && Number.isFinite(headerRetryAfter) && headerRetryAfter > 0
         ? headerRetryAfter
         : quota?.retryAfterSec;
-    return { kind: 'response', status: res.status, data, retryAfter, detail, quota };
+    return { kind: 'response', status: res.status, data, retryAfter, detail, quota, requestChars };
   } catch (err) {
     const detail = err instanceof Error ? err.message : String(err);
-    return timedOut ? { kind: 'aborted', detail } : { kind: 'network_error', detail };
+    return timedOut ? { kind: 'aborted', detail, requestChars } : { kind: 'network_error', detail, requestChars };
   } finally {
     cancel();
   }

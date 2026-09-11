@@ -159,6 +159,18 @@ describe('quotaModalView - userKey source', () => {
     expect(v.anyReady).toBe(true);
   });
 
+  it('test_usage_telemetry_is_quoted_in_the_hint_and_per_row', () => {
+    const v = quotaModalView(POOL, { KEY_MAIN: NOW + 26 }, NOW, 'platform', {
+      quotaInfo: { scope: 'minute', metric: 'generate_content_free_tier_input_token_count', limit: 250000, model: 'gemini-3.6-flash' },
+      usage: { lastPromptTokens: 187000, lastRequestChars: 600000, tokensLastMinuteByKey: { KEY_MAIN: 187000 } },
+    });
+    expect(v.rows[0].sub).toBe('đã gửi 187.000 token trong 60 giây qua');
+    expect(v.rows[1].sub).toBeUndefined();
+    expect(v.hint).toContain('lệnh gọi vừa bị từ chối dài 600.000 ký tự (ước chừng 200.000 token)');
+    expect(v.hint).toContain('lệnh gọi thành công gần nhất tốn 187.000 token đầu vào theo Google');
+    expect(v.hint).toContain('so với hạn mức 250.000 token/phút');
+  });
+
   it('test_no_quota_info_gives_no_hint_and_keeps_the_old_behaviour', () => {
     const v = quotaModalView(POOL, { KEY_MAIN: NOW + 5 }, NOW);
     expect(v.hint).toBe('');
