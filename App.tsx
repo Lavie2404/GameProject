@@ -2599,13 +2599,16 @@ const DialogueBubble = ({ speaker, content, playerName, characters, gameSettings
 };
 
 
-const StoryItem = React.memo(({ item, formatStoryText, playerName, onDelete, characters, gameSettings }) => {
-    // Component bọc ngoài để xử lý hiệu ứng hover và hiển thị nút Xóa
-    const Wrapper = ({ children, isSystemOrAction }) => (
+// Component bọc ngoài để xử lý hiệu ứng hover và hiển thị nút Xóa.
+// 2026-09-11: đưa RA NGOÀI StoryItem. Khi còn khai báo bên trong, mỗi lần
+// StoryItem render lại (knowledge đổi sau mỗi lượt) React thấy một "kiểu
+// component" mới → unmount + mount lại toàn bộ DOM của lượt truyện (hàng
+// nghìn node chữ) thay vì chỉ so khớp — tốn layout/text-shaping vô ích.
+const StoryItemWrapper = ({ children, isSystemOrAction, itemId, onDelete }) => (
         <div className={`relative group mb-5 ${isSystemOrAction ? '' : 'story-item'}`}>
             {children}
             <button
-                onClick={() => onDelete && onDelete(item.id)}
+                onClick={() => onDelete && onDelete(itemId)}
                 // opacity-0 + group-hover từng khiến nút này VÔ HÌNH và không thể
                 // bấm được trên điện thoại (không có trạng thái hover). Chỉ ẩn theo
                 // hover trên thiết bị thực sự có con trỏ chuột ([@media(hover:hover)]);
@@ -2619,6 +2622,7 @@ const StoryItem = React.memo(({ item, formatStoryText, playerName, onDelete, cha
         </div>
     );
 
+const StoryItem = React.memo(({ item, formatStoryText, playerName, onDelete, characters, gameSettings }) => {
     // 1. Xử lý các loại item hệ thống/người dùng
     if (item.type !== 'story') {
         if (item.type === 'htab_dialogue_session') {
@@ -2638,7 +2642,7 @@ const StoryItem = React.memo(({ item, formatStoryText, playerName, onDelete, cha
             };
 
             return (
-                <Wrapper isSystemOrAction={true}>
+                <StoryItemWrapper isSystemOrAction={true} itemId={item.id} onDelete={onDelete}>
                     <div className="my-6 py-4 border-y-2 border-dashed border-purple-500/40 relative">
                         <div className="text-center mb-4">
                             <span className="bg-[#0a0f0a] px-4 py-1 border border-purple-500/40 text-purple-300 font-bold text-xs tracking-[0.2em] uppercase rounded-full shadow-[0_0_10px_rgba(165,180,252,0.15)]">
@@ -2683,7 +2687,7 @@ const StoryItem = React.memo(({ item, formatStoryText, playerName, onDelete, cha
                             })}
                         </div>
                     </div>
-                </Wrapper>
+                </StoryItemWrapper>
             );
         }
 
@@ -2697,19 +2701,19 @@ const StoryItem = React.memo(({ item, formatStoryText, playerName, onDelete, cha
                 : <p className="font-bold text-[#cda45e] scale-text-xs mb-2 tracking-widest uppercase" style={{ fontFamily: "'Noto Serif Vietnamese', serif" }}>Đã chọn:</p>;
         } else if (item.type === 'system') {
              return (
-                <Wrapper isSystemOrAction={true}>
+                <StoryItemWrapper isSystemOrAction={true} itemId={item.id} onDelete={onDelete}>
                     <div className="py-3 px-5 bg-[#0a0f0a]/60 border-y border-[#cda45e]/30 text-[#8ba888] scale-text-sm flex items-start gap-3 whitespace-pre-line shadow-inner backdrop-blur-sm">
                         <InformationCircleIcon className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#cda45e]" />
                         <div className="leading-relaxed italic">{formatStoryText(item.content)}</div>
                     </div>
-                </Wrapper>
+                </StoryItemWrapper>
             );
         }
 
         const cleanedContent = typeof item.content === 'string' ? item.content.replace(/\*/g, '') : item.content;
 
         return (
-            <Wrapper isSystemOrAction={true}>
+            <StoryItemWrapper isSystemOrAction={true} itemId={item.id} onDelete={onDelete}>
                 <div id={item.type.includes('user') ? `turn-start-${item.id}` : undefined} className={`p-4 relative rounded-sm ${itemClass}`}>
                     {/* Họa tiết góc kim loại cho hành động của người chơi */}
                     {(item.type === 'user_choice' || item.type === 'user_custom_action') && (
@@ -2723,27 +2727,27 @@ const StoryItem = React.memo(({ item, formatStoryText, playerName, onDelete, cha
                         {cleanedContent}
                     </div>
                 </div>
-            </Wrapper>
+            </StoryItemWrapper>
         );
     }
 
     // 2. Xử lý Story (Văn bản truyện)
     if (typeof item.content === 'string') {
         return (
-            <Wrapper isSystemOrAction={false}>
+            <StoryItemWrapper isSystemOrAction={false} itemId={item.id} onDelete={onDelete}>
                 <div className="whitespace-pre-line text-[#e8d3a1] leading-[1.8] scale-text-lg tracking-wide" style={{ fontFamily: "'Noto Serif Vietnamese', serif" }}>
                     {formatStoryText(item.content)}
                 </div>
-            </Wrapper>
+            </StoryItemWrapper>
         );
     }
     if (Array.isArray(item.content)) {
         return (
-            <Wrapper isSystemOrAction={false}>
+            <StoryItemWrapper isSystemOrAction={false} itemId={item.id} onDelete={onDelete}>
                 <div className="text-[#e8d3a1] leading-[1.8] scale-text-lg tracking-wide" style={{ fontFamily: "'Noto Serif Vietnamese', serif" }}>
                     {formatStoryText(item.content)}
                 </div>
-            </Wrapper>
+            </StoryItemWrapper>
         );
     }
     return null;
@@ -11566,7 +11570,7 @@ const VipWelcomeModal = ({ show, ownerName, onClose }) => {
 
                 <button
                     onClick={onClose}
-                    className="w-full bg-[#1b2a1b] border-2 border-[#cda45e] hover:bg-[#cda45e] text-[#cda45e] hover:text-black font-extrabold py-3.5 uppercase tracking-widest text-base transition-all shadow-[0_0_15px_rgba(205,164,94,0.2)] hover:shadow-[0_0_25px_rgba(205,164,94,0.5)]"
+                    className="w-full bg-[#1b2a1b] border-2 border-[#cda45e] hover:bg-[#cda45e] text-[#cda45e] hover:text-[#0a0f0a] font-extrabold py-3.5 uppercase tracking-widest text-base transition-all shadow-[0_0_15px_rgba(205,164,94,0.2)] hover:shadow-[0_0_25px_rgba(205,164,94,0.5)]"
                     style={{ fontFamily: "'Protest Revolution', sans-serif" }}
                 >
                     Tiến Vào Thế Giới
@@ -11586,7 +11590,10 @@ const VipWelcomeModal = ({ show, ownerName, onClose }) => {
 //
 // Đọc thẳng cooldown map (không chụp lại vào state) là có chủ đích: requestAi
 // sửa map đó tại chỗ, nên nếu có lệnh gọi nền nào cập nhật thì bảng ăn theo luôn.
-const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, onClose }) => {
+// `source` (2026-09-11): 'platform' hay 'userKey' — cùng một bảng cho cả hai chế độ.
+// Ở chế độ key riêng, pool thực tế requestAi đã thử là [key riêng, ...key nền tảng],
+// nên hàng 0 là key của người chơi, các hàng sau là key nền tảng dự phòng.
+const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, onClose }) => {
     const [, forceTick] = useState(0);
     useEffect(() => {
         if (!show) return undefined;
@@ -11599,7 +11606,7 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, onClose 
     // Mọi quyết định (nhãn, câu khuyên, chữ trên nút) nằm trong quotaModalView —
     // module thuần đã có test; ở đây chỉ còn việc vẽ. Gọi lại mỗi lần render, mà
     // render lại mỗi giây, nên bảng luôn khớp thời gian thật.
-    const view = quotaModalView(keys || [], cooldownUntil || {}, Date.now() / 1000);
+    const view = quotaModalView(keys || [], cooldownUntil || {}, Date.now() / 1000, source === 'userKey' ? 'userKey' : 'platform');
     const toneStyle = {
         ok: 'text-[#8ba888]',
         wait: 'text-[#e8d3a1]',
@@ -11619,7 +11626,7 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, onClose 
                 <h3 className="text-2xl font-bold tracking-widest text-[#ff4d4d]" style={{ fontFamily: "'Noto Serif Vietnamese', serif" }}>Hết Quota AI</h3>
             </div>
 
-            <p className="text-[#a3b8a3] mb-4 leading-relaxed">Nguồn AI mặc định vừa báo hết quota (Lỗi 429).</p>
+            <p className="text-[#a3b8a3] mb-4 leading-relaxed">{view.headline}</p>
 
             <div className="mb-4 border border-[#a3b8a3]/20 divide-y divide-[#a3b8a3]/10">
                 {view.rows.map(r => (
@@ -11644,7 +11651,7 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, onClose 
             <button
                 onClick={onClose}
                 className={`w-full border font-bold py-3 uppercase tracking-widest text-sm transition-all ${view.anyReady
-                    ? 'bg-[#cda45e]/10 border-[#cda45e] hover:bg-[#cda45e] hover:text-black text-[#e8d3a1]'
+                    ? 'bg-[#cda45e]/10 border-[#cda45e] hover:bg-[#cda45e] hover:text-[#0a0f0a] text-[#e8d3a1]'
                     : 'bg-transparent border-[#cda45e] hover:bg-[#cda45e]/10 text-[#cda45e]'}`}
             >
                 {view.buttonLabel}
@@ -11687,7 +11694,7 @@ const MessageModal = ({ show, title, content, type, onClose, actionLabel, onActi
           {actionLabel && onAction && (
             <button
               onClick={() => { onAction(); onClose(); }}
-              className="w-full bg-[#cda45e]/10 border border-[#cda45e] hover:bg-[#cda45e] hover:text-black text-[#e8d3a1] font-bold py-3 uppercase tracking-widest text-sm transition-all mb-3"
+              className="w-full bg-[#cda45e]/10 border border-[#cda45e] hover:bg-[#cda45e] hover:text-[#0a0f0a] text-[#e8d3a1] font-bold py-3 uppercase tracking-widest text-sm transition-all mb-3"
             >
               {actionLabel}
             </button>
@@ -16377,8 +16384,8 @@ const HtabInfoModal = ({
                                         
                                         <div className="space-y-4">
                                             <div className="flex gap-4">
-                                                <button onClick={() => setDonateType('gold')} className={`px-4 py-1 text-xs font-bold ${donateType === 'gold' ? 'bg-[#cda45e] text-black' : 'bg-transparent text-gray-400'}`}>Tiền tệ</button>
-                                                <button onClick={() => setDonateType('item')} className={`px-4 py-1 text-xs font-bold ${donateType === 'item' ? 'bg-[#cda45e] text-black' : 'bg-transparent text-gray-400'}`}>Bảo Vật</button>
+                                                <button onClick={() => setDonateType('gold')} className={`px-4 py-1 text-xs font-bold ${donateType === 'gold' ? 'bg-[#cda45e] text-[#0a0f0a]' : 'bg-transparent text-gray-400'}`}>Tiền tệ</button>
+                                                <button onClick={() => setDonateType('item')} className={`px-4 py-1 text-xs font-bold ${donateType === 'item' ? 'bg-[#cda45e] text-[#0a0f0a]' : 'bg-transparent text-gray-400'}`}>Bảo Vật</button>
                                             </div>
 
                                             {donateType === 'gold' ? (
@@ -20119,15 +20126,26 @@ const fetchWithRetriesRaw = async (apiUrl, payload, onRetry = null, maxRetries =
             // có chọn slot ưu tiên là lúc nhãn sẽ sai nếu lấy theo thứ tự đã xoay.
             const canonicalPlatformKeys = [PLATFORM_DEFAULT_GEMINI_KEY, ...PLATFORM_FALLBACK_GEMINI_KEYS]
                 .filter(k => String(k || '').trim());
+            // 2026-09-11: chế độ key riêng cũng đi qua QuotaKeyStatusModal (bảng đếm
+            // lùi sống) thay vì MessageModal văn bản thuần. Pool thực tế requestAi đã
+            // thử ở chế độ này là [key riêng, ...key nền tảng] (buildAiCredentials +
+            // resolveApiKeys: trim + bỏ trùng), nên dựng lại đúng thứ tự đó để nhãn và
+            // đồng hồ của từng hàng tra đúng key_cooldown_until.
+            const trimmedUserKey = String(apiKey || '').trim();
+            const quotaSource = apiMode === 'userKey' ? 'userKey' : 'platform';
+            const quotaPool = apiMode === 'userKey'
+                ? [trimmedUserKey, ...canonicalPlatformKeys.filter(k => k !== trimmedUserKey)].filter(Boolean)
+                : canonicalPlatformKeys;
             const quotaMessage = apiMode === 'userKey'
-                ? 'API Key Gemini của riêng ngươi vừa báo hết quota (Lỗi 429). Hãy đợi ít phút rồi thử lại, hoặc vào "Thiết Lập API Key" chọn "Sử Dụng Gemini AI Mặc Định" để chơi tiếp bằng key nền tảng.'
+                ? 'API Key Gemini của riêng ngươi vừa báo hết quota (Lỗi 429). Hãy đợi ít phút rồi thử lại, hoặc kiểm tra lại key trong "Thiết Lập API Key".'
                 : 'Nguồn AI mặc định vừa báo hết quota (Lỗi 429).'
                   + describeKeyPool(canonicalPlatformKeys, aiSessionState.key_cooldown_until, Date.now() / 1000);
             const quotaError = new Error(quotaMessage + googleDetail);
             // Kèm dữ liệu có cấu trúc để QuotaKeyStatusModal vẽ được bảng đếm lùi
             // sống. Chuỗi quotaMessage ở trên vẫn giữ nguyên làm bản dự phòng cho
             // bất kỳ chỗ nào còn hiển thị error.message dưới dạng văn bản thuần.
-            quotaError.quotaKeys = apiMode === 'userKey' ? [] : canonicalPlatformKeys;
+            quotaError.quotaKeys = quotaPool;
+            quotaError.quotaSource = quotaSource;
             quotaError.googleDetail = googleDetail;
             quotaError.isQuotaError = true;
             quotaError.isModelUnavailable = true;
@@ -21198,7 +21216,7 @@ const [impromptuInput, setImpromptuInput] = useState('');
   const [quotaKeyModal, setQuotaKeyModal] = useState(null);
   const showAiError = useCallback((error, fallbackTitle = 'Lỗi Giao Tiếp AI') => {
       if (error?.isQuotaError && Array.isArray(error.quotaKeys) && error.quotaKeys.length > 0) {
-          setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '' });
+          setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '', source: error.quotaSource || 'platform' });
           return;
       }
       setModalMessage({ show: true, title: fallbackTitle, content: error?.message || String(error), type: 'error' });
@@ -38759,6 +38777,7 @@ const formatStoryText = useCallback((text) => {
             keys={quotaKeyModal?.keys}
             cooldownUntil={aiSessionState.key_cooldown_until}
             googleDetail={quotaKeyModal?.googleDetail}
+            source={quotaKeyModal?.source}
             onClose={() => setQuotaKeyModal(null)}
         />
     <ConfirmationModal
