@@ -11594,7 +11594,10 @@ const VipWelcomeModal = ({ show, ownerName, onClose }) => {
 // `source` (2026-09-11): 'platform' hay 'userKey' — cùng một bảng cho cả hai chế độ.
 // Ở chế độ key riêng, pool thực tế requestAi đã thử là [key riêng, ...key nền tảng],
 // nên hàng 0 là key của người chơi, các hàng sau là key nền tảng dự phòng.
-const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, onClose }) => {
+// `scopeByKey` / `quotaInfo` (2026-09-11): bucket nào đã cạn (phút hay NGÀY) —
+// key cạn hạn mức ngày không "còn dùng được" khi hết đếm ngược, và bảng phải nói
+// rõ điều đó thay vì để đồng hồ ngầm hứa "hết giờ là gọi được".
+const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, scopeByKey, quotaInfo, onClose }) => {
     const [, forceTick] = useState(0);
     useEffect(() => {
         if (!show) return undefined;
@@ -11607,7 +11610,7 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, 
     // Mọi quyết định (nhãn, câu khuyên, chữ trên nút) nằm trong quotaModalView —
     // module thuần đã có test; ở đây chỉ còn việc vẽ. Gọi lại mỗi lần render, mà
     // render lại mỗi giây, nên bảng luôn khớp thời gian thật.
-    const view = quotaModalView(keys || [], cooldownUntil || {}, Date.now() / 1000, source === 'userKey' ? 'userKey' : 'platform');
+    const view = quotaModalView(keys || [], cooldownUntil || {}, Date.now() / 1000, source === 'userKey' ? 'userKey' : 'platform', { scopeByKey: scopeByKey || {}, quotaInfo: quotaInfo || null });
     const toneStyle = {
         ok: 'text-[#8ba888]',
         wait: 'text-[#e8d3a1]',
@@ -11641,6 +11644,12 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, 
             <p className="text-[#a3b8a3] mb-6 leading-relaxed scale-text-sm">
                 {view.advice}
             </p>
+
+            {view.hint ? (
+                <p className="text-[#e8d3a1] mb-6 leading-relaxed scale-text-xs border-l-2 border-[#cda45e]/40 pl-3">
+                    {view.hint}
+                </p>
+            ) : null}
 
             {googleDetail ? (
                 <details className="mb-6">
@@ -20157,6 +20166,10 @@ const fetchWithRetriesRaw = async (apiUrl, payload, onRetry = null, maxRetries =
             // bất kỳ chỗ nào còn hiển thị error.message dưới dạng văn bản thuần.
             quotaError.quotaKeys = quotaPool;
             quotaError.quotaSource = quotaSource;
+            // 2026-09-11: bucket Google đã nêu (phút/ngày, hạn mức, model) để modal
+            // giải thích đếm ngược nghĩa là gì thay vì để người chơi tưởng hết giờ
+            // là chắc chắn gọi được.
+            quotaError.quotaInfo = result.quota || null;
             quotaError.googleDetail = googleDetail;
             quotaError.isQuotaError = true;
             quotaError.isModelUnavailable = true;
@@ -21227,7 +21240,7 @@ const [impromptuInput, setImpromptuInput] = useState('');
   const [quotaKeyModal, setQuotaKeyModal] = useState(null);
   const showAiError = useCallback((error, fallbackTitle = 'Lỗi Giao Tiếp AI') => {
       if (error?.isQuotaError && Array.isArray(error.quotaKeys) && error.quotaKeys.length > 0) {
-          setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '', source: error.quotaSource || 'platform' });
+          setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '', source: error.quotaSource || 'platform', quotaInfo: error.quotaInfo || null });
           return;
       }
       setModalMessage({ show: true, title: fallbackTitle, content: error?.message || String(error), type: 'error' });
@@ -38789,6 +38802,8 @@ const formatStoryText = useCallback((text) => {
             cooldownUntil={aiSessionState.key_cooldown_until}
             googleDetail={quotaKeyModal?.googleDetail}
             source={quotaKeyModal?.source}
+            scopeByKey={aiSessionState.key_quota_scope}
+            quotaInfo={quotaKeyModal?.quotaInfo}
             onClose={() => setQuotaKeyModal(null)}
         />
     <ConfirmationModal

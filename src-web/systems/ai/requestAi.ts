@@ -160,6 +160,12 @@ export interface AiSessionState {
    * Keyed by the key string itself; in-memory only, never persisted or logged.
    */
   key_cooldown_until: Record<string, number>;
+  /**
+   * Which quota bucket the last 429 on each key named (2026-09-11). A per-DAY
+   * bucket does not come back when the breaker expires, so the UI must say so
+   * instead of showing a countdown that ends in another 429.
+   */
+  key_quota_scope: Record<string, QuotaScope>;
   /** Sticky preferred model - ported from `App.tsx:17962`. */
   preferred_model: string | null;
   log: AiLogEntry[];
@@ -171,6 +177,7 @@ export function createAiSessionState(): AiSessionState {
     in_flight: false,
     cooldown_until: {},
     key_cooldown_until: {},
+    key_quota_scope: {},
     preferred_model: null,
     log: [],
     state: 'idle',
@@ -231,6 +238,8 @@ export type AiResult =
       attempts: number;
       elapsed_ms: number;
       retry_after?: number;
+      /** For `quota_429`: what Google's error body said about the bucket that tripped. */
+      quota?: QuotaErrorInfo;
       counted: boolean;
     };
 
@@ -439,10 +448,116 @@ interface AttemptOutcome {
   data?: unknown;
   retryAfter?: number;
   detail?: string;
+  /** Parsed from a 429 body (see `parseQuotaErrorBody`). */
+  quota?: QuotaErrorInfo;
 }
 
 /** Non-200 bodies are truncated before they reach a log or a UI string. */
 export const MAX_ERROR_DETAIL_CHARS = 500;
+
+// ---------------------------------------------------------------------------
+// 429 body parsing (2026-09-11)
+// ---------------------------------------------------------------------------
+
+/**
+ * Which bucket a 429 named. Google's free tier has per-MINUTE buckets (requests
+ * and input tokens) and a per-DAY request bucket; only the quotaId in the
+ * body's QuotaFailure detail tells them apart ("...PerMinute..." vs
+ * "...PerDay...").
+ */
+export type QuotaScope = 'minute' | 'day' | 'unknown';
+
+export interface QuotaErrorInfo {
+  /** Google's own "retry in Ns" (RetryInfo.retryDelay or the message text). */
+  retryAfterSec?: number;
+  scope: QuotaScope;
+  /** Metric name as Google prints it, e.g. "generate_content_free_tier_input_token_count". */
+  metric?: string;
+  limit?: number;
+  model?: string;
+}
+
+/**
+ * Why this exists: in a browser the `retry-after` header of a Gemini 429 is
+ * NOT readable (not a CORS-safelisted response header and not exposed by the
+ * API), so `outcome.retryAfter` was always undefined and every key breaker
+ * silently fell back to the 60s knob. The player saw a countdown that had
+ * nothing to do with Google's actual "Please retry in 26.4s", and a per-DAY
+ * exhaustion looked exactly like a per-minute one. The same information IS in
+ * the body — both in `error.details[]` (RetryInfo / QuotaFailure) and, less
+ * precisely, in `error.message` — so read it from there.
+ *
+ * Accepts the raw body text, the parsed body object, or just the message.
+ */
+export function parseQuotaErrorBody(input: unknown): QuotaErrorInfo {
+  let obj: Record<string, unknown> | null = null;
+  let message = '';
+  if (typeof input === 'string') {
+    message = input;
+    try {
+      const parsed = JSON.parse(input) as unknown;
+      if (parsed && typeof parsed === 'object') obj = parsed as Record<string, unknown>;
+    } catch {
+      /* plain text - regex path below */
+    }
+  } else if (input && typeof input === 'object') {
+    obj = input as Record<string, unknown>;
+  }
+
+  const info: QuotaErrorInfo = { scope: 'unknown' };
+  const err = (obj?.error && typeof obj.error === 'object' ? obj.error : obj) as Record<string, unknown> | null;
+  if (err && typeof err.message === 'string') message = err.message;
+
+  const details = Array.isArray(err?.details) ? (err!.details as Array<Record<string, unknown>>) : [];
+  for (const d of details) {
+    const type = String(d?.['@type'] ?? '');
+    if (type.endsWith('RetryInfo') && typeof d.retryDelay === 'string') {
+      const secs = parseFloat(d.retryDelay);
+      if (Number.isFinite(secs) && secs > 0) info.retryAfterSec = secs;
+    }
+    if (type.endsWith('QuotaFailure') && Array.isArray(d.violations)) {
+      for (const v of d.violations as Array<Record<string, unknown>>) {
+        const quotaId = String(v?.quotaId ?? '');
+        if (/perday/i.test(quotaId)) info.scope = 'day';
+        else if (/perminute/i.test(quotaId) && info.scope !== 'day') info.scope = 'minute';
+        if (typeof v?.quotaMetric === 'string' && !info.metric) {
+          info.metric = v.quotaMetric.replace(/^generativelanguage\.googleapis\.com\//, '');
+        }
+        const lim = Number(v?.quotaValue);
+        if (Number.isFinite(lim) && info.limit === undefined) info.limit = lim;
+        const dims = v?.quotaDimensions as Record<string, unknown> | undefined;
+        if (dims && typeof dims.model === 'string' && !info.model) info.model = dims.model;
+      }
+    }
+  }
+
+  // Message-text fallbacks (the only thing available when details are absent).
+  if (info.retryAfterSec === undefined) {
+    const m = /retry in\s+([\d.]+)\s*s/i.exec(message);
+    if (m) {
+      const secs = parseFloat(m[1]);
+      if (Number.isFinite(secs) && secs > 0) info.retryAfterSec = secs;
+    }
+  }
+  if (!info.metric) {
+    const m = /metric:\s*(?:generativelanguage\.googleapis\.com\/)?([A-Za-z0-9_./-]+)/i.exec(message);
+    if (m) info.metric = m[1];
+  }
+  if (info.limit === undefined) {
+    const m = /limit:\s*(\d+)/i.exec(message);
+    if (m) info.limit = Number(m[1]);
+  }
+  if (!info.model) {
+    const m = /model:\s*([A-Za-z0-9_.-]+)/i.exec(message);
+    if (m) info.model = m[1];
+  }
+  if (info.scope === 'unknown' && info.metric) {
+    if (/per_day|daily/i.test(info.metric)) info.scope = 'day';
+    // Token-count buckets only exist per minute on the free tier.
+    else if (/token/i.test(info.metric)) info.scope = 'minute';
+  }
+  return info;
+}
 
 function joinDetail(base: string, extra?: string): string {
   return extra && extra.length > 0 ? base + ': ' + extra : base;
@@ -503,7 +618,7 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
     return result;
   };
 
-  const fail = (label: FailLabel, detail?: string, retry_after?: number): AiResult =>
+  const fail = (label: FailLabel, detail?: string, retry_after?: number, quota?: QuotaErrorInfo): AiResult =>
     finish({
       ok: false,
       call_type: req.call_type,
@@ -512,6 +627,7 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
       attempts,
       elapsed_ms: deps.clock() - t_start,
       retry_after,
+      ...(quota ? { quota } : {}),
       counted: !background,
     });
 
@@ -705,6 +821,10 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
             // when the pool is exhausted is it the caller's quota_429 - with
             // the last suggested wait forwarded (R5). No same-key retry, ever.
             session.key_cooldown_until[key] = nowSec() + quotaCooldownSeconds(outcome.retryAfter, cfg);
+            // 2026-09-11: remember WHICH bucket tripped so the quota modal can say
+            // "hạn mức ngày" instead of a countdown that ends in another 429.
+            if (!session.key_quota_scope) session.key_quota_scope = {};
+            session.key_quota_scope[key] = outcome.quota?.scope ?? 'unknown';
             // Project decision 2026-08-28: field evidence (Google's own 429 body names
             // the MODEL, e.g. "limit: 20, model: gemini-3.5-flash") showed the sticky
             // preference (App.tsx:17962, "last model that worked leads next time") kept
@@ -717,7 +837,7 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
             // chance to reach a model with separate quota instead of parking on this one.
             if (session.preferred_model === model) session.preferred_model = null;
             if (switchKey('quota_429', outcome.detail)) break;
-            return fail('quota_429', joinDetail('HTTP 429', outcome.detail), outcome.retryAfter);
+            return fail('quota_429', joinDetail('HTTP 429', outcome.detail), outcome.retryAfter, outcome.quota);
           } else if (status === 403 || status === 404) {
             // Ported from App.tsx: this model is unusable for THIS key - skip it
             // WITHOUT a cooldown (the model is not overloaded, it is unavailable
@@ -818,7 +938,14 @@ export async function requestAi(req: AiRequest, deps: AiDeps): Promise<AiResult>
  * is already consumed, empty, or not text must NEVER turn an HTTP error into a
  * thrown exception. Truncated so a huge HTML error page cannot reach a toast.
  */
-async function readErrorBody(res: HttpResponseLike): Promise<string | undefined> {
+interface ErrorBodyRead {
+  /** Clipped, display-ready message (unchanged behaviour). */
+  detail?: string;
+  /** The UNCLIPPED body (text or parsed object) for structured parsing. */
+  body?: unknown;
+}
+
+async function readErrorBody(res: HttpResponseLike): Promise<ErrorBodyRead> {
   const clip = (s: string): string | undefined => {
     const t = s.trim();
     return t.length > 0 ? t.slice(0, MAX_ERROR_DETAIL_CHARS) : undefined;
@@ -826,7 +953,7 @@ async function readErrorBody(res: HttpResponseLike): Promise<string | undefined>
   try {
     if (typeof res.text === 'function') {
       const raw = await res.text();
-      if (typeof raw === 'string') return clip(raw);
+      if (typeof raw === 'string') return { detail: clip(raw), body: raw };
     }
   } catch {
     /* fall through to the JSON seam */
@@ -835,14 +962,14 @@ async function readErrorBody(res: HttpResponseLike): Promise<string | undefined>
     if (typeof res.json === 'function') {
       const parsed = (await res.json()) as { error?: { message?: string } } | null;
       const message = parsed?.error?.message;
-      if (typeof message === 'string') return clip(message);
+      if (typeof message === 'string') return { detail: clip(message), body: parsed };
       const dumped = JSON.stringify(parsed ?? {});
-      return dumped === '{}' || dumped === 'null' ? undefined : clip(dumped);
+      return { detail: dumped === '{}' || dumped === 'null' ? undefined : clip(dumped), body: parsed };
     }
   } catch {
     /* body unreadable - the status code alone has to carry the failure */
   }
-  return undefined;
+  return {};
 }
 
 /**
@@ -880,6 +1007,7 @@ async function httpAttempt(
     });
     let data: unknown = null;
     let detail: string | undefined;
+    let quota: QuotaErrorInfo | undefined;
     if (res.status === 200) {
       try {
         data = await res.json();
@@ -887,11 +1015,19 @@ async function httpAttempt(
         return { kind: 'response', status: 200, data: {} };
       }
     } else {
-      detail = await readErrorBody(res);
+      const read = await readErrorBody(res);
+      detail = read.detail;
+      if (res.status === 429 && read.body !== undefined) quota = parseQuotaErrorBody(read.body);
     }
     const retryAfterRaw = res.headers?.get?.('retry-after') ?? null;
-    const retryAfter = retryAfterRaw ? Number(retryAfterRaw) : undefined;
-    return { kind: 'response', status: res.status, data, retryAfter, detail };
+    const headerRetryAfter = retryAfterRaw ? Number(retryAfterRaw) : undefined;
+    // Header first (authoritative when present), else Google's own retryDelay
+    // from the body — the header is unreadable from a browser, see parseQuotaErrorBody.
+    const retryAfter =
+      typeof headerRetryAfter === 'number' && Number.isFinite(headerRetryAfter) && headerRetryAfter > 0
+        ? headerRetryAfter
+        : quota?.retryAfterSec;
+    return { kind: 'response', status: res.status, data, retryAfter, detail, quota };
   } catch (err) {
     const detail = err instanceof Error ? err.message : String(err);
     return timedOut ? { kind: 'aborted', detail } : { kind: 'network_error', detail };

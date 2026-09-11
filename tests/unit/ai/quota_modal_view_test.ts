@@ -115,6 +115,56 @@ describe('quotaModalView - userKey source', () => {
     expect(allOut.advice).not.toContain('Key AI Ưu Tiên');
   });
 
+  it('test_day_scoped_key_is_never_ready_and_the_hint_explains_the_reset', () => {
+    // Breaker expired (ready) but the DAY bucket is gone: the row must not
+    // invite a retry, and the hint must answer "đếm ngược sai à?".
+    const v = quotaModalView(
+      POOL,
+      { KEY_MAIN: NOW - 1, KEY_SPARE_1: NOW + 8, KEY_SPARE_2: Infinity },
+      NOW,
+      'platform',
+      {
+        scopeByKey: { KEY_MAIN: 'day', KEY_SPARE_1: 'minute' },
+        quotaInfo: { scope: 'day', metric: 'generate_content_free_tier_requests', limit: 20, model: 'gemini-3.6-pro', retryAfterSec: 41 },
+      },
+    );
+    expect(v.rows[0]).toMatchObject({ text: 'hết hạn mức ngày', tone: 'bad' });
+    expect(v.rows[1]).toMatchObject({ text: 'hồi sau 8 giây', tone: 'wait' });
+    expect(v.anyReady).toBe(false);
+    expect(v.advice).toContain('"Key dự phòng 1"');
+    expect(v.hint).toContain('hạn mức theo NGÀY');
+    expect(v.hint).toContain('20 lượt gọi/ngày cho model gemini-3.6-pro');
+    expect(v.hint).toContain('00:00 giờ Thái Bình Dương');
+  });
+
+  it('test_all_keys_day_exhausted_says_waiting_does_not_help', () => {
+    const v = quotaModalView(POOL, { KEY_MAIN: NOW - 1, KEY_SPARE_1: NOW - 1, KEY_SPARE_2: NOW + 3 }, NOW, 'platform', {
+      scopeByKey: { KEY_MAIN: 'day', KEY_SPARE_1: 'day', KEY_SPARE_2: 'day' },
+    });
+    expect(v.anyReady).toBe(false);
+    expect(v.buttonLabel).toBe('Tuân Mệnh');
+    expect(v.advice).toContain('đợi không giúp');
+  });
+
+  it('test_minute_scope_hint_says_the_turn_itself_may_exceed_the_bucket', () => {
+    const v = quotaModalView(POOL, { KEY_MAIN: NOW + 26 }, NOW, 'platform', {
+      scopeByKey: { KEY_MAIN: 'minute' },
+      quotaInfo: { scope: 'minute', metric: 'generate_content_free_tier_input_token_count', limit: 250000, model: 'gemini-3.6-flash', retryAfterSec: 26.4 },
+    });
+    expect(v.hint).toContain('hạn mức theo PHÚT');
+    expect(v.hint).toContain('250.000 token/phút cho model gemini-3.6-flash');
+    expect(v.hint).toContain('không phải đồng hồ sai');
+    // Minute-scoped keys still count down and still become ready.
+    expect(v.rows[0]).toMatchObject({ text: 'hồi sau 26 giây', tone: 'wait' });
+    expect(v.anyReady).toBe(true);
+  });
+
+  it('test_no_quota_info_gives_no_hint_and_keeps_the_old_behaviour', () => {
+    const v = quotaModalView(POOL, { KEY_MAIN: NOW + 5 }, NOW);
+    expect(v.hint).toBe('');
+    expect(v.anyReady).toBe(true);
+  });
+
   it('test_userkey_source_with_only_the_own_key_still_counts_down', () => {
     const v = quotaModalView(['KEY_OWN'], { KEY_OWN: NOW + 3 }, NOW, 'userKey');
     expect(v.rows).toHaveLength(1);
