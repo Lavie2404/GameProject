@@ -34,6 +34,7 @@ import {
     describeViolations,
 } from './src-web/systems/contract/foreignScript';
 import { appendToPromptText, promptTextOf } from './src-web/systems/contract/promptPayload';
+import { scrubCourtesyNamesOutsideDialogue } from './src-web/systems/contract/courtesyName';
 import { describeKeyPool } from './src-web/systems/ai/keyPoolStatus';
 import { quotaModalView } from './src-web/systems/ui/quotaModalView';
 import { makeThucId } from './src-web/systems/equipment/schema';
@@ -17794,10 +17795,20 @@ const INITIAL_GAME_SETTINGS = {
 // cùng cách các thẻ lệnh [TAG] lạ khác bị strip thay vì hiển thị nguyên văn.
 const STRAY_SOUND_TAG_RE = /<sound\b[^>]*\/>|<sound\b[^>]*>[\s\S]*?<\/sound>/gi;
 
-const parseStoryWithDialogue = (text) => {
+// `characters` (tùy chọn, 2026-09-11): danh sách nhân vật có Name/CourtesyName để
+// chốt chặn tên tự — luật "tự chỉ dùng trong <dialogue>" nằm trong prompt từ
+// 013c814 nhưng model vẫn viết "*Tôn Kiên* (tự Văn Đài)" trong văn kể. Mọi
+// đoạn NGOÀI thẻ <dialogue> được lọc: xoá "(tự X)" / "Tên, tự X", và đổi tên tự
+// đứng một mình về tên chính. Không truyền danh sách thì vẫn xoá được dạng chú
+// thích (không cần biết nhân vật nào).
+const parseStoryWithDialogue = (text, characters = undefined) => {
     if (!text || typeof text !== 'string') return [];
 
-    const cleanedText = text.replace(STRAY_SOUND_TAG_RE, '').trim();
+    const scrubbed = scrubCourtesyNamesOutsideDialogue(text.replace(STRAY_SOUND_TAG_RE, ''), characters);
+    if (scrubbed.changes.length) {
+        console.warn(`[Tên tự] Lọc ${scrubbed.changes.length} chỗ dùng tự ngoài lời thoại: ${scrubbed.changes.join(' | ')}`);
+    }
+    const cleanedText = scrubbed.text.trim();
     if (!cleanedText) return [];
 
     const segments = [];
@@ -28499,7 +28510,7 @@ const callGeminiAPI = async (prompt, isInitialCall = false, options = {}, knowle
             processAndUpdateState(updates, commandBlock, knowledgeToUse, story);
             
             if (story) {
-                const storyEntry = { id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story) };
+                const storyEntry = { id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story, knowledgeToUse.characters) };
                 setStoryHistory(prev => [...prev, storyEntry]);
 
                 if (updates.htabAwaken) {
@@ -28894,7 +28905,7 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
         processAndUpdateState(updates, commandBlock, knowledgeToUse, story);
         
         if (story) {
-            const storyEntry = { id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story) };
+            const storyEntry = { id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story, knowledgeToUse.characters) };
             setStoryHistory(prev => [...prev, storyEntry]);
 
             if (updates.htabAwaken) {
@@ -30514,7 +30525,7 @@ ${coreRules}
         }
 
         if (story) {
-            setStoryHistory([{ id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story) }]);
+            setStoryHistory([{ id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story, knowledgeToUse.characters) }]);
         }
         setChoices(newChoices || []);
 
@@ -31102,7 +31113,7 @@ const handleSongTu = async (characterId) => {
                             });
 
                             if (storySnippet) {
-                                setStoryHistory(prev => [...prev, { id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(storySnippet) }]);
+                                setStoryHistory(prev => [...prev, { id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(storySnippet, knowledge.characters) }]);
                             }
 
                             setIsProcessingAction(false);
@@ -37973,7 +37984,7 @@ const formatStoryText = useCallback((text) => {
     }
 
     if (typeof text === 'string') {
-        const segments = parseStoryWithDialogue(text);
+        const segments = parseStoryWithDialogue(text, knowledge.characters);
         return segments.map((segment, index) => {
              if (segment.type === 'narrative') {
                 return (
