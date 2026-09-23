@@ -30882,7 +30882,7 @@ ${coreRules}
 
         setknowledge(knowledgeAfterAI);
         if (updates.quests && updates.quests.length > 0) {
-            const oldQuestTitles = new Set((knowledgeToUse.quests || []).map(q => q.title));
+            const oldQuestTitles = new Set((initialKnowledge.quests || []).map(q => q.title));
             const newQuest = updates.quests.find(q => !oldQuestTitles.has(q.title));
             
             if (newQuest) {
@@ -30894,7 +30894,7 @@ ${coreRules}
         }
 
         if (story) {
-            setStoryHistory([{ id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story, knowledgeToUse.characters) }]);
+            setStoryHistory([{ id: crypto.randomUUID(), type: 'story', content: parseStoryWithDialogue(story, knowledgeAfterAI.characters) }]);
         }
         setChoices(newChoices || []);
 
