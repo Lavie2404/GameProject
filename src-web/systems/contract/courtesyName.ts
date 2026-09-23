@@ -32,6 +32,12 @@
 export interface CharacterNameLike {
   Name?: string;
   CourtesyName?: string;
+  /**
+   * Courtesy names this character USED to have (player renamed them, or an
+   * AI-suggested one was replaced). The story history still carries them, so
+   * the model keeps copying them; `replaceFormerCourtesyNames` fixes the text.
+   */
+  formerCourtesyNames?: readonly string[];
 }
 
 export interface CourtesyScrubResult {
@@ -170,4 +176,83 @@ export function scrubCourtesyNamesOutsideDialogue(
 /** Convenience for callers that only want the cleaned text. */
 export function scrubCourtesyNames(text: string, characters?: readonly CharacterNameLike[]): string {
   return scrubCourtesyNamesOutsideDialogue(text, characters).text;
+}
+
+/**
+ * Replace a character's FORMER courtesy names with the current one, in prose
+ * and in dialogue alike (reported 2026-09-23: Chân Cơ was renamed from "Văn
+ * Cơ" to "Văn Chiêu" on the card, the narration kept saying "Văn Cơ" because
+ * the history did). Deterministic text fix, applied before the story is
+ * parsed so the old name never re-enters the history.
+ *
+ * Skipped for safety when the former name is a single syllable, is contained
+ * in any character's main name, or is another character's current name or
+ * courtesy name - a blind replacement there would mangle ordinary text.
+ */
+export function replaceFormerCourtesyNames(
+  text: string,
+  characters?: readonly CharacterNameLike[],
+): CourtesyScrubResult {
+  if (typeof text !== 'string' || text.length === 0 || !characters?.length) return { text: text ?? '', changes: [] };
+  const allNames = new Set<string>();
+  for (const c of characters) {
+    for (const n of [c?.Name, c?.CourtesyName]) {
+      const t = String(n || '').trim();
+      if (t) allNames.add(t.toLowerCase());
+    }
+  }
+  const changes: string[] = [];
+  let out = text;
+  for (const c of characters) {
+    const current = String(c?.CourtesyName || '').trim();
+    if (!current) continue;
+    for (const formerRaw of c?.formerCourtesyNames || []) {
+      const former = String(formerRaw || '').trim();
+      if (!former || former === current) continue;
+      if (former.split(/\s+/).length < 2) continue;
+      if (allNames.has(former.toLowerCase())) continue;
+      const containedInAName = characters.some((k) => {
+        const n = String(k?.Name || '');
+        return n && new RegExp(`(?<![\\p{L}\\p{M}])${escapeRe(former)}(?![\\p{L}\\p{M}])`, 'u').test(n);
+      });
+      if (containedInAName) continue;
+      const re = new RegExp(`(?<![\\p{L}\\p{M}])${escapeRe(former)}(?![\\p{L}\\p{M}])`, 'gu');
+      out = out.replace(re, () => {
+        changes.push(`"${former}" -> "${current}" (tự cũ của ${String(c?.Name || '')})`);
+        return current;
+      });
+    }
+  }
+  return { text: out, changes };
+}
+
+/**
+ * Bookkeeping for a courtesy-name change: returns the updated character with
+ * the previous name remembered in `formerCourtesyNames` (deduplicated, and
+ * the new name removed from it if it had been a former one).
+ */
+export function withCourtesyNameChange<T extends CharacterNameLike>(character: T, next: string | null | undefined): T {
+  const current = String(character?.CourtesyName || '').trim();
+  const target = String(next || '').trim();
+  const formers = new Set((character?.formerCourtesyNames || []).map((s) => String(s || '').trim()).filter(Boolean));
+  if (current && current !== target) formers.add(current);
+  formers.delete(target);
+  const updated: T = { ...character };
+  if (target) (updated as CharacterNameLike).CourtesyName = target;
+  else delete (updated as CharacterNameLike).CourtesyName;
+  if (formers.size) (updated as CharacterNameLike).formerCourtesyNames = [...formers];
+  else delete (updated as CharacterNameLike).formerCourtesyNames;
+  return updated;
+}
+
+/**
+ * The `(Tự: X)` tag for a prompt's character line, naming any abandoned
+ * courtesy names so the model has a data reason not to reuse them.
+ */
+export function courtesyNamePromptTag(character: CharacterNameLike | null | undefined): string {
+  const current = String(character?.CourtesyName || '').trim();
+  const formers = (character?.formerCourtesyNames || []).map((s) => String(s || '').trim()).filter((s) => s && s !== current);
+  if (!current && !formers.length) return '';
+  const formerNote = formers.length ? `; tự cũ ${formers.map((f) => `"${f}"`).join(', ')} ĐÃ BỎ, không dùng` : '';
+  return current ? ` (Tự: ${current}${formerNote})` : ` (không có Tự${formerNote})`;
 }

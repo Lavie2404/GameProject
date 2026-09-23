@@ -117,6 +117,19 @@ Appearance → thêm cả 3 vào THÔNG TIN NỀN với chỉ thị "Tiểu sử
 thật về xuất thân, mở đầu phải đặt nhân vật đúng hoàn cảnh", checklist 4.a
 nhắc lại. Test soi App: `test_app_opening_prompts_carry_role_appearance_and_backstory`.
 
+**Cùng phiên — bug Tự bị đổi ngược (Chân Cơ: "Văn Cơ" → "Văn Chiêu" trên thẻ,
+tường thuật vẫn "Văn Cơ").** Hai nguyên nhân: (a) lịch sử còn "Văn Cơ" nên
+model chép lại; (b) 3 chỗ giám định NPC (handleAppraiseNpc + 2 upsert) ghi đè
+`CourtesyName` bằng giá trị AI trả về mỗi lần. Sửa: `courtesyName.ts` thêm
+`withCourtesyNameChange` (nhớ `formerCourtesyNames`), `replaceFormerCourtesyNames`
+(đổi tự cũ → tự mới trong cả văn kể lẫn thoại, chạy trước scrub trong
+`parseStoryWithDialogue`; bỏ qua tự 1 âm tiết/trùng tên nhân vật khác),
+`courtesyNamePromptTag` (dòng NPC trong prompt ghi `tự cũ "X" ĐÃ BỎ`). App:
+`CourtesyNameLocked = true` khi người chơi đặt/sửa/đổi lại Tự → 3 chỗ giám
+định không ghi đè; luật 2.5b thêm "tự trong danh sách là nguồn duy nhất
+đúng, lịch sử dùng tự khác thì coi là sai". 4 test mới trong
+`courtesy_name_test.ts`. `npm test` 1634 pass, build OK.
+
 **Việc còn lại:** chụp BASELINE golden (user tự chơi S01–S12 theo README, xuất
 JSON vào `tests/golden/narration/captures/latest.json`, chạy
 `npm run golden:lint` với `GOLDEN_LABEL=baseline`), rồi so với báo cáo sau khi

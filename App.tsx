@@ -69,7 +69,12 @@ import {
     parseCombatIntent,
     runStoryCombatTurn,
 } from './src-web/systems/combat/storyCombatTurn';
-import { scrubCourtesyNamesOutsideDialogue } from './src-web/systems/contract/courtesyName';
+import {
+    scrubCourtesyNamesOutsideDialogue,
+    replaceFormerCourtesyNames,
+    withCourtesyNameChange,
+    courtesyNamePromptTag,
+} from './src-web/systems/contract/courtesyName';
 import { describeKeyPool } from './src-web/systems/ai/keyPoolStatus';
 import { quotaModalView } from './src-web/systems/ui/quotaModalView';
 import { makeThucId } from './src-web/systems/equipment/schema';
@@ -17918,7 +17923,13 @@ const STRAY_SOUND_TAG_RE = /<sound\b[^>]*\/>|<sound\b[^>]*>[\s\S]*?<\/sound>/gi;
 const parseStoryWithDialogue = (text, characters = undefined) => {
     if (!text || typeof text !== 'string') return [];
 
-    const scrubbed = scrubCourtesyNamesOutsideDialogue(text.replace(STRAY_SOUND_TAG_RE, ''), characters);
+    // Former courtesy names first (2026-09-23): a renamed Tự still lives in the
+    // history, so the model keeps writing it; fix it before anything is parsed.
+    const renamed = replaceFormerCourtesyNames(text.replace(STRAY_SOUND_TAG_RE, ''), characters);
+    if (renamed.changes.length) {
+        console.warn(`[Tên tự] Đổi ${renamed.changes.length} chỗ dùng tự cũ: ${renamed.changes.join(' | ')}`);
+    }
+    const scrubbed = scrubCourtesyNamesOutsideDialogue(renamed.text, characters);
     if (scrubbed.changes.length) {
         console.warn(`[Tên tự] Lọc ${scrubbed.changes.length} chỗ dùng tự ngoài lời thoại: ${scrubbed.changes.join(' | ')}`);
     }
@@ -18759,7 +18770,8 @@ const handleAppraiseNpc = async (npcId) => {
                 charToUpdate.Backstory = detailedNpcProfile.Backstory;
                 charToUpdate.Personality = detailedNpcProfile.Personality;
                 charToUpdate.Stance = detailedNpcProfile.Stance;
-                if (String(detailedNpcProfile.CourtesyName || '').trim()) {
+                // A player-set Tự is locked: the AI's appraisal never overwrites it.
+                if (!charToUpdate.CourtesyNameLocked && String(detailedNpcProfile.CourtesyName || '').trim()) {
                     charToUpdate.CourtesyName = detailedNpcProfile.CourtesyName.trim();
                 }
 
@@ -23332,7 +23344,7 @@ useEffect(() => {
                             charToUpdate.Backstory = detailedNpcProfile.Backstory;
                             charToUpdate.Personality = detailedNpcProfile.Personality;
                             charToUpdate.Stance = detailedNpcProfile.Stance;
-                            if (String(detailedNpcProfile.CourtesyName || '').trim()) {
+                            if (!charToUpdate.CourtesyNameLocked && String(detailedNpcProfile.CourtesyName || '').trim()) {
                                 charToUpdate.CourtesyName = detailedNpcProfile.CourtesyName.trim();
                             }
 
@@ -23457,7 +23469,7 @@ useEffect(() => {
                     charToUpdate.Backstory = detailedNpcProfile.Backstory;
                     charToUpdate.Personality = detailedNpcProfile.Personality;
                     charToUpdate.Stance = detailedNpcProfile.Stance;
-                    if (String(detailedNpcProfile.CourtesyName || '').trim()) {
+                    if (!charToUpdate.CourtesyNameLocked && String(detailedNpcProfile.CourtesyName || '').trim()) {
                         charToUpdate.CourtesyName = detailedNpcProfile.CourtesyName.trim();
                     }
 
@@ -24036,9 +24048,10 @@ const handleSetCourtesyName = useCallback((characterId, newCourtesyName) => {
         const charIndex = prev.characters.findIndex(c => c.id === characterId);
         if (charIndex === -1) return prev;
         const newCharacters = prev.characters.slice();
-        const updatedChar = { ...newCharacters[charIndex] };
-        if (trimmed) updatedChar.CourtesyName = trimmed;
-        else delete updatedChar.CourtesyName;
+        // Remember the old Tự (the history still uses it) and LOCK the field:
+        // a player's choice must survive later AI appraisals (2026-09-23).
+        const updatedChar = withCourtesyNameChange(newCharacters[charIndex], trimmed);
+        updatedChar.CourtesyNameLocked = true;
         newCharacters[charIndex] = updatedChar;
         return { ...prev, characters: newCharacters };
     });
@@ -24077,6 +24090,17 @@ const handleEditCharacterProfile = (characterId, edits) => {
             if (!(key in edits)) return;
             const value = String(edits[key] ?? '').trim();
             if (key === 'Name') { if (value) ch.Name = value; return; } // Tên không được rỗng
+            if (key === 'CourtesyName') {
+                // Same bookkeeping as handleSetCourtesyName: remember + lock.
+                if (value !== String(ch.CourtesyName || '').trim()) {
+                    const withChange = withCourtesyNameChange(ch, value);
+                    ch.CourtesyName = withChange.CourtesyName;
+                    if (withChange.formerCourtesyNames) ch.formerCourtesyNames = withChange.formerCourtesyNames; else delete ch.formerCourtesyNames;
+                    if (!ch.CourtesyName) delete ch.CourtesyName;
+                    ch.CourtesyNameLocked = true;
+                }
+                return;
+            }
             if (value) ch[key] = value; else delete ch[key];
         });
 
@@ -29093,7 +29117,7 @@ ${storyCombatIntentInstruction}
                     .filter(c => c.isCompanion && !c.isPermanentlyDead)
                     .map(c => {
                         const profile = c.isAppraised ? `Tính cách: ${c.Personality}. Ngoại hình: ${c.Appearance}.  Tiểu sử: ${c.Backstory}` : `Mô tả: ${c.description}`;
-                        return `${c.Name}${c.CourtesyName ? ` (Tự: ${c.CourtesyName})` : ''} (${profile} | HP: ${c.hp}/${c.maxhp})${npcToneHint(c, player.level, NARRATION_LINT_KNOBS)}`;
+                        return `${c.Name}${courtesyNamePromptTag(c)} (${profile} | HP: ${c.hp}/${c.maxhp})${npcToneHint(c, player.level, NARRATION_LINT_KNOBS)}`;
                     })
                     .join('\n      - ') || 'Ngươi đang đi một mình (không có đồng hành)';
 
@@ -29111,7 +29135,7 @@ ${storyCombatIntentInstruction}
                     })
                     .map(npc => {
                         const profile = npc.isAppraised ? `Vai trò: ${npc.Role}. Thái độ: ${npc.Stance}. Tính cách: ${npc.Personality}. Ngoại hình: ${npc.Appearance}. Quá khứ: ${npc.Backstory}` : `Ghi chú: ${npc.description}`;
-                        return `${npc.Name}${npc.CourtesyName ? ` (Tự: ${npc.CourtesyName})` : ''} (Cấp ${npc.level} - ${profile})${gapInjuryPromptSuffix(npc)}${npcToneHint(npc, player.level, NARRATION_LINT_KNOBS)}`;
+                        return `${npc.Name}${courtesyNamePromptTag(npc)} (Cấp ${npc.level} - ${profile})${gapInjuryPromptSuffix(npc)}${npcToneHint(npc, player.level, NARRATION_LINT_KNOBS)}`;
                     })
                     .join('\n      - ') || "Không có ai khác ở quanh đây";
 
@@ -29744,6 +29768,7 @@ ${QUOC_NGU_ONLY_NARRATION}
 //      * VÍ DỤ (đang theo đuổi): <dialogue speaker="Ngươi">Nàng đừng lo, có ta ở đây.</dialogue>
 
 // 2.5b. QUY TẮC GỌI BẰNG TỰ / TÊN CHỮ (BẮT BUỘC KHI NHÂN VẬT CÓ "Tự"):
+//    - TỰ GHI TRONG DANH SÁCH NHÂN VẬT LÀ NGUỒN DUY NHẤT ĐÚNG: nếu lịch sử ở trên gọi cùng nhân vật bằng một tự khác (tự đó đã bị đổi, danh sách có ghi "tự cũ ... ĐÃ BỎ"), coi lịch sử là SAI — từ lượt này chỉ dùng tự trong danh sách, không bao giờ dùng lại tự cũ, không giải thích việc đổi trong truyện. Không tự suy tự từ kiến thức lịch sử nếu danh sách đã ghi tự khác.
 //    - Một số nhân vật trong danh sách nhân vật có ghi "Tự: ..." (tên chữ). Với các nhân vật này:
 //      + GỌI THÂN MẬT (bạn thân, tri kỷ, người yêu, trưởng bối gọi vãn bối, người ngang hàng thân thiết): BẮT BUỘC gọi bằng TỰ thay cho tên húy — dùng dạng "Họ + Tự" (VD: Thái Văn Cơ tự Diễm → gọi "Thái Diễm") hoặc dạng nựng "Tự + nhi" với nữ/vãn bối thân thiết (VD: "Diễm nhi"). TUYỆT ĐỐI KHÔNG gọi thẳng tên húy trong ngữ cảnh thân mật.
 //      + GỌI TRANG TRỌNG / NGƯỜI LẠ / CẤP DƯỚI GỌI CẤP TRÊN: dùng họ tên đầy đủ, chức danh, tước vị hoặc "họ + chức danh" như bình thường — không dùng tự một cách suồng sã với người có vai vế cao hơn mình.
@@ -32670,7 +32695,7 @@ ${questDetails}
                 .filter(c => c.isCompanion && !c.isPermanentlyDead && c.inParty !== false)
                 .map(c => {
                     const profile = c.isAppraised ? `Tính cách: ${c.Personality}. Ngoại hình: ${c.Appearance}. Tiểu sử: ${c.Backstory}` : `Mô tả: ${c.description}`;
-                    return `${c.Name}${c.CourtesyName ? ` (Tự: ${c.CourtesyName})` : ''} (${profile} | HP: ${c.hp}/${c.maxhp})${getCharacterStatusesString(c)}${getCharacterTitleTag(c)}`;
+                    return `${c.Name}${courtesyNamePromptTag(c)} (${profile} | HP: ${c.hp}/${c.maxhp})${getCharacterStatusesString(c)}${getCharacterTitleTag(c)}`;
                 })
                 .join('\n      - ') || 'Không có';
 
@@ -32690,7 +32715,7 @@ ${questDetails}
                 })
                 .map(npc => {
                     const profile = npc.isAppraised ? `Vai trò: ${npc.Role}. Thái độ: ${npc.Stance}. Tính cách: ${npc.Personality}. Ngoại hình: ${npc.Appearance}. Quá khứ: ${npc.Backstory}` : `Ghi chú: ${npc.description}`;
-                    return `${npc.Name}${npc.CourtesyName ? ` (Tự: ${npc.CourtesyName})` : ''} (Cấp ${npc.level} - ${profile})${gapInjuryPromptSuffix(npc)}${getCharacterStatusesString(npc)}${getCharacterTitleTag(npc)}`;
+                    return `${npc.Name}${courtesyNamePromptTag(npc)} (Cấp ${npc.level} - ${profile})${gapInjuryPromptSuffix(npc)}${getCharacterStatusesString(npc)}${getCharacterTitleTag(npc)}`;
                 })
                 .join('\n      - ') || "Không có ai khác ở quanh đây";
             

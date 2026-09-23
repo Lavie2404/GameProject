@@ -6,9 +6,52 @@
 
 import { describe, expect, it } from 'vitest';
 import {
+  courtesyNamePromptTag,
+  replaceFormerCourtesyNames,
   scrubCourtesyNames,
   scrubCourtesyNamesOutsideDialogue,
+  withCourtesyNameChange,
 } from '../../../src-web/systems/contract/courtesyName';
+
+// Reported 2026-09-23: Chân Cơ's Tự was changed "Văn Cơ" -> "Văn Chiêu" on the
+// card, but the narration kept using "Văn Cơ" (it lives in the history).
+describe('former courtesy names', () => {
+  const chanCo = { Name: 'Chân Cơ', CourtesyName: 'Văn Chiêu', formerCourtesyNames: ['Văn Cơ'] };
+
+  it('test_former_courtesy_name_is_replaced_in_prose_and_dialogue', () => {
+    const text = '*Chân Văn Cơ* khẽ cười. <dialogue speaker="Diệp Thần">Văn Cơ, nàng nghĩ sao?</dialogue>';
+    const out = replaceFormerCourtesyNames(text, [chanCo]);
+    expect(out.text).toBe('*Chân Văn Chiêu* khẽ cười. <dialogue speaker="Diệp Thần">Văn Chiêu, nàng nghĩ sao?</dialogue>');
+    expect(out.changes).toHaveLength(2);
+  });
+
+  it('test_former_courtesy_name_replacement_respects_word_boundaries_and_other_characters', () => {
+    const roster = [chanCo, { Name: 'Thái Diễm', CourtesyName: 'Văn Cơ' }];
+    // "Văn Cơ" is another character's current Tự -> never touched.
+    expect(replaceFormerCourtesyNames('Văn Cơ gảy đàn.', roster).text).toBe('Văn Cơ gảy đàn.');
+    // Single-syllable formers are skipped.
+    const single = { Name: 'Chân Cơ', CourtesyName: 'Văn Chiêu', formerCourtesyNames: ['Cơ'] };
+    expect(replaceFormerCourtesyNames('Chân Cơ bước tới.', [single]).text).toBe('Chân Cơ bước tới.');
+    expect(replaceFormerCourtesyNames('', [chanCo]).text).toBe('');
+  });
+
+  it('test_courtesy_name_change_bookkeeping_remembers_and_dedupes', () => {
+    const a = withCourtesyNameChange({ Name: 'Chân Cơ', CourtesyName: 'Văn Cơ' }, 'Văn Chiêu');
+    expect(a).toEqual({ Name: 'Chân Cơ', CourtesyName: 'Văn Chiêu', formerCourtesyNames: ['Văn Cơ'] });
+    const b = withCourtesyNameChange(a, 'Văn Cơ'); // back to the old one
+    expect(b.CourtesyName).toBe('Văn Cơ');
+    expect(b.formerCourtesyNames).toEqual(['Văn Chiêu']);
+    const c = withCourtesyNameChange(b, '');
+    expect(c.CourtesyName).toBeUndefined();
+    expect(c.formerCourtesyNames).toEqual(['Văn Chiêu', 'Văn Cơ']);
+  });
+
+  it('test_courtesy_name_prompt_tag_names_abandoned_names', () => {
+    expect(courtesyNamePromptTag(chanCo)).toBe(' (Tự: Văn Chiêu; tự cũ "Văn Cơ" ĐÃ BỎ, không dùng)');
+    expect(courtesyNamePromptTag({ Name: 'Quan Vũ', CourtesyName: 'Vân Trường' })).toBe(' (Tự: Vân Trường)');
+    expect(courtesyNamePromptTag({ Name: 'X' })).toBe('');
+  });
+});
 
 const ROSTER = [
   { Name: 'Tôn Kiên', CourtesyName: 'Văn Đài' },
