@@ -137,6 +137,27 @@ import {
     gapInjuryRecoveredMessage,
 } from './src-web/systems/objectivity/levelGapInjury';
 import { capOverreach } from './src-web/systems/objectivity/overreachCap';
+// Narration lint + golden capture (Pillar 1 MEASURE, tests/golden/narration/README.md).
+// Reads the API-2 response back; logs and captures, never edits, never blocks.
+import {
+    lintNarration,
+    narrationLintContextFromKnowledge,
+    narrationLintKnobsFromGameConfig,
+    formatLintReportForConsole,
+} from './src-web/systems/contract/narrationLint';
+import { createGoldenCaptureStore } from './src-web/systems/contract/goldenCapture';
+// Narration guard: PREVENT (recent NPC lines in the prompt) + CURE (one re-request
+// naming the offending lines). Same pattern as the Quốc ngữ guard below.
+import {
+    buildPillar1Reminder,
+    buildRecentDialogueBlock,
+    correctionInstructionFor,
+    decideBetween,
+    narrationGuardKnobsFromGameConfig,
+    triggeringViolations,
+} from './src-web/systems/contract/narrationGuard';
+// Per-NPC tone hint (affinity band + level gap → how warmly this NPC may speak).
+import { npcToneHint } from './src-web/systems/contract/npcToneHint';
 import { HOSTILE_INITIATIVE_LEVEL_GAP_MAX, OBJECTIVITY_KNOBS } from './src-web/systems/registry';
 import { createCommitController } from './src-web/systems/customize/commitFlow';
 import { estimateOriginQuota } from './src-web/systems/persistence/quota';
@@ -156,6 +177,31 @@ try {
 
 /** gdd-02 A5 knob block, read once from gameConfig.js section 16. */
 const EXP_KNOBS = expKnobsFromGameConfig();
+
+/** gameConfig.js block 22 (narration lint), read once. */
+const NARRATION_LINT_KNOBS = narrationLintKnobsFromGameConfig(GAME_CONFIG);
+/** gameConfig.js block 22 part B (narration guard: prevent + cure), read once. */
+const NARRATION_GUARD_KNOBS = narrationGuardKnobsFromGameConfig(GAME_CONFIG);
+
+/**
+ * Golden capture store: records API-2 turns while `localStorage.golden_capture === '1'`.
+ * `window.exportGoldenCaptures()` downloads them as JSON for tests/golden/narration.
+ */
+const goldenCaptureStore = createGoldenCaptureStore({
+    storage: typeof window !== 'undefined' ? window.localStorage : null,
+    now: () => new Date().toISOString(),
+});
+if (typeof window !== 'undefined') {
+    (window as any).goldenCaptures = goldenCaptureStore;
+    (window as any).exportGoldenCaptures = () => {
+        const blob = new Blob([goldenCaptureStore.exportJson()], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `golden-captures-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+    };
+}
 
 // === P3b/P4b session-scoped singletons ======================================
 // One IndexedDB backend per document (gdd-05 B3: a slot is opened once, and the
@@ -28823,11 +28869,19 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
             .map(h => formatHistoryItemForPrompt(h, 'xml_thuong'))
             .join('\n');
 
+        // Narration lint context + PREVENT block (narrationGuard.ts). Built here so
+        // the prompt can carry the exact NPC lines the model must not repeat.
+        const lintCtx = narrationLintContextFromKnowledge(knowledgeToUse.characters, storyHistory, NARRATION_LINT_KNOBS);
+        const recentDialogueBlock = buildRecentDialogueBlock(lintCtx.recentLines, lintCtx.player.name, NARRATION_GUARD_KNOBS);
+        // Compressed Pillar 1 reminder for the END of the prompt (the full block
+        // sits at the top of `narrativeRules`, furthest from the output request).
+        const pillar1Reminder = buildPillar1Reminder(NARRATION_LINT_KNOBS);
+
                 const allCompanionsString = knowledgeToUse.characters
                     .filter(c => c.isCompanion && !c.isPermanentlyDead)
                     .map(c => {
                         const profile = c.isAppraised ? `Tính cách: ${c.Personality}. Ngoại hình: ${c.Appearance}.  Tiểu sử: ${c.Backstory}` : `Mô tả: ${c.description}`;
-                        return `${c.Name}${c.CourtesyName ? ` (Tự: ${c.CourtesyName})` : ''} (${profile} | HP: ${c.hp}/${c.maxhp})`;
+                        return `${c.Name}${c.CourtesyName ? ` (Tự: ${c.CourtesyName})` : ''} (${profile} | HP: ${c.hp}/${c.maxhp})${npcToneHint(c, player.level, NARRATION_LINT_KNOBS)}`;
                     })
                     .join('\n      - ') || 'Ngươi đang đi một mình (không có đồng hành)';
 
@@ -28845,7 +28899,7 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
                     })
                     .map(npc => {
                         const profile = npc.isAppraised ? `Vai trò: ${npc.Role}. Thái độ: ${npc.Stance}. Tính cách: ${npc.Personality}. Ngoại hình: ${npc.Appearance}. Quá khứ: ${npc.Backstory}` : `Ghi chú: ${npc.description}`;
-                        return `${npc.Name}${npc.CourtesyName ? ` (Tự: ${npc.CourtesyName})` : ''} (Cấp ${npc.level} - ${profile})${gapInjuryPromptSuffix(npc)}`;
+                        return `${npc.Name}${npc.CourtesyName ? ` (Tự: ${npc.CourtesyName})` : ''} (Cấp ${npc.level} - ${profile})${gapInjuryPromptSuffix(npc)}${npcToneHint(npc, player.level, NARRATION_LINT_KNOBS)}`;
                     })
                     .join('\n      - ') || "Không có ai khác ở quanh đây";
 
@@ -28897,6 +28951,10 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
                     --- LỊCH SỬ THÁM HIỂM GẦN NHẤT ---
                     ${historyBlock}
 
+${recentDialogueBlock}
+
+${pillar1Reminder}
+
                     YÊU CẦU ĐẦU RA (NGHIÊM NGẶT):
                     1. NHẮC LẠI LẦN CUỐI (BẮT BUỘC, BỎ QUA LỊCH SỬ CŨ Ở TRÊN NẾU MÂU THUẪN): Đoạn văn ngươi viết ra BẮT BUỘC phải MỞ ĐẦU bằng việc khắc họa trực tiếp, đang-diễn-ra-ngay-bây-giờ nội dung sau: "${chosenScenario.summary}" (hành động gốc của người chơi: "${sanitizedUserActionForNarrative}"). Nếu nội dung này có lời thoại/tiếng hét, PHẢI viết ra bằng thẻ <dialogue> ngay trong đoạn mở đầu. TUYỆT ĐỐI KHÔNG lấy lý do "lịch sử thám hiểm gần nhất" ở trên để bỏ qua, viết tắt, hay coi hành động này như đã xảy ra xong từ trước — lịch sử chỉ là bối cảnh nền, còn nội dung trong dấu ngoặc kép ở trên mới là thứ PHẢI xảy ra ngay trong đoạn mở đầu của lượt này.
                     NHẮC LẠI: nếu "hành động gốc của người chơi" ở trên là một đoạn văn dài mô tả nhiều khoảnh khắc/diễn biến nối tiếp nhau (không phải một hành động đơn lẻ), TOÀN BỘ chuỗi diễn biến đó — không chỉ câu cuối/kết quả — PHẢI được viết ra thành văn xuôi của chính ngươi trong đoạn mở đầu này. Câu chữ người chơi gõ vào ô hành động CHƯA TỪNG được kể cho người đọc, nó chỉ là bản nháp ý định — ngươi là người duy nhất viết nên câu chuyện thật sự.
@@ -28918,13 +28976,64 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
         // of the turn (gdd-01 C.4 F2 / plan.md C-9).
         try { turnManagerRef.current && turnManagerRef.current.markCall('narration_call'); }
         catch (callError) { console.warn('[systems] markCall:', callError); }
-        const narrativeText = await fetchWithRetries(apiUrl, narrativePayload, null, 2, 1500, 'narration',
-            turnGlue.narrationBudgetOverrides(tagsLower));
+        const narrationBudget = turnGlue.narrationBudgetOverrides(tagsLower);
+        const firstNarrativeText = await fetchWithRetries(apiUrl, narrativePayload, null, 2, 1500, 'narration', narrationBudget);
 
         console.log("=========================================");
         console.log("📖 [API 2 - NARRATIVE ENGINE] PHẢN HỒI NHẬN VỀ (RAW):");
-        console.log(narrativeText);
+        console.log(firstNarrativeText);
         console.log("=========================================");
+
+        // CURE (narrationGuard.ts): lint the response; on a triggering violation
+        // (gameConfig.js GUARD_RETRY_KINDS) make ONE more API-2 call with the
+        // offending lines named, then keep the better of the two. Documented
+        // deviation from gdd-01 C.4 F2 (one narration call per turn): the call
+        // set is boolean so `calls_per_turn` is unchanged, but the turn may take
+        // up to one extra call budget. Never edits text, never blocks the turn:
+        // any failure in here falls back to the first response.
+        let narrativeText = firstNarrativeText;
+        let lintReport = null;
+        let guardTrace = null;
+        try {
+            const firstReport = lintNarration(firstNarrativeText, lintCtx, NARRATION_LINT_KNOBS);
+            lintReport = firstReport;
+            const triggering = triggeringViolations(firstReport, NARRATION_GUARD_KNOBS);
+            guardTrace = { retried: false, kept: 'first', first_triggering: triggering.length, second_triggering: null };
+            if (triggering.length > 0 && NARRATION_GUARD_KNOBS.GUARD_RETRY_MAX > 0) {
+                console.warn(`[narration-guard] ${triggering.length} vi phạm cần chữa — gọi lại API 2 một lần:\n`
+                    + formatLintReportForConsole({ ...firstReport, violations: triggering }));
+                const curedPayload = appendToPromptText(narrativePayload, correctionInstructionFor(triggering));
+                const secondNarrativeText = await fetchWithRetries(apiUrl, curedPayload, null, 2, 1500, 'narration', narrationBudget);
+                const secondReport = lintNarration(secondNarrativeText, lintCtx, NARRATION_LINT_KNOBS);
+                const decision = decideBetween(firstReport, secondReport, NARRATION_GUARD_KNOBS);
+                guardTrace = { retried: true, kept: decision.keep, first_triggering: decision.first_triggering, second_triggering: decision.second_triggering };
+                if (decision.keep === 'second') {
+                    narrativeText = secondNarrativeText;
+                    lintReport = secondReport;
+                }
+                console.warn(`[narration-guard] giữ bản ${decision.keep === 'second' ? 'gọi lại' : 'đầu'} (vi phạm cần chữa: ${decision.first_triggering} → ${decision.second_triggering}).`);
+            }
+            if (lintReport.violations.length) {
+                console.warn(`[narration-lint] ${lintReport.violations.length} vi phạm còn lại:\n` + formatLintReportForConsole(lintReport));
+            }
+        } catch (guardError) {
+            console.warn('[narration-guard] bỏ qua, giữ bản đầu:', guardError);
+            narrativeText = firstNarrativeText;
+        }
+
+        // Golden capture (tests/golden/narration/README.md): the KEPT response.
+        try {
+            goldenCaptureStore.record({
+                turn: adventureTurnCount,
+                context: { ...lintCtx, action: sanitizedUserActionForNarrative, locked_summary: chosenScenario.summary, location: locationName },
+                prompt: narrativePrompt,
+                response: narrativeText,
+                lint: lintReport || lintNarration(narrativeText, lintCtx, NARRATION_LINT_KNOBS),
+                guard: guardTrace || undefined,
+            });
+        } catch (captureError) {
+            console.warn('[narration-lint] capture bỏ qua:', captureError);
+        }
 
         // QUAN TRỌNG: phải thay [NC] bằng tên thật TRƯỚC khi lọc bỏ thẻ lệnh dạng [XXX] bên dưới —
         // nếu không, "[NC]" (khớp đúng mẫu thẻ lệnh không tham số) sẽ bị regex lọc thẻ lệnh xóa mất trước khi kịp thay thế.

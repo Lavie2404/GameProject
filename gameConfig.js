@@ -347,4 +347,69 @@ export const GAME_CONFIG = {
         // (b) Trần cho "partial" = trần "success" nhân hệ số này (>= 1).
         OVERREACH_PARTIAL_CAP_MULT: 2,
     },
+
+    // ------------------------------------------------------------------------
+    // 22. KIỂM ĐỊNH LỜI KỂ (narration lint — bộ đo cho Pillar 1 + chống lặp thoại)
+    //     Đây là bộ ĐO đầu ra của API 2, không phải luật cho AI: sau mỗi lượt kể,
+    //     src-web/systems/contract/narrationLint.ts quét văn bản và báo vi phạm
+    //     ra console + bộ golden (tests/golden/narration/README.md).
+    //     Danh sách cụm từ lấy từ chính các ví dụ SAI trong chỉ thị Pillar 1
+    //     (narrationDirectives.ts) — sửa ở đây thì lint đổi, prompt không đổi.
+    // ------------------------------------------------------------------------
+    narrationLint: {
+        // Cụm NGƯỜI KỂ (ngoài thẻ <dialogue>) khẳng định nhân vật chính vượt trội.
+        OBJECTIVE_PRAISE_PHRASES: [
+            'thiên phú nghìn năm có một',
+            'thiên phú vô song',
+            'kẻ mạnh nhất nơi này',
+            'ai cũng phải thừa nhận',
+            'khiến cả đám cao thủ chấn động',
+            'khí thế kinh người',
+            'trong mắt hiện lên vẻ tán thưởng',
+            'quyết định sẽ dõi theo',
+            'kỳ tài trăm năm',
+            'vạn năm có một',
+            'nghìn năm có một',
+            'trăm năm hiếm có',
+            'không ai sánh bằng',
+            'tuyệt thế kỳ tài',
+        ],
+        // Cụm khen CHUNG CHUNG trong lời thoại NPC (không chỉ vào việc cụ thể).
+        GENERIC_PRAISE_PHRASES: [
+            'thiên tài',
+            'vô song',
+            'phi phàm',
+            'kỳ tài',
+            'tuyệt thế',
+            'vạn năm có một',
+            'nghìn năm có một',
+            'trăm năm hiếm có',
+            'tương lai vô hạn',
+            'tiền đồ vô lượng',
+            'đỉnh thiên hạ',
+            'không ai sánh bằng',
+            'thiên tư hơn người',
+        ],
+        // NPC cao hơn người chơi từ ngần này cấp = "bề trên": khen chung chung
+        // bị tính nặng hơn (superior_overpraise). Trùng OVERREACH_TIER_SIZE.
+        SUPERIOR_NPC_LEVEL_GAP: 10,
+        // Độ giống (Jaccard trên cặp từ) từ mức này trở lên = lặp thoại (0..1].
+        REPEAT_SIMILARITY_THRESHOLD: 0.6,
+        // So câu mới với bao nhiêu câu gần nhất của CÙNG NPC (1..20).
+        REPEAT_WINDOW_PER_SPEAKER: 6,
+        // Câu ngắn hơn ngần này từ không tính lặp ("Ừm.", "Đi thôi.").
+        REPEAT_MIN_TOKENS: 4,
+
+        // ---- Phần B: CHỐT CHỮA (src-web/systems/contract/narrationGuard.ts) ----
+        // Loại vi phạm nào thì gọi lại API 2 đúng một lần kèm chỉ dẫn đích danh.
+        // Bỏ bớt phần tử để thu hẹp (vd. chỉ ['repeated_line'] = chỉ chống lặp).
+        GUARD_RETRY_KINDS: ['repeated_line', 'ungrounded_praise', 'superior_overpraise', 'objective_praise'],
+        // Số lần gọi lại tối đa mỗi lượt (0 = chỉ phòng, không chữa; 1 = thiết kế).
+        // Lệch có chủ ý so với gdd-01 C.4 F2 "một lệnh gọi tường thuật/lượt":
+        // calls_per_turn là tập boolean nên không đổi, nhưng lượt có thể lâu hơn.
+        GUARD_RETRY_MAX: 1,
+        // Khối "NPC đã nói gần đây" chèn cuối prompt: số câu mỗi NPC và trần ký tự.
+        RECENT_LINES_PROMPT_PER_SPEAKER: 4,
+        RECENT_LINES_PROMPT_MAX_CHARS: 1500,
+    },
 };

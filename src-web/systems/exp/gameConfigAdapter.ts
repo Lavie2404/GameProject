@@ -39,6 +39,8 @@ import {
 import type { EquipmentKnobs } from '../equipment/validateDataset';
 import { assertAffinityKnobs, type AffinityKnobs } from '../affinity/table';
 import { assertDeathKnobs, type DeathKnobs } from '../death/deathRoll';
+import { assertNarrationLintKnobs } from '../contract/narrationLint';
+import { assertNarrationGuardKnobs } from '../contract/narrationGuard';
 
 type AnyConfig = Record<string, unknown>;
 
@@ -161,4 +163,9 @@ export function validateGameConfig(gc: AnyConfig = GAME_CONFIG as AnyConfig): vo
   // dampening rule (D.2/D.3/D.4) or make `medium` severity unreachable.
   assertAffinityKnobs(affinityKnobsFromGameConfig(gc));
   assertDeathKnobs(deathKnobsFromGameConfig(gc));
+  // Narration lint (Pillar 1 measure, gameConfig.js block 22): a bad threshold
+  // would silently turn the repeat check into "everything repeats" or "nothing".
+  assertNarrationLintKnobs(block(gc, 'narrationLint') as never);
+  // Same block, part B: the cure knobs (each assert ignores keys it does not own).
+  assertNarrationGuardKnobs(block(gc, 'narrationLint') as never);
 }

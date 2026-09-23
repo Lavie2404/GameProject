@@ -8,7 +8,9 @@ export default defineConfig({
     // Two patterns on purpose: `*.test.ts` is the repo's existing convention, and
     // `*_test.ts` is the naming the GDD acceptance criteria mandate
     // (`[system]_[feature]_test.*`, coding-standards.md "Automated Test Rules").
-    include: ['tests/unit/**/*.test.ts', 'tests/unit/**/*_test.ts'],
+    // `tests/golden/**/*_golden.ts` are ADVISORY LLM-output scorers; they skip
+    // themselves unless a capture file exists (tests/golden/narration/README.md).
+    include: ['tests/unit/**/*.test.ts', 'tests/unit/**/*_test.ts', 'tests/golden/**/*_golden.ts'],
     environment: 'node',
   },
 });

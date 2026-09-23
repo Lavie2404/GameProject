@@ -1,4 +1,52 @@
-# Session State — Checkpoint 2026-09-11
+# Session State — Checkpoint 2026-09-23
+
+## PHIÊN 23/09/2026 — Pillar 1: bộ đo + chốt đầu ra (chống nịnh, chống lặp thoại)
+
+User báo: Pillar 1 "có trong code" nhưng NPC vẫn khen quá nhiều và lặp một câu
+thoại nhiều lần. Chẩn đoán: Pillar 1 phía tường thuật chỉ tồn tại dưới dạng
+chỉ thị prompt (7 chỉ thị trong `narrationDirectives.ts`), nằm giữa ~200 dòng
+quy tắc và 165 cụm "TUYỆT ĐỐI", KHÔNG có bước nào đọc lại phản hồi. Lặp thoại:
+không có chỉ thị lẫn cơ chế nào; toàn bộ lịch sử chưa tóm tắt (kèm nguyên văn
+mọi `<dialogue>`) được đưa lại vào prompt mỗi lượt nên model chép lại chính
+mình. Test `pillar1_directives_test.ts` chỉ kiểm tra chuỗi có trong prompt.
+
+Quyết định của user: KHÔNG thêm chỉ thị mới vào khối quy tắc; làm chốt đầu ra
+đo được. Thứ tự thực hiện 4-1-2-3, mỗi bước duyệt riêng, tất cả đã ghi:
+
+- **Bước 4 — bộ đo.** `src-web/systems/contract/narrationLint.ts` (4 loại vi
+  phạm: `objective_praise` ngoài dialogue, `ungrounded_praise` /
+  `superior_overpraise` trong dialogue NPC, `repeated_line` theo Jaccard cặp
+  từ), `goldenCapture.ts` (ghi prompt+phản hồi API-2 thật khi
+  `localStorage.golden_capture='1'`, xuất qua `exportGoldenCaptures()`),
+  `tests/golden/narration/` (README playbook 12 kịch bản S01–S12 + rubric 3
+  cột thủ công; runner vitest ADVISORY, tự skip khi chưa có capture; báo cáo
+  vào `production/qa/evidence/narration-golden/`). Knob: `gameConfig.js` block
+  22 `narrationLint` (danh sách cụm cấm lấy từ chính ví dụ SAI của chỉ thị).
+- **Bước 1 — chống lặp.** `narrationGuard.ts`: lớp PHÒNG = khối "LỜI THOẠI NPC
+  ĐÃ NÓI GẦN ĐÂY" (4 câu/NPC) chèn ngay trước "YÊU CẦU ĐẦU RA"; lớp CHỮA =
+  lint phản hồi, có vi phạm thì gọi lại API 2 đúng 1 lần kèm chỉ dẫn đích
+  danh câu cũ/câu lặp, giữ bản ít vi phạm hơn (hòa → bản gọi lại). Cùng mẫu
+  với chốt Quốc ngữ `829ae30`. Lỗi trong chốt → giữ bản đầu, không mất lượt.
+- **Bước 2 — chữa khen.** `GUARD_RETRY_KINDS` mở rộng 4 loại; `buildPillar1Reminder`
+  3 dòng ở cuối prompt, danh sách cụm cấm dùng chung với lint (1 nguồn).
+- **Bước 3 — giọng riêng từng NPC.** `npcToneHint.ts`: hậu tố
+  `[Giọng với nhân vật chính: <dải hảo cảm> · <chênh N cảnh giới → giọng> ·
+  <mức tình cảm cho phép>]` nối vào mỗi NPC/đồng hành trong prompt API-2.
+  Dải lấy từ `attitudeBand` gdd-03, không lộ số hảo cảm (AC-37b).
+
+**Lệch thiết kế có chủ ý (user chấp nhận):** gdd-01 C.4 F2 coi API-2 là lệnh
+gọi critical-path duy nhất/lượt; lớp chữa là lệnh gọi API-2 thứ hai khi có vi
+phạm. `calls_per_turn` là tập boolean nên không đổi; lượt có thể lâu hơn tối
+đa 1 ngân sách gọi. Tắt bằng `GUARD_RETRY_MAX: 0`.
+
+Kiểm chứng: `npm test` 1550 pass + 1 skipped (golden), `vite build` OK.
+`tsc --noEmit` vốn đã đỏ ở App.tsx từ trước, không phải cổng.
+
+**Việc còn lại:** chụp BASELINE golden (user tự chơi S01–S12 theo README, xuất
+JSON vào `tests/golden/narration/captures/latest.json`, chạy
+`npm run golden:lint` với `GOLDEN_LABEL=baseline`), rồi so với báo cáo sau khi
+chơi lại cùng kịch bản trên bản đã sửa. Chưa có số đo thực tế nào cho tới khi
+làm bước này. Chưa commit (không có lệnh commit).
 
 ## PHIÊN 10–11/09/2026 — hiệu năng UI, 2 luật ngôn ngữ, modal quota
 
