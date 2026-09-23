@@ -34,6 +34,26 @@ import {
     describeViolations,
 } from './src-web/systems/contract/foreignScript';
 import { appendToPromptText, promptTextOf } from './src-web/systems/contract/promptPayload';
+// Rule 1.5 second half: Vietnamese WITHOUT diacritics is caught at the same
+// gate as foreign script (reported 2026-09-23, "Thân phận / Vai trò" field).
+import {
+    scanFieldsForMissingDiacritics,
+    diacriticsCorrectionInstruction,
+    describeDiacriticsViolations,
+} from './src-web/systems/contract/missingDiacritics';
+// A known historical / canon figure keeps their known identity (2026-09-23).
+import { KNOWN_FIGURE_ROLE_RULE, CHARACTER_ROLE_MISSION } from './src-web/systems/contract/knownFigureRole';
+// Starting age + timeline rule: every inference and every turn respects the
+// character's age on the game clock (requested 2026-09-23).
+import {
+    AGE_TIMELINE_RULE,
+    CHARACTER_AGE_MISSION,
+    ageContextLine,
+    ageNarrationLine,
+    ageOpeningLine,
+    currentAge,
+    parseStartingAge,
+} from './src-web/systems/character/characterAge';
 import { scrubCourtesyNamesOutsideDialogue } from './src-web/systems/contract/courtesyName';
 import { describeKeyPool } from './src-web/systems/ai/keyPoolStatus';
 import { quotaModalView } from './src-web/systems/ui/quotaModalView';
@@ -6431,6 +6451,13 @@ const GameSetupScreen = ({
                 </select>
             </FormRow>
 
+            <FormRow label="Độ tuổi bắt đầu">
+                <div className="flex items-center gap-2">
+                    <input type="number" inputMode="numeric" min="1" step="1" name="characterAge" value={gameSettings.characterAge ?? ''} onChange={handleInputChange} placeholder="VD: 18 — mọi suy diễn của AI sẽ bám theo mốc thời gian ở tuổi này" className="w-full p-3 bg-[#0a0f0a]/60 border border-[#cda45e]/30 focus:border-[#cda45e] text-[#e8d3a1] outline-none"/>
+                    <SuggestButton fieldName="characterAge" isGenerating={isGenerating.characterAge} handleGenerateSingleField={handleGenerateSingleField} />
+                </div>
+            </FormRow>
+
              <FormRow label="Tính cách">
                 <div className="flex items-center gap-2">
                     <select name="characterPersonality" value={gameSettings.characterPersonality} onChange={handleInputChange} className="w-full p-3 bg-[#0a0f0a]/60 border border-[#cda45e]/30 focus:border-[#cda45e] text-[#e8d3a1] outline-none appearance-none">
@@ -8102,6 +8129,7 @@ const buildCharacterEditDraft = (c) => {
         Name: c.Name || '',
         CourtesyName: c.CourtesyName || '',
         Gender: c.Gender || '',
+        Age: c.Age ?? '',   // nhân vật chính: tuổi lúc bắt đầu hành trình
         Role: c.Role || '',
         Personality: c.Personality || '',
         Appearance: c.Appearance || '',
@@ -8180,6 +8208,12 @@ const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledg
     let headerDescription = (entity.description || "Chưa có mô tả chi tiết.").replace(/\*/g, '');
     if (type === 'character' && (entity.isPlayer || entity.isAppraised)) {
         headerDescription = entity.Role ? `Thân phận: ${entity.Role}` : (entity.Personality ? `Tính cách: ${entity.Personality}` : "");
+        // Tuổi hiện tại = tuổi bắt đầu + số năm tròn đã trôi qua trên đồng hồ game.
+        const ageNow = currentAge(entity.Age, knowledge?.time);
+        if (ageNow !== null) {
+            const ageText = ageNow > entity.Age ? `${ageNow} tuổi (bắt đầu ${entity.Age})` : `${ageNow} tuổi`;
+            headerDescription = headerDescription ? `${ageText} · ${headerDescription}` : ageText;
+        }
         if (entity.CourtesyName) {
             headerDescription = headerDescription ? `Tự: ${entity.CourtesyName} · ${headerDescription}` : `Tự: ${entity.CourtesyName}`;
         }
@@ -8519,6 +8553,7 @@ const QuickLoreModal = ({ loreItem, show, onClose, calculateFinalStats, knowledg
                         <datalist id="quicklore-gender-options">{CHARACTER_EDIT_GENDER_OPTIONS.map(o => <option key={o} value={o} />)}</datalist>
                         <datalist id="quicklore-stance-options">{CHARACTER_EDIT_STANCE_OPTIONS.map(o => <option key={o} value={o} />)}</datalist>
                         {textField('Role', 'Thân phận')}
+                        {finalStats.isPlayer && numberField('Age', 'Tuổi lúc bắt đầu hành trình (tuổi hiện tại tự tăng theo năm trong game)', { min: 1, step: 1, placeholder: 'VD: 18' })}
                         {textField('titles', 'Danh hiệu (cách nhau bằng dấu phẩy)', { placeholder: 'VD: Kiếm Thánh, Thiên Hạ Đệ Nhất' })}
                         {areaField('Personality', 'Tính cách', 3)}
                         {areaField('Appearance', 'Ngoại hình', 4)}
@@ -14532,6 +14567,9 @@ const QuickReferenceModal = ({ show, onClose, knowledge, onSelectForChat, player
                                  {/* CHỈ HIỆN THÔNG TIN CHI TIẾT KHI MỞ RỘNG */}
                                  <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3 bg-[#101a10] p-2 border border-[#cda45e]/10">
                                      <p className="text-[11px]"><strong className="text-[#cda45e] uppercase">Cấp độ:</strong> <span className="text-[#e8d3a1]">{npc.level || 1} {npc.realm ? `(${npc.realm})` : ''}</span></p>
+                                     {currentAge(npc.Age, knowledge?.time) !== null && (
+                                         <p className="text-[11px]"><strong className="text-[#cda45e] uppercase">Tuổi:</strong> <span className="text-[#e8d3a1]">{currentAge(npc.Age, knowledge?.time)}{currentAge(npc.Age, knowledge?.time) > npc.Age ? ` (bắt đầu ${npc.Age})` : ''}</span></p>
+                                     )}
                                      <p className="text-[11px]"><strong className="text-[#cda45e] uppercase">Thái độ:</strong> <span className={`${npc.Stance === 'Thù địch' ? 'text-[#ff4d4d]' : (npc.Stance === 'Thân thiện' ? 'text-[#5eead4]' : 'text-[#8ba888]')}`}>{npc.Stance || 'Không rõ'}</span></p>
                                  </div>
                                  
@@ -17800,6 +17838,7 @@ const INITIAL_GAME_SETTINGS = {
     characterPersonality: PLAYER_PERSONALITIES[0],
     customCharacterPersonality: '',
     characterGender: 'Không xác định',
+    characterAge: '',   // Độ tuổi bắt đầu (số năm); trống = để AI chọn khi suy diễn
     characterBackstory: '',
     playerAvatarUrl: null,
     playerAvatarStoredLocally: false,
@@ -20317,16 +20356,30 @@ const fetchWithRetriesRaw = async (apiUrl, payload, onRetry = null, maxRetries =
 // Vì sao cần lớp 2 dù đã có lớp 1: khối tường thuật MANG luật suốt từ đầu mà
 // vẫn rò — lịch sử commit là một chuỗi lần vá thêm phản ví dụ ("физи", "tâm念",
 // "supple"). Luật trong prompt là một lời đề nghị; chốt này là một phép đo.
-const scanResponseForForeignScript = (responseText) => {
+// Hai loại lỗi ngôn ngữ dò được bằng máy: (1) ký tự ngoài chữ Quốc ngữ
+// (foreignScript.ts) và (2) tiếng Việt KHÔNG DẤU (missingDiacritics.ts — báo
+// lỗi 2026-09-23: "Mat su an danh tu Thuong Son..." toàn chữ Latin nên lớp (1)
+// không thấy gì). Cùng một lượt quét, cùng một lần gọi lại.
+const scanResponseForLanguageDefects = (responseText) => {
     // Quét trên dữ liệu đã parse để báo được TÊN TRƯỜNG sai; nếu chưa parse nổi
     // (còn code fence, hoặc câu trả lời là văn xuôi thuần) thì quét chuỗi thô —
     // thà mất tên trường còn hơn bỏ sót. Khoá JSON toàn ASCII nên không báo nhầm.
-    try {
-        return scanFieldsForForeignScript(JSON.parse(stripJsonCodeFence(responseText)));
-    } catch {
-        return scanFieldsForForeignScript(responseText);
-    }
+    let target = responseText;
+    try { target = JSON.parse(stripJsonCodeFence(responseText)); } catch { /* văn xuôi thuần */ }
+    return {
+        foreign: scanFieldsForForeignScript(target),
+        noDiacritics: scanFieldsForMissingDiacritics(target),
+    };
 };
+const countLanguageDefects = (d) => d.foreign.length + d.noDiacritics.length;
+const describeLanguageDefects = (d) => [
+    d.foreign.length ? `ký tự ngoại lai: ${describeViolations(d.foreign)}` : '',
+    d.noDiacritics.length ? `không dấu: ${describeDiacriticsViolations(d.noDiacritics)}` : '',
+].filter(Boolean).join(' || ');
+const languageDefectCorrection = (d) => [
+    d.foreign.length ? correctionInstruction(d.foreign) : '',
+    d.noDiacritics.length ? diacriticsCorrectionInstruction(d.noDiacritics) : '',
+].filter(Boolean).join('\n');
 
 const fetchWithRetries = async (apiUrl, payload, onRetry = null, maxRetries = 2, retryDelay = 1000, callSite = 'generic', budgetOverrides = null) => {
     const call = (p) => fetchWithRetriesRaw(apiUrl, p, onRetry, maxRetries, retryDelay, callSite, budgetOverrides);
@@ -20340,19 +20393,19 @@ const fetchWithRetries = async (apiUrl, payload, onRetry = null, maxRetries = 2,
     const first = await call(guarded);
 
     // Lớp 2 — chữa.
-    const bad = scanResponseForForeignScript(first);
-    if (bad.length === 0) return first;
+    const bad = scanResponseForLanguageDefects(first);
+    if (countLanguageDefects(bad) === 0) return first;
 
-    console.warn(`[Quốc ngữ][${callSite}] AI trả về ký tự ngoài chữ Quốc ngữ — gọi lại 1 lần: ${describeViolations(bad)}`);
-    const second = await call(appendToPromptText(guarded, correctionInstruction(bad)));
+    console.warn(`[Quốc ngữ][${callSite}] AI trả về văn bản sai luật 1.5 — gọi lại 1 lần: ${describeLanguageDefects(bad)}`);
+    const second = await call(appendToPromptText(guarded, languageDefectCorrection(bad)));
 
-    const still = scanResponseForForeignScript(second);
-    if (still.length === 0) return second;
+    const still = scanResponseForLanguageDefects(second);
+    if (countLanguageDefects(still) === 0) return second;
 
     // Vẫn sai sau khi nhắc: KHÔNG chặn người chơi. Biến một lỗi chính tả thành
     // lỗi mất lượt chơi thì tệ hơn hẳn bản thân lỗi. Ghi log và lấy bản đỡ tệ hơn.
-    console.warn(`[Quốc ngữ][${callSite}] gọi lại vẫn còn ký tự ngoại lai, giữ kết quả: ${describeViolations(still)}`);
-    return still.length <= bad.length ? second : first;
+    console.warn(`[Quốc ngữ][${callSite}] gọi lại vẫn còn lỗi, giữ kết quả: ${describeLanguageDefects(still)}`);
+    return countLanguageDefects(still) <= countLanguageDefects(bad) ? second : first;
 };
 
 
@@ -21479,8 +21532,13 @@ const handleGenerateImpromptuCharacter = async () => {
     const prompt = `
         Bạn là một chuyên gia sáng tạo nhân vật. Dựa trên ý tưởng: "${impromptuCharInput}", và bối cảnh game "${gameSettings.theme}", hãy tạo ra MỘT nhân vật hoàn chỉnh.
 
+        ${KNOWN_FIGURE_ROLE_RULE}
+
+        ${AGE_TIMELINE_RULE}
+        ${ageContextLine(gameSettings.characterAge)} (nếu đã có, GIỮ NGUYÊN con số này; nếu "[Chưa có]", ngươi tự chọn theo quy tắc trên)
+
         CHECKLIST (BẮT BUỘC THỰC HIỆN):
-        1.  Tạo "name", "gender", "personality", "role", "appearance", "backstory", "goal".
+        1.  Tạo "name", "gender", "age", "personality", "role", "appearance", "backstory", "goal". Với "role": ${CHARACTER_ROLE_MISSION}. Với "age": ${CHARACTER_AGE_MISSION}.
         ${gameSettings.isDouLuoWorld
             ? `2.  Tạo một MẢNG tên là "initialMartialSouls" chứa từ 1 đến 3 VÕ HỒN khởi đầu (thông tin nền về bản chất/hình dạng linh hồn của nhân vật, KHÔNG phải kỹ năng).
             *   Với MỖI Võ Hồn, PHẢI có 2 thuộc tính: "name" (tên hấp dẫn) và "description" (mô tả ngắn gọn 1-2 câu).`
@@ -21501,6 +21559,7 @@ const handleGenerateImpromptuCharacter = async () => {
         properties: {
             name: { type: "STRING" },
             gender: { type: "STRING", enum: ["Nam", "Nữ", "Khác", "Không xác định"] },
+            age: { type: "INTEGER" },
             personality: { type: "STRING", enum: PLAYER_PERSONALITIES },
             role: { type: "STRING" },
             appearance: { type: "STRING" },
@@ -21530,7 +21589,7 @@ const handleGenerateImpromptuCharacter = async () => {
                 }
             }
         },
-        required: ["name", "gender", "personality", "role", "appearance", "backstory", "goal", "initialMartialSouls", "initialTraits"]
+        required: ["name", "gender", "age", "personality", "role", "appearance", "backstory", "goal", "initialMartialSouls", "initialTraits"]
     };
     if (!gameSettings.isDouLuoWorld) {
         // No martial souls outside Đấu La Đại Lục — don't force the model to invent any.
@@ -21557,6 +21616,10 @@ const handleGenerateImpromptuCharacter = async () => {
                 ...prev,
                 characterName: data.name,
                 characterGender: data.gender,
+                // A user-typed age wins; otherwise take the model's pick.
+                characterAge: parseStartingAge(prev.characterAge) !== null
+                    ? prev.characterAge
+                    : (parseStartingAge(data.age) !== null ? String(parseStartingAge(data.age)) : ''),
                 characterPersonality: data.personality,
                 characterRole: data.role,
                 characterAppearance: data.appearance,
@@ -24000,6 +24063,12 @@ const handleEditCharacterProfile = (characterId, edits) => {
             if (value) ch[key] = value; else delete ch[key];
         });
 
+        // Starting age (player only): blank clears it, otherwise a whole year count.
+        if (ch.isPlayer && 'Age' in edits) {
+            const age = parseStartingAge(edits.Age);
+            if (age !== null) ch.Age = age; else delete ch.Age;
+        }
+
         if ('titles' in edits) {
             const titles = Array.isArray(edits.titles)
                 ? edits.titles
@@ -24050,7 +24119,7 @@ const handleEditCharacterProfile = (characterId, edits) => {
 
     const target = knowledge.characters.find(c => c.id === characterId);
     if (target?.isPlayer) {
-        const syncMap = { Name: 'characterName', Gender: 'characterGender', Role: 'characterRole', Personality: 'characterPersonality', Appearance: 'characterAppearance', Backstory: 'characterBackstory' };
+        const syncMap = { Name: 'characterName', Gender: 'characterGender', Age: 'characterAge', Role: 'characterRole', Personality: 'characterPersonality', Appearance: 'characterAppearance', Backstory: 'characterBackstory' };
         const settingsPatch = {};
         Object.entries(syncMap).forEach(([charKey, settingsKey]) => {
             if (!(charKey in edits)) return;
@@ -28943,6 +29012,7 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
                     - Thời gian: ${timeOfDay}
                     - Thời tiết: ${knowledgeToUse.weather}
                     - Thể trạng hiện tại của nhân vật chính: ${convertCharacterStatsToNarrative(player)}
+${ageNarrationLine(player.Age, knowledgeToUse.time) ? `                    - ${ageNarrationLine(player.Age, knowledgeToUse.time)}` : ''}
                     - Hành động nhân vật chính đã lựa chọn thực hiện: "${sanitizedUserActionForNarrative}"
                     - Tổ đội: ${allCompanionsString}
                     - Các NPC khác đang hiện diện tại địa điểm này:
@@ -29993,10 +30063,11 @@ BỐI CẢNH (THÔNG TIN ĐÃ BIẾT):
 - Bối cảnh chi tiết: "${gameSettings.setting || '[Chưa có]'}"
 - Tên nhân vật: "${gameSettings.characterName || '[Chưa có]'}"
 - Giới tính: "${gameSettings.characterGender}"
+${ageContextLine(gameSettings.characterAge)}
 - Tính cách: "${finalPersonality}"
 - Mục tiêu: "${gameSettings.characterGoal || '[Chưa có]'}"
 `;
-        
+
         let missionPrompt = '';
         let outputSchema = {};
         let targetFieldKey = '';
@@ -30067,7 +30138,8 @@ YÊU CẦU: Dựa vào bối cảnh, hãy ${targetFieldKey === 'name' ? 'sáng t
                 characterPersonality: { mission: "chọn MỘT tính cách phù hợp nhất từ danh sách", key: "characterPersonality", enum: PLAYER_PERSONALITIES.filter(p => p !== 'Để AI quyết định' && p !== 'Tùy chỉnh...') },
                 characterBackstory: { mission: "viết MỘT đoạn tiểu sử (2-4 câu)", key: "characterBackstory" },
                 characterAppearance: { mission: "miêu tả MỘT đoạn ngoại hình, trang phục, khí chất (1-2 câu)", key: "characterAppearance" },
-                characterRole: { mission: "sáng tạo MỘT thân phận/vai trò xuất thân ngắn gọn (VD: Đệ tử mồ côi, Sát thủ lưu vong...)", key: "characterRole" },
+                characterRole: { mission: CHARACTER_ROLE_MISSION, key: "characterRole" },
+                characterAge: { mission: CHARACTER_AGE_MISSION, key: "characterAge", integer: true },
                 characterGoal: { mission: "viết MỘT mục tiêu/động lực chính (1-2 câu)", key: "characterGoal" }
             };
 
@@ -30080,7 +30152,7 @@ NHIỆM VỤ: Hoàn thiện mục "${fieldName}".
 YÊU CẦU:
 - NẾU nội dung là '[Chưa có]', hãy ${mapping.mission}.
 - NẾU đã có nội dung, hãy lấy đó làm gốc và hoàn thiện/mở rộng nó.`;
-                outputSchema = { type: "OBJECT", properties: { [mapping.key]: { type: "STRING", ...(mapping.enum && { enum: mapping.enum }) } }, required: [mapping.key] };
+                outputSchema = { type: "OBJECT", properties: { [mapping.key]: { type: mapping.integer ? "INTEGER" : "STRING", ...(mapping.enum && { enum: mapping.enum }) } }, required: [mapping.key] };
                 targetFieldKey = mapping.key;
                 stateUpdateKey = mapping.key;
             }
@@ -30088,7 +30160,7 @@ YÊU CẦU:
         
         if (!missionPrompt) throw new Error("Không xác định được nhiệm vụ cho AI.");
 
-        const finalPrompt = `VAI TRÒ: Bạn là AI trợ lý sáng tạo.\n\n${contextPrompt}\n\n${missionPrompt}\n\nYÊU CẦU ĐẦU RA: CHỈ trả về một đối tượng JSON theo đúng cấu trúc đã định.`;
+        const finalPrompt = `VAI TRÒ: Bạn là AI trợ lý sáng tạo.\n\n${contextPrompt}\n\n${KNOWN_FIGURE_ROLE_RULE}\n\n${AGE_TIMELINE_RULE}\n\n${missionPrompt}\n\nYÊU CẦU ĐẦU RA: CHỈ trả về một đối tượng JSON theo đúng cấu trúc đã định.`;
 
         const payload = {
             contents: [{ role: "user", parts: [{ text: finalPrompt }] }],
@@ -30097,7 +30169,10 @@ YÊU CẦU:
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_TEXT_MODEL_FALLBACKS[0]}:generateContent?key=${effectiveApiKey}`;
         const jsonText = await fetchWithRetries(apiUrl, payload);
         const data = JSON.parse(jsonText);
-        const generatedValue = data[targetFieldKey];
+        // Age comes back as a JSON integer; settings keep it as the input's string.
+        const generatedValue = targetFieldKey === 'characterAge'
+            ? (parseStartingAge(data[targetFieldKey]) !== null ? String(parseStartingAge(data[targetFieldKey])) : '')
+            : data[targetFieldKey];
 
         if (isMartialSoulField) {
             setGameSettings(prev => ({ ...prev, initialMartialSouls: prev.initialMartialSouls.map(s => s.id === traitOrElementId ? { ...s, [targetFieldKey]: generatedValue } : s) }));
@@ -30137,6 +30212,7 @@ BỐI CẢNH (THÔNG TIN NGƯỜI DÙNG ĐÃ CUNG CẤP):
 - Tên tiền tệ: "${gameSettings.currencyName || '[Chưa có]'}"
 - Tên nhân vật: "${gameSettings.characterName || '[Chưa có]'}"
 - Giới tính: "${gameSettings.characterGender}"
+${ageContextLine(gameSettings.characterAge)}
 - Tính cách: "${finalPersonality}"
 - Mục tiêu: "${gameSettings.characterGoal || '[Chưa có]'}"
 ${gameSettings.isDouLuoWorld
@@ -30161,12 +30237,17 @@ ${gameSettings.isDouLuoWorld
         if (gameSettings.characterGender === 'Không xác định') { 
             missionPrompt += "- Giới tính (characterGender)\n"; 
             outputSchemaProperties.characterGender = { type: "STRING", enum: ["Nam", "Nữ", "Khác"] }; 
-            requiredFields.push("characterGender"); 
+            requiredFields.push("characterGender");
+        }
+        if (parseStartingAge(gameSettings.characterAge) === null) {
+            missionPrompt += `- Độ tuổi bắt đầu (characterAge): ${CHARACTER_AGE_MISSION}\n`;
+            outputSchemaProperties.characterAge = { type: "INTEGER" };
+            requiredFields.push("characterAge");
         }
         if (gameSettings.characterPersonality === 'Để AI quyết định') { missionPrompt += "- Tính cách (characterPersonality)\n"; outputSchemaProperties.characterPersonality = { type: "STRING", enum: PLAYER_PERSONALITIES.filter(p => p !== 'Để AI quyết định' && p !== 'Tùy chỉnh...') }; requiredFields.push("characterPersonality"); }
         if (!gameSettings.characterBackstory) { missionPrompt += "- Tiểu sử (characterBackstory)\n"; outputSchemaProperties.characterBackstory = { type: "STRING" }; requiredFields.push("characterBackstory"); }
         if (!gameSettings.characterAppearance) { missionPrompt += "- Ngoại hình (characterAppearance)\n"; outputSchemaProperties.characterAppearance = { type: "STRING" }; requiredFields.push("characterAppearance"); }
-        if (!gameSettings.characterRole) { missionPrompt += "- Thân phận (characterRole)\n"; outputSchemaProperties.characterRole = { type: "STRING" }; requiredFields.push("characterRole"); }
+        if (!gameSettings.characterRole) { missionPrompt += `- Thân phận (characterRole): ${CHARACTER_ROLE_MISSION}\n`; outputSchemaProperties.characterRole = { type: "STRING" }; requiredFields.push("characterRole"); }
         if (!gameSettings.characterGoal) { missionPrompt += "- Mục tiêu (characterGoal)\n"; outputSchemaProperties.characterGoal = { type: "STRING" }; requiredFields.push("characterGoal"); }
         
         // --- LOGIC CHO VÕ HỒN (chỉ khi thế giới Đấu La Đại Lục) ---
@@ -30200,7 +30281,7 @@ ${gameSettings.isDouLuoWorld
             return;
         }
 
-        const finalPrompt = `VAI TRÒ: Bạn là AI trợ lý sáng tạo.\n\n${contextPrompt}\n\nNHIỆM VỤ:\n${missionPrompt}\n\nYÊU CẦU ĐẦU RA: CHỈ trả về một đối tượng JSON theo đúng cấu trúc đã định.`;
+        const finalPrompt = `VAI TRÒ: Bạn là AI trợ lý sáng tạo.\n\n${contextPrompt}\n\n${KNOWN_FIGURE_ROLE_RULE}\n\n${AGE_TIMELINE_RULE}\n\nNHIỆM VỤ:\n${missionPrompt}\n\nYÊU CẦU ĐẦU RA: CHỈ trả về một đối tượng JSON theo đúng cấu trúc đã định.`;
         const outputSchema = { type: "OBJECT", properties: outputSchemaProperties, required: requiredFields };
 
         const payload = {
@@ -30215,7 +30296,10 @@ ${gameSettings.isDouLuoWorld
             setGameSettings(prev => {
                 const newSettings = { ...prev };
                 Object.keys(data).forEach(key => {
-                    if (key !== 'initialTraits' && key !== 'initialWorldElements' && key !== 'initialMartialSouls') {
+                    if (key === 'characterAge') {
+                        const age = parseStartingAge(data[key]);
+                        if (age !== null) newSettings.characterAge = String(age);
+                    } else if (key !== 'initialTraits' && key !== 'initialWorldElements' && key !== 'initialMartialSouls') {
                         newSettings[key] = data[key];
                     }
                 });
@@ -30534,7 +30618,8 @@ const initializeGame = async (forceStart = false) => {
             id: 'player', 
             isPlayer: true, 
             Name: finalSettings.characterName,
-            Gender: finalSettings.characterGender, 
+            Gender: finalSettings.characterGender,
+            Age: parseStartingAge(finalSettings.characterAge),
             Role: finalSettings.characterRole,
             Appearance: finalSettings.characterAppearance,
             Backstory: finalSettings.characterBackstory,
@@ -30572,6 +30657,7 @@ VAI TRÒ: Bạn là một Đấng kể chuyện bậc thầy, đang sáng tác m
 - Tác phẩm gốc: "${finalSettings.fanFicOriginalWork}"
 - Nhân vật người chơi: "${finalSettings.fanFicCharacter}" (Kiểu: ${finalSettings.fanFicCharacterType})
 - Mô tả/Tiểu sử nhân vật: "${finalSettings.characterBackstory || 'Theo đúng nguyên tác.'}"
+${ageOpeningLine(finalSettings.characterAge) ? `- ${ageOpeningLine(finalSettings.characterAge)}` : ''}
 ${martialSoulsPromptBlock}
 
 --- CHECKLIST KHỞI TẠO ĐỒNG NHÂN (BẮT BUỘC THỰC HIỆN TUẦN TỰ) ---
@@ -30600,6 +30686,7 @@ ${coreRules}
 VAI TRÒ: Bạn là một Đấng kể chuyện, chuyên sáng tác tiểu thuyết mạng bằng tiếng Việt theo góc nhìn thứ hai, thể loại "${finalSettings.theme}".
 THÔNG TIN NỀN (Hệ thống đã cung cấp, ngươi phải tuân thủ):
 *   Nhân vật chính: ${finalSettings.characterName}, ${finalPersonality}. ${characterGoalInstruction}
+${ageOpeningLine(finalSettings.characterAge) ? `*   ${ageOpeningLine(finalSettings.characterAge)}` : ''}
 *   Bối cảnh game chi tiết: ${finalSettings.setting}
 *   (Tham khảo) Các thực thể LORE đã tồn tại trong thế giới (dạng {id, type, name, description}):
 ${initialWorldElementsString || "Không có thực thể đặc biệt nào được chỉ định."}
@@ -32636,7 +32723,7 @@ ${relevantObjectives.join('\n')}
     *   NẾU nội dung trên có chứa lời thoại/câu nói/tiếng hét cụ thể (thường nằm sau dấu hai chấm hoặc trong ngoặc kép), nhân vật chính BẮT BUỘC phải thực sự nói/hét ra đúng câu đó (có thể diễn đạt tự nhiên hơn nhưng phải giữ nguyên nội dung, ý nghĩa) trong kịch bản — TUYỆT ĐỐI KHÔNG được lược bỏ, tóm lược mơ hồ, hay bỏ qua lời thoại này.
 2.  **Thời Gian & Không Gian:** ${formatTimeOfDay(sanitizedKnowledge.time.hour)}, tại địa điểm ${getDisplayName(playerLocation) || "Nơi vô định"}. Thời tiết: ${sanitizedKnowledge.weather}.
 3.  **Trạng Thái Của Nhân Vật Chính (${player.Name}):**
-    *   Cấp ${player.level} ${player.realm} | HP: ${player.hp}/${player.maxhp}
+    *   Cấp ${player.level} ${player.realm} | HP: ${player.hp}/${player.maxhp}${ageNarrationLine(player.Age, sanitizedKnowledge.time) ? `\n    *   ${ageNarrationLine(player.Age, sanitizedKnowledge.time)}` : ''}
     *   **Trạng thái cơ thể (Buff/Debuff): ${allPlayerStatuses}**
     *   **Tài sản: ${player.currency || 0} ${gameSettings.currencyName || 'tiền'}.**
     *   Mục tiêu chính: ${gameSettings.useCharacterGoal ? gameSettings.characterGoal : 'Chưa có mục tiêu cụ thể.'}

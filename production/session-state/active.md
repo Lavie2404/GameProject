@@ -42,6 +42,37 @@ phạm. `calls_per_turn` là tập boolean nên không đổi; lượt có thể
 Kiểm chứng: `npm test` 1550 pass + 1 skipped (golden), `vite build` OK.
 `tsc --noEmit` vốn đã đỏ ở App.tsx từ trước, không phải cổng.
 
+**Cùng phiên — "Thân phận / Vai trò" bị bịa + tiếng Việt không dấu** (user
+báo với "Triệu Vân": AI trả "Mat su an danh tu Thuong Son, che giau than phan
+that..."). Hai lỗi, hai nguyên nhân: 3 prompt điền nhân vật đều lệnh "sáng
+tạo MỘT thân phận" (không có luật nhân vật có sẵn); chốt Quốc ngữ chỉ dò chữ
+viết ngoại lai nên chuỗi Latin không dấu lọt. Sửa:
+- `contract/knownFigureRole.ts`: QUY TẮC NHÂN VẬT CÓ SẴN (tên trùng lịch sử/
+  nguyên tác → dùng đúng thân phận đã biết; ví dụ đúng/sai Triệu Vân) chèn
+  vào 3 prompt (Định Hình, gợi ý từng trường, Điền Tự Động) +
+  `CHARACTER_ROLE_MISSION` thay mission cũ.
+- `contract/missingDiacritics.ts`: dò tiếng Việt không dấu (≥5 từ, 0 ký tự
+  Việt, ≥2 từ chức năng dạng mất dấu). `fetchWithRetries` quét chung với
+  foreignScript, cùng 1 lần gọi lại, chọn bản ít lỗi hơn. `languagePurity.ts`
+  RULE_BODY thêm 1 dòng "phải có đầy đủ dấu" (áp mọi prompt).
+- Test: `missing_diacritics_test.ts` (11). Tổng `npm test` 1561 pass, build OK.
+
+**Cùng phiên — tính năng "Độ tuổi bắt đầu"** (user yêu cầu: AI suy diễn phải
+bám mốc thời gian theo tuổi nhân vật). `src-web/systems/character/characterAge.ts`:
+parse tuổi, tuổi hiện tại = tuổi bắt đầu + số năm tròn trên đồng hồ game
+(năm 360 ngày, gốc year 0), `AGE_TIMELINE_RULE` (số năm từng trải ≤ tuổi;
+nhân vật lịch sử/nguyên tác chỉ dùng sự kiện trước/tại tuổi đó; ví dụ Triệu
+Vân 20 vs 45), các dòng ngữ cảnh. App.tsx: `gameSettings.characterAge` (chuỗi,
+trống = AI chọn), ô nhập + nút gợi ý sau Giới tính, 3 prompt thiết lập nhận
+tuổi + luật (Định Hình/Điền Tự Động tự sinh tuổi nếu trống, schema INTEGER),
+`player.Age` khi bắt đầu game, prompt mở đầu ghim mốc tuổi (`ageOpeningLine`),
+API-1 + API-2 mỗi lượt nhận "Tuổi hiện tại" (`ageNarrationLine`), bảng Chỉnh
+Sửa Toàn Bộ có ô Tuổi cho nhân vật chính, đồng bộ về settings. Test:
+`tests/unit/character-age/character_age_test.ts` (12). `npm test` 1573 pass,
+build OK. Tuổi hiện tại hiển thị ở đầu bảng thông tin nhân vật (QuickLoreModal
+header) và ở chip "Tuổi" trong danh sách nhân vật (QuickReferenceModal), dạng
+"N tuổi (bắt đầu M)" khi đã trôi qua ít nhất một năm.
+
 **Việc còn lại:** chụp BASELINE golden (user tự chơi S01–S12 theo README, xuất
 JSON vào `tests/golden/narration/captures/latest.json`, chạy
 `npm run golden:lint` với `GOLDEN_LABEL=baseline`), rồi so với báo cáo sau khi
