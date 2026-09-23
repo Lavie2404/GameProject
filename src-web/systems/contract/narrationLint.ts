@@ -48,6 +48,11 @@ export interface LintContext {
   npcs: LintNpc[];
   /** Dialogue lines from earlier turns, oldest first. */
   recentLines: DialogueLine[];
+  /**
+   * Pillar 4 (STORY-mode combat): names of the thuc the LOCKED exchange says
+   * were actually executed this turn. Each must be named in the narration.
+   */
+  lockedThuc?: readonly string[];
 }
 
 export interface NarrationLintKnobs {
@@ -69,7 +74,9 @@ export type LintViolationKind =
   | 'objective_praise'
   | 'ungrounded_praise'
   | 'superior_overpraise'
-  | 'repeated_line';
+  | 'repeated_line'
+  /** Pillar 4: a thuc the locked combat result says was used is absent from the prose. */
+  | 'missing_thuc';
 
 export interface LintViolation {
   kind: LintViolationKind;
@@ -361,11 +368,31 @@ export function findRepeatedLines(
   return out;
 }
 
+/**
+ * Pillar 4 (game-concept.md 282-289): every mechanical result is narrated
+ * "reflecting the skill/gear actually used". With a locked exchange the check
+ * is exact: each executed thuc name must appear somewhere in the response
+ * (prose or dialogue, case-insensitive, markdown stars ignored).
+ */
+export function findMissingThuc(text: string, ctx: LintContext): LintViolation[] {
+  const locked = (ctx.lockedThuc || []).map((s) => (s || '').trim()).filter(Boolean);
+  if (!locked.length) return [];
+  const norm = normalizeForMatch(text);
+  const out: LintViolation[] = [];
+  for (const name of locked) {
+    if (!norm.includes(normalizeForMatch(name))) {
+      out.push({ kind: 'missing_thuc', excerpt: text.slice(0, 120).replace(/\s+/g, ' ').trim(), matched: name });
+    }
+  }
+  return out;
+}
+
 const EMPTY_COUNTS: Record<LintViolationKind, number> = {
   objective_praise: 0,
   ungrounded_praise: 0,
   superior_overpraise: 0,
   repeated_line: 0,
+  missing_thuc: 0,
 };
 
 /** The whole thing. `text` is the RAW API-2 response (tags still in). */
@@ -379,6 +406,7 @@ export function lintNarration(
     ...findObjectivePraise(narration, knobs),
     ...findUngroundedPraise(dialogues, ctx, knobs),
     ...findRepeatedLines(dialogues, ctx, knobs),
+    ...findMissingThuc(text, ctx),
   ];
   const counts = { ...EMPTY_COUNTS };
   for (const v of violations) counts[v.kind]++;
@@ -476,6 +504,7 @@ const KIND_LABEL: Record<LintViolationKind, string> = {
   ungrounded_praise: 'NPC khen chung chung, không căn cứ',
   superior_overpraise: 'NPC bề trên khen quá tầm',
   repeated_line: 'NPC lặp lại câu đã nói',
+  missing_thuc: 'Văn kể bỏ sót thức đã dùng theo kết quả đã khóa',
 };
 
 /** One line per finding; Vietnamese because it surfaces in the dev console. */

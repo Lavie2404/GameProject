@@ -73,6 +73,40 @@ build OK. Tuổi hiện tại hiển thị ở đầu bảng thông tin nhân v�
 header) và ở chip "Tuổi" trong danh sách nhân vật (QuickReferenceModal), dạng
 "N tuổi (bắt đầu M)" khi đã trôi qua ít nhất một năm.
 
+**Cùng phiên — COMBAT cho STORY mode theo Pillar 3/4 (user chọn "cơ chế thật").**
+Phát hiện: Combat GDD từng được implement bằng GDScript (`src/gameplay/combat/*.gd`,
+ADR-0001) và MẤT trong pivot web 14-08; plan.md 17-08 khóa "Combat không sửa";
+STORY mode không hề có trạng thái trận (`narrativeCombatState.isActive` chưa
+bao giờ bật), AI là "trọng tài duy nhất" tự trừ HP/giết. User chốt bỏ ràng
+buộc "không sửa" cho đường STORY (sa bàn CombatLoop giữ nguyên).
+- **C1** `src-web/systems/combat/narrativeExchange.ts`: port D.1–D.14 (áp chế
+  cảnh giới/phạt trang bị/phế, SPD, trúng-hụt, sát thương + sàn, chí mạng,
+  phòng thủ, D.9 ngắt sớm, D.9b hòa giao hữu, D.9c cap, D.10 regen, D.4b
+  kiệt sức, D.11 bỏ chạy, D.13 điểm chỉ số, D.14 NPC chọn thức), RNG tiêm.
+  Knob block 23 `narrativeCombat` (gameConfig) = bảng Tuning Knobs GDD +
+  `BASE_ACC` (app không có ACC) + 2 ràng buộc chéo fail-loud. Lệch có chủ ý
+  ghi ở đầu module: không lifesteal/regen, item/skill chưa có `tier`.
+  30 test `tests/unit/narrative-combat/narrative_exchange_test.ts` (khớp ví
+  dụ số của GDD).
+- **C2** `src-web/systems/combat/storyCombatTurn.ts` + App.tsx: API-1 nhận
+  trường `combat` (CHỈ phân loại: is_combat/action_type/skill_name/target_name/
+  lethal/ends_combat, tên thức + NPC hiện diện đưa sẵn); sau khi API-1 chốt,
+  `runStoryCombatTurn` tìm đối thủ hiện diện, áp trọng thương chênh cấp khi mở
+  trận, khớp thức (không lặp), NPC chọn thức theo D.14, giải pha, THAY
+  `summary`/`commands` của API-1 bằng kết quả hệ thống (hp:-X hai bên,
+  `[CHARACTER_DEATH]` NPC khi sinh tử về 0), hand-off `lastCombatHandoff`
+  (Death & Consequence quyết cái chết người chơi qua death_roll, EXP) đúng
+  đường sa bàn, trạng thái trận trên `knowledge.narrativeCombatState`
+  (exchange_id, used_thuc, combat_type, spar_parity_eligible). API-2 nhận
+  khối "KẾT QUẢ ĐÃ KHÓA" + 6 quy tắc Pillar 4. Khối B luật STORY thay bằng
+  `STORY_MODE_COMBAT_RULES`. 23 test `story_combat_turn_test.ts`.
+- **C3** Lint thêm `missing_thuc` (Pillar 4: thức trong kết quả đã khóa phải
+  được gọi tên trong văn kể), guard chữa cả loại này; golden thêm S13–S15.
+Tổng: `npm test` 1629 pass (+1 skipped), build OK. Giới hạn v1: 1v1 (đồng
+hành chưa tham chiến), nhiều NPC thì chỉ đối thủ đầu; cân bằng thực tế cần
+chơi thử và chỉnh block 23; chưa có UI hiển thị pha/HP trong STORY mode
+(chỉ dòng "[Giao đấu]" trong nhật ký).
+
 **Việc còn lại:** chụp BASELINE golden (user tự chơi S01–S12 theo README, xuất
 JSON vào `tests/golden/narration/captures/latest.json`, chạy
 `npm run golden:lint` với `GOLDEN_LABEL=baseline`), rồi so với báo cáo sau khi

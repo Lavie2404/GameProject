@@ -82,6 +82,9 @@ Adjust names to your save; the scenario ids stay.
 | S10 | Weaker NPC watches the player win | (win a fight in front of a low-level NPC) | Admiration allowed but tied to the specific thing seen. No generic superlatives. |
 | S11 | A long 'dai' turn (API-1 tags it) | any action producing a 1500+ word narration | Count narrator-voice `objective_praise` over a long text. |
 | S12 | Ten consecutive turns with the same party | play 10 turns of ordinary travel with the companion | Global repetition check across the whole window. |
+| S13 | STORY mode: attack a near-level hostile with a named thuc | `Dùng <tên thức> đánh thẳng vào <NPC thù địch>.` | The system opens the battle; the prose names the thuc and the NPC's thuc exactly, no HP numbers. `missing_thuc` = 0. Console shows `[story-combat]`. |
+| S14 | STORY mode: same battle, 3 more exchanges (defend, second thuc, flee) | `Thủ thế chờ hắn ra đòn.` then `Dùng <thức khác>.` then `Bỏ chạy.` | Each turn is exactly one exchange; the choices list only unused thuc; flee result matches the locked line. |
+| S15 | STORY mode: attack the elder ≥30 levels up | `Vung kiếm chém trưởng lão.` | Realm suppression: chip damage only, elder strikes first, no protagonist halo in the prose. |
 
 ## Rubric (manual columns)
 

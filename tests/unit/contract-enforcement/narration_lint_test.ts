@@ -204,6 +204,29 @@ describe('repeated lines', () => {
 });
 
 // ---------------------------------------------------------------------------
+// Pillar 4: locked thuc must be narrated
+// ---------------------------------------------------------------------------
+
+describe('missing thuc (Pillar 4)', () => {
+  it('test_narration_lint_locked_thuc_absent_from_prose_is_flagged', () => {
+    const report = lintNarration('Ngươi lao tới, đòn đánh trúng vai hắn.', ctx({ lockedThuc: ['Hỏa Cầu Thuật', 'Đao Pháp Sơn Lâm'] }), KNOBS);
+    expect(report.counts.missing_thuc).toBe(2);
+    expect(report.violations.map((v) => v.matched)).toEqual(['Hỏa Cầu Thuật', 'Đao Pháp Sơn Lâm']);
+  });
+
+  it('test_narration_lint_locked_thuc_named_in_prose_or_dialogue_is_clean', () => {
+    const text = 'Ngươi thi triển *Hỏa Cầu Thuật*. ' + dlg('Sơn tặc', 'Đao Pháp Sơn Lâm của ta không dễ phá!');
+    const report = lintNarration(text, ctx({ lockedThuc: ['hỏa cầu thuật', 'Đao Pháp Sơn Lâm'] }), KNOBS);
+    expect(report.counts.missing_thuc).toBe(0);
+  });
+
+  it('test_narration_lint_no_locked_thuc_means_no_check', () => {
+    expect(lintNarration('Trời mưa.', ctx(), KNOBS).counts.missing_thuc).toBe(0);
+    expect(lintNarration('Trời mưa.', ctx({ lockedThuc: [] }), KNOBS).counts.missing_thuc).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Context builders
 // ---------------------------------------------------------------------------
 

@@ -41,6 +41,7 @@ import { assertAffinityKnobs, type AffinityKnobs } from '../affinity/table';
 import { assertDeathKnobs, type DeathKnobs } from '../death/deathRoll';
 import { assertNarrationLintKnobs } from '../contract/narrationLint';
 import { assertNarrationGuardKnobs } from '../contract/narrationGuard';
+import { assertNarrativeCombatKnobs } from '../combat/narrativeExchange';
 
 type AnyConfig = Record<string, unknown>;
 
@@ -168,4 +169,6 @@ export function validateGameConfig(gc: AnyConfig = GAME_CONFIG as AnyConfig): vo
   assertNarrationLintKnobs(block(gc, 'narrationLint') as never);
   // Same block, part B: the cure knobs (each assert ignores keys it does not own).
   assertNarrationGuardKnobs(block(gc, 'narrationLint') as never);
+  // Block 23: STORY-mode combat knobs (Combat GDD Tuning Knobs + cross constraints).
+  assertNarrativeCombatKnobs(block(gc, 'narrativeCombat') as never);
 }

@@ -60,6 +60,7 @@ const KNOWN_KINDS: readonly LintViolationKind[] = [
   'ungrounded_praise',
   'superior_overpraise',
   'repeated_line',
+  'missing_thuc',
 ];
 
 export class NarrationGuardConfigError extends Error {
@@ -215,6 +216,7 @@ const KIND_INTRO: Record<LintViolationKind, string> = {
   ungrounded_praise: 'NPC khen chung chung, không chỉ vào việc cụ thể nhân vật chính vừa làm',
   superior_overpraise: 'NPC bề trên (cao hơn nhiều cảnh giới) khen như với đối thủ ngang tầm',
   objective_praise: 'người kể tự khẳng định nhân vật chính vượt trội như sự thật khách quan',
+  missing_thuc: 'văn kể bỏ sót một thức mà kết quả đã khóa nói là đã được dùng (Tường Thuật Sống Động)',
 };
 
 const KIND_FIX: Record<LintViolationKind, string> = {
@@ -222,6 +224,7 @@ const KIND_FIX: Record<LintViolationKind, string> = {
   ungrounded_praise: 'sửa lời khen để chỉ vào ĐÚNG MỘT việc cụ thể vừa xảy ra, hoặc bỏ lời khen',
   superior_overpraise: 'hạ giọng khen xuống mức bề trên dè dặt ("có chút tư chất", "không tệ") hoặc bỏ lời khen',
   objective_praise: 'xóa lời khẳng định đó khỏi văn kể; muốn khen thì để một nhân vật nói bằng thẻ <dialogue> kèm thiên kiến riêng',
+  missing_thuc: 'kể lại đòn đó và gọi ĐÚNG TÊN thức như trong kết quả đã khóa, đúng thứ tự và đúng trúng/hụt',
 };
 
 /**
@@ -241,6 +244,8 @@ export function correctionInstructionFor(violations: readonly LintViolation[]): 
       const who = v.speaker ? `${v.speaker} ` : 'Người kể ';
       if (kind === 'repeated_line') {
         lines.push(`  - ${who}đã nói trước đó: "${v.matched}" → lượt này lại viết: "${v.excerpt}"`);
+      } else if (kind === 'missing_thuc') {
+        lines.push(`  - Thức "${v.matched}" đã được dùng theo kết quả đã khóa nhưng không xuất hiện trong văn kể`);
       } else {
         lines.push(`  - ${who}viết: "${v.excerpt}" (cụm vi phạm: "${v.matched}")`);
       }

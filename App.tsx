@@ -54,6 +54,21 @@ import {
     currentAge,
     parseStartingAge,
 } from './src-web/systems/character/characterAge';
+// STORY-mode combat (Pillar 3 "Sức Mạnh Có Logic"): the Combat GDD formulas
+// resolve each exchange; API-1 only classifies intent, API-2 only narrates.
+// The turn-based sa bàn (CombatLoop) is untouched.
+import { narrativeCombatKnobsFromGameConfig } from './src-web/systems/combat/narrativeExchange';
+import {
+    COMBAT_INTENT_SCHEMA,
+    STORY_MODE_COMBAT_RULES,
+    buildCombatIntentInstruction,
+    buildStoryCombatPromptBlock,
+    findOpponent,
+    knownThucOf,
+    normalizeStoryCombatState,
+    parseCombatIntent,
+    runStoryCombatTurn,
+} from './src-web/systems/combat/storyCombatTurn';
 import { scrubCourtesyNamesOutsideDialogue } from './src-web/systems/contract/courtesyName';
 import { describeKeyPool } from './src-web/systems/ai/keyPoolStatus';
 import { quotaModalView } from './src-web/systems/ui/quotaModalView';
@@ -202,6 +217,8 @@ const EXP_KNOBS = expKnobsFromGameConfig();
 const NARRATION_LINT_KNOBS = narrationLintKnobsFromGameConfig(GAME_CONFIG);
 /** gameConfig.js block 22 part B (narration guard: prevent + cure), read once. */
 const NARRATION_GUARD_KNOBS = narrationGuardKnobsFromGameConfig(GAME_CONFIG);
+/** gameConfig.js block 23 (STORY-mode combat, Combat GDD Tuning Knobs), read once. */
+const NARRATIVE_COMBAT_KNOBS = narrativeCombatKnobsFromGameConfig(GAME_CONFIG);
 
 /**
  * Golden capture store: records API-2 turns while `localStorage.golden_capture === '1'`.
@@ -28622,6 +28639,29 @@ const convertCharacterStatsToNarrative = (character) => {
     return `Trạng thái cơ thể: ${hpDesc}.${statusDesc}`;
 };
 
+// STORY-mode combat: a thuc's base attack power from the App's own skill data
+// (first damage effect's power components), falling back to ATK. Keeps the
+// narrative resolver's numbers on the same scale as the sa bàn's.
+const storyCombatPower = (attackerId, thuc, kb) => {
+    const ch = ((kb && kb.characters) || []).find(c => c && c.id === attackerId);
+    if (!ch) return 0;
+    const atk = Number(ch.atk) || 0;
+    if (!thuc || thuc.thucId === 'basic_attack') return atk;
+    const pool = [...Object.values(ch.equippedSkills || {}), ...(ch.learnedSkills || []), ...(ch.skills || [])].filter(Boolean);
+    const skill = pool.find(s => String(s.id || s.Name || s.name) === thuc.thucId)
+        || pool.find(s => (s.Name || s.name) === thuc.name);
+    const effect = skill && Array.isArray(skill.effects)
+        ? skill.effects.find(e => e && e.action && Array.isArray(e.action.power_components))
+        : null;
+    if (!effect) return atk;
+    try {
+        const v = calculateEffectPower(effect.action.power_components, ch, ch);
+        return Number.isFinite(v) && v > 0 ? v : atk;
+    } catch {
+        return atk;
+    }
+};
+
 const callGeminiAPI = async (prompt, isInitialCall = false, options = {}, knowledgeToUse = knowledge, userActionForHistory = null) => {
     let effectiveApiKey = "";
     let apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_TEXT_MODEL_FALLBACKS[0]}:generateContent`;
@@ -28701,8 +28741,33 @@ const callGeminiAPI = async (prompt, isInitialCall = false, options = {}, knowle
 
     try {
         const player = knowledgeToUse.characters.find(c => c.isPlayer) || {};
-        
+
         const htabAwakenPromptBlock = '';
+
+        // STORY mode: API-1 CLASSIFIES combat intent (storyCombatTurn.ts); the
+        // system resolves it after the call. Names are exact so the match is cheap.
+        let storyCombatIntentInstruction = '';
+        if (gameSettings.playStyle === 'STORY') {
+            try {
+                const scState0 = normalizeStoryCombatState(knowledgeToUse.narrativeCombatState);
+                const scOpp0 = scState0.isActive
+                    ? (knowledgeToUse.characters || []).find(c => c && c.id === scState0.combatants[0])
+                    : null;
+                const presentNpcNames = (knowledgeToUse.characters || [])
+                    .filter(c => c && !c.isPlayer && !c.isCompanion && !c.isPermanentlyDead && c.Name
+                        && (!c.current_location_id || c.current_location_id === player.current_location_id))
+                    .map(c => c.Name);
+                const usedNow = new Set(scState0.used_thuc[player.id] || []);
+                storyCombatIntentInstruction = buildCombatIntentInstruction(
+                    knownThucOf(player).filter(t => !usedNow.has(t.thucId)).map(t => t.name),
+                    presentNpcNames,
+                    scState0.isActive,
+                    scOpp0 ? scOpp0.Name : null,
+                );
+            } catch (scPromptError) {
+                console.warn('[story-combat] không dựng được chỉ thị phân loại:', scPromptError);
+            }
+        }
 
         const logicPrompt = `
             ${prompt}
@@ -28759,6 +28824,7 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
                  + [RELATIONSHIP_CHANGED: NPC="...", Standing="...", Reason="...", AffinityChange="+X" hoặc "-X"] (BẮT BUỘC dùng mỗi khi hành động của người chơi làm biến động thái độ/hảo cảm của một NPC dành cho họ — kể cả các cuộc trò chuyện, cử chỉ thân mật, giúp đỡ hay xúc phạm nhẹ, không chỉ giới hạn ở sự kiện lớn. Nếu 'summary' của kịch bản có nhắc đến việc hảo cảm/thiện cảm/tình cảm tăng hoặc giảm, PHẢI xuất thẻ này tương ứng, TUYỆT ĐỐI không được chỉ mô tả suông mà bỏ quên thẻ lệnh).
                  + [RECOVER_INJURY: Name="Tên nhân vật"] (Giải trừ trạng thái "Trọng Thương (Cảnh Giới Suy Giảm)" — cựu thương đè nén cảnh giới — cho một nhân vật ĐANG mang trạng thái đó, trả họ về tu vi thật. RÀNG BUỘC TUYỆT ĐỐI: CHỈ được xuất thẻ này khi chính 'summary' của kịch bản có một SỰ KIỆN CHỮA TRỊ TƯỜNG MINH: uống linh đan/thần dược đúng công dụng, gặp kỳ ngộ lớn (suối linh, tiên duyên, bảo vật), hoặc được một danh y/cao nhân ra tay chữa trị. TUYỆT ĐỐI KHÔNG xuất thẻ này chỉ vì thời gian trôi qua, chỉ vì nhân vật nghỉ ngơi/tự tu, hay vì cốt truyện cần họ mạnh lên.)
                - TUYỆT ĐỐI KHÔNG tự chế ra các cấu trúc thẻ lệnh không nằm trong danh sách trên.
+${storyCombatIntentInstruction}
 
             YÊU CẦU ĐẦU RA: Chỉ trả về duy nhất một chuỗi JSON sạch đại diện cho mảng gồm CHÍNH XÁC 1 đối tượng (kịch bản đã chốt). Tuyệt đối không bao bọc kết quả trong ký tự markdown như \`\`\`json ... \`\`\`. Không giải thích thêm.
         `;
@@ -28777,7 +28843,10 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
                     // scenario is a win for the protagonist. `overreachCap` uses it to
                     // hold the total weight of "success" scenarios down when the target
                     // is a tier or more above the player.
-                    outcome_for_player: { type: "STRING", enum: ["success", "partial", "failure"] }
+                    outcome_for_player: { type: "STRING", enum: ["success", "partial", "failure"] },
+                    // STORY mode (storyCombatTurn.ts): classification only, optional
+                    // in the schema so RPG mode is unaffected.
+                    combat: COMBAT_INTENT_SCHEMA
                 },
                 required: ["probability", "summary", "classification_tags", "relevant_entities", "commands", "outcome_for_player"]
             }
@@ -28877,6 +28946,79 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
         const chosenScenario = rollDiceAndChooseScenario(scenarios);
         if (!chosenScenario) throw new Error("Không thể chọn kịch bản.");
 
+        // === STORY-mode narrative combat (Pillar 3): resolve BEFORE narration ====
+        // storyCombatTurn.ts turns API-1's classification into a LOCKED exchange
+        // (Combat GDD D.1-D.14). Its lines/commands REPLACE API-1's summary and
+        // commands, so the model never scores a fight. State and the combat
+        // hand-off ride on `knowledgeToUse`, which processAndUpdateState merges
+        // over the live state (code review C-7). Any failure keeps API-1's text.
+        let storyCombatPromptBlock = '';
+        // Pillar 4 measure: thuc names the locked exchange says were executed;
+        // the narration lint checks each one is named in the prose.
+        let storyCombatLockedThuc = [];
+        if (gameSettings.playStyle === 'STORY') {
+            try {
+                const scState = normalizeStoryCombatState(knowledgeToUse.narrativeCombatState);
+                const scIntent = parseCombatIntent(chosenScenario.combat);
+                // Opening a battle: the level-gap injury (Pillar 1) hits the
+                // opponent FIRST, so the resolver sees the reduced level.
+                if (!scState.isActive && scIntent.is_combat && (scIntent.action_type === 'skill' || scIntent.action_type === 'defend')) {
+                    const scOpp = findOpponent(scIntent.target_name, knowledgeToUse.characters || [], player.current_location_id);
+                    if (scOpp) {
+                        const gi = maybeApplyGapInjury(scOpp, Number(player.level) || 1, {
+                            turn: adventureTurnCount,
+                            combatType: scIntent.lethal ? 'Lethal' : 'Sparring',
+                        });
+                        if (gi.applied) {
+                            const gk = knowledgeToUse.characters.findIndex(c => c && c.id === scOpp.id);
+                            if (gk > -1) knowledgeToUse.characters[gk] = gi.npc;
+                            if (gi.message) {
+                                setStoryHistory(prev => [...prev, { id: crypto.randomUUID(), type: 'system', content: '**[Hệ thống]** ' + gi.message, transient: true }]);
+                            }
+                        }
+                    }
+                }
+                const scTurn = runStoryCombatTurn({
+                    intent: scIntent,
+                    state: scState,
+                    player,
+                    characters: knowledgeToUse.characters || [],
+                    rng: Math.random,
+                    knobs: NARRATIVE_COMBAT_KNOBS,
+                    powerOf: (attackerId, thuc) => storyCombatPower(attackerId, thuc, knowledgeToUse),
+                });
+                if (scTurn.kind !== 'none') {
+                    knowledgeToUse.narrativeCombatState = scTurn.state;
+                    if (scTurn.handoff) {
+                        // Same hand-off shape the sa bàn produces: Death & Consequence
+                        // (death_roll for the player) and EXP consume it once.
+                        knowledgeToUse.lastCombatHandoff = toCombatHandoff({
+                            outcome: scTurn.handoff.outcome,
+                            data: { winningSideInfo: scTurn.handoff.winningSideInfo, losingSideInfo: scTurn.handoff.losingSideInfo },
+                            combatType: scTurn.handoff.combatType,
+                        }, knowledgeToUse);
+                    }
+                    chosenScenario.summary = scTurn.lines.join(' ');
+                    chosenScenario.commands = scTurn.commands;
+                    if (!Array.isArray(chosenScenario.classification_tags)) chosenScenario.classification_tags = [];
+                    if (scTurn.result && !chosenScenario.classification_tags.includes('hanhdong')) chosenScenario.classification_tags.push('hanhdong');
+                    storyCombatPromptBlock = buildStoryCombatPromptBlock(scTurn);
+                    if (scTurn.result) {
+                        storyCombatLockedThuc = ['A', 'B']
+                            .map(k => scTurn.result.per_actor[k])
+                            .filter(pa => pa && pa.executed && pa.action_type === 'skill' && pa.thuc_name)
+                            .map(pa => pa.thuc_name);
+                    }
+                    if (scTurn.messages.length) {
+                        setStoryHistory(prev => [...prev, ...scTurn.messages.map(m => ({ id: crypto.randomUUID(), type: 'system', content: '**[Giao đấu]** ' + m }))]);
+                    }
+                    console.log('[story-combat]', scTurn.kind, scTurn.lines.join(' | '));
+                }
+            } catch (scError) {
+                console.warn('[story-combat] bỏ qua, giữ kịch bản của API 1:', scError);
+            }
+        }
+
         const relevantNames = chosenScenario.relevant_entities || [];
         let detailedEntitiesPrompt = "";
         if (relevantNames.length > 0) {
@@ -28941,6 +29083,7 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
         // Narration lint context + PREVENT block (narrationGuard.ts). Built here so
         // the prompt can carry the exact NPC lines the model must not repeat.
         const lintCtx = narrationLintContextFromKnowledge(knowledgeToUse.characters, storyHistory, NARRATION_LINT_KNOBS);
+        lintCtx.lockedThuc = storyCombatLockedThuc;
         const recentDialogueBlock = buildRecentDialogueBlock(lintCtx.recentLines, lintCtx.player.name, NARRATION_GUARD_KNOBS);
         // Compressed Pillar 1 reminder for the END of the prompt (the full block
         // sits at the top of `narrativeRules`, furthest from the output request).
@@ -28990,6 +29133,7 @@ ${PILLAR1_DIRECTIVES_LOGIC.map(d => '               - ' + d).join('\n')}
                     KẾT QUẢ ĐÃ ĐỊNH (BẠN BẮT BUỘC PHẢN DỰA VÀO ĐÂY ĐỂ TƯỜNG THUẬT): "${chosenScenario.summary}"
                     THẺ LỆNH ĐƯỢC PHÊ DUYỆT TỪ HỆ THỐNG: ${chosenScenario.commands || "Không có thẻ lệnh nào"}
                     ${detailedEntitiesPrompt}
+${storyCombatPromptBlock}
 
                     --- RÀNG BUỘC MỞ ĐẦU TƯỜNG THUẬT (CỰC KỲ QUAN TRỌNG, ĐỌC KỸ) ---
                     "KẾT QUẢ ĐÃ ĐỊNH" là CHỈ THỊ NỘI BỘ dành cho ngươi, KHÔNG phải văn bản của truyện: TUYỆT ĐỐI KHÔNG chép nguyên văn hay diễn đạt lại câu chữ của nó thành câu văn trong bài viết. Đặc biệt, nếu nó mở đầu bằng câu tín hiệu "Toàn bộ chuỗi hành động người chơi mô tả diễn ra trọn vẹn đúng trình tự." thì đó là ÁM HIỆU HỆ THỐNG báo rằng mọi bước trong hành động gốc đều đã xảy ra — ngươi phải THỂ HIỆN điều đó bằng cách kể đầy đủ từng bước thành văn, TUYỆT ĐỐI KHÔNG viết câu ám hiệu đó (hay bất kỳ biến thể nào của nó) vào truyện. Văn tường thuật cũng KHÔNG được chứa các từ ngữ máy móc ngoài-truyện như "chuỗi hành động", "đúng trình tự", "kịch bản", "người chơi", "hệ thống đã phê duyệt".
@@ -29168,20 +29312,7 @@ ${pillar1Reminder}
 // A. QUY TẮC CẤM (TUYỆT ĐỐI):
 //    - KHÔNG SỬ DỤNG: [START_COMBAT], [ENTER_TRADE_MODE].
 
-// B. HỆ THỐNG CHIẾN ĐẤU TƯỜNG THUẬT (NARRATIVE COMBAT):
-//    1. NGUYÊN TẮC TRỌNG TÀI: Ngươi là người quyết định thắng thua duy nhất. Hãy so sánh sức mạnh (Cấp độ, Cảnh giới, Trang bị) và tính hợp lý của hành động.
-//    2. CẤU TRÚC PHẢN HỒI CHIẾN ĐẤU (BẮT BUỘC):
-//       - Dùng thẻ lệnh cập nhật HP ngay lập tức: [CHARACTER_UPDATE: Name="...", Stats="hp:-X"].
-//       - Nếu kẻ địch chết: Dùng [CHARACTER_DEATH: Name="..."] và [WORLD_ITEM] để rớt đồ.
-//       - Viết văn bản mô tả trọn vẹn diễn biến: Đòn đánh của người chơi -> Hiệu ứng/Sát thương -> Phản công của kẻ địch (nếu còn sống).
-//
-//    * VÍ DỤ CHIẾN ĐẤU TƯỜNG THUẬT:
-//      Input: "Ta dùng Hỏa Cầu Thuật bắn vào mặt tên Cướp." (Ngươi Cấp 10 vs Cướp Cấp 2)
-//      Output:
-//      [CHARACTER_UPDATE: Name="Tên Cướp", Stats="hp:-100"]
-//      [CHARACTER_DEATH: Name="Tên Cướp"]
-//      [WORLD_ITEM: id="dao_cuop_01", name="Đao Cùn", description="Vũ khí của tên cướp.", quantity=1]
-//      "Quả cầu lửa bùng lên từ tay ngươi, lao thẳng vào mặt tên cướp. Hắn không kịp hét lên tiếng nào đã bị ngọn lửa thiêu rụi, ngã xuống đất tắt thở. Thanh đao cùn của hắn rơi leng keng xuống đất."
+${STORY_MODE_COMBAT_RULES}
 
 // C. HỆ THỐNG GIAO DỊCH TƯỜNG THUẬT (NARRATIVE TRADE):
 //    1. NGUYÊN TẮC: Diễn ra qua hội thoại.
@@ -32568,10 +32699,10 @@ ${questDetails}
                 
                 combatContextBlock = `
 --- B. BỐI CẢNH CHIẾN ĐẤU (ƯU TIÊN HÀNG ĐẦU) ---
-**TRẠNG THÁI:** Đang trong một trận chiến sinh tử!
+**TRẠNG THÁI:** Đang trong một trận giao đấu (pha ${sanitizedKnowledge.narrativeCombatState?.exchange_id || 0} đã qua).
 **CÁC BÊN THAM CHIẾN:**
 ${combatantDetails}
-**NHIỆM VỤ CỦA NGƯƠI:** Tuân thủ "HỆ THỐNG CHIẾN ĐẤU TƯỜNG THUẬT" trong bộ luật tối thượng để xử lý lượt này.
+**NHIỆM VỤ CỦA NGƯƠI:** Kết quả pha kế tiếp do HỆ THỐNG tính bằng công thức Lực chiến. Ngươi CHỈ phân loại hành động của người chơi vào trường 'combat' (xem mục 6) — không phán trúng/hụt, sát thương hay thắng thua.
 `;
             }
             

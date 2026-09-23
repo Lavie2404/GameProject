@@ -403,7 +403,7 @@ export const GAME_CONFIG = {
         // ---- Phần B: CHỐT CHỮA (src-web/systems/contract/narrationGuard.ts) ----
         // Loại vi phạm nào thì gọi lại API 2 đúng một lần kèm chỉ dẫn đích danh.
         // Bỏ bớt phần tử để thu hẹp (vd. chỉ ['repeated_line'] = chỉ chống lặp).
-        GUARD_RETRY_KINDS: ['repeated_line', 'ungrounded_praise', 'superior_overpraise', 'objective_praise'],
+        GUARD_RETRY_KINDS: ['repeated_line', 'ungrounded_praise', 'superior_overpraise', 'objective_praise', 'missing_thuc'],
         // Số lần gọi lại tối đa mỗi lượt (0 = chỉ phòng, không chữa; 1 = thiết kế).
         // Lệch có chủ ý so với gdd-01 C.4 F2 "một lệnh gọi tường thuật/lượt":
         // calls_per_turn là tập boolean nên không đổi, nhưng lượt có thể lâu hơn.
@@ -411,5 +411,48 @@ export const GAME_CONFIG = {
         // Khối "NPC đã nói gần đây" chèn cuối prompt: số câu mỗi NPC và trần ký tự.
         RECENT_LINES_PROMPT_PER_SPEAKER: 4,
         RECENT_LINES_PROMPT_MAX_CHARS: 1500,
+    },
+
+    // ------------------------------------------------------------------------
+    // 23. CHIẾN ĐẤU TƯỜNG THUẬT (STORY mode — Pillar 3 "Sức Mạnh Có Logic")
+    //     Bảng Tuning Knobs của design/gdd/combat-system.md, port cho đường
+    //     kể chuyện (src-web/systems/combat/narrativeExchange.ts). Sa bàn
+    //     (CombatLoop) KHÔNG dùng block này. Hệ thống tính xong pha giao đấu
+    //     rồi khóa kết quả; AI chỉ kể lại (game-concept.md Khế Ước).
+    //     Hai ràng buộc chéo được kiểm khi nạp: ONSET < CAP và CAP − ONSET ≥ 120.
+    // ------------------------------------------------------------------------
+    narrativeCombat: {
+        // D.1 — áp chế cảnh giới & phạt trang bị: % giảm chỉ số mỗi bậc chênh (0.05..0.30)
+        PENALTY_PER_TIER: 0.15,
+        FLOOR_LAYER: 0.1,            // sàn mỗi lớp phạt (0.05..0.3)
+        FLOOR_TOTAL: 0.05,           // sàn TỔNG sau khi nhân các lớp (0.02..0.15)
+        CRIPPLED_PENALTY_MULT: 0.85, // đang "Phế Đan Điền" (0.7..0.95)
+        // LỆCH CÓ CHỦ Ý: app không có chỉ số chính xác (ACC) → dùng hằng này thay
+        // base_ACC cho MỌI nhân vật; "Né" = evasion (%) của app trên cùng thang.
+        BASE_ACC: 50,
+        // D.3 — trúng/hụt: P = clamp(0.5 + K_HIT·(ACC − Né), P_MIN, P_MAX)
+        K_HIT: 0.01,
+        P_MIN: 0.05,
+        P_MAX: 0.95,
+        // D.4 / D.6 — sát thương: sàn chip theo % ATK; sàn hệ số cuối; giảm khi Phòng thủ
+        MIN_RAW_RATIO: 0.05,
+        MIN_DMG_MULT: 0.1,
+        DEFEND_DMG_REDUCTION_PCT: 0.35,
+        // D.11 — bỏ chạy: P = clamp(0.5 + K_FLEE·(SPD mình − SPD địch))
+        K_FLEE: 0.01,
+        P_MIN_FLEE: 0.05,
+        P_MAX_FLEE: 0.95,
+        // Core Rule #2 Tầng 1 — NPC tự bỏ chạy dưới % HP này (trận sinh tử)
+        NPC_FLEE_HP_THRESHOLD: 0.2,
+        // D.10 / D.4b — hồi máu (app chưa có chỉ số → hiện = 0) và kiệt sức lũy tiến
+        HP_REGEN_CAP: 0.05,
+        EXHAUSTION_ONSET_EXCHANGE: 40,   // pha bắt đầu kiệt sức (20..80)
+        EXHAUSTION_DRAIN_PCT: 0.05,      // KHÔNG dưới 0.05 (GDD: mất đảm bảo hội tụ)
+        TECHNICAL_EXCHANGE_CAP: 200,     // van an toàn kỹ thuật (100..500)
+        // D.9b — hòa giao hữu khi ngang sức và bên thắng danh nghĩa cũng kiệt lực
+        SPAR_PARITY_TOLERANCE: 0.15,
+        SPAR_LOW_HP_THRESHOLD: 0.15,
+        // D.13 — trọng số HP trong Điểm Chỉ số (chỉ dùng cho parity gate)
+        W_HP: 0.25,
     },
 };
