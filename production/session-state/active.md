@@ -107,6 +107,16 @@ hành chưa tham chiến), nhiều NPC thì chỉ đối thủ đầu; cân bằ
 chơi thử và chỉnh block 23; chưa có UI hiển thị pha/HP trong STORY mode
 (chỉ dòng "[Giao đấu]" trong nhật ký).
 
+**Cùng phiên — 2 bug sau khi chơi thử.** (1) "knowledgeToUse is not defined"
+khi bắt đầu game: 2 dòng trong handleStartGame (quest cũ, tách thoại mở đầu)
+đọc biến của hàm khác → đổi sang `initialKnowledge`/`knowledgeAfterAI`.
+(2) Phân cảnh mở đầu bỏ qua Tiểu sử (Diệp Thần tam công tử Diệp gia bị kể
+thành "kẻ lạ mặt bí ẩn"): prompt khởi tạo nhánh KHÔNG đồng nhân chưa từng
+nhận characterBackstory/Role/Appearance, nhánh đồng nhân thiếu Role/
+Appearance → thêm cả 3 vào THÔNG TIN NỀN với chỉ thị "Tiểu sử là nguồn sự
+thật về xuất thân, mở đầu phải đặt nhân vật đúng hoàn cảnh", checklist 4.a
+nhắc lại. Test soi App: `test_app_opening_prompts_carry_role_appearance_and_backstory`.
+
 **Việc còn lại:** chụp BASELINE golden (user tự chơi S01–S12 theo README, xuất
 JSON vào `tests/golden/narration/captures/latest.json`, chạy
 `npm run golden:lint` với `GOLDEN_LABEL=baseline`), rồi so với báo cáo sau khi

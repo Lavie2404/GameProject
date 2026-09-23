@@ -30787,7 +30787,9 @@ VAI TRÒ: Bạn là một Đấng kể chuyện bậc thầy, đang sáng tác m
 **BỐI CẢNH ĐỒNG NHÂN (NGUỒN THÔNG TIN CHÍNH):**
 - Tác phẩm gốc: "${finalSettings.fanFicOriginalWork}"
 - Nhân vật người chơi: "${finalSettings.fanFicCharacter}" (Kiểu: ${finalSettings.fanFicCharacterType})
-- Mô tả/Tiểu sử nhân vật: "${finalSettings.characterBackstory || 'Theo đúng nguyên tác.'}"
+- Mô tả/Tiểu sử nhân vật (NGUỒN SỰ THẬT về xuất thân, gia tộc, quan hệ và hoàn cảnh — phân cảnh mở đầu PHẢI đặt nhân vật đúng vào hoàn cảnh này, không bịa xuất thân khác): "${finalSettings.characterBackstory || 'Theo đúng nguyên tác.'}"
+- Thân phận / Vai trò: ${finalSettings.characterRole || 'Theo đúng nguyên tác.'}
+- Ngoại hình: ${finalSettings.characterAppearance || 'Theo đúng nguyên tác.'}
 ${ageOpeningLine(finalSettings.characterAge) ? `- ${ageOpeningLine(finalSettings.characterAge)}` : ''}
 ${martialSoulsPromptBlock}
 
@@ -30806,7 +30808,7 @@ ${martialSoulsPromptBlock}
     c. Đặt nhân vật vào địa điểm cụ thể đó bằng thẻ [SET_STARTING_LOCATION: locationName="Tên Địa Điểm Cụ Thể"].
     d. Quyết định thời điểm trong ngày phù hợp nhất với bối cảnh/phân cảnh mở đầu ngươi sắp viết (KHÔNG mặc định 8h sáng nếu bối cảnh gợi ý khác), quy đổi thành giờ 24h (Sáng sớm=5, Buổi sáng=9, Giữa trưa=12, Chiều=15, Hoàng hôn=18, Tối=21, Nửa đêm=0) rồi xuất thẻ [SET_STARTING_TIME: hour=X] (X là số giờ 0-23).
 4.  **Viết Phân Cảnh Mở Đầu & Hiện Thực Hóa Thực Thể:**
-    a. Viết câu chuyện mở đầu, mô tả cảnh nhân vật xuất hiện tại địa điểm bắt đầu — PHẢI khớp đúng với thời điểm trong ngày đã chọn ở bước 3.d (VD đã chọn Hoàng hôn thì văn phải tả ánh hoàng hôn, không được mô tả cảnh buổi sáng).
+    a. Viết câu chuyện mở đầu, mô tả cảnh nhân vật xuất hiện tại địa điểm bắt đầu — PHẢI khớp đúng với thời điểm trong ngày đã chọn ở bước 3.d (VD đã chọn Hoàng hôn thì văn phải tả ánh hoàng hôn, không được mô tả cảnh buổi sáng), VÀ khớp với Tiểu sử/Thân phận đã cho: đúng gia thế, hoàn cảnh, quan hệ; không bịa xuất thân khác.
     b. Nếu có các NPC hoặc địa điểm con quan trọng khác xuất hiện ngay lập tức, hãy "hiện thực hóa" chúng bằng các thẻ [WORLD_NPC] hoặc [WORLD_LOCATION] tương ứng.
 5.  **Kết Thúc:** Luôn kết thúc bằng 4 lựa chọn hành động mới cho người chơi.
 
@@ -30818,6 +30820,10 @@ VAI TRÒ: Bạn là một Đấng kể chuyện, chuyên sáng tác tiểu thuy�
 THÔNG TIN NỀN (Hệ thống đã cung cấp, ngươi phải tuân thủ):
 *   Nhân vật chính: ${finalSettings.characterName}, ${finalPersonality}. ${characterGoalInstruction}
 ${ageOpeningLine(finalSettings.characterAge) ? `*   ${ageOpeningLine(finalSettings.characterAge)}` : ''}
+*   Thân phận / Vai trò: ${finalSettings.characterRole || 'Chưa xác định'}
+*   Ngoại hình: ${finalSettings.characterAppearance || 'Chưa xác định'}
+*   Tiểu sử / Quá khứ — NGUỒN SỰ THẬT về xuất thân, gia tộc, quê quán, quan hệ và hoàn cảnh hiện tại: "${finalSettings.characterBackstory}"
+    → Phân cảnh mở đầu PHẢI đặt nhân vật ĐÚNG vào hoàn cảnh này: đúng gia thế, đúng nơi chốn, đúng những người xung quanh mà tiểu sử nêu (cha mẹ, anh em, kẻ thù, ân nhân...). KHÔNG bịa một xuất thân khác, KHÔNG biến nhân vật thành "kẻ lạ mặt bí ẩn không rõ lai lịch" khi tiểu sử đã nói rõ. Những nhân vật tiểu sử nhắc tên mà xuất hiện ngay trong phân cảnh thì hiện thực hóa bằng [WORLD_NPC].
 *   Bối cảnh game chi tiết: ${finalSettings.setting}
 *   (Tham khảo) Các thực thể LORE đã tồn tại trong thế giới (dạng {id, type, name, description}):
 ${initialWorldElementsString || "Không có thực thể đặc biệt nào được chỉ định."}
@@ -30838,7 +30844,7 @@ ${martialSoulsPromptBlock ? martialSoulsPromptBlock.replace(/^- /, '*   ') : ''}
     c. Dùng tên chính xác của địa điểm cụ thể đó trong thẻ [SET_STARTING_LOCATION: locationName="Tên Địa Điểm Cụ Thể"].
     d. Quyết định thời điểm trong ngày phù hợp nhất với bối cảnh/phân cảnh mở đầu ngươi sắp viết (KHÔNG mặc định 8h sáng nếu bối cảnh gợi ý khác), quy đổi thành giờ 24h (Sáng sớm=5, Buổi sáng=9, Giữa trưa=12, Chiều=15, Hoàng hôn=18, Tối=21, Nửa đêm=0) rồi xuất thẻ [SET_STARTING_TIME: hour=X] (X là số giờ 0-23).
 4.  **Viết Phân Cảnh Mở Đầu & Hiện Thực Hóa LORE:**
-    a. Viết câu chuyện mở đầu, trong đó nhân vật chính xuất hiện tại địa điểm bắt đầu — PHẢI khớp đúng với thời điểm trong ngày đã chọn ở bước 3.d (VD đã chọn Hoàng hôn thì văn phải tả ánh hoàng hôn, không được mô tả cảnh buổi sáng).
+    a. Viết câu chuyện mở đầu, trong đó nhân vật chính xuất hiện tại địa điểm bắt đầu — PHẢI khớp đúng với thời điểm trong ngày đã chọn ở bước 3.d (VD đã chọn Hoàng hôn thì văn phải tả ánh hoàng hôn, không được mô tả cảnh buổi sáng), VÀ khớp với Tiểu sử/Thân phận ở THÔNG TIN NỀN: nhân vật mở màn trong đúng gia thế, hoàn cảnh và quan hệ đã cho (không phải một kẻ vô danh lang bạt nếu tiểu sử nói khác).
     b. **QUY TẮC HIỆN THỰC HÓA (QUAN TRỌNG):** Trong quá trình viết, nếu ngươi quyết định cho một thực thể LORE từ danh sách tham khảo xuất hiện, ngươi BẮT BUỘC phải sử dụng thẻ WORLD tương ứng và điền 'loreId' của nó.
     c. **VÍ DỤ:** Nếu ngươi muốn cho *Ông Già Elara* (có id="uuid-elara") xuất hiện, ngươi phải dùng thẻ [WORLD_NPC: id="lao_gia_elara_npc", loreId="uuid-elara", name="Ông Già Elara", ...].
 5.  **Kết Thúc:** Luôn kết thúc bằng 4 lựa chọn hành động mới cho người chơi.

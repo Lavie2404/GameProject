@@ -107,6 +107,25 @@ describe('known figure role rule', () => {
     expect(src).toContain('CHARACTER_ROLE_MISSION');
   });
 
+  it('test_app_opening_prompts_carry_role_appearance_and_backstory', () => {
+    // Reported 2026-09-23: the opening scene ignored the setup backstory because
+    // the non-fan-fiction opening prompt never received it.
+    const src = readFileSync(resolve(__dirname, '../../../App.tsx'), 'utf8');
+    const starts: number[] = [];
+    let i = src.indexOf('CHECKLIST KHỞI TẠO');
+    while (i !== -1) {
+      starts.push(i);
+      i = src.indexOf('CHECKLIST KHỞI TẠO', i + 1);
+    }
+    expect(starts.length).toBeGreaterThanOrEqual(2);
+    for (const s of starts) {
+      const head = src.slice(Math.max(0, s - 4000), s);
+      expect(head).toContain('finalSettings.characterBackstory');
+      expect(head).toContain('finalSettings.characterRole');
+      expect(head).toContain('finalSettings.characterAppearance');
+    }
+  });
+
   it('test_app_fetch_wrapper_cures_missing_diacritics', () => {
     const src = readFileSync(resolve(__dirname, '../../../App.tsx'), 'utf8');
     // The scan helpers are defined right above the wrapper; the wrapper calls them.
