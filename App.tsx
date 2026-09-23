@@ -11777,8 +11777,23 @@ const QuotaKeyStatusModal = ({ show, keys, cooldownUntil, googleDetail, source, 
     );
 };
 
-const MessageModal = ({ show, title, content, type, onClose, actionLabel, onAction }) => {
+const MessageModal = ({ show, title, content, type, onClose, actionLabel, onAction, actionEnabledAt }) => {
+    // actionEnabledAt (epoch ms, tuỳ chọn): nút hành động bị khoá và đếm ngược cho
+    // tới mốc này — dùng cho "Thử Lại" sau khi mọi model Gemini bị 503 (nghỉ 90s).
+    const [nowMs, setNowMs] = useState(() => Date.now());
+    useEffect(() => {
+        if (!show || !actionEnabledAt || actionEnabledAt <= Date.now()) return;
+        setNowMs(Date.now());
+        const id = setInterval(() => {
+            const t = Date.now();
+            setNowMs(t);
+            if (t >= actionEnabledAt) clearInterval(id);
+        }, 1000);
+        return () => clearInterval(id);
+    }, [show, actionEnabledAt]);
     if (!show) return null;
+    const waitSec = actionEnabledAt ? Math.max(0, Math.ceil((actionEnabledAt - nowMs) / 1000)) : 0;
+    const actionLocked = waitSec > 0;
     let titleColor = 'text-[#e8d3a1]';
     let borderColor = 'border-[#cda45e]/50';
     let IconComponent = () => <InformationCircleIcon className="w-7 h-7 mr-3 text-[#cda45e]"/>;
@@ -11809,10 +11824,13 @@ const MessageModal = ({ show, title, content, type, onClose, actionLabel, onActi
           <p className="text-[#a3b8a3] mb-8 whitespace-pre-line leading-relaxed">{content}</p>
           {actionLabel && onAction && (
             <button
-              onClick={() => { onAction(); onClose(); }}
-              className="w-full bg-[#cda45e]/10 border border-[#cda45e] hover:bg-[#cda45e] hover:text-[#0a0f0a] text-[#e8d3a1] font-bold py-3 uppercase tracking-widest text-sm transition-all mb-3"
+              onClick={() => { if (actionLocked) return; onAction(); onClose(); }}
+              disabled={actionLocked}
+              className={`w-full border border-[#cda45e] text-[#e8d3a1] font-bold py-3 uppercase tracking-widest text-sm transition-all mb-3 ${actionLocked
+                  ? 'bg-transparent opacity-50 cursor-not-allowed'
+                  : 'bg-[#cda45e]/10 hover:bg-[#cda45e] hover:text-[#0a0f0a]'}`}
             >
-              {actionLabel}
+              {actionLocked ? `${actionLabel} (${waitSec}s)` : actionLabel}
             </button>
           )}
           <button
@@ -21389,6 +21407,10 @@ const [impromptuInput, setImpromptuInput] = useState('');
   // Lỗi hết quota đi vào QuotaKeyStatusModal (có đếm lùi sống) thay vì
   // MessageModal văn bản tĩnh; mọi lỗi AI khác giữ nguyên đường cũ.
   const [quotaKeyModal, setQuotaKeyModal] = useState(null);
+  // Lỗi gốc của lần callGeminiAPI gần nhất. callGeminiAPI nuốt lỗi (trả null) sau
+  // khi đã hiện modal, nên luồng khởi tạo cần ref này để không đè thông báo 503
+  // đầy đủ bằng câu chung "AI không trả về nội dung khởi tạo" (báo lỗi 2026-09-23).
+  const lastAiErrorRef = useRef(null);
   const showAiError = useCallback((error, fallbackTitle = 'Lỗi Giao Tiếp AI') => {
       if (error?.isQuotaError && Array.isArray(error.quotaKeys) && error.quotaKeys.length > 0) {
           setQuotaKeyModal({ keys: error.quotaKeys, googleDetail: error.googleDetail || '', source: error.quotaSource || 'platform', quotaInfo: error.quotaInfo || null, usage: error.quotaUsage || null });
@@ -28752,6 +28774,7 @@ const callGeminiAPI = async (prompt, isInitialCall = false, options = {}, knowle
 
         } catch (error) {
             console.error('Lỗi trong callGeminiAPI (Khởi tạo/Kịch bản đơn):', error);
+            lastAiErrorRef.current = error;
             // Symmetric with the hybrid catch below (code review C-1): a failed
             // call must release the Turn Manager, or every later turn is locked out.
             abortSystemsTurn();
@@ -30878,9 +30901,15 @@ ${coreRules}
 `;
         }
 
+        lastAiErrorRef.current = null;
         const responseText = await callGeminiAPI(initialPrompt, true);
         if (!responseText) {
-            throw new Error("AI không trả về nội dung khởi tạo. Vui lòng thử lại.");
+            // callGeminiAPI đã bắt lỗi gốc và trả null; lấy lại nó để modal bên dưới
+            // nói đúng nguyên nhân (503 quá tải, safety, timeout...) thay vì câu chung.
+            const cause = lastAiErrorRef.current;
+            const initError = new Error(cause?.message || "AI không trả về nội dung khởi tạo. Vui lòng thử lại.");
+            if (cause?.isOverloadedError) initError.isOverloadedError = true;
+            throw initError;
         }
         
         const { story, choices: newChoices, updates } = await parseGeminiResponseAndUpdateState(responseText);
@@ -30933,7 +30962,24 @@ ${coreRules}
 
     } catch (error) {
         console.error("Lỗi nghiêm trọng trong quá trình khởi tạo game:", error);
-        setModalMessage({ show: true, title: 'Lỗi Khởi Tạo', content: `Không thể bắt đầu game: ${error.message}`, type: 'error' });
+        if (error?.isOverloadedError) {
+            // Mọi model đều 503 và đang nghỉ (model_cooldown_seconds). Nút Thử Lại
+            // khoá tới khi bậc sớm nhất của thang hồi, để người chơi khỏi bấm vô ích.
+            const earliestReadySec = Math.min(...GEMINI_TEXT_MODEL_FALLBACKS.map(m => aiSessionState.cooldown_until[m] || 0));
+            setModalMessage({
+                show: true,
+                title: 'Máy Chủ AI Quá Tải',
+                content: `Không thể bắt đầu game.
+
+${error.message}`,
+                type: 'error',
+                actionLabel: 'Thử Lại',
+                actionEnabledAt: earliestReadySec * 1000,
+                onAction: () => initializeGame(true),
+            });
+        } else {
+            setModalMessage({ show: true, title: 'Lỗi Khởi Tạo', content: `Không thể bắt đầu game: ${error.message}`, type: 'error' });
+        }
         setCurrentScreen('initial');
         setStartGameInitialization(false);
     } finally {
@@ -39181,6 +39227,7 @@ const formatStoryText = useCallback((text) => {
         type={modalMessage.type}
         actionLabel={modalMessage.actionLabel}
         onAction={modalMessage.onAction}
+        actionEnabledAt={modalMessage.actionEnabledAt}
         onClose={() => setModalMessage({ show: false, title: '', content: '', type: 'info' })}
       />
         <QuotaKeyStatusModal
