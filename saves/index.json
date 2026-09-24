@@ -32,6 +32,13 @@
       "difficulty": "Ác Mộng",
       "currentTurn": 99
     },
-    null
+    {
+      "gameId": "91393574-4eae-4d88-8bd9-430ca5548150",
+      "timestamp": "2026-09-24T04:45:11.165Z",
+      "characterName": "Diệp Thần",
+      "storyTitle": "Tam Quốc Diễn Nghĩa",
+      "difficulty": "Ác Mộng",
+      "currentTurn": 12
+    }
   ]
 }
