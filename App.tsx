@@ -30912,8 +30912,14 @@ ${coreRules}
             throw initError;
         }
         
-        const { story, choices: newChoices, updates } = await parseGeminiResponseAndUpdateState(responseText);
-        
+        // Lượt khởi tạo không truyền knowledge vào parseGeminiResponseAndUpdateState (để không kích
+        // hoạt bộ lọc hợp đồng thẻ lệnh lên [CHARACTER_UPDATE] khởi tạo của người chơi), nên phải thay
+        // [NC] bằng tên nhân vật TẠI ĐÂY — nếu không, hàm sẽ rơi về "ngươi" và NPC gọi người chơi là
+        // "ngươi" ngay trong khung lời thoại mở đầu (lỗi người dùng báo 2026-09-24). Cùng cách làm với
+        // đường lượt thường (xem chỗ thay [NC] trước khi lọc thẻ lệnh trong callGeminiAPI).
+        const responseTextWithPlayerName = responseText.replace(/\[NC\]/gi, finalSettings.characterName?.trim() || "ngươi");
+        const { story, choices: newChoices, updates } = await parseGeminiResponseAndUpdateState(responseTextWithPlayerName);
+
         let knowledgeAfterAI = applyUpdates(initialKnowledge, updates, undefined, "", story);
 
         knowledgeAfterAI.characters.forEach((char, index) => {
