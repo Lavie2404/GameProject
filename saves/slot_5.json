@@ -1,8 +1,8 @@
 {
   "id": "91393574-4eae-4d88-8bd9-430ca5548150",
-  "currentTurn": 12,
+  "currentTurn": 16,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-24T04:45:11.165Z",
+  "timestamp": "2026-09-24T06:31:28.868Z",
   "gameSettings": {
     "storyTitle": "Tam Quốc Diễn Nghĩa",
     "theme": "Chiến thuật, Quân sự, Lịch sử, Anh hùng ca",
@@ -1411,14 +1411,14 @@
           "content": "*Chân Nghiệp* mỉm cười nhận lấy chén trà từ tay ngươi, vuốt râu hài lòng. Tuy nhiên, ánh mắt của lão cùng một vài quản sự ngồi phía sau vẫn phảng phất sự dò xét, muốn xem gã tam công tử vốn bị đồn là \"phế vật\" này sẽ thể hiện thái độ thế nào khi chính thức bước chân vào nội cục của *Chân gia*.\nNgươi khẽ nâng quạt xếp, gương mặt tuấn tú mười sáu tuổi vẫn giữ vẻ thong dong, bình thản nhưng ánh mắt lại sâu thẳm như giếng cổ. Mạng lưới quân nhu ngầm, kho tàng vũ khí phương Bắc và hàng trăm chiến mã đang giấu ở trang viên phía Tây... tất cả những bí mật ấy giờ đây đã nằm ngay trong tầm với của ngươi.\nNgươi sẽ làm gì tiếp theo sau khi hoàn tất lễ thỉnh an?"
         }
       ]
+    },
+    {
+      "id": "81643293-5388-42a2-ab95-bb2c5f4071a7",
+      "type": "user_choice",
+      "content": "Giữ vẻ lười biếng hoàn khố, xin phép Chân Nghiệp đưa Chân Cơ đi dạo quanh các trang viên của Chân gia dưới cớ dẫn thê tử thưởng ngoạn phong cảnh. {Tỷ lệ thành công: 85%, Hậu quả/Phần thưởng: Danh chính ngôn thuận quan sát cẩn mật các vị trí canh phòng mà không làm lộ dã tâm.}"
     }
   ],
-  "choices": [
-    "Kính cẩn đáp lời Chân Nghiệp, thể hiện sự ngoan ngoãn của gã con rể để tích lũy thêm sự tin tưởng từ các trưởng bối Chân gia. {Tỷ lệ thành công: 90%, Hậu quả/Phần thưởng: Tăng mạnh hảo cảm của trưởng bối Chân gia, củng cố vị thế ở rể an toàn.}",
-    "Nhân cơ hội thỉnh an, chủ động ngỏ ý muốn nhận quán xuyến một vài trang viên hoặc kho bãi nhỏ ở phía Tây để bắt đầu tiếp cận mạng lưới quân nhu ngầm. {Tỷ lệ thành công: 75%, Hậu quả/Phần thưởng: Mở ra cơ hội trực tiếp quản lý kho tàng vũ khí và ngựa chiến, nhưng có thể khiến Chân Nghiệp sinh chút cảnh giác.}",
-    "Giữ vẻ lười biếng hoàn khố, xin phép Chân Nghiệp đưa Chân Cơ đi dạo quanh các trang viên của Chân gia dưới cớ dẫn thê tử thưởng ngoạn phong cảnh. {Tỷ lệ thành công: 85%, Hậu quả/Phần thưởng: Danh chính ngôn thuận quan sát cẩn mật các vị trí canh phòng mà không làm lộ dã tâm.}",
-    "Trực tiếp trao đổi ánh mắt tâm đầu ý hợp với Chân Cơ, để nàng thay mặt lên tiếng bày tỏ mong muốn hỗ trợ phu quân quán xuyến việc nội bộ gia tộc. {Tỷ lệ thành công: 80%, Hậu quả/Phần thưởng: Tận dụng trí tuệ và uy tín của Chân Cơ để danh chính ngôn thuận bước vào nội cục Chân gia.}"
-  ],
+  "choices": [],
   "gameMode": "EXPLORATION",
   "activeTrade": {
     "trader": null,
@@ -1430,5 +1430,5 @@
     "itemSpecificBuyBonuses": {}
   },
   "storySummaries": [],
-  "adventureTurnCount": 11
+  "adventureTurnCount": 15
 }
