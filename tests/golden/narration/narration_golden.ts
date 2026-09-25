@@ -41,7 +41,7 @@ const REPORT_DIR = resolve(HERE, '../../../production/qa/evidence/narration-gold
 const REPLAY_N = Math.max(0, parseInt(process.env.GOLDEN_REPLAY || '0', 10) || 0);
 const STRICT = process.env.GOLDEN_STRICT === '1';
 const LABEL = (process.env.GOLDEN_LABEL || '').trim();
-const KINDS: LintViolationKind[] = ['objective_praise', 'ungrounded_praise', 'superior_overpraise', 'repeated_line', 'missing_thuc'];
+const KINDS: LintViolationKind[] = ['objective_praise', 'ungrounded_praise', 'superior_overpraise', 'repeated_line', 'missing_thuc', 'convert_register'];
 
 const hasCapture = existsSync(CAPTURE_PATH);
 
@@ -123,12 +123,12 @@ function renderReport(rows: ScenarioRow[], captures: GoldenCapture[], model: str
   lines.push('');
   lines.push('## Per scenario');
   lines.push('');
-  lines.push('| Scenario | Turn | Source | Guard | objective | ungrounded | superior | repeated | missing thuc | Manual: NPC self-interest | Manual: praise grounded | Manual: fresh lines | Signed |');
-  lines.push('|---|---|---|---|---|---|---|---|---|---|---|---|---|');
+  lines.push('| Scenario | Turn | Source | Guard | objective | ungrounded | superior | repeated | missing thuc | convert | Manual: NPC self-interest | Manual: praise grounded | Manual: fresh lines | Signed |');
+  lines.push('|---|---|---|---|---|---|---|---|---|---|---|---|---|---|');
   for (const r of rows) {
     const c = r.report.counts;
     lines.push(
-      `| ${r.scenario_id} | ${r.turn} | ${r.source} | ${r.guard} | ${c.objective_praise} | ${c.ungrounded_praise} | ${c.superior_overpraise} | ${c.repeated_line} | ${c.missing_thuc ?? 0} |  |  |  |  |`,
+      `| ${r.scenario_id} | ${r.turn} | ${r.source} | ${r.guard} | ${c.objective_praise} | ${c.ungrounded_praise} | ${c.superior_overpraise} | ${c.repeated_line} | ${c.missing_thuc ?? 0} | ${c.convert_register ?? 0} |  |  |  |  |`,
     );
   }
   lines.push('');

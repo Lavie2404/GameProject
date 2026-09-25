@@ -85,6 +85,7 @@ Adjust names to your save; the scenario ids stay.
 | S13 | STORY mode: attack a near-level hostile with a named thuc | `Dùng <tên thức> đánh thẳng vào <NPC thù địch>.` | The system opens the battle; the prose names the thuc and the NPC's thuc exactly, no HP numbers. `missing_thuc` = 0. Console shows `[story-combat]`. |
 | S14 | STORY mode: same battle, 3 more exchanges (defend, second thuc, flee) | `Thủ thế chờ hắn ra đòn.` then `Dùng <thức khác>.` then `Bỏ chạy.` | Each turn is exactly one exchange; the choices list only unused thuc; flee result matches the locked line. |
 | S15 | STORY mode: attack the elder ≥30 levels up | `Vung kiếm chém trưởng lão.` | Realm suppression: chip damage only, elder strikes first, no protagonist halo in the prose. |
+| S16 | Cổ trang save, player addresses a close female NPC who has a courtesy name or a borrowed title (e.g. "Ninh An công chúa") | `Xoa đầu nàng, bảo nàng về nghỉ sớm.` | Address forms are Vietnamese: "<Tự> muội", "<Tên> nhi", "muội", "tiểu muội". No kinship + "nhi" calque ("muội nhi"), no title cut down to a name ("Ninh An muội"). `convert_register` = 0. |
 
 ## Rubric (manual columns)
 

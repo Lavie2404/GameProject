@@ -1,4 +1,29 @@
-# Session State — Checkpoint 2026-09-23
+# Session State — Checkpoint 2026-09-25
+
+## PHIÊN 25/09/2026 — xưng hô lai "muội nhi" (dịch sát chữ truyện mạng)
+
+User báo lời thoại "Ninh An muội nhi, ta thấy đầu óc hơi chếnh choáng...".
+Nguồn: luật 2.5b trong prompt dạy dạng nựng "Tự + nhi" ("Diễm nhi"), luật 2.5
+dạy cặp "ta/muội" → model ghép thành "Tự + muội + nhi"; "Ninh An" lại là danh
+hiệu đang đóng ("Ninh An công chúa"), không phải tên. Không bộ lọc nào bắt
+(lint chỉ đo khen/lặp; luật Quốc ngữ chỉ bắt ký tự ngoại lai). Save slot 4 đã
+có "Bảo Nguyệt nhi" từ trước. Sửa theo hướng đã chốt cho Pillar 1 (đo + chữa,
+không thêm luật "TUYỆT ĐỐI"):
+- App.tsx luật 2.5b: bỏ "Tự + nhi", thay bằng "Tự + từ xưng hô đúng vai"
+  ("Diễm muội", "Khởi Minh ca"); thêm 1 dòng: không ghép thân tộc + "nhi",
+  danh hiệu đang đóng không cắt ra làm tên.
+- `narrationLint.ts`: loại vi phạm mới `convert_register`, knob
+  `CONVERT_REGISTER_PHRASES` (gameConfig block 22, 12 cụm: muội/tỷ/tỉ/đệ/
+  huynh/ca/nàng/ngươi/sư muội/sư đệ/công chúa/huynh đài + nhi), so khớp
+  nguyên từ ("muội nhi" không bắt "muội nhìn"), quét cả tường thuật lẫn MỌI
+  thoại kể cả lời nhân vật chính (AI viết). `[]` = tắt.
+- `narrationGuard.ts`: KNOWN_KINDS + lời chữa (thay bằng "Tên + muội" /
+  "Tên + nhi" / "muội" / "tiểu muội", không ghép); gameConfig
+  `GUARD_RETRY_KINDS` thêm `convert_register`.
+- Golden: cột `convert` trong báo cáo, kịch bản S16 trong README.
+- Test: 6 lint + 2 knob + 1 guard, sửa test wiring. `npm test` 1642 pass
+  (+1 skipped). `tsc` vẫn 1153 lỗi có sẵn toàn dự án (không phải của phiên).
+Chưa commit. Baseline golden vẫn chưa chụp (xem "Việc còn lại" phiên 23/09).
 
 ## PHIÊN 23/09/2026 — Pillar 1: bộ đo + chốt đầu ra (chống nịnh, chống lặp thoại)
 

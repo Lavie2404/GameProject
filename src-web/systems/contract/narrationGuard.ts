@@ -61,6 +61,7 @@ const KNOWN_KINDS: readonly LintViolationKind[] = [
   'superior_overpraise',
   'repeated_line',
   'missing_thuc',
+  'convert_register',
 ];
 
 export class NarrationGuardConfigError extends Error {
@@ -217,6 +218,7 @@ const KIND_INTRO: Record<LintViolationKind, string> = {
   superior_overpraise: 'NPC bề trên (cao hơn nhiều cảnh giới) khen như với đối thủ ngang tầm',
   objective_praise: 'người kể tự khẳng định nhân vật chính vượt trội như sự thật khách quan',
   missing_thuc: 'văn kể bỏ sót một thức mà kết quả đã khóa nói là đã được dùng (Tường Thuật Sống Động)',
+  convert_register: 'xưng hô ghép từ thân tộc với hậu tố "nhi" hoặc cụm dịch sát chữ truyện mạng Trung Quốc, không phải tiếng Việt',
 };
 
 const KIND_FIX: Record<LintViolationKind, string> = {
@@ -225,6 +227,8 @@ const KIND_FIX: Record<LintViolationKind, string> = {
   superior_overpraise: 'hạ giọng khen xuống mức bề trên dè dặt ("có chút tư chất", "không tệ") hoặc bỏ lời khen',
   objective_praise: 'xóa lời khẳng định đó khỏi văn kể; muốn khen thì để một nhân vật nói bằng thẻ <dialogue> kèm thiên kiến riêng',
   missing_thuc: 'kể lại đòn đó và gọi ĐÚNG TÊN thức như trong kết quả đã khóa, đúng thứ tự và đúng trúng/hụt',
+  convert_register:
+    'thay bằng cách gọi tiếng Việt đúng vai: "Tên + muội" / "Tên + nhi" / "muội" / "tiểu muội" (một trong các dạng, không ghép); danh hiệu đang đóng ("Ninh An công chúa") không cắt ra làm tên gọi',
 };
 
 /**

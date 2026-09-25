@@ -399,11 +399,29 @@ export const GAME_CONFIG = {
         REPEAT_WINDOW_PER_SPEAKER: 6,
         // Câu ngắn hơn ngần này từ không tính lặp ("Ừm.", "Đi thôi.").
         REPEAT_MIN_TOKENS: 4,
+        // Xưng hô lai dịch sát chữ truyện mạng Trung Quốc ("muội nhi" = 妹儿),
+        // không phải tiếng Việt. Quét cả tường thuật lẫn MỌI lời thoại (kể cả
+        // lời nhân vật chính do AI viết). So khớp nguyên từ: "muội nhi" không
+        // bắt "muội nhìn". Để [] = tắt kiểm tra. Báo cáo 2026-09-25.
+        CONVERT_REGISTER_PHRASES: [
+            'muội nhi',
+            'tỷ nhi',
+            'tỉ nhi',
+            'đệ nhi',
+            'huynh nhi',
+            'ca nhi',
+            'nàng nhi',
+            'ngươi nhi',
+            'sư muội nhi',
+            'sư đệ nhi',
+            'công chúa nhi',
+            'huynh đài nhi',
+        ],
 
         // ---- Phần B: CHỐT CHỮA (src-web/systems/contract/narrationGuard.ts) ----
         // Loại vi phạm nào thì gọi lại API 2 đúng một lần kèm chỉ dẫn đích danh.
         // Bỏ bớt phần tử để thu hẹp (vd. chỉ ['repeated_line'] = chỉ chống lặp).
-        GUARD_RETRY_KINDS: ['repeated_line', 'ungrounded_praise', 'superior_overpraise', 'objective_praise', 'missing_thuc'],
+        GUARD_RETRY_KINDS: ['repeated_line', 'ungrounded_praise', 'superior_overpraise', 'objective_praise', 'missing_thuc', 'convert_register'],
         // Số lần gọi lại tối đa mỗi lượt (0 = chỉ phòng, không chữa; 1 = thiết kế).
         // Lệch có chủ ý so với gdd-01 C.4 F2 "một lệnh gọi tường thuật/lượt":
         // calls_per_turn là tập boolean nên không đổi, nhưng lượt có thể lâu hơn.

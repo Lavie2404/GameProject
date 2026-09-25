@@ -227,6 +227,56 @@ describe('missing thuc (Pillar 4)', () => {
 });
 
 // ---------------------------------------------------------------------------
+// Convert-register calques ("muội nhi", reported 2026-09-25)
+// ---------------------------------------------------------------------------
+
+describe('convert register', () => {
+  it('test_narration_lint_reported_player_line_muoi_nhi_is_flagged', () => {
+    // Arrange: the exact line from the 2026-09-25 report, spoken by the player (AI-authored).
+    const text = dlg('Ngươi', 'Ninh An muội nhi, ta thấy đầu óc hơi chếnh choáng rồi, chắc phải đi nghỉ sớm thôi.');
+    // Act
+    const report = lintNarration(text, ctx(), KNOBS);
+    // Assert
+    expect(report.counts.convert_register).toBe(1);
+    expect(report.violations[0]).toMatchObject({ kind: 'convert_register', speaker: 'Ngươi', matched: 'muội nhi' });
+  });
+
+  it('test_narration_lint_kinship_nhi_calque_in_narration_is_flagged', () => {
+    const text = 'Nàng khẽ gật đầu với tỷ nhi rồi lui ra.';
+    const report = lintNarration(text, ctx(), KNOBS);
+    expect(report.counts.convert_register).toBe(1);
+    expect(report.violations[0].speaker).toBeUndefined();
+  });
+
+  it('test_narration_lint_legitimate_vietnamese_address_forms_are_clean', () => {
+    const text =
+      dlg('Ngươi', 'Diễm muội, muội về nghỉ sớm đi.') +
+      dlg('Thái Văn Cơ', 'Tú Nhi muội muội! Tỷ sợ không được gặp lại muội nữa.') +
+      dlg('Ngươi', 'Diễm nhi, tiểu muội đừng lo.') +
+      ' Ngươi nhìn muội nhìn lại, cả hai cùng cười.';
+    const report = lintNarration(text, ctx(), KNOBS);
+    expect(report.counts.convert_register).toBe(0);
+  });
+
+  it('test_narration_lint_convert_phrase_matches_whole_tokens_only', () => {
+    // "muội nhìn" starts with the letters of "muội nhi" but is a different word.
+    const report = lintNarration(dlg('Tiểu Vân', 'Huynh để muội nhìn vết thương.'), ctx(), KNOBS);
+    expect(report.counts.convert_register).toBe(0);
+  });
+
+  it('test_narration_lint_empty_convert_list_turns_the_check_off', () => {
+    const knobs = assertNarrationLintKnobs({ CONVERT_REGISTER_PHRASES: [] });
+    const report = lintNarration(dlg('Ngươi', 'Ninh An muội nhi, đi thôi.'), ctx(), knobs);
+    expect(report.counts.convert_register).toBe(0);
+  });
+
+  it('test_narration_lint_console_label_for_convert_register_is_vietnamese', () => {
+    const report = lintNarration(dlg('Ngươi', 'Ninh An muội nhi, đi thôi.'), ctx(), KNOBS);
+    expect(formatLintReportForConsole(report)).toContain('Xưng hô lai');
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Context builders
 // ---------------------------------------------------------------------------
 
@@ -287,6 +337,13 @@ describe('knobs', () => {
     expect(() => assertNarrationLintKnobs({ REPEAT_SIMILARITY_THRESHOLD: 1.2 })).toThrow(NarrationLintConfigError);
     expect(() => assertNarrationLintKnobs({ REPEAT_MIN_TOKENS: 0 })).toThrow(NarrationLintConfigError);
     expect(() => assertNarrationLintKnobs({ GENERIC_PRAISE_PHRASES: [] })).toThrow(NarrationLintConfigError);
+    expect(() => assertNarrationLintKnobs({ CONVERT_REGISTER_PHRASES: ['muội nhi', ' '] })).toThrow(NarrationLintConfigError);
+    expect(() => assertNarrationLintKnobs({ CONVERT_REGISTER_PHRASES: 'muội nhi' as never })).toThrow(NarrationLintConfigError);
+  });
+
+  it('test_narration_lint_game_config_convert_list_covers_the_reported_phrase', () => {
+    const knobs = narrationLintKnobsFromGameConfig(GAME_CONFIG as Record<string, unknown>);
+    expect(knobs.CONVERT_REGISTER_PHRASES).toContain('muội nhi');
   });
 });
 

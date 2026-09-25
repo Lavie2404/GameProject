@@ -68,6 +68,13 @@ export interface NarrationLintKnobs {
   REPEAT_WINDOW_PER_SPEAKER: number;
   /** Lines shorter than this many tokens are never "repeats" ("Um.", "Di thoi."). */
   REPEAT_MIN_TOKENS: number;
+  /**
+   * Word-for-word calques of Chinese web-novel address forms that are not
+   * Vietnamese ("muội nhi" = 妹儿). Matched on whole tokens, in narration AND
+   * in every dialogue line including the player's (the model writes those
+   * too). Empty list = check off.
+   */
+  CONVERT_REGISTER_PHRASES: readonly string[];
 }
 
 export type LintViolationKind =
@@ -76,7 +83,9 @@ export type LintViolationKind =
   | 'superior_overpraise'
   | 'repeated_line'
   /** Pillar 4: a thuc the locked combat result says was used is absent from the prose. */
-  | 'missing_thuc';
+  | 'missing_thuc'
+  /** A kinship word glued to the "nhi" suffix or similar convert-register calque (reported 2026-09-25). */
+  | 'convert_register';
 
 export interface LintViolation {
   kind: LintViolationKind;
@@ -141,6 +150,20 @@ export const DEFAULT_NARRATION_LINT_KNOBS: NarrationLintKnobs = {
   REPEAT_SIMILARITY_THRESHOLD: 0.6,
   REPEAT_WINDOW_PER_SPEAKER: 6,
   REPEAT_MIN_TOKENS: 4,
+  CONVERT_REGISTER_PHRASES: [
+    'muội nhi',
+    'tỷ nhi',
+    'tỉ nhi',
+    'đệ nhi',
+    'huynh nhi',
+    'ca nhi',
+    'nàng nhi',
+    'ngươi nhi',
+    'sư muội nhi',
+    'sư đệ nhi',
+    'công chúa nhi',
+    'huynh đài nhi',
+  ],
 };
 
 export class NarrationLintConfigError extends Error {
@@ -162,6 +185,14 @@ export function assertNarrationLintKnobs(knobs: Partial<NarrationLintKnobs>): Na
       if (typeof p !== 'string' || !p.trim()) {
         throw new NarrationLintConfigError(`narrationLint.${listName} contains an empty phrase`);
       }
+    }
+  }
+  if (!Array.isArray(k.CONVERT_REGISTER_PHRASES)) {
+    throw new NarrationLintConfigError('narrationLint.CONVERT_REGISTER_PHRASES must be an array');
+  }
+  for (const p of k.CONVERT_REGISTER_PHRASES) {
+    if (typeof p !== 'string' || !p.trim()) {
+      throw new NarrationLintConfigError('narrationLint.CONVERT_REGISTER_PHRASES contains an empty phrase');
     }
   }
   if (!(k.REPEAT_SIMILARITY_THRESHOLD > 0 && k.REPEAT_SIMILARITY_THRESHOLD <= 1)) {
@@ -387,12 +418,47 @@ export function findMissingThuc(text: string, ctx: LintContext): LintViolation[]
   return out;
 }
 
+/** True when `phrase` occurs in `norm` as whole tokens ("muội nhi" must not hit "muội nhìn"). */
+function hasWholePhrase(norm: string, phrase: string): boolean {
+  const p = normalizeForMatch(phrase);
+  return !!p && (' ' + norm + ' ').includes(' ' + p + ' ');
+}
+
+/**
+ * Convert-register calques (reported 2026-09-25: "Ninh An muội nhi"). The
+ * prompt's rule 2.5b used to teach a "Tự + nhi" pet form and rule 2.5 the
+ * "ta/muội" pair; the model fused them. Checked everywhere, player lines
+ * included: the model authors those as well.
+ */
+export function findConvertRegister(
+  narration: string,
+  dialogues: DialogueLine[],
+  knobs: NarrationLintKnobs,
+): LintViolation[] {
+  const out: LintViolation[] = [];
+  if (!knobs.CONVERT_REGISTER_PHRASES.length) return out;
+  const normNarration = normalizeForMatch(narration);
+  for (const phrase of knobs.CONVERT_REGISTER_PHRASES) {
+    if (normNarration && hasWholePhrase(normNarration, phrase)) {
+      out.push({ kind: 'convert_register', excerpt: excerptAround(narration, phrase), matched: phrase });
+    }
+    for (const line of dialogues) {
+      const norm = normalizeForMatch(line.content);
+      if (norm && hasWholePhrase(norm, phrase)) {
+        out.push({ kind: 'convert_register', speaker: line.speaker, excerpt: line.content, matched: phrase });
+      }
+    }
+  }
+  return out;
+}
+
 const EMPTY_COUNTS: Record<LintViolationKind, number> = {
   objective_praise: 0,
   ungrounded_praise: 0,
   superior_overpraise: 0,
   repeated_line: 0,
   missing_thuc: 0,
+  convert_register: 0,
 };
 
 /** The whole thing. `text` is the RAW API-2 response (tags still in). */
@@ -407,6 +473,7 @@ export function lintNarration(
     ...findUngroundedPraise(dialogues, ctx, knobs),
     ...findRepeatedLines(dialogues, ctx, knobs),
     ...findMissingThuc(text, ctx),
+    ...findConvertRegister(narration, dialogues, knobs),
   ];
   const counts = { ...EMPTY_COUNTS };
   for (const v of violations) counts[v.kind]++;
@@ -505,6 +572,7 @@ const KIND_LABEL: Record<LintViolationKind, string> = {
   superior_overpraise: 'NPC bề trên khen quá tầm',
   repeated_line: 'NPC lặp lại câu đã nói',
   missing_thuc: 'Văn kể bỏ sót thức đã dùng theo kết quả đã khóa',
+  convert_register: 'Xưng hô lai kiểu dịch sát chữ truyện mạng ("muội nhi")',
 };
 
 /** One line per finding; Vietnamese because it surfaces in the dev console. */

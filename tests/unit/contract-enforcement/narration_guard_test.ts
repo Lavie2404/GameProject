@@ -167,6 +167,21 @@ describe('cure', () => {
     expect(instruction).toContain('Tiểu Vân viết: "Chàng là thiên tài."');
   });
 
+  it('test_narration_guard_correction_names_the_convert_calque_and_the_vietnamese_fix', () => {
+    // Arrange: the 2026-09-25 report line, with the guard configured to cure it.
+    const text = dlg('Ngươi', 'Ninh An muội nhi, ta thấy đầu óc hơi chếnh choáng rồi.');
+    const report = lintNarration(text, ctx());
+    const knobs = { ...KNOBS, GUARD_RETRY_KINDS: ['convert_register'] as const };
+    // Act
+    const triggering = triggeringViolations(report, knobs);
+    const instruction = correctionInstructionFor(triggering);
+    // Assert
+    expect(triggering.map((v) => v.kind)).toEqual(['convert_register']);
+    expect(instruction).toContain('hậu tố "nhi"');
+    expect(instruction).toContain('Ngươi viết: "Ninh An muội nhi, ta thấy đầu óc hơi chếnh choáng rồi." (cụm vi phạm: "muội nhi")');
+    expect(instruction).toContain('"Tên + muội"');
+  });
+
   it('test_narration_guard_correction_is_empty_without_violations', () => {
     expect(correctionInstructionFor([])).toBe('');
   });
@@ -227,7 +242,7 @@ describe('App.tsx wiring', () => {
 
   it('test_narration_guard_cure_covers_praise_kinds_in_game_config', () => {
     const kinds = (GAME_CONFIG as Record<string, any>).narrationLint.GUARD_RETRY_KINDS as string[];
-    for (const k of ['repeated_line', 'ungrounded_praise', 'superior_overpraise', 'objective_praise']) {
+    for (const k of ['repeated_line', 'ungrounded_praise', 'superior_overpraise', 'objective_praise', 'missing_thuc', 'convert_register']) {
       expect(kinds).toContain(k);
     }
   });
