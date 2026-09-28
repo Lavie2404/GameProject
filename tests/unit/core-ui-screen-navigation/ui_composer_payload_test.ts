@@ -17,6 +17,7 @@ import {
   composerSegmentValid,
   fuzzyScore,
   normalize,
+  parseSerializedComposerPayload,
   resetSpeakerOnTypeChange,
   resolveSpeaker,
   serializeComposerPayload,
@@ -158,9 +159,45 @@ describe('serializeComposerPayload', () => {
     ];
     const serialized = serializeComposerPayload(payload, 'Trần Phong');
     expect(serialized).toBe(
-      '[Đoạn 1 - Tường thuật]: "Nàng bước vào sảnh."\n' +
+      '[Đoạn 1 - Tường thuật]: Nàng bước vào sảnh.\n' +
         '[Đoạn 2 - Lời Trần Phong]: "Ngươi là ai?"\n' +
         '[Đoạn 3 - Lời Bùi Lan]: "Ta là Bùi Lan."',
     );
+  });
+
+  it('regression (2026-09-28): narration is never quoted, so it cannot read as a spoken line', () => {
+    const payload: ComposerSegment[] = [
+      { type: 'narration', text: 'Tử bài phải là những người có nhan sắc sánh ngang Điêu Thuyền.' },
+      { type: 'dialogue', text: 'Lý Tiệm, đây là danh sách.', speaker: { kind: 'player' } },
+    ];
+    const [narrationLine, dialogueLine] = serializeComposerPayload(payload, 'Diệp Thần').split('\n');
+    expect(narrationLine).not.toContain('"');
+    expect(dialogueLine).toBe('[Đoạn 2 - Lời Diệp Thần]: "Lý Tiệm, đây là danh sách."');
+  });
+});
+
+describe('parseSerializedComposerPayload', () => {
+  it('reads back type, speaker and text of every serialized segment', () => {
+    const payload: ComposerSegment[] = [
+      { type: 'narration', text: 'Nàng bước vào sảnh.\nGió lạnh lùa theo.' },
+      { type: 'dialogue', text: 'Ngươi là ai?', speaker: { kind: 'player' } },
+      { type: 'dialogue', text: 'Ta là Bùi Lan.', speaker: { kind: 'known_npc', char_id: 'bui_lan', display_name: 'Bùi Lan' } },
+    ];
+    expect(parseSerializedComposerPayload(serializeComposerPayload(payload, 'Trần Phong'))).toEqual([
+      { type: 'narration', speaker: '', text: 'Nàng bước vào sảnh.\nGió lạnh lùa theo.' },
+      { type: 'dialogue', speaker: 'Trần Phong', text: 'Ngươi là ai?' },
+      { type: 'dialogue', speaker: 'Bùi Lan', text: 'Ta là Bùi Lan.' },
+    ]);
+  });
+
+  it('still reads the old quoted-narration form kept in saved history', () => {
+    expect(parseSerializedComposerPayload('[Đoạn 1 - Tường thuật]: "Ngươi rút kiếm."')).toEqual([
+      { type: 'narration', speaker: '', text: 'Ngươi rút kiếm.' },
+    ]);
+  });
+
+  it('returns [] for text without numbered segments (choice, single narration)', () => {
+    expect(parseSerializedComposerPayload('Ngươi bước vào sảnh.')).toEqual([]);
+    expect(parseSerializedComposerPayload('')).toEqual([]);
   });
 });

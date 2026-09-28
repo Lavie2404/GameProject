@@ -473,4 +473,19 @@ export const GAME_CONFIG = {
         // D.13 — trọng số HP trong Điểm Chỉ số (chỉ dùng cho parity gate)
         W_HP: 0.25,
     },
+
+    // ------------------------------------------------------------------------
+    // 24. CHỐT ĐOẠN TƯỜNG THUẬT CỦA COMPOSER
+    //     Người chơi chọn loại đoạn bằng nút riêng (+ Tường thuật / + Đối thoại).
+    //     Nếu AI vẫn bọc một đoạn Tường thuật vào <dialogue>, bộ chốt
+    //     src-web/systems/contract/composerSegmentGuard.ts gỡ thẻ để hiện thành
+    //     văn kể. Báo cáo 2026-09-28 (lượt 15).
+    // ------------------------------------------------------------------------
+    composerSegmentGuard: {
+        // Độ giống (Jaccard trên cặp từ) giữa lời thoại và đoạn Tường thuật từ
+        // mức này trở lên = AI chép đoạn Tường thuật thành lời thoại (0..1].
+        NARRATION_UNWRAP_SIMILARITY: 0.6,
+        // Lời thoại ngắn hơn ngần này từ không bao giờ bị gỡ thẻ.
+        NARRATION_UNWRAP_MIN_TOKENS: 4,
+    },
 };

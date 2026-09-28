@@ -198,6 +198,11 @@ import {
 } from './src-web/systems/contract/narrationGuard';
 // Per-NPC tone hint (affinity band + level gap → how warmly this NPC may speak).
 import { npcToneHint } from './src-web/systems/contract/npcToneHint';
+// Composer "Tường thuật" segments the model wrapped in <dialogue> get unwrapped.
+import {
+    composerSegmentGuardKnobsFromGameConfig,
+    unwrapNarrationSegmentDialogue,
+} from './src-web/systems/contract/composerSegmentGuard';
 import { HOSTILE_INITIATIVE_LEVEL_GAP_MAX, OBJECTIVITY_KNOBS } from './src-web/systems/registry';
 import { createCommitController } from './src-web/systems/customize/commitFlow';
 import { estimateOriginQuota } from './src-web/systems/persistence/quota';
@@ -224,6 +229,8 @@ const NARRATION_LINT_KNOBS = narrationLintKnobsFromGameConfig(GAME_CONFIG);
 const NARRATION_GUARD_KNOBS = narrationGuardKnobsFromGameConfig(GAME_CONFIG);
 /** gameConfig.js block 23 (STORY-mode combat, Combat GDD Tuning Knobs), read once. */
 const NARRATIVE_COMBAT_KNOBS = narrativeCombatKnobsFromGameConfig(GAME_CONFIG);
+/** gameConfig.js block 24 (composer narration-segment guard), read once. */
+const COMPOSER_SEGMENT_GUARD_KNOBS = composerSegmentGuardKnobsFromGameConfig(GAME_CONFIG);
 
 /**
  * Golden capture store: records API-2 turns while `localStorage.golden_capture === '1'`.
@@ -29301,7 +29308,15 @@ ${pillar1Reminder}
         // Chưa đặt tên → thay [NC] bằng "ngươi" chữ thường (đại từ), không viết
         // hoa như tên riêng (sửa 2026-09-01, cùng lý do với parseGeminiResponseAndUpdateState).
         const narrativeTextWithPlayerName = narrativeText.replace(/\[NC\]/gi, player?.Name || "ngươi");
-        const cleanNarrativeText = narrativeTextWithPlayerName.replace(/\[[A-Z_]+(?::\s*[^\]]+)?\]/g, "");
+        const strippedNarrativeText = narrativeTextWithPlayerName.replace(/\[[A-Z_]+(?::\s*[^\]]+)?\]/g, "");
+        // The player marked these segments "Tường thuật" with the composer's own
+        // button; a <dialogue> copy of one is the model's mistake, not a line.
+        const segmentGuard = unwrapNarrationSegmentDialogue(strippedNarrativeText, sanitizedUserActionForNarrative, COMPOSER_SEGMENT_GUARD_KNOBS);
+        if (segmentGuard.unwrapped.length) {
+            console.warn(`[composer-guard] Gỡ ${segmentGuard.unwrapped.length} thẻ <dialogue> bọc đoạn Tường thuật: ` +
+                segmentGuard.unwrapped.map(u => `Đoạn ${u.segment} (speaker="${u.speaker}", giống ${u.similarity.toFixed(2)})`).join(' | '));
+        }
+        const cleanNarrativeText = segmentGuard.text;
         const combinedRawText = `${chosenScenario.commands}\n\n${cleanNarrativeText}`;
 
         const { story, choices: newChoices, updates, commandBlock } = await parseGeminiResponseAndUpdateState(combinedRawText, knowledgeToUse, setActiveTrade);
@@ -29899,6 +29914,7 @@ ${gameSettings.isTamQuocWorld ? `//    - THẾ GIỚI TAM QUỐC: các nhân v�
 //      (a) Viết tiếp bất kỳ diễn biến, tình tiết, hay hành động nào SAU điểm nội dung đoạn cuối cùng kết thúc.
 //      (b) Tự thêm phản ứng, lời thoại, hay cử động mới của bất kỳ NPC nào KHÔNG nằm trong danh sách đoạn của lượt này — kể cả một NPC đang có mặt ngay trong cảnh.
 //      (c) Tự thêm một đoạn tường thuật "chốt lượt" mang tính tổng kết hoặc dẫn dắt sang tình huống mới, nếu người chơi không hề viết đoạn đó.
+//    - Nhãn của mỗi đoạn là do người chơi tự chọn bằng nút riêng, không phải để ngươi đoán: đoạn "[Đoạn N - Tường thuật]" (không có ngoặc kép) là văn kể — viết thành văn kể, không đặt vào thẻ <dialogue>, kể cả khi câu văn đọc lên giống một lời khẳng định hay mệnh lệnh; chỉ đoạn "[Đoạn N - Lời X]" (nội dung trong ngoặc kép) mới thành <dialogue speaker="X">.
 //    - PHẢI tường thuật hoá ĐỦ TẤT CẢ các đoạn đã cho, đúng thứ tự, không được bỏ sót hay gộp tắt bất kỳ đoạn nào — kể cả đoạn ngắn hoặc có vẻ ít quan trọng. Bỏ sót một đoạn bị coi là lỗi ngang với việc thêm một đoạn thừa.
 //    - NGOẠI LỆ DUY NHẤT — đoạn thoại NPC không kèm mô tả: nếu một đoạn chỉ là nguyên văn câu thoại của 1 NPC (không mô tả gì thêm), ngươi ĐƯỢC PHÉP thêm tối thiểu một khung cử chỉ/giọng điệu/nét mặt TRỰC TIẾP đi kèm ĐÚNG LÚC câu đó được nói ra (VD: giọng run rẩy, cúi đầu, siết chặt tay) — đây là phần "trình bày" tất yếu khi văn xuôi hoá một câu thoại, không phải một tình tiết mới. TUYỆT ĐỐI KHÔNG thêm bất kỳ hành động/phản ứng nào XẢY RA SAU câu thoại đó (VD: NPC quay đi, rơi nước mắt, bước ra khỏi phòng) nếu người chơi không viết tiếp đoạn nào khác.
 //    - Nếu lượt này ĐỒNG THỜI có kết quả cơ học đã khóa từ hệ khác (Combat/EXP/Hảo cảm...), ngươi VẪN PHẢI phản ánh trung thực kết quả đó (không bị mục này hạn chế) — phạm vi hợp lệ của văn tường thuật lượt này = (các đoạn người chơi đã cho, đã làm giàu văn phong) HỢP VỚI (kết quả cơ học đã khóa, nếu có) — không viết bất kỳ nội dung nào ngoài hợp của hai tập này.

@@ -183,6 +183,12 @@ function speakerLabel(speaker: ComposerSpeaker, playerName: string): string {
  * unambiguous segment boundaries to reference, and so the player's dialogue
  * segments never visually collide with the `<dialogue>` tags the AI itself
  * must emit in its OWN response text.
+ *
+ * Only dialogue segments are quoted. Narration used to be quoted too, which
+ * made it read like a spoken line: report 2026-09-28 (turn 15), the model
+ * copied a "Tường thuật" segment verbatim into `<dialogue speaker="Ngươi">`.
+ * The player already picks the segment type with a separate button, so the
+ * serialized form must not leave that open to interpretation.
  */
 export function serializeComposerPayload(segments: ComposerSegment[], playerName: string): string {
   if (segments.length === 1 && segments[0].type === 'narration') {
@@ -190,9 +196,39 @@ export function serializeComposerPayload(segments: ComposerSegment[], playerName
   }
   return segments
     .map((seg, i) => {
-      const label =
-        seg.type === 'narration' ? 'Tường thuật' : `Lời ${speakerLabel(seg.speaker, playerName)}`;
-      return `[Đoạn ${i + 1} - ${label}]: "${seg.text.trim()}"`;
+      if (seg.type === 'narration') return `[Đoạn ${i + 1} - ${NARRATION_LABEL}]: ${seg.text.trim()}`;
+      return `[Đoạn ${i + 1} - Lời ${speakerLabel(seg.speaker, playerName)}]: "${seg.text.trim()}"`;
     })
     .join('\n');
+}
+
+const NARRATION_LABEL = 'Tường thuật';
+const SEGMENT_HEADER_RE = /^\[Đoạn (\d+) - ([^\]\n]+)\]: /gm;
+
+/** One segment read back from `serializeComposerPayload` output. */
+export interface SerializedComposerSegment {
+  type: 'narration' | 'dialogue';
+  /** Speaker display name for dialogue; empty for narration. */
+  speaker: string;
+  text: string;
+}
+
+/**
+ * Inverse of `serializeComposerPayload` for the numbered multi-segment form.
+ * Returns [] for anything else (single narration segment, a picked choice,
+ * freeform text), since those carry no segment boundaries to read back.
+ * Accepts the old quoted-narration form too, so saved history still parses.
+ */
+export function parseSerializedComposerPayload(actionText: string): SerializedComposerSegment[] {
+  if (!actionText) return [];
+  const headers = [...actionText.matchAll(SEGMENT_HEADER_RE)];
+  return headers.map((m, i) => {
+    const start = (m.index ?? 0) + m[0].length;
+    const end = i + 1 < headers.length ? headers[i + 1].index ?? actionText.length : actionText.length;
+    let text = actionText.slice(start, end).trim();
+    if (text.length >= 2 && text.startsWith('"') && text.endsWith('"')) text = text.slice(1, -1).trim();
+    const label = m[2].trim();
+    if (label === NARRATION_LABEL) return { type: 'narration', speaker: '', text };
+    return { type: 'dialogue', speaker: label.replace(/^Lời\s+/, ''), text };
+  });
 }
