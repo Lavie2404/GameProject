@@ -1,13 +1,13 @@
 {
-  "id": "eb81eba5-a033-4df8-a751-182dca7e193b",
-  "currentTurn": 2,
+  "id": "88d1ceb7-efce-475e-aa30-561256239c9d",
+  "currentTurn": 20,
   "saveVersion": "2.8",
-  "timestamp": "2026-09-07T07:32:42.279Z",
+  "timestamp": "2026-09-28T08:55:24.812Z",
   "gameSettings": {
-    "storyTitle": "Tam quốc chí",
-    "theme": "Dã sử, Huyền Huyễn, Tu Tiên, Quân sự, Cổ đại, Chiến tranh, Tam quốc",
-    "setting": "1 năm trước khi quân Hoàng Cân nổi dậy",
-    "playStyle": "RPG",
+    "storyTitle": "Tam Quốc Diễn Nghĩa",
+    "theme": "Chiến thuật, Quân sự, Lịch sử, Anh hùng ca",
+    "setting": "Bối cảnh diễn ra vào cuối thời Đông Hán, khi thiên hạ đại loạn, triều đình suy tàn và các chư hầu khắp nơi nổi dậy tranh giành quyền lực. Giữa khói lửa chiến tranh và những mưu đồ chính trị phức tạp, vận mệnh của trăm họ đang ngàn cân treo sợi tóc. Thời gian xuyên không là 1 năm trước thời điểm khởi nghĩa Hoàng Cân. \nCảnh giới võ học phân từ Nhất phẩm đến Cửu phẩm. Mỗi phẩm gồm 10 bậc. Bậc 3 Tiểu thành, 6 Đại thành, 9 Viên Mãn, 10 Đại Viên Mãn",
+    "playStyle": "STORY",
     "uiTheme": "DARK_GOLD",
     "textScale": 100,
     "customThemeConfig": {
@@ -33,9 +33,10 @@
     "fanFicCharacterType": "Khởi Sinh",
     "characterName": "Diệp Thần",
     "characterPersonality": "Tùy chỉnh...",
-    "customCharacterPersonality": "Lạc quan, Bí ẩn, Thông minh",
+    "customCharacterPersonality": "Bí ẩn, Thông minh",
     "characterGender": "Nam",
-    "characterBackstory": "Lập trình viên đột quỵ khi đang tăng ca được xuyên không về thời tam quốc trong hình hài của 1 cậu bé 8 tuổi mồ côi tại Thôn Mộc Nhĩ, huyện Hãn Châu, tỉnh Sơn Tây. Hàng xóm của Điêu Thuyền lúc 8 tuổi",
+    "characterAge": "10",
+    "characterBackstory": "Con trai thứ 3 của Diệp Vô Song đại tướng quân Đại Hán. \nPhò mã của Ninh An công chúa Đại Hán.\nThân phận thực sự là Thái tử Nam Ly quốc nhưng bị tính kế vào 1 lần tụ hội tại Đại Hán. Kế hoạch Thâu thiên hoán nhật đánh tráo Thái tử Nam Ly quốc và con trai thứ 3 của đại tướng quân Đại Hán. Mỗi năm ngươi đều bị cho uống Bách Nhật Túy khiến ngươi quên đi thân phận thật sự. Lần đầu tiên ngươi uống Bách Nhật Túy là do con trai thứ 2 của Diệp Vô Song là Diệp Bình Xuyên lừa uống. Những năm đầu, đại ca Diệp Bình Sinh, nhị ca Diệp Bình Xuyên, tứ đệ Diệp Bình Phàm đều đối xử với ngươi rất tốt. Chỉ từ khi ký ức xuyên không của ngươi xuất hiện tính cách của ngươi mới dần thay đổi. Từ 1 phò mã ăn chơi trác táng không làm nên chuyện trở thành người sâu không lường được. ",
     "playerAvatarUrl": null,
     "playerAvatarStoredLocally": false,
     "difficulty": "Ác Mộng",
@@ -46,62 +47,50 @@
     "enableParasiticSystem": false,
     "initialWorldElements": [
       {
-        "id": "87a03dd1-43e3-4993-b99e-021c18d886c6",
+        "id": "47029092-6570-4d00-8458-aee94f3527db",
         "type": "LOCATION",
-        "name": "Thôn Mộc Nhĩ",
-        "description": "Thôn Mộc Nhĩ, huyện Hãn Châu, tỉnh Sơn Tây"
+        "name": "Tướng Quân Phủ",
+        "description": "Phủ đệ Diệp gia"
       }
     ],
     "useCharacterGoal": false,
-    "characterGoal": "Cứu vớt tất cả mỹ nhân bạc mệnh",
+    "characterGoal": "Túy ngọa mỹ nhân tất\nTỉnh chưởng thiên hạ quyền",
     "allowCustomActionInput": true,
     "currencyName": "Bạc, Vàng",
     "isFanFictionMode": false,
-    "fanFicOriginalWork": "",
+    "fanFicOriginalWork": "Tam quốc diễn nghĩa",
     "fanFicPlotSummary": "",
     "fanFicCharacter": "Diệp Thần",
     "fanFicEntryMethod": "Xuyên không",
     "customFanFicEntryMethod": "",
     "skipCrisis": true,
     "isDouLuoWorld": false,
+    "isTamQuocWorld": true,
     "initialMartialSouls": [],
     "initialTraits": [
       {
-        "id": "f2c59fe6-d618-43ca-8841-e13b598268c4",
-        "name": "Phong Quyển Tàn Vân",
-        "description": "Kiếm khí trùng tiêu tam vạn lý\nNhất kiếm quang hàn thập cửu châu",
-        "category": "Kỹ năng",
-        "rarity": "Thần Thoại",
-        "stats": "ATK: 999999999",
-        "effects": "Tấn công tất cả kẻ địch, bỏ qua giáp và gây [Trọng Thương]\n[Trọng Thương]: ATK giảm 50%, SPD giảm 50%, không thể hồi máu bằng thuốc hoặc kỹ năng",
-        "equipmentType": "",
-        "usageCondition": "",
-        "skillCategoryChoice": "Chủ động",
-        "cooldown": "0"
-      },
-      {
-        "id": "e6667682-91f7-4f04-b409-a9b0725fcf66",
-        "name": "Bách Điểu Triều Phụng",
-        "description": "Tuyệt kỹ thương pháp đỉnh cao tấn công nhanh chóng như bách điểu triều phụng, quét ngang tất cả kẻ địch",
-        "category": "Kỹ năng",
-        "rarity": "Thần Thoại",
-        "stats": "ATK: 999999999",
-        "effects": "Tấn công tất cả kẻ địch, bỏ qua giáp, đẩy lùi và gây [Xuất Huyết]\n[Xuất Huyết]: Mỗi hiệp mất 5% máu tối đa, không thể thanh tẩy. Có thể cộng dồn tối đa 5 tầng",
-        "equipmentType": "",
-        "usageCondition": "",
-        "skillCategoryChoice": "Chủ động",
-        "cooldown": "0"
-      },
-      {
-        "id": "97e04055-38f9-4811-937d-591e48e08281",
-        "name": "Bách Điểu Triều Phụng Thương",
-        "description": "Thần binh gắn liền với tên tuổi Thương Tôn Đổng Uyên",
+        "id": "3f941412-0fe0-464f-a80d-a40ae41fee26",
+        "name": "Long Đảm Lượng Ngân Thương",
+        "description": "Thân thương dài trọn một trượng hai thước, đúc bằng loại thép tinh luyện ngàn năm, quanh năm tỏa ra hàn khí buốt giá. Thân cán thương bằng bạc bạch sáng quắc, soi rõ bóng người, trên trạm trổ hình rồng thiêng uốn lượn, thần thái uy nghi như muốn xé gió tung mây. Đầu thương rèn bằng ngọc thiết kiên xảo, dẹp mà nhọn sắc, hai bên lưỡi có gờ sắc bén tựa long nha, mỗi lần vung lên lại xé gió phát ra tiếng như long ngâm.",
         "category": "Vật phẩm",
         "rarity": "Thần Thoại",
-        "stats": "ATK: 999999999\nSRP: 999999999",
-        "effects": "Gây hiệu ứng [Trọng thương] và [Vết thương sâu]\n[Trọng thương]: ATK giảm 50%, SPD giảm 50%, không thể hồi máu bằng thuốc hoặc kỹ năng\n[Vết thương sâu]: DEF giảm 50%, HP giảm 50%, không thể hồi máu bằng thuốc hoặc kỹ năng",
+        "stats": "ATK: 999999999",
+        "effects": "[Phá giáp]: Gây 100% sát thương chuẩn, bỏ qua DEF",
         "equipmentType": "Vũ khí",
-        "usageCondition": "level: 1",
+        "usageCondition": "Level: 1",
+        "skillCategoryChoice": "",
+        "cooldown": ""
+      },
+      {
+        "id": "7942d7ff-c1a3-46b9-b9e5-de6180fc9edd",
+        "name": "Bạch Long Mã",
+        "description": "Toàn thân nó phủ một màu lông trắng muốt như ngọc tuyết, mượt mà sáng bóng, tuyệt nhiên không lẫn lấy một sợi lông tạp. Nơi cổ ngựa, lốm đốm vảy rồng trắng, bộ bờm dày dặn dựng đứng, xù ra uy phong lẫm lẫm, nhìn qua chẳng khác nào bờm của con sư tử chúa chốn sơn lâm. Đôi mắt sáng quắc như tia điện, vĩ lực vô song, ngày đi ngàn dặm không biết mệt mỏi, dẫu gặp khe sâu vực thẳm cũng nhảy qua dễ dàng như đi trên đất bằng.",
+        "category": "Vật phẩm",
+        "rarity": "Thần Thoại",
+        "stats": "HP: 999999999\nDEF: 999999999\nSPD: 999999999",
+        "effects": "Có thể đi, đứng, chạy trên mặt nước như trên đất bằng.",
+        "equipmentType": "Phương tiện",
+        "usageCondition": "Level: 1",
         "skillCategoryChoice": "",
         "cooldown": ""
       }
@@ -112,42 +101,187 @@
       "idle": "",
       "attack_normal": ""
     },
-    "characterRole": "Lập trình viên đột tử khi đang tăng ca được xuyên không về Tam quốc ",
-    "characterAppearance": "Trích tiên hạ phàm. Dung mạo khiến tất cả các mỹ nhân như Điêu Thuyền, Thái Văn Cơ, Chân Cơ, Đại Kiều, Tiểu Kiều,... đều yêu ngay từ cái nhìn đầu tiên"
+    "characterRole": "Lập trình viên đột tử khi đang tăng ca được xuyên không về Tam quốc",
+    "characterAppearance": "Thiếu niên mười sáu tuổi có vóc dáng thanh mảnh, vận bộ trường y màu trắng giản dị mà nho nhã, gương mặt tuấn tú. Mái tóc đen được buộc gọn bằng dải lụa trắng, tỏa ra khí chất thư thái.",
+    "playerAvatarThumbnail": null
   },
   "knowledge": {
     "time": {
       "year": 0,
-      "month": 1,
-      "day": 1,
-      "hour": 21
+      "month": 3,
+      "day": 9,
+      "hour": 9
     },
-    "weather": "Trời tối, gió mát",
+    "weather": "Nắng ấm, gió nhẹ mang hương đinh hương",
+    "narrativeCombatState": {
+      "isActive": false,
+      "combatants": []
+    },
     "loreLocations": [],
-    "loreNpcs": [],
+    "loreNpcs": [
+      {
+        "id": "lore_thai_van_co",
+        "description": "Nữ sĩ nổi tiếng, tài hoa xuất chúng, con gái của đại thần Thái Ung.",
+        "Name": "Thái Văn Cơ"
+      },
+      {
+        "id": "lore_chan_co",
+        "description": "Mỹ nhân danh tiếng lẫy lừng của Chân thị Ký Châu.",
+        "Name": "Chân Cơ"
+      },
+      {
+        "id": "lore_ha_hau_khinh_y",
+        "description": "Ái nữ của Thái thú Chân Định Hạ Hầu Kiệt.",
+        "Name": "Hạ Hầu Khinh Y"
+      },
+      {
+        "id": "lore_dai_kieu",
+        "description": "Đại Kiều của Kiều gia Giang Đông, dung nhan kiều diễm tuyệt trần.",
+        "Name": "Kiều Dao"
+      },
+      {
+        "id": "lore_tieu_kieu",
+        "description": "Tiểu Kiều của Kiều gia Giang Đông, thông minh lanh lợi.",
+        "Name": "Kiều Sương"
+      },
+      {
+        "id": "lore_trieu_vu",
+        "description": "Muội muội của danh tướng Triệu Vân.",
+        "Name": "Triệu Vũ"
+      },
+      {
+        "id": "lore_cong_ton_bao_nguyet",
+        "description": "Ái nữ võ nghệ cao cường của Thái thú Ung Châu Công Tôn Toản.",
+        "Name": "Công Tôn Bảo Nguyệt"
+      },
+      {
+        "id": "lore_ma_van_loc",
+        "description": "Muội muội của Mã Siêu vùng Tây Lương.",
+        "Name": "Mã Vân Lộc"
+      }
+    ],
     "loreItems": [],
     "locations": [
       {
-        "id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
-        "Name": "Thôn Mộc Nhĩ",
-        "description": "Một địa điểm vừa được khám phá.",
-        "category": "Khu Vực",
-        "tier": 3
+        "id": "dai_han_quoc",
+        "description": "Vương triều phương Đông đang trong cơn hấp hối, thiên hạ đại loạn, chư hầu cát cứ.",
+        "category": "Quốc Gia",
+        "tier": 2,
+        "Name": "Đại Hán Quốc"
+      },
+      {
+        "id": "tuong_quan_phu",
+        "description": "Phủ đệ uy nghiêm của Diệp gia tại kinh thành Lạc Dương, nơi ở của Đại tướng quân Diệp Vô Song.",
+        "category": "Công Trình",
+        "tier": 3,
+        "parentLocationId": "dai_han_quoc",
+        "Name": "Tướng Quân Phủ"
+      },
+      {
+        "id": "loc_phu_ninh_an_01",
+        "category": "Công Trình",
+        "tier": 1,
+        "parentLocationId": "lac_duong",
+        "Name": "Phủ Ninh An Công Chúa"
+      },
+      {
+        "id": "loc_van_huong_lau",
+        "category": "Tửu Lâu",
+        "tier": 3,
+        "Name": "Vân Hương Lâu"
       }
     ],
     "items": [],
     "worldItems": [],
     "relationships": [
       {
-        "id": "bcad8843-6bf5-4059-b0c1-3af0b25049c9",
-        "NPC": "Điêu Thuyền",
+        "id": "c6b24673-1fc2-4268-80e4-b194135efd5b",
+        "NPC": "Ngô Thu Phương",
         "Standing": "Thân thiết",
-        "Reason": "Ngươi luôn chăm sóc chu đáo, mang cá ngon về cho nàng."
+        "Reason": "Ngươi chủ động đến thăm nàng sau thời gian dài bị phong ấn nhận thức."
+      },
+      {
+        "id": "507251ce-6d96-41ee-ae69-b5ffcad2e0b1",
+        "NPC": "Điêu Thuyền",
+        "Standing": "Yêu thích",
+        "Reason": "Sự thân mật xác thịt nồng cháy và lời hứa che chở tuyệt đối của ngươi."
+      },
+      {
+        "id": "c1ae9857-4f8e-4979-a7e4-d738c51bff00",
+        "NPC": "Lý Tiệm",
+        "Standing": "Kính nể",
+        "Reason": "Nắm rõ danh sách tuyệt sắc thiên hạ và đưa ra chiến lược phát triển Tử bài sắc bén."
       }
     ],
-    "quests": [],
-    "trackedQuestId": null,
-    "realmProgressionList": [],
+    "quests": [
+      {
+        "id": "44fe453f-6fbf-45f0-a2e5-0721e8e46e80",
+        "title": "Hơi thở của ván cờ mới",
+        "loreId": "lore_quest_van_co_moi",
+        "category": "tự phát",
+        "completion_condition": "return_to_npc",
+        "questGiver": "Dã Tâm Của Diệp Thần",
+        "objectives": [
+          {
+            "id": "den_mat_phong_van_huong_lau",
+            "text": "Lặng lẽ rời phủ tướng quân để đi đến mật phòng tại tầng ba của tửu lâu Vân Hương.",
+            "type": "goto",
+            "targetName": "Tầng Ba Vân Hương Lâu",
+            "requiredCount": 1,
+            "currentCount": 1,
+            "completed": true
+          },
+          {
+            "id": "doi_soat_tien_do_hong_nhan",
+            "text": "Tiến hành đối soát danh sách ca kỹ và đánh giá hiệu quả thu thập tin tức của tổ chức Hồng Nhan sau một tháng.",
+            "type": "action",
+            "targetName": "Bảng Danh Sách Hồng Nhan",
+            "requiredCount": 1,
+            "currentCount": 1,
+            "completed": true
+          },
+          {
+            "id": "nghe_bao_cao_tu_dieu_thuyen",
+            "text": "Trao đổi trực tiếp với Điêu Thuyền về những bí mật quân nhu của Diệp Bình Xuyên thu thập được từ biên giới.",
+            "type": "talk",
+            "targetName": "Điêu Thuyền",
+            "requiredCount": 1,
+            "currentCount": 0,
+            "completed": false
+          },
+          {
+            "id": "trien_khai_ke_hoach_giap_lai",
+            "text": "Ra lệnh cho quân cờ Ngân bài thâm nhập vào phủ Ninh An công chúa để tìm kiếm mối liên kết ẩn với phương Tây.",
+            "type": "action",
+            "targetName": "Mạng Lưới Tình Báo",
+            "requiredCount": 1,
+            "currentCount": 0,
+            "completed": false
+          }
+        ],
+        "rewardsDescription": "Củng cố quyền kiểm soát tuyệt đối với tổ chức Hồng Nhan, nhận được bản đồ phân bố quân lương tại biên giới Tây Viêm và thăng cấp thực lực cá nhân lên cấp độ mới.",
+        "failureDescription": "Sự tồn tại của tổ chức Hồng Nhan bị các phe phái thù địch trong phủ tướng quân chú ý, dẫn đến việc lộ danh tính thật và khiến kế hoạch thâu thiên hoán nhật của Diệp gia bị đẩy nhanh hơn.",
+        "deadline_hours": 12,
+        "status": "active"
+      }
+    ],
+    "trackedQuestId": "44fe453f-6fbf-45f0-a2e5-0721e8e46e80",
+    "realmProgressionList": [
+      "Nhất Phẩm - Phàm Nhân",
+      "Nhị Phẩm - Luyện Thể",
+      "Tam Phẩm - Khai Mạch",
+      "Tứ Phẩm - Ngưng Khí",
+      "Ngũ Phẩm - Vũ Giả",
+      "Lục Phẩm - Đấu Sư",
+      "Thất Phẩm - Tông Sư",
+      "Bát Phẩm - Đại Tông Sư",
+      "Cửu Phẩm - Thiên Nhân",
+      "Vương Cảnh",
+      "Hoàng Cảnh",
+      "Đế Cảnh",
+      "Thánh Cảnh",
+      "Thần Cảnh"
+    ],
     "knownRecipes": [],
     "eventHistory": [],
     "unlearnedSkillScrolls": [],
@@ -158,10 +292,10 @@
         "id": "player",
         "isPlayer": true,
         "loreId": null,
-        "level": 1,
-        "exp": 10.1,
+        "level": 80,
+        "exp": 21903.445,
         "progressionState": "Tu Luyện Thường",
-        "ap": 5,
+        "ap": 1520,
         "currency": 0,
         "allocatedPoints": {
           "hp": 0,
@@ -169,7 +303,7 @@
           "def": 0,
           "spd": 0
         },
-        "current_location_id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
+        "current_location_id": "tuong_quan_phu",
         "baseHp": 2000,
         "baseAtk": 200,
         "baseDef": 100,
@@ -179,11 +313,146 @@
         "baseDmgAmp": 100,
         "baseDmgRes": 100,
         "baseEvasion": 100,
-        "hp": 2000,
-        "maxhp": 2000,
-        "atk": 200,
-        "def": 100,
-        "spd": 300,
+        "hp": 1000001999,
+        "maxhp": 1000001999,
+        "atk": 1000000199,
+        "def": 1000000099,
+        "spd": 1000000299,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": {
+            "Name": "Long Đảm Lượng Ngân Thương",
+            "Type": "Vũ khí",
+            "Rarity": "Thần Thoại",
+            "description": "Thân thương dài trọn một trượng hai thước, đúc bằng loại thép tinh luyện ngàn năm, quanh năm tỏa ra hàn khí buốt giá. Thân cán thương bằng bạc bạch sáng quắc, soi rõ bóng người, trên trạm trổ hình rồng thiêng uốn lượn, thần thái uy nghi như muốn xé gió tung mây. Đầu thương rèn bằng ngọc thiết kiên xảo, dẹp mà nhọn sắc, hai bên lưỡi có gờ sắc bén tựa long nha, mỗi lần vung lên lại xé gió phát ra tiếng như long ngâm.",
+            "Stats": "atk:999999999",
+            "Requirements": "level:1",
+            "Weight": 12,
+            "effects": [
+              {
+                "action": {
+                  "type": "damage",
+                  "target": {
+                    "type": "single_enemy"
+                  },
+                  "power_components": [
+                    {
+                      "source_stat": "ATK",
+                      "scale_number": 1,
+                      "based_on": "caster"
+                    }
+                  ],
+                  "special_properties": {
+                    "true_damage": true
+                  }
+                },
+                "conditions": [
+                  {
+                    "trigger": "ON_SKILL_USE"
+                  }
+                ]
+              }
+            ],
+            "technicaldescription": "Khi sử dụng kỹ năng, gây sát thương chuẩn bằng một trăm phần trăm sức tấn công của bản thân lên một mục tiêu, đồng thời bỏ qua hoàn toàn phòng ngự.",
+            "Consumable": false,
+            "Equippable": true,
+            "id": "e87ed352-4569-4080-b4a3-65c9c7f09ae6",
+            "Value": 9999900000,
+            "was_ever_equipped": true
+          },
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": {
+            "Name": "Bạch Long Mã",
+            "Type": "Phương tiện",
+            "Rarity": "Thần Thoại",
+            "description": "Toàn thân nó phủ một màu lông trắng muốt như ngọc tuyết, mượt mà sáng bóng, tuyệt nhiên không lẫn lấy một sợi lông tạp. Nơi cổ ngựa, lốm đốm vảy rồng trắng, bộ bờm dày dặn dựng đứng, xù ra uy phong lẫm lẫm, nhìn qua chẳng khác nào bờm của con sư tử chúa chốn sơn lâm. Đôi mắt sáng quắc như tia điện, vĩ lực vô song, ngày đi ngàn dặm không biết mệt mỏi, dẫu gặp khe sâu vực thẳm cũng nhảy qua dễ dàng như đi trên đất bằng.",
+            "Stats": "hp:999999999,def:999999999,spd:999999999",
+            "Requirements": "level:1",
+            "Weight": 100,
+            "Consumable": false,
+            "Equippable": true,
+            "id": "94809089-4540-45b8-8f94-fc48172b97f6",
+            "Value": 11999880000,
+            "was_ever_equipped": true
+          },
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "Name": "Diệp Thần",
+        "Gender": "Nam",
+        "Age": 10,
+        "Role": "Lập trình viên đột tử khi đang tăng ca được xuyên không về Tam quốc",
+        "Appearance": "Thiếu niên mười sáu tuổi có vóc dáng thanh mảnh, vận bộ trường y màu trắng giản dị mà nho nhã, gương mặt tuấn tú. Mái tóc đen được buộc gọn bằng dải lụa trắng, tỏa ra khí chất thư thái.",
+        "Backstory": "Con trai thứ 3 của Diệp Vô Song đại tướng quân Đại Hán. \nPhò mã của Ninh An công chúa Đại Hán.\nThân phận thực sự là Thái tử Nam Ly quốc nhưng bị tính kế vào 1 lần tụ hội tại Đại Hán. Kế hoạch Thâu thiên hoán nhật đánh tráo Thái tử Nam Ly quốc và con trai thứ 3 của đại tướng quân Đại Hán. Mỗi năm ngươi đều bị cho uống Bách Nhật Túy khiến ngươi quên đi thân phận thật sự. Lần đầu tiên ngươi uống Bách Nhật Túy là do con trai thứ 2 của Diệp Vô Song là Diệp Bình Xuyên lừa uống. Những năm đầu, đại ca Diệp Bình Sinh, nhị ca Diệp Bình Xuyên, tứ đệ Diệp Bình Phàm đều đối xử với ngươi rất tốt. Chỉ từ khi ký ức xuyên không của ngươi xuất hiện tính cách của ngươi mới dần thay đổi. Từ 1 phò mã ăn chơi trác táng không làm nên chuyện trở thành người sâu không lường được. ",
+        "MartialSouls": [],
+        "Personality": "Bí ẩn, Thông minh",
+        "isAppraised": true,
+        "description": "",
+        "isCompanion": false,
+        "maxExp": 4380689,
+        "realm": "Bát Phẩm - Đại Tông Sư",
+        "incomingHealing": 1,
+        "skills": []
+      },
+      {
+        "id": "diep_vo_song_npc",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 75,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 349,
+          "atk": 347,
+          "def": 347,
+          "spd": 347
+        },
+        "current_location_id": null,
+        "baseHp": 1680,
+        "baseAtk": 168,
+        "baseDef": 84,
+        "baseSpd": 104,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 71480,
+        "maxhp": 71480,
+        "atk": 3638,
+        "def": 3554,
+        "spd": 3574,
         "cr": 15,
         "cdmg": 200,
         "dmgAmp": 100,
@@ -221,13 +490,198 @@
           "Trữ vật": null,
           "Dị thường": null
         },
-        "Name": "",
-        "maxExp": 100,
-        "realm": "Giai Đoạn 1",
-        "incomingHealing": 1
+        "isCompanion": false,
+        "affinity": 0,
+        "description": "Đại tướng quân đương triều của Đại Hán, phụ thân trên danh nghĩa của ngươi.",
+        "stance": "Thân thiện",
+        "personality": "Uy nghiêm",
+        "Gender": "Nam",
+        "Name": "Diệp Vô Song",
+        "realm": "Bát Phẩm - Đại Tông Sư",
+        "incomingHealing": 1,
+        "maxExp": 3976485,
+        "skills": []
       },
       {
-        "id": "dieu_thuyen_10t",
+        "id": "diep_binh_xuyen_npc",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 15,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 81,
+          "atk": 78,
+          "def": 78,
+          "spd": 78
+        },
+        "current_location_id": null,
+        "baseHp": 480,
+        "baseAtk": 48,
+        "baseDef": 24,
+        "baseSpd": 44,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 16680,
+        "maxhp": 16680,
+        "atk": 828,
+        "def": 804,
+        "spd": 824,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": -50,
+        "description": "",
+        "stance": "Thân thiện",
+        "personality": "Xảo quyệt",
+        "Gender": "Nam",
+        "Name": "Diệp Bình Xuyên",
+        "realm": "Nhị Phẩm - Luyện Thể",
+        "incomingHealing": 1,
+        "maxExp": 10457,
+        "Role": "Môn chủ ngầm của Ám Thương Hội, Nhị thiếu gia nhà họ Diệp",
+        "Appearance": "Thân hình cao ráo, gương mặt tú khí, lông mày lá liễu cùng đôi mắt phượng lúc nào cũng đong đầy vẻ ôn hòa. Hắn thường mặc trường bào màu xanh nhạt thêu họa tiết mây trắng, tay cầm quạt xếp bằng trúc. Bề ngoài tỏ ra là một thư sinh yếu đuối thanh nhã, nhưng ánh mắt thi thoảng lại lóe lên tia lạnh lẽo tàn nhẫn.",
+        "Backstory": "Diệp Bình Xuyên vốn không phải con ruột của Diệp gia mà là đứa trẻ được nhận nuôi từ nhỏ. Mang trong mình mối thù dòng họ bị diệt vong, hắn bí mật gây dựng thế lực riêng và âm mưu thực hiện kế hoạch Thâu Thiên Hoán Nhật nhằm tráo đổi thân phận, đoạt lấy toàn bộ gia sản cũng như mạng sống của nhân vật chính để làm bước đệm xưng bá thời loạn thế.",
+        "Personality": "Xảo quyệt, điềm tĩnh, mưu mô thâm trầm, bề ngoài ân cần chu đáo nhưng bên trong tàn nhẫn độc ác.",
+        "Stance": "Giả vờ yêu thương chăm sóc nhân vật chính như em ruột, nhưng thực chất xem nhân vật chính là quân cờ có thể vứt bỏ bất cứ lúc nào.",
+        "CourtesyName": "Tử An",
+        "isAppraised": true,
+        "skills": []
+      },
+      {
+        "id": "npc_ngo_thu_phuong_01",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 15,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": -5,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 27,
+          "atk": 26,
+          "def": 26,
+          "spd": 26
+        },
+        "current_location_id": "loc_phu_ninh_an_01",
+        "baseHp": 480,
+        "baseAtk": 48,
+        "baseDef": 24,
+        "baseSpd": 44,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 5880,
+        "maxhp": 5880,
+        "atk": 308,
+        "def": 284,
+        "spd": 304,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 90,
+        "Name": "Ngô Thu Phương",
+        "Stance": "Nàng xem bạn là một nhân tố mới đầy triển vọng trên bàn cờ thiên hạ và đang âm thầm quan sát để đánh giá thực lực cũng như tâm tính của bạn.",
+        "realm": "Nhị Phẩm - Luyện Thể",
+        "incomingHealing": 1,
+        "maxExp": 10457,
+        "Gender": "Nữ",
+        "Role": "Công chúa nhà Tây Viêm đế quốc. Quen biết với nhân vật chính qua tụ hội tứ quốc. Tụ hội gồm Thái tử Nam Ly đế quốc và Đông Thương đế quốc cùng Công chúa Đại Hán đế quốc và Tây Viêm đế quốc",
+        "Appearance": "Dáng người thanh tú, uyển chuyển trong bộ cung trang lụa tơ tằm thêu hoa mẫu đơn tinh xảo màu vàng nhạt. Khuôn mặt trái xoan với đôi mắt phượng sắc sảo nhưng đượm vẻ ưu tư, làn da trắng mịn như ngọc thạch. Nàng thường cài trâm phượng bằng vàng ròng tỏa ra khí chất cao sang, thoát tục nhưng cũng đầy sự trầm mặc của một bậc bề trên đang gánh vác sơn hà.",
+        "Backstory": "Là một công chúa tài hoa của Tây Viêm. Rất thân thiết với nhân vật chính lúc tụ hội tứ quốc. Tận mắt chứng kiến kế hoạch Thâu Thiên Hoán Nhật nhằm vào nhân vật chính, nàng đã lên kế hoạch giết Ninh An công chúa thật sự và thay thế thân phận của nàng để ở lại Đại Hán giúp đỡ nhân vật chính bằng quyền lực và trí tuệ của mình trong bóng tối",
+        "Personality": "Thông minh tuyệt đỉnh, điềm tĩnh trước mọi biến cố và có tầm nhìn chính trị sắc sảo. Nàng mang lòng trắc ẩn sâu sắc với bách tính nhưng cũng vô cùng kiên định, thậm chí có phần lạnh lùng khi đưa ra những quyết định quan trọng cho đại cuộc.",
+        "CourtesyName": "Tịch Nhan",
+        "isAppraised": true,
+        "formerCourtesyNames": [
+          "Trường Lạc"
+        ],
+        "CourtesyNameLocked": true,
+        "titles": [
+          "Ninh An công chúa"
+        ],
+        "description": "Công chúa Tây Viêm trong thân phận Ninh An công chúa của Đại Hán, vị hôn thê của ngươi.",
+        "stance": "Thân thiết",
+        "skills": []
+      },
+      {
+        "id": "6fd105fd-ec36-4837-a4dd-381fff6ca650",
         "isPlayer": false,
         "loreId": null,
         "level": 1,
@@ -241,7 +695,7 @@
           "def": 1,
           "spd": 1
         },
-        "current_location_id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
+        "current_location_id": "loc_phu_ninh_an_01",
         "baseHp": 200,
         "baseAtk": 20,
         "baseDef": 10,
@@ -294,20 +748,178 @@
           "Dị thường": null
         },
         "isCompanion": false,
-        "affinity": 45,
-        "description": "",
+        "affinity": 0,
+        "Name": "Ám Vệ",
+        "description": "Một nhân vật xuất hiện trong câu chuyện.",
+        "Stance": "Trung lập",
+        "realm": "Nhất Phẩm - Phàm Nhân",
+        "incomingHealing": 1,
+        "maxExp": 100,
+        "skills": []
+      },
+      {
+        "id": "npc_dieu_thuyen",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 12,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 21,
+          "atk": 20,
+          "def": 20,
+          "spd": 20
+        },
+        "current_location_id": "tuong_quan_phu",
+        "baseHp": 420,
+        "baseAtk": 42,
+        "baseDef": 21,
+        "baseSpd": 41,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 4620,
+        "maxhp": 4620,
+        "atk": 242,
+        "def": 221,
+        "spd": 241,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 100,
         "stance": "Thân thiện",
         "Name": "Điêu Thuyền",
         "CourtesyName": "Tú Nhi",
-        "realm": "Giai Đoạn 1",
+        "realm": "Nhị Phẩm - Luyện Thể",
+        "incomingHealing": 1,
+        "maxExp": 7482,
+        "formerCourtesyNames": [
+          "Tú Dinh"
+        ],
+        "CourtesyNameLocked": true,
+        "Role": "Thủ lĩnh bí mật của tổ chức Hồng Nhan, thiếu nữ thôn Mộc Nhĩ có thiên tư tuyệt thế.",
+        "Appearance": "Một thiếu nữ mang vẻ đẹp thanh tú, thoát tục dù vận trên mình bộ đồ vải thô sơ sài. Gương mặt trái xoan, đôi mắt phượng mày ngài ẩn chứa nét thông tuệ hơn người. Làn da trắng ngần như tuyết, mái tóc đen mượt thả ngang vai, tỏa ra một khí chất cao sang khiến người đối diện vừa muốn che chở vừa không dám mạo phạm.",
+        "Backstory": "Vốn là tiểu thư gia đình danh giá bị thất lạc trong binh lửa, cô lưu lạc đến thôn Mộc Nhĩ và được người dân nơi đây nuôi dưỡng.",
+        "Personality": "Trầm tĩnh, quyết đoán và mang một tâm tư sâu thẳm khó đoán định. Cô luôn giữ thái độ chừng mực, khéo léo trong giao tiếp nhưng bên trong lại vô cùng sắc sảo.",
+        "Stance": "Quan sát và đánh giá thực lực cũng như tâm tính của nhân vật chính để xem có thể trở thành đồng minh hay không.",
+        "isAppraised": true,
+        "skills": []
+      },
+      {
+        "id": "3c35cc9f-f4d5-44a7-b936-c5d9958544da",
+        "isPlayer": false,
+        "loreId": null,
+        "level": 1,
+        "exp": 0,
+        "progressionState": "Tu Luyện Thường",
+        "ap": 0,
+        "currency": 0,
+        "allocatedPoints": {
+          "hp": 2,
+          "atk": 1,
+          "def": 1,
+          "spd": 1
+        },
+        "current_location_id": "tuong_quan_phu",
+        "baseHp": 200,
+        "baseAtk": 20,
+        "baseDef": 10,
+        "baseSpd": 30,
+        "baseCr": 15,
+        "baseCdmg": 200,
+        "baseDmgAmp": 100,
+        "baseDmgRes": 100,
+        "baseEvasion": 100,
+        "hp": 600,
+        "maxhp": 600,
+        "atk": 30,
+        "def": 20,
+        "spd": 40,
+        "cr": 15,
+        "cdmg": 200,
+        "dmgAmp": 100,
+        "dmgRes": 0,
+        "evasion": 0,
+        "learnedSkills": [],
+        "equippedSkills": {
+          "combat_basic_1": null,
+          "combat_basic_2": null,
+          "combat_basic_3": null,
+          "combat_basic_4": null,
+          "combat_basic_5": null,
+          "combat_basic_6": null,
+          "combat_basic_7": null,
+          "combat_basic_8": null,
+          "combat_ultimate": null,
+          "adventure_1": null,
+          "adventure_2": null,
+          "adventure_3": null
+        },
+        "potionCooldown": 0,
+        "longTermStatuses": [],
+        "combatStatuses": [],
+        "inventory": [],
+        "pendingSkillsToLearn": [],
+        "equippedItems": {
+          "Đầu": null,
+          "Thân": null,
+          "Chân": null,
+          "Vũ khí chính": null,
+          "Vũ khí phụ": null,
+          "Phụ kiện 1": null,
+          "Phụ kiện 2": null,
+          "Phương tiện": null,
+          "Trữ vật": null,
+          "Dị thường": null
+        },
+        "isCompanion": false,
+        "affinity": 0,
+        "Name": "Lý Tiệm",
+        "description": "Một nhân vật xuất hiện trong câu chuyện.",
+        "Stance": "Trung lập",
+        "realm": "Nhất Phẩm - Phàm Nhân",
         "incomingHealing": 1,
         "maxExp": 100,
-        "Role": "Thanh mai trúc mã nhà bên, Thiên Hương tiên thể chưa thức tỉnh",
-        "Appearance": "Dù mới mười tuổi và mặc y phục vải thô đơn sơ, Tú Nhi đã lộ rõ dung mạo của một tuyệt thế giai nhân tương lai. Đôi mắt trong veo như nước mùa thu, làn da trắng ngần mịn màng như bạch ngọc, mái tóc đen nhánh buộc hai bên bằng dây ruy-băng đỏ. Mỗi bước đi của cô bé đều toát lên vẻ nhẹ nhàng, uyển chuyển tự nhiên.",
-        "Backstory": "Là cô bé hàng xóm sống cạnh nhà nhân vật chính. Cha mẹ mất sớm do thiên tai, cô bé phải tự lập từ nhỏ nhưng may mắn được nhân vật chính thường xuyên giúp đỡ, đùm bọc. Ít ai biết rằng, trong huyết quản của Tú Nhi đang ẩn chứa một luồng mị lực bẩm sinh của tiên thể chưa thức tỉnh, vận mệnh sau này định sẵn sẽ làm khuynh đảo cả giang sơn Tam Quốc.",
-        "Personality": "Thông minh, hiểu chuyện trước tuổi, tính cách dịu dàng, hoạt bát nhưng cũng có phần bướng bỉnh khi muốn bảo vệ những người mình yêu thương. Rất thích bám lấy nhân vật chính và luôn nỗ lực giúp đỡ việc nhà.",
-        "Stance": "Cực kỳ ỷ lại và tin tưởng nhân vật chính, coi chàng như người thân duy nhất và là chỗ dựa vững chãi trong cuộc đời.",
-        "isAppraised": true
+        "skills": []
       }
     ],
     "sharedCooldowns": {
@@ -319,13 +931,314 @@
     "progression": {
       "recentMeaningfulActions": [
         {
-          "reason": "Trò chuyện với Thôn trưởng Lão Tam và nắm bắt thông tin về Thái Bình Đạo dưới góc nhìn lạc quan",
-          "turn": 7
+          "reason": "Nghỉ ngơi dưỡng sức hồi phục thể trạng và khéo léo bồi dưỡng tình cảm với Ninh An Công Chúa",
+          "turn": 3
         }
       ],
-      "lastExpResolvedTurn": 1
+      "lastExpResolvedTurn": 18
     },
     "loreQuests": [],
+    "pendingCreations": [],
+    "deathState": {},
+    "isDeathTurn": false,
+    "lastLockedResult": {
+      "turn_id": 18,
+      "world_time": 18,
+      "is_death_turn": false,
+      "in_combat": false,
+      "battle_active": false,
+      "outcome": {
+        "type": "none",
+        "winner_id": null,
+        "loser_id": null
+      },
+      "fields": {
+        "exp_delta_player": 4380.689
+      }
+    },
+    "stateHistory": [
+      {
+        "time": {
+          "year": 0,
+          "month": 3,
+          "day": 7,
+          "hour": 9
+        },
+        "location_id": "tuong_quan_phu",
+        "weather": "Nắng ấm, gió nhẹ mang hương đinh hương",
+        "characters": [
+          {
+            "id": "player",
+            "Name": "Diệp Thần",
+            "level": 80,
+            "exp": 13142.067000000001,
+            "hp": 1000001999,
+            "maxhp": 1000001999,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "diep_vo_song_npc",
+            "Name": "Diệp Vô Song",
+            "level": 75,
+            "exp": 0,
+            "hp": 71480,
+            "maxhp": 71480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "diep_binh_xuyen_npc",
+            "Name": "Diệp Bình Xuyên",
+            "level": 15,
+            "exp": 0,
+            "hp": 16680,
+            "maxhp": 16680,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ngo_thu_phuong_01",
+            "Name": "Ngô Thu Phương",
+            "level": 15,
+            "exp": 0,
+            "hp": 5880,
+            "maxhp": 5880,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "6fd105fd-ec36-4837-a4dd-381fff6ca650",
+            "Name": "Ám Vệ",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_dieu_thuyen",
+            "Name": "Điêu Thuyền",
+            "level": 12,
+            "exp": 0,
+            "hp": 4620,
+            "maxhp": 4620,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "3c35cc9f-f4d5-44a7-b936-c5d9958544da",
+            "Name": "Lý Tiệm",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          }
+        ],
+        "quests": [
+          {
+            "id": "44fe453f-6fbf-45f0-a2e5-0721e8e46e80",
+            "title": "Hơi thở của ván cờ mới",
+            "status": "active",
+            "objectives": [
+              {
+                "id": "den_mat_phong_van_huong_lau",
+                "text": "Lặng lẽ rời phủ tướng quân để đi đến mật phòng tại tầng ba của tửu lâu Vân Hương.",
+                "type": "goto",
+                "targetName": "Tầng Ba Vân Hương Lâu",
+                "requiredCount": 1,
+                "currentCount": 1,
+                "completed": true
+              },
+              {
+                "id": "doi_soat_tien_do_hong_nhan",
+                "text": "Tiến hành đối soát danh sách ca kỹ và đánh giá hiệu quả thu thập tin tức của tổ chức Hồng Nhan sau một tháng.",
+                "type": "action",
+                "targetName": "Bảng Danh Sách Hồng Nhan",
+                "requiredCount": 1,
+                "currentCount": 1,
+                "completed": true
+              },
+              {
+                "id": "nghe_bao_cao_tu_dieu_thuyen",
+                "text": "Trao đổi trực tiếp với Điêu Thuyền về những bí mật quân nhu của Diệp Bình Xuyên thu thập được từ biên giới.",
+                "type": "talk",
+                "targetName": "Điêu Thuyền",
+                "requiredCount": 1,
+                "currentCount": 0,
+                "completed": false
+              },
+              {
+                "id": "trien_khai_ke_hoach_giap_lai",
+                "text": "Ra lệnh cho quân cờ Ngân bài thâm nhập vào phủ Ninh An công chúa để tìm kiếm mối liên kết ẩn với phương Tây.",
+                "type": "action",
+                "targetName": "Mạng Lưới Tình Báo",
+                "requiredCount": 1,
+                "currentCount": 0,
+                "completed": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "time": {
+          "year": 0,
+          "month": 3,
+          "day": 8,
+          "hour": 9
+        },
+        "location_id": "tuong_quan_phu",
+        "weather": "Nắng ấm, gió nhẹ mang hương đinh hương",
+        "characters": [
+          {
+            "id": "player",
+            "Name": "Diệp Thần",
+            "level": 80,
+            "exp": 17522.756,
+            "hp": 1000001999,
+            "maxhp": 1000001999,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "diep_vo_song_npc",
+            "Name": "Diệp Vô Song",
+            "level": 75,
+            "exp": 0,
+            "hp": 71480,
+            "maxhp": 71480,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "diep_binh_xuyen_npc",
+            "Name": "Diệp Bình Xuyên",
+            "level": 15,
+            "exp": 0,
+            "hp": 16680,
+            "maxhp": 16680,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_ngo_thu_phuong_01",
+            "Name": "Ngô Thu Phương",
+            "level": 15,
+            "exp": 0,
+            "hp": 5880,
+            "maxhp": 5880,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "6fd105fd-ec36-4837-a4dd-381fff6ca650",
+            "Name": "Ám Vệ",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "npc_dieu_thuyen",
+            "Name": "Điêu Thuyền",
+            "level": 12,
+            "exp": 0,
+            "hp": 4620,
+            "maxhp": 4620,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          },
+          {
+            "id": "3c35cc9f-f4d5-44a7-b936-c5d9958544da",
+            "Name": "Lý Tiệm",
+            "level": 1,
+            "exp": 0,
+            "hp": 600,
+            "maxhp": 600,
+            "currency": 0,
+            "inventory": [],
+            "longTermStatuses": []
+          }
+        ],
+        "quests": [
+          {
+            "id": "44fe453f-6fbf-45f0-a2e5-0721e8e46e80",
+            "title": "Hơi thở của ván cờ mới",
+            "status": "active",
+            "objectives": [
+              {
+                "id": "den_mat_phong_van_huong_lau",
+                "text": "Lặng lẽ rời phủ tướng quân để đi đến mật phòng tại tầng ba của tửu lâu Vân Hương.",
+                "type": "goto",
+                "targetName": "Tầng Ba Vân Hương Lâu",
+                "requiredCount": 1,
+                "currentCount": 1,
+                "completed": true
+              },
+              {
+                "id": "doi_soat_tien_do_hong_nhan",
+                "text": "Tiến hành đối soát danh sách ca kỹ và đánh giá hiệu quả thu thập tin tức của tổ chức Hồng Nhan sau một tháng.",
+                "type": "action",
+                "targetName": "Bảng Danh Sách Hồng Nhan",
+                "requiredCount": 1,
+                "currentCount": 1,
+                "completed": true
+              },
+              {
+                "id": "nghe_bao_cao_tu_dieu_thuyen",
+                "text": "Trao đổi trực tiếp với Điêu Thuyền về những bí mật quân nhu của Diệp Bình Xuyên thu thập được từ biên giới.",
+                "type": "talk",
+                "targetName": "Điêu Thuyền",
+                "requiredCount": 1,
+                "currentCount": 0,
+                "completed": false
+              },
+              {
+                "id": "trien_khai_ke_hoach_giap_lai",
+                "text": "Ra lệnh cho quân cờ Ngân bài thâm nhập vào phủ Ninh An công chúa để tìm kiếm mối liên kết ẩn với phương Tây.",
+                "type": "action",
+                "targetName": "Mạng Lưới Tình Báo",
+                "requiredCount": 1,
+                "currentCount": 0,
+                "completed": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "affinityState": {
+      "version": 1,
+      "streaks": {
+        "npc_dieu_thuyen_01": {
+          "small_help": {
+            "last_event_turn": 9,
+            "streak": 1
+          }
+        }
+      },
+      "links": {}
+    },
+    "activeBreakthroughQuests": [],
     "systemAssistant": {
       "isActive": false,
       "dialogue": "",
@@ -338,226 +1251,541 @@
         "angry": null,
         "laugh": null
       }
-    },
-    "pendingCreations": [],
-    "deathState": {},
-    "isDeathTurn": false,
-    "lastLockedResult": {
-      "turn_id": 1,
-      "world_time": 1,
-      "is_death_turn": false,
-      "in_combat": false,
-      "battle_active": false,
-      "outcome": {
-        "type": "none",
-        "winner_id": null,
-        "loser_id": null
-      },
-      "fields": {
-        "exp_delta_player": 0.1
-      }
-    },
-    "narrativeCombatState": {
-      "isActive": false,
-      "combatants": []
-    },
-    "stateHistory": [
-      {
-        "time": {
-          "year": 0,
-          "month": 1,
-          "day": 1,
-          "hour": 8
-        },
-        "location_id": null,
-        "weather": "Trời trong",
-        "characters": [
-          {
-            "id": "player",
-            "Name": "",
-            "level": 1,
-            "exp": 0,
-            "hp": 2000,
-            "maxhp": 2000,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          }
-        ],
-        "quests": []
-      },
-      {
-        "time": {
-          "year": 0,
-          "month": 1,
-          "day": 1,
-          "hour": 21
-        },
-        "location_id": "358ce0d5-43f2-4c05-8a0b-1b3f4fc06ca3",
-        "weather": "Trời tối, gió mát",
-        "characters": [
-          {
-            "id": "player",
-            "Name": "",
-            "level": 1,
-            "exp": 10,
-            "hp": 2000,
-            "maxhp": 2000,
-            "currency": 0,
-            "inventory": [],
-            "longTermStatuses": []
-          }
-        ],
-        "quests": []
-      }
-    ]
+    }
   },
   "storyHistory": [
     {
-      "id": "2c523fd1-c2f2-41f6-80b0-a494e09538b0",
+      "id": "a86fe6c2-cfe9-4a3f-a509-11c19729abeb",
       "type": "story",
       "content": [
         {
           "type": "narrative",
-          "content": "Ánh hoàng hôn đỏ ối như máu nhuộm rực cả một góc trời phía tây, rải những tia sáng cuối ngày xuống *Thôn Mộc Nhĩ* hẻo lánh. Gió chiều thổi qua rặng tre xào xạc, mang theo chút không khí mát mẻ nhưng dường như cũng lẫn vào đó một sự ngột ngạt vô hình của thời cuộc dông bão sắp đến. \nNằm lười biếng trên bãi cỏ mịn ven thôn, *Diệp Thần* ngậm một cọng cỏ khô, hai tay gối sau đầu, đôi mắt lấp lánh phản chiếu ánh ráng chiều rực rỡ. Với tính cách lạc quan bẩm sinh, ngươi dường như chẳng hề bận tâm đến những tin đồn triều đình mục nát hay thiên tai liên miên ngoài kia. \nTừ phía lối mòn nhỏ, một bóng dáng lom khom khệ nệ bê chiếc rổ tre lớn chứa đầy mộc nhĩ khô đang tiến lại gần. Đó là *Lão Tam*, thôn trưởng tốt bụng của thôn này. Thấy ngươi vẫn nằm đó hưởng nhàn, lão dừng bước, đặt rổ xuống đất rồi thở dài một tiếng dầy lo âu."
+          "content": "Kinh thành *Lạc Dương* vào hạ, cái nóng oi ả bao trùm lên những con phố lát đá xanh, nhưng bên trong *Tướng Quân Phủ*, không khí lại mang một vẻ tĩnh mịch đến lạ lùng. Ngươi, *Diệp Thần*, đang ngồi khoanh chân trên chiếc sập gỗ trong sương phòng. Ngươi vừa tròn mười tuổi, vóc dáng nhỏ nhắn nhưng đôi mắt lại mang một vẻ thâm trầm không thuộc về lứa tuổi này. \nTrong đầu ngươi lúc này là một mớ hỗn độn. Những ký ức về một thế giới đầy ánh sáng điện tử, những dòng mã lệnh phức tạp và cái chết đột ngột do kiệt sức đang dần hiện rõ, đan xen với ký ức về cuộc sống của một \"Tam công tử\" tại *Đại Hán Quốc*. Ngươi cảm thấy mình vừa tỉnh dậy từ một giấc mộng dài mười năm, một giấc mộng bị phong ấn bởi một làn sương mù dày đặc.\nTiếng gõ cửa vang lên đều đặn, cắt ngang dòng suy nghĩ của ngươi. *Diệp Bình Xuyên* bước vào với nụ cười rạng rỡ trên môi. Hắn vận một bộ cẩm y sang trọng, dáng vẻ hào hoa, trên tay nâng một bầu rượu bằng ngọc tỏa ra hương thơm nồng nàn, thanh khiết."
         },
         {
           "type": "dialogue",
-          "speaker": "Lão Tam",
-          "content": "Diệp Thần này, ngươi còn thong thả nằm đây sao? Gần đây trong huyện truyền tai nhau, có mấy người mặc đạo bào màu vàng, hành tung quỷ dị thường xuyên lảng vảng ngoài thôn. Ta nghe nói bọn họ tự xưng là người của *Thái Bình Đạo*, chuyên phát bùa nước trị bệnh, nhưng ánh mắt bọn họ nhìn thôn chúng ta thật đáng ngại."
+          "speaker": "Diệp Bình Xuyên",
+          "content": "Tam đệ, hôm nay là ngày lành, Nhị ca vừa có được loại rượu quý tên gọi *Bách Nhật Túy*. Nghe nói loại rượu này có thể khai thông trí tuệ, giúp đệ sớm ngày tinh tiến võ học. Mau, uống thử một chén xem sao."
         },
         {
           "type": "narrative",
-          "content": "Ngươi khẽ nhếch môi cười, xoay người ngồi dậy một cách nhẹ nhàng rồi đáp lời lão bằng giọng điệu đầy thư thái."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Ngươi",
-          "content": "Lão Tam ơi là Lão Tam, thiên hạ bao la, đạo sĩ đi truyền đạo là chuyện thường tình của nhân gian. Bọn họ cứu nhân độ thế thì cứ kệ bọn họ đi, có khi nào lại mang đến cho thôn chúng ta chút sinh khí mới không chừng?"
-        },
-        {
-          "type": "narrative",
-          "content": "*Lão Tam* nghe vậy chỉ biết lắc đầu ngao ngán trước sự lạc quan đến kỳ lạ của ngươi. Lão dặn dò ngươi vài câu chú ý an toàn rồi lại khệ nệ bê rổ mộc nhĩ đi về hướng cuối thôn. Ánh mặt trời đã hoàn toàn tắt lịm sau dãy núi phía xa, màn đêm tĩnh mịch bắt đầu bao phủ lấy *Thôn Mộc Nhĩ*."
+          "content": "Ngươi nhìn vò rượu, một cảm giác ớn lạnh chạy dọc sống lưng. Một mảnh ký ức vụn vỡ hiện về—mỗi năm một lần, Nhị ca đều mang loại rượu này đến cho ngươi. Chính nó là thứ khiến ngươi quên đi bản ngã, khiến một Thái tử *Nam Ly Quốc* trở thành một phò mã ăn chơi trác táng, vô dụng trong mắt thiên hạ. Nhưng lần này, linh hồn của một kẻ đến từ thế kỷ 21 đã thức tỉnh. Ngươi nhận ra phía sau nụ cười ân cần kia là một âm mưu động trời.\nXung quanh ngươi, khí thế của *Tướng Quân Phủ* vẫn uy nghiêm, xa xa là tiếng binh khí va chạm từ thao trường của phụ thân *Diệp Vô Song*. Vận mệnh của ngươi đang đứng trước một ngã rẽ sinh tử ngay tại chén rượu này."
         }
       ]
     },
     {
-      "id": "b373c55d-a536-46d6-8052-452500c5b7e4",
+      "id": "056d9858-00b6-4afb-b108-c779f6c7e039",
       "type": "user_custom_action",
-      "content": "[Đoạn 1 - Lời Ngươi]: \"Không nói với lão nữa, ta phải đem con cá này về cho Tú Nhi nhà ta nấu canh\"\n[Đoạn 2 - Tường thuật]: \"Tú Nhi là tên chữ của Điêu Thuyền. Chính là đệ nhất mỹ nữ Tam Quốc. Hiện nàng đang là cô bé hàng xóm của ngươi. Năm nay nàng 10 tuổi, phụ mẫu nàng đã qua đời vì bạo bệnh 2 năm trước. Trong 2 năm này, luôn là ngươi chiếu cố nàng. Mỗi lần đi săn hay đi câu về đều dành phần ngon nhất cho nàng, chỗ còn lại thì đem bán hoặc tự ăn\"\n[Đoạn 3 - Lời Ngươi]: \"Tú Nhi, Tú Nhi. Ra xem ta câu được con cá to lắm nè\"\n[Đoạn 4 - Lời Điêu Thuyền]: \"Diệp ca ca đi câu về rồi à. Mau vào uống bát nước cho mát. Để con cá đó cho muội xử lý. Tối nay chúng ta có canh cá với dưa chua\"\n[Đoạn 5 - Lời Ngươi]: \"Được được được. Ta thích nhất là canh cá Tú Nhi nấu\"\n[Đoạn 6 - Lời Điêu Thuyền]: \"Huynh bớt trêu muội lại đi. Nếu thích ăn thì ngày nào muội cũng nấu cho huynh ăn\"\n[Đoạn 7 - Lời Ngươi]: \"Thế thì ngày nào ta cũng phải cố gắng câu thật nhiều cá rồi\""
+      "content": "Bách Nhật Túy. 1 chén say trăm ngày. Đây là 1 loại rượu cực mạnh với người cổ đại nhưng với người hiện đại như ngươi thì lại chỉ nhạt như nước lọc. Bách Nhật Túy đã không còn tác dụng với ngươi nữa. Ngươi không ngần ngại uống cạn rồi giả vờ say để về phòng ngủ"
     },
     {
-      "id": "0c655d6c-f14a-4965-be9b-a5fd8a5d16b9",
+      "id": "54fda1e9-d0c3-44f8-b718-5a45c678932a",
       "type": "story",
       "content": [
         {
-          "type": "dialogue",
-          "speaker": "Ngươi",
-          "content": "Không nói với lão nữa, ta phải đem con cá này về cho Tú Nhi nhà ta nấu canh."
-        },
-        {
           "type": "narrative",
-          "content": "Ngươi dứt lời dứt khoát, tay xách xâu cỏ tranh luồn qua mang một con cá chép lớn béo mầm, khẽ vẫy tay chào tạm biệt thôn trưởng *Lão Tam* rồi sải bước đi nhanh về phía con đường mòn nhỏ dẫn vào sâu trong thôn. Sau lưng ngươi, bóng dáng lom khom của lão thôn trưởng tốt bụng khẽ lắc đầu, thở dài một tiếng dầy lo âu rồi lại khệ nệ bê rổ mộc nhĩ đi về hướng ngược lại. Hoàng hôn đỏ rực như máu đã hoàn toàn chìm khuất sau những rặng núi điệp trùng phía tây, nhường chỗ cho màn đêm đen thẫm tĩnh mịch bao phủ lấy *Thôn Mộc Nhĩ*. Gió đêm bắt đầu thổi mạnh hơn, mang theo hơi nước mát lạnh từ bờ sông mát rượi thổi qua những rặng tre xào xạc, nhưng dường như giữa khoảng không gian tĩnh mịch ấy vẫn phảng phất một chút gì đó bất ổn của thời cuộc dông bão sắp sửa ập đến nhân gian.\nNgươi đi trên con đường đất quen thuộc, bước chân nhẹ nhàng uyển chuyển. Chân nguyên trong cơ thể cuộn trào đều đặn theo từng nhịp thở, giúp ngươi hoàn toàn giữ được sự thư thái tối đa dù đêm tối đã buông xuống. Nghĩ đến bóng dáng nhỏ nhắn đang đợi mình ở nhà, lòng ngươi bỗng chốc mềm mại đi rất nhiều, mọi lo toan về thời cuộc hay những lời cảnh báo của *Lão Tam* về giáo chúng *Thái Bình Đạo* đều bị quét sạch ra sau đầu.\n*Tú Nhi* chính là tên chữ của *Điêu Thuyền* – đệ nhất mỹ nữ của thời *Tam Quốc* trong tương lai. Nhưng hiện tại, nàng vẫn chỉ là một cô bé hàng xóm mười tuổi ngây thơ, thánh thiện của ngươi. Phụ mẫu của nàng vốn là những nông phu hiền lành, nhưng không may đã qua đời vì một trận dịch bệnh quỷ quái hoành hành cách đây hai năm. Kể từ cái ngày định mệnh tang thương ấy, khi một cô bé tám tuổi khóc đến khản cả giọng bên linh cữu lạnh lẽo của cha mẹ, chính ngươi đã dang tay che chở và dắt tay nàng bước qua những tháng ngày tăm tối nhất. \nTrong suốt hai năm ròng rã đầy rẫy những biến động khôn lường ngoài kia, luôn là một tay ngươi chăm sóc, bảo hộ cho nàng. Cuộc sống nơi thôn dã nghèo khó nhưng bình yên, ngươi dựa vào bản lĩnh săn bắn và câu cá của mình để nuôi sống hai miệng ăn. Mỗi lần vào rừng sâu săn được gà rừng, thỏ béo, hay ra bờ sông câu được những con cá tươi ngon nhất, ngươi luôn dành phần thịt mềm ngọt nhất cho *Tú Nhi*. Chỗ còn thừa, ngươi mới đem ra chợ huyện bán lấy vài đồng tiền lẻ mua gạo muối, hoặc giữ lại tự ăn qua ngày. Đối với ngươi, nụ cười rạng rỡ của nàng chính là sự đền đáp xứng đáng nhất, ấm áp nhất giữa thế gian đầy rẫy rạn nứt này.\nKhi bước chân ngươi dừng lại trước chiếc cổng tre nhỏ quen thuộc của sân nhà, ánh lửa vàng ấm áp từ gian bếp nhỏ củi rơm đã lọt qua khe cửa, hắt những vệt sáng nhảy mót lên khoảng sân đất ẩm ướt. Mùi khói bếp thoang thoảng quyện cùng hương vị quen thuộc của mái nhà tranh khiến lòng ngươi dâng lên một cảm giác yên bình khó tả. Ngươi không kìm được mà cất tiếng gọi lớn, giọng nói tràn đầy sự phấn khởi, vang vọng cả góc sân nhỏ."
+          "content": "Hương thơm nồng đượm của *Bách Nhật Túy* lan tỏa trong không gian chật hẹp của sương phòng, một thứ mùi vị thanh khiết nhưng ẩn chứa bên trong là sự tàn độc kéo dài suốt mười năm qua. *Diệp Thần* nhìn chằm chằm vào chất lỏng trong vắt trong chén ngọc, đôi đồng tử vốn mang vẻ ngây thơ của một đứa trẻ mười tuổi bỗng chốc co rụt lại, ánh lên tia sáng lạnh lẽo của một linh hồn đã kinh qua trăm đắng nghìn cay ở một thế giới khác. Đối diện với ngươi, *Diệp Bình Xuyên* vẫn giữ nguyên nụ cười hiền từ, một vẻ mặt mà nếu là *Diệp Thần* của trước đây, chắc chắn sẽ cảm động đến rơi nước mắt vì sự quan tâm của vị Nhị ca này.\nNgươi vươn bàn tay nhỏ nhắn, hơi run rẩy — một sự run rẩy được tính toán kỹ lưỡng để biểu hiện sự nôn nóng và tin tưởng tuyệt đối — đón lấy chén rượu từ tay hắn."
         },
         {
           "type": "dialogue",
           "speaker": "Ngươi",
-          "content": "Tú Nhi, Tú Nhi! Ra xem ta câu được con cá to lắm nè!"
+          "content": "Nhị ca đã có lòng như vậy, đệ sao có thể từ chối. Rượu này thơm quá, chắc chắn là thứ tốt để giúp đệ tinh tiến công phu."
         },
         {
           "type": "narrative",
-          "content": "Tiếng gọi vừa dứt, từ bên trong gian bếp, tiếng bước chân nhỏ nhắn, dồn dập nhưng đầy khấp khởi vang lên. Cánh cửa gỗ khẽ kẹt một tiếng mở ra, một bóng dáng nhỏ nhắn, gầy guộc nhanh chóng chạy ra ngoài. Dưới ánh trăng non mới nhú và ánh lửa bập bùng từ bếp lò hắt ra, dung nhan của nàng dần hiện rõ. Dẫu mới mười tuổi, nhưng đường nét trên gương mặt của *Tú Nhi* đã vô cùng thanh tú, đôi mắt to tròn đen lánh như chứa đựng cả bầu trời sao, làn da dẫu có chút sương gió thôn quê nhưng vẫn trắng ngần, mịn màng. Nàng mặc một bộ y phục bằng vải thô màu xanh nhạt đã sờn vai nhưng được giặt giũ vô cùng sạch sẽ, mái tóc đen mượt được bới gọn gàng sau gáy bằng một chiếc trâm gỗ giản dị do chính tay ngươi gọt tặng.\nNhìn thấy ngươi đứng ở sân, tay xách con cá chép lớn vẫn còn quẫy đuôi thỉnh thoảng vảy nước lấp lánh dưới ánh trăng, đôi mắt của *Tú Nhi* cong lên thành hai vầng trăng khuyết đáng yêu. Nàng nhanh nhẹn bước tới, đôi bàn tay nhỏ nhắn giấu trong vạt áo khẽ chìa ra, đón lấy chiếc nón lá trên tay ngươi treo lên vách tre, rồi dịu dàng nói bằng giọng oanh yến trong trẻo."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Điêu Thuyền",
-          "content": "Diệp ca ca đi câu về rồi à. Mau vào uống bát nước cho mát. Để con cá đó cho muội xử lý. Tối nay chúng ta có canh cá với dưa chua."
-        },
-        {
-          "type": "narrative",
-          "content": "Ngươi nhìn điệu bộ đảm đang, ra dáng một người nội trợ nhỏ của nàng mà lòng không khỏi ấm áp. Ngươi khẽ đưa con cá cho nàng, cố ý lắc mạnh khiến con cá quẫy đuôi làm nước bắn lên gò má phúng phính của nàng, cười ha hả đầy chiều chuộng."
+          "content": "Dứt lời, ngươi nâng chén, dứt khoát uống cạn. Dòng chất lỏng đi qua cuống họng, cay nồng nhưng ngay lập tức hóa thành một sự nhạt nhẽo vô vị. Đối với những người cổ đại vốn chưa từng tiếp xúc với các loại cồn tinh luyện hay sự đề kháng kỳ lạ của một linh hồn xuyên không, *Bách Nhật Túy* là một loại mê dược đáng sợ có thể phong tỏa nhận thức. Nhưng với ngươi, nó chẳng khác nào một chén nước lọc pha chút hương liệu rẻ tiền. Dẫu vậy, ngay khi giọt rượu cuối cùng trôi xuống, ngươi cảm nhận được một luồng ý thức lạnh lẽo từ phía đối diện đang quan sát mình như một thợ săn nhìn con mồi đã sập bẫy. \nNgươi bắt đầu diễn kịch. Đôi chén ngọc trong tay khẽ rơi xuống mặt sập gỗ, phát ra tiếng \"cộp\" khô khốc. Đầu ngươi gục xuống một chút, rồi lại ngẩng lên với ánh mắt lờ đờ, tiêu cự dần phân tán. Đôi tay ngươi đưa lên ôm lấy thái dương, chân tay bắt đầu lảo đảo, tạo nên một tư thế vô lực, mê muội."
         },
         {
           "type": "dialogue",
           "speaker": "Ngươi",
-          "content": "Được được được. Ta thích nhất là canh cá Tú Nhi nấu!"
+          "content": "Nhị ca... sao đầu đệ... lại choáng váng thế này... Rượu này... thực sự... mạnh quá..."
         },
         {
           "type": "narrative",
-          "content": "*Tú Nhi* bị nước bắn vào mặt liền khẽ nghiêng đầu né tránh, đôi má phúng phính đỏ ửng lên dưới ánh lửa bếp bập bùng. Nàng giơ vạt áo lên khẽ lau đi những giọt nước bám trên mặt, chu cái miệng nhỏ nhắn lên nhìn ngươi đầy hờn dỗi, nhưng trong mắt lại tràn ngập ý cười ấm áp. Nàng cầm lấy xâu cá, xoay người đi vào bếp, miệng vẫn không quên lẩm bẩm đáp lời ngươi."
+          "content": "Nhìn thấy cảnh tượng này, nụ cười trên môi *Diệp Bình Xuyên* càng thêm đậm nét, nhưng ánh mắt hắn lại lạnh lẽo đi vài phần. Hắn khẽ vươn tay đỡ lấy vai ngươi, cử chỉ trông thì có vẻ ân cần nhưng thực chất là để kiểm tra xem cơ thể ngươi đã hoàn toàn buông lỏng hay chưa."
         },
         {
           "type": "dialogue",
-          "speaker": "Điêu Thuyền",
-          "content": "Huynh bớt trêu muội lại đi. Nếu thích ăn thì ngày nào muội cũng nấu cho huynh ăn."
+          "speaker": "Diệp Bình Xuyên",
+          "content": "Tam đệ, rượu quý phát huy tác dụng rất nhanh. Đừng gượng ép, cứ để tâm trí được thư giãn. Cơn say này sẽ giúp đệ quên đi những phiền muộn, để khi tỉnh lại, đệ sẽ lại là vị phò mã vô ưu vô lo của *Đại Hán*."
         },
         {
           "type": "narrative",
-          "content": "Ngươi bước theo nàng vào trong gian bếp ấm cúng, nhìn bóng lưng nhỏ nhắn của nàng đang loay hoay múc nước rửa cá bên chum sành. Lòng ngươi ngập tràn một thứ cảm xúc dịu dàng khó tả, ngươi bước tới gần bếp lò, thêm vài thanh củi khô vào đống lửa đang cháy đượm, rồi khẽ cười trêu đùa tiếp lời nàng."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Ngươi",
-          "content": "Thế thì ngày nào ta cũng phải cố gắng câu thật nhiều cá rồi!"
-        },
-        {
-          "type": "narrative",
-          "content": "Hai huynh muội cười đùa vui vẻ bên bếp lửa hồng, xua tan đi cái lạnh lẽo và tĩnh mịch của màn đêm nơi thôn dã. *Tú Nhi* quả thực vô cùng khéo tay. Nàng ngồi trên chiếc ghế gỗ nhỏ, một tay giữ cá, tay kia cầm con dao nhỏ đánh vảy một cách thuần thục. Những chiếc vảy cá lấp lánh rơi rụng trên thớt gỗ, tiếng dao thớt gõ nhẹ đều đặn hòa cùng tiếng lửa reo tí tách tạo nên một khúc nhạc gia đình vô cùng êm đềm. \nNgươi ngồi bên cạnh, không đành lòng để nàng làm hết một mình, liền phụ giúp nàng rửa sạch những cây dưa cải muối chua trong hũ gốm góc nhà, rồi thái chúng ra thành từng khúc nhỏ đều đặn. Dưa cải nhà muối có màu vàng ruộm, mùi thơm chua nồng đặc trưng tỏa ra lập tức kích thích vị giác của cả hai. \nKhi nồi nước trên bếp lò bắt đầu sôi sùng sục, phả ra những làn hơi nước mờ ảo, *Tú Nhi* khéo léo thả những khúc cá đã được chiên sơ qua dầu ép từ hạt trà vào nồi. Tiếng \"xèo xèo\" vui tai vang lên, tiếp đó là dưa chua, vài lát gừng già đập dập và một chút ớt hiểm cay nồng để át đi vị tanh của cá sông. Chỉ một loáng sau, một mùi thơm nồng nàn, ngào ngạt của canh cá dưa chua đã tràn ngập khắp gian bếp nhỏ, xua đi cái không khí se lạnh của gió đêm luồn qua khe cửa tre.\nDưới ánh lửa bập bùng của bếp lò, gương mặt của *Tú Nhi* đỏ hồng lên vì hơi nóng, vài sợi tóc mai bết nhẹ mồ hôi dán chặt bên thái dương càng tôn lên vẻ thanh tú, kiều diễm của nàng. Ngươi nhìn nàng chăm chú, trong thâm tâm thầm nghĩ, thời gian trôi qua thật nhanh, cô bé nhỏ ngày nào giờ đã bắt đầu có dáng dấp của một thiếu nữ xinh đẹp. Một ngày nào đó, khi nàng thực sự trưởng thành, e là vẻ đẹp này sẽ khiến cả thế gian ngoài kia phải điên đảo. Nhưng bất luận thế sự đổi dời ra sao, ngươi vẫn thầm thề sẽ dùng cả tính mạng và tu vi chân nguyên của mình để bảo vệ sự thuần khiết, bình yên này của nàng.\nBữa tối giản dị nhanh chóng được dọn ra chiếc bàn gỗ nhỏ đặt ở gian giữa. Một bát canh cá dưa chua bốc khói nghi ngút, một đĩa rau rừng luộc xanh mướt và hai bát cơm gạo tẻ nóng hổi. Hai huynh muội ngồi đối diện nhau, ánh đèn dầu lạc mờ ảo tỏa ra vầng sáng màu cam dịu nhẹ, bao bọc lấy hai tâm hồn nương tựa vào nhau giữa cõi đời đầy biến động.\nNgươi cầm đũa, khéo léo gỡ bỏ hết phần xương dăm của một miếng lườn cá béo ngậy, đặt vào bát của *Tú Nhi*. Nàng ngước nhìn ngươi, đôi mắt lấp lánh niềm hạnh phúc ngập tràn, khẽ gật đầu cảm ơn rồi đưa lên miệng ăn một cách ngon lành."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Điêu Thuyền",
-          "content": "Cá hôm nay thịt thật săn chắc và ngọt, Diệp ca ca. Huynh cũng ăn đi, đừng chỉ gắp cho muội mãi thế."
-        },
-        {
-          "type": "narrative",
-          "content": "Ngươi mỉm cười gật đầu, tự múc cho mình một bát nước canh chua cay ấm nồng, húp một ngụm lớn. Vị chua thanh của dưa cải quyện với vị ngọt đậm đà của cá chép sông, chút cay nồng của ớt bừng lên nơi đầu lưỡi khiến cơ thể ngươi như ấm hẳn lên, chân nguyên trong cơ thể vận chuyển nhẹ nhàng, vô cùng sảng khoái."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Ngươi",
-          "content": "Ngon lắm! Tay nghề của Tú Nhi nhà ta quả thực ngày càng tiến bộ. Sau này ai cưới được muội chắc chắn là phúc phận tu ba đời mới có được."
-        },
-        {
-          "type": "narrative",
-          "content": "*Tú Nhi* nghe ngươi trêu ghẹo, đôi gò má lại một lần nữa đỏ bừng lên như quả táo chín. Nàng cúi đầu thật thấp, gần như muốn chôn mặt vào bát cơm, khẽ lý nhí trong miệng đầy thẹn thùng."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Điêu Thuyền",
-          "content": "Ca ca lại nói đùa rồi... Muội chẳng thèm gả cho ai cả. Muội chỉ muốn ở lại đây, ngày ngày nấu canh cá cho ca ca ăn thôi."
-        },
-        {
-          "type": "narrative",
-          "content": "Lời nói ngây ngô nhưng chân thành của nàng chạm vào nơi mềm mại nhất trong lòng ngươi. Ngươi khẽ thở dài một tiếng dầy tự hào và thương mến, xoa đầu nàng một cái thật nhẹ, không nói gì thêm mà chỉ lẳng lặng gắp thêm thức ăn vào bát cho nàng. \nBên ngoài cửa sổ, gió đêm vẫn thổi ào ạt qua rặng tre, tiếng xào xạc ngày một lớn hơn. Màn đêm bao phủ lấy *Thôn Mộc Nhĩ* càng lúc càng dày đặc, tựa như một tấm màn đen khổng lồ đang che giấu những sóng gió, bão bùng của thiên hạ ngoài kia. Giữa cõi nhân gian đang dần rạn nứt bởi binh đao và loạn lạc, trong căn nhà tranh nhỏ bé này, ánh lửa ấm áp và mùi thơm của bát canh cá dưa chua dường như đã tạo nên một thế giới hoàn toàn tách biệt, yên bình và đầy ắp tình thương.\nSau khi dùng xong bữa tối ấm cúng, hai huynh muội cùng nhau thu dọn bát đũa. Ngươi giành phần rửa bát để nàng nghỉ ngơi, nhưng *Tú Nhi* vẫn không chịu ngồi yên, nàng lấy chiếc chổi tre nhỏ quét dọn sạch sẽ những vảy cá rơi rụng dưới đất và lau chùi bàn ăn ngăn nắp. Mọi việc xong xuôi, đêm cũng đã về khuya, gió ngoài trời thổi qua khe cửa rít lên từng hồi lạnh buốt.\nNgươi tiễn *Tú Nhi* về gian phòng nhỏ bên cạnh của nàng. Đứng trước cửa phòng, ngươi khẽ chỉnh lại chiếc áo khoác thô cho nàng, dặn dò chu đáo."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Ngươi",
-          "content": "Đêm nay gió lạnh lắm, muội nhớ đắp chăn ấm và đóng chặt cửa sổ nhé. Có chuyện gì cứ gọi ta ngay, ta ở ngay gian bên cạnh."
-        },
-        {
-          "type": "narrative",
-          "content": "*Tú Nhi* ngoan ngoãn gật đầu, đôi mắt to tròn nhìn ngươi đầy lưu luyến, nàng khẽ cười ngọt ngào rồi khép hờ cánh cửa gỗ."
-        },
-        {
-          "type": "dialogue",
-          "speaker": "Điêu Thuyền",
-          "content": "Diệp ca ca cũng ngủ ngon nhé. Ngày mai muội lại chờ huynh mang cá về."
-        },
-        {
-          "type": "narrative",
-          "content": "Ngươi mỉm cười quay trở về gian phòng của mình. Đóng chặt cửa phòng, ngươi ngồi xếp bằng trên chiếc giường gỗ đơn sơ. Đêm sâu tĩnh mịch, chỉ có tiếng gió rít gào bên ngoài vách đất. Ngươi khẽ nhắm mắt, điều hòa hơi thở, cảm nhận luồng chân nguyên tràn đầy đang luân chuyển tuần hoàn khắp các kinh mạch trong cơ thể. Những lời cảnh báo lúc chiều của *Lão Tam* về đám đạo sĩ mặc áo vàng của *Thái Bình Đạo* lại một lần nữa hiện lên trong tâm trí ngươi. Thời cuộc đang dần trở nên hỗn loạn, và để bảo vệ nụ cười bình yên của *Tú Nhi*, ngươi biết mình cần phải chuẩn bị thật kỹ lưỡng cho những ngày tháng sắp tới."
+          "content": "Hắn khẽ cười một tiếng, thanh âm mang theo sự khinh miệt không hề che giấu. Trong mắt hắn, đứa trẻ mười tuổi trước mặt, dù có là Thái tử của *Nam Ly Quốc* hay phò mã của *Ninh An công chúa*, thì chung quy cũng chỉ là một quân cờ bị hắn xoay vần trong lòng bàn tay suốt bao năm qua. Tin rằng ngươi đã lại rơi vào trạng thái mê muội như mọi năm, *Diệp Bình Xuyên* đứng dậy, phủi nhẹ lớp bụi không tồn tại trên vạt áo cẩm y, rồi ung dung rời khỏi sương phòng. Tiếng bước chân của hắn xa dần, để lại một sự tĩnh lặng đến rợn người trong căn phòng.\nNgươi ngồi đó, vẫn giữ nguyên tư thế lảo đảo cho đến khi chắc chắn bóng dáng của Nhị ca đã hoàn toàn khuất dạng sau dãy hành lang của *Tướng Quân Phủ*. Ngay lập tức, vẻ lờ đờ biến mất, thay vào đó là một sự tỉnh táo đến đáng sợ. Ngươi hít một hơi thật sâu, cảm nhận khí huyết trong cơ thể vẫn lưu thông bình thường, không hề có sự ngưng trệ hay tác động dược lý nào của thứ rượu chết tiệt kia. \nNgươi loạng choạng đứng dậy, tiếp tục duy trì vẻ ngoài của một kẻ say rượu để đề phòng bất kỳ tai mắt nào ẩn nấp trong phủ. Từng bước chân lết trên mặt sàn đá, ngươi trở về phòng ngủ riêng của mình. Tiếng cánh cửa gỗ khép lại nghe thật nặng nề, như đánh dấu một sự khởi đầu mới sau mười năm tăm tối. Ngươi chốt cửa, tiến về phía giường và nằm xuống, hai mắt nhìn trân trân lên trần nhà gỗ chạm khắc tinh xảo.\nBên ngoài cửa sổ, ánh hoàng hôn đỏ thẫm như máu của *Lạc Dương* dần lịm tắt, nhường chỗ cho màn đêm đen đặc bắt đầu buông xuống. Sương phòng chìm vào bóng tối, chỉ còn lại nhịp thở đều đặn của ngươi. Màn đêm này không giống với bất kỳ màn đêm nào trong suốt mười năm qua. Đây là đêm đầu tiên ngươi hoàn toàn tỉnh táo để đối mặt với sự thật: ngươi không phải là *Diệp Thần* vô dụng, ngươi là Thái tử của *Nam Ly Quốc*, là kẻ mang linh hồn của một thời đại khác, và ngươi đang nằm giữa hang cọp mang tên *Tướng Quân Phủ*.\nKhông gian xung quanh yên tĩnh đến mức ngươi có thể nghe thấy tiếng gió rít qua kẽ lá và tiếng tuần tra đều đặn của binh lính từ phía xa. Sự tĩnh mịch này như một liều thuốc kích thích, khiến bộ não của một lập trình viên từng quen với những thuật toán phức tạp bắt đầu vận hành điên cuồng. Ngươi cần phân tích từng mảnh ký ức vụn vỡ, cần hiểu rõ thế cục của *Đại Hán* hiện tại, và quan trọng nhất là phải tìm ra cách để sinh tồn khi mà \"Nhị ca\" và có lẽ là cả *Diệp gia* này đang coi ngươi như một vật thí nghiệm cho kế hoạch \"Thâu thiên hoán nhật\" của bọn họ.\nCơ thể mười tuổi của ngươi tuy nhỏ nhắn nhưng lại ẩn chứa một ý chí sắt đá. Ngươi nhắm mắt lại, nhưng không phải để ngủ, mà để lắng nghe. Lắng nghe hơi thở của bóng tối, lắng nghe những âm mưu đang sục sôi dưới lớp vỏ bọc uy nghiêm của phủ tướng quân. Trận chiến này không có khói súng, không có đao kiếm trực diện, nhưng nó còn tàn khốc hơn bất kỳ cuộc chiến nào ngươi từng biết.\nMàn đêm càng lúc càng sâu, sương lạnh bắt đầu tràn vào phòng qua khe cửa, thấm vào da thịt. Ngươi khẽ rùng mình, nhưng đôi môi lại nở một nụ cười nhạt. *Bách Nhật Túy* đã thất bại, và đó là sai lầm lớn nhất của *Diệp Bình Xuyên*."
         }
       ]
+    },
+    {
+      "id": "36e7ac24-5e91-4202-bef0-61ed6aecbb90",
+      "type": "user_custom_action",
+      "content": "Ngươi ngủ 1 giấc đến sáng sau đó đến phủ Tịch Nhan - Ninh An công chúa chơi. Nàng là vị hôn thê được hoàng đế Đại Hán ban hôn cho ngươi. Nàng cũng trạc tuổi ngươi. 2 đứa trẻ chơi đùa trong hoa viên. Tịch Nhan không biết ngươi đã không còn bị Bách Nhật Túy khống chế nữa, còn ngươi thì không biết Tịch Nhan là công chúa Tây Viêm. Cả 2 đều có kế hoạch riêng không cho đối phương biết"
+    },
+    {
+      "id": "2eff57c6-82cd-447e-8b4a-aac6a78dd19d",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Ánh nắng ban mai của kinh thành *Lạc Dương* xuyên qua những khe hở trên cánh cửa gỗ chạm khắc, rọi những vệt sáng vàng óng ánh lên khuôn mặt của một đứa trẻ mười tuổi. Ngươi, *Diệp Thần*, khẽ cựa mình trên tấm nệm gấm êm ái, cảm nhận một sự sảng khoái chưa từng có đang lan tỏa khắp các thớ cơ. Không còn sự trì trệ, không còn làn sương mù u tối của *Bách Nhật Túy* vây hãm trong tâm trí suốt bấy lâu, linh hồn của một kẻ đến từ tương lai hoàn toàn hòa nhập và làm chủ cơ thể nhỏ bé này. Ngươi ngồi dậy, hít một hơi thật sâu làn không khí mang theo hương nhài thanh khiết của buổi sớm, đôi mắt đen láy bỗng chốc trở nên thâm trầm, sắc sảo đến lạ thường.\nSau khi vệ sinh cá nhân và chỉnh đốn y phục, ngươi không chút chần chừ, một mình rời khỏi *Tướng Quân Phủ*, hướng thẳng về phía *Phủ Ninh An Công Chúa*. Trên những con phố sầm uất của kinh thành, bóng dáng một tiểu công tử mười tuổi với dáng vẻ lảo đảo, đôi mắt thỉnh thoảng lại ngơ ngác nhìn xung quanh khiến người qua đường đều tặc lưỡi tiếc nuối cho một \"phế vật\" của nhà họ Diệp. Nhưng chẳng ai hay biết, dưới lớp vỏ bọc ngây ngô đó, bộ não của ngươi đang hoạt động hết công suất để ghi nhớ từng ngóc ngách, từng trạm gác và bố phòng quân sự dọc đường.\nVừa bước chân vào cổng *Phủ Ninh An Công Chúa*, một không gian xa hoa và trang nhã mở ra trước mắt. Những dãy hành lang uốn lượn, những hòn non bộ được sắp đặt tinh tế và tiếng chim hót líu lo tạo nên một khung cảnh thanh bình như chốn thần tiên. Tại hoa viên phía sau phủ, giữa muôn vàn đóa mẫu đơn đang đua nhau khoe sắc, một bóng dáng nhỏ nhắn, thanh tú đang đứng lặng yên bên hồ sen. Đó chính là vị hôn thê của ngươi — *Ninh An công chúa*, người mà trong lòng ngươi lúc này gọi bằng cái tên tự thân thương: *Ngô Thu Phương*.\nNàng vận một bộ cung trang lụa tơ tằm màu vàng nhạt, mái tóc đen mượt được búi gọn gàng bằng một chiếc trâm phượng bằng vàng ròng tinh xảo. Nghe tiếng bước chân, nàng quay lại, đôi mắt phượng vốn mang vẻ ưu tư bỗng chốc tan biến, thay vào đó là một nụ cười rạng rỡ, ngây thơ như một đứa trẻ thực thụ."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngô Thu Phương",
+          "content": "Thần ca ca! Huynh lại đến tìm muội chơi sao? Muội cứ ngỡ hôm nay huynh lại ngủ nướng đến tận trưa cơ đấy."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi cười hì hì, cố ý bước đi hơi loạng choạng, tiến lại gần nàng với vẻ mặt hớn hở của một đứa trẻ được đi chơi."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tịch Nhan muội muội, rượu của Nhị ca thực sự quá mạnh, huynh ngủ một mạch đến tận bây giờ mới tỉnh. Nhưng vừa tỉnh dậy là huynh nghĩ ngay đến muội, chúng ta đi chơi trốn tìm đi!"
+        },
+        {
+          "type": "narrative",
+          "content": "*Ngô Thu Phương* khẽ cười, bàn tay nhỏ nhắn của nàng nắm lấy tay ngươi, cảm giác mềm mại như ngọc thạch. Nàng khéo léo che giấu tia nhìn dò xét trong đáy mắt. Trong suy nghĩ của nàng, ngươi vẫn là vị phò mã bị *Bách Nhật Túy* khống chế, một quân cờ hoàn hảo để nàng có thể nương tựa và che giấu thân phận thật là công chúa của *Tây Viêm*. Nàng không hề hay biết rằng, kẻ đang đứng trước mặt nàng đã không còn là đứa trẻ khờ khạo dễ bị bắt nạt kia nữa."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngô Thu Phương",
+          "content": "Được, vậy chúng ta chơi trốn tìm. Nhưng huynh phải hứa là không được trốn ở những nơi quá nguy hiểm đâu nhé, Diệp Thần ca ca."
+        },
+        {
+          "type": "narrative",
+          "content": "Cả một ngày dài, hoa viên của phủ công chúa tràn ngập tiếng cười đùa của hai đứa trẻ. Ngươi chạy nhảy, reo hò, đôi khi giả vờ vấp ngã hay ngơ ngác khi không tìm thấy nàng, diễn tròn vai một tiểu tử ngốc nghếch vô tư lự. Có những lúc, cả hai cùng ngồi bệt xuống thảm cỏ, cùng nhau quan sát đàn cá koi đang bơi lội dưới hồ sen."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Này Tịch Nhan, muội xem con cá màu vàng kia, nó cứ bơi quanh con cá màu đỏ mãi không thôi. Chắc là nó thích con cá đỏ đó lắm nhỉ?"
+        },
+        {
+          "type": "narrative",
+          "content": "Nàng nghiêng đầu nhìn theo hướng tay ngươi chỉ, đôi mắt ánh lên những tia sáng phức tạp. Nàng đang âm thầm quan sát từng cử chỉ nhỏ nhất của ngươi, cố gắng tìm kiếm một dấu hiệu nào đó của sự thức tỉnh, nhưng mọi thứ đều được ngươi che giấu một cách hoàn mỹ."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngô Thu Phương",
+          "content": "Có lẽ là vậy. Nhưng cá thì làm sao hiểu được thế giới của con người hả huynh? Chúng chỉ biết bơi trong cái hồ nhỏ bé này, chẳng bao giờ biết được sóng gió ngoài đại dương kia tàn khốc đến mức nào."
+        },
+        {
+          "type": "narrative",
+          "content": "Lời nói của nàng mang theo một sự trầm mặc, già dặn vượt xa lứa tuổi mười tuổi, khiến lòng ngươi khẽ chùng xuống. Ngươi biết nàng đang nói về chính mình, về những gánh nặng của một công chúa vong quốc đang phải ẩn mình dưới một thân phận giả. Trong lòng ngươi bỗng dâng lên một cảm giác thương cảm lạ kỳ đối với cô bé này, dù ngươi vẫn biết cả hai đang đứng ở hai đầu chiến tuyến của những âm mưu chính trị.\nThời gian trôi qua thật nhanh, ánh hoàng hôn đỏ thẫm dần lịm tắt sau những rặng tre già bao quanh phủ công chúa. Màn đêm buông xuống, mang theo những cơn gió sương lạnh buốt giá của kinh thành *Lạc Dương* vào hạ. Không gian hoa viên vốn rực rỡ sắc màu giờ đây chìm vào một màu đen huyền bí, chỉ còn lại ánh sáng le lói từ những chiếc đèn lồng treo dọc hành lang. \nNgươi và *Ngô Thu Phương* đứng bên cạnh cổng chính của phủ, gió đêm thổi tung tà áo gấm của cả hai. Lúc này, không khí bỗng trở nên tĩnh lặng một cách kỳ quái. Những tiếng cười đùa ban sáng đã biến mất, nhường chỗ cho một dư vị phức tạp đang len lỏi trong lòng mỗi người."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngô Thu Phương",
+          "content": "Trời đã muộn rồi, huynh nên về sớm đi kẻo Diệp tướng quân lại lo lắng. Cảm ơn huynh vì ngày hôm nay, muội thực sự đã rất vui."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngàng nhìn ngươi, ánh mắt phượng trong đêm tối dường như sâu thẳm hơn bao giờ hết, chứa đựng sự dịu dàng, một chút lo lắng nhưng cũng đầy sự cảnh giác lạnh lùng. Nàng khẽ đưa tay chỉnh lại cổ áo cho ngươi, cử chỉ tự nhiên như một vị hiền thê thực thụ, khiến tim ngươi lỡ một nhịp."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Huynh cũng vậy, Tịch Nhan. Ngày mai huynh lại đến tìm muội nhé. Muội... muội nhớ đi ngủ sớm, đừng thức khuya xem những cuốn sách cũ kỹ kia nữa, sẽ đau mắt lắm đấy."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi quay người bước đi, bỏ lại phía sau bóng dáng nhỏ nhắn của nàng đang đứng cô độc dưới ánh đèn lồng mờ ảo. Khi đi được một đoạn khá xa, ngươi khẽ ngoái đầu nhìn lại. *Ngô Thu Phương* vẫn đứng đó, bất động như một pho tượng ngọc. Ngươi biết, đằng sau sự ngây thơ mà nàng vừa thể hiện là một trái tim sắt đá đang mưu tính những đại kế xoay chuyển giang sơn. Và nàng cũng không biết rằng, đứa trẻ mà nàng vừa tiễn biệt cũng đang mang trong mình một bí mật có thể khiến cả thiên hạ này phải chấn động.\nSương lạnh tràn về, thấm thía qua lớp áo mỏng, nhắc nhở ngươi về thực tại tàn khốc. Cuộc gặp gỡ này không chỉ là một buổi đi chơi đơn thuần, nó là sự khởi đầu của một ván cờ mà ở đó, cả hai quân cờ đều đang cố gắng tìm đường sống trong chỗ chết. Những dư vị ngọt ngào của buổi chơi đùa đan xen với sự lạnh lẽo của những toan tính, tạo thành một cảm xúc nghẹn đắng nơi cổ họng. Ngươi hít một hơi thật sâu cái lạnh của màn đêm, đôi mắt trở lại vẻ sắc lạnh vốn có, từng bước đi khuất dần vào bóng tối của *Lạc Dương*.\nMàn đêm đen đặc bao trùm lấy phủ công chúa, tiếng gió rít qua kẽ lá như tiếng thở dài của định mệnh. Ngươi biết, từ giây phút này trở đi, mỗi lời nói, mỗi nụ cười đều phải được cân nhắc kỹ lưỡng. Cuộc chiến này mới chỉ bắt đầu.\nĐịa điểm hiện tại: Phía ngoài cổng *Phủ Ninh An Công Chúa*.\nThời gian: 8 giờ 15 phút Tối.\nThời tiết: Trời đêm sương lạnh dày đặc.\nTrạng thái: Tỉnh táo hoàn toàn, tinh thần hơi nặng nề do những suy nghĩ về *Ngô Thu Phương*."
+        }
+      ]
+    },
+    {
+      "id": "09b16aa6-3e8b-4124-bd04-3fe3e71356b4",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Đã đến thế giới này rồi thì an tâm ở lại đây thôi. Cũng may ta còn có khả năng đặc biệt là tu luyện trong mộng. Nếu không thì không biết sẽ tự vệ thế nào trong thời loạn này nữa\"\n[Đoạn 2 - Tường thuật]: \"Khả năng Tu luyện trong mộng giúp ngươi có thể luyện võ trong mơ và phản hồi lại thực thể. Thời gian tu luyện trong mộng trôi qua khác với thực tế. 1 đêm bên ngoài bằng 1 năm trong mộng. Kể từ khi xuyên không đến nay đã được 10 ngày, ngươi hiện nay đã có võ công bằng 10 năm tu luyện. Trong thời gian 10 ngày này, ngươi cũng đã tạo nên 1 tổ chức bí mật. Bề ngoài là tửu lâu nhưng bên trong đều là cao thủ ám vệ. Nơi đây có rất nhiều loại khách, từ quan phủ, lãng khách cho tới văn sĩ, dân chúng bình dân. Tửu lâu phục vụ từ đồ ăn thức uống đến mỹ nhân nên ở Kinh Thành rất nổi tiếng. Mọi thông tin khắp nơi đều có thể thu thập được tại đây\""
+    },
+    {
+      "id": "bf70a2ac-eba0-4786-bb1e-ab9e85a6b122",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Sương đêm buông xuống ngày một dày đặc bên ngoài cổng *Phủ Ninh An Công Chúa*, phủ lên những hàng cây hòe già dọc con phố lát đá xanh một lớp hơi lạnh buốt giá. Ngươi, *Diệp Thần*, khẽ kéo lại vạt áo gấm màu xám tro, che đi bờ vai nhỏ nhắn của một đứa trẻ mười tuổi. Nhìn bóng lưng *Ngô Thu Phương* đã khuất sau cánh cửa gỗ đỏ sẫm đóng kín, ánh mắt ngươi từ vẻ ngây thơ vốn có dần chìm vào sự thâm trầm, sắc lạnh. Trong không gian tịch mịch chỉ có tiếng gió rít qua khe lá và tiếng bước chân tuần tra xa xăm của binh lính, ngươi đứng lặng hồi lâu dưới tán cây cổ thụ, khẽ thì xầm một câu nói mà không ai xung quanh có thể nghe thấy:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Đã đến thế giới này rồi thì an tâm ở lại đây thôi. Cũng may ta còn có khả năng đặc biệt là tu luyện trong mộng. Nếu không thì không biết sẽ tự vệ thế nào trong thời loạn này nữa."
+        },
+        {
+          "type": "narrative",
+          "content": "Khả năng Tu Luyện Trong Mộng chính là chỗ dựa lớn nhất của ngươi kể từ khi tỉnh lại với linh hồn của một kẻ xuyên không. Mỗi khi màn đêm buông xuống và cơ thể chìm vào giấc ngủ, ý thức của ngươi không rơi vào hư vô mà được đưa đến một không gian diễn võ mênh mông, hoàn toàn tách biệt với thực tại. Quy luật thời gian bên trong giấc mộng ấy vận hành vô cùng kỳ diệu: một đêm trôi qua ở thế giới bên ngoài tương đương với trọn vẹn một năm miệt mài tu luyện trong mộng. \nTính đến nay, tròn mười ngày kể từ thời điểm ký ức kiếp trước thức tỉnh, ngươi đã trải qua mười đêm rèn luyện gian khổ trong không gian mộng cảnh. Mười đêm ấy tương ứng với mười năm tích lũy võ học thực thụ, từ bộ pháp, quyền kình cho đến phản xạ chiến đấu đều được khắc sâu vào từng thớ cơ, gân cốt của thân thể mười tuổi này. Dù bề ngoài ngươi vẫn mang dáng vẻ mảnh khảnh, yếu ớt của một tiểu công tử quanh năm mang bệnh, nhưng bên trong lại ẩn chứa sức bật và sự dẻo dai của một cao thủ võ học đã qua mười năm khổ luyện.\nKhông chỉ dừng lại ở việc tích lũy thực lực bản thân, trong mười ngày ngắn ngủi ấy, ngươi còn vận dụng tư duy nhạy bén của một lập trình viên từng quen xử lý những hệ thống thông tin phức tạp để âm thầm gieo một hạt giống quyền lực tại kinh thành *Lạc Dương*. Mượn danh nghĩa một thương gia ẩn danh từ phương Nam, ngươi đã lập ra một tổ chức bí mật núp bóng dưới lớp vỏ *Vân Hương Lâu* — một tửu lâu ba tầng nguy nga tọa lạc ngay trên con phố sầm uất nhất kinh đô.\nBề ngoài, *Vân Hương Lâu* là chốn ăn chơi bậc nhất *Lạc Dương*, nổi tiếng với rượu ngon, mỹ vị cùng dàn vũ cơ múa hát tuyệt diệu. Nơi đây mỗi ngày đón tiếp đủ mọi tầng lớp trong xã hội, từ những vị quan lại quyền quý trong triều, các văn sĩ hay chữ, các lãng khách giang hồ tay lăm lăm binh khí, cho tới những thương nhân và dân chúng bình dân. Nhờ sự nhộn nhịp đó, *Vân Hương Lâu* trở thành một cái phễu khổng lồ thu hút mọi luồng tin tức trong thiên hạ. Phía sau bức rèm nhung xa hoa và những bàn tiệc rộn rã tiếng cười đùa lại là nơi trú ngụ của hàng chục cao thủ ám vệ được ngươi tuyển chọn và huấn luyện gắt gao. Mọi lời thì thầm trong lúc say, mọi cuộc giao dịch ngầm hay tin tức mật từ hoàng cung đều được đội ngũ ám vệ ghi nhận, lọc lựa và chuyển về tay ngươi một cách chính xác, an toàn.\nÁnh trăng treo lơ lửng trên tầng mây xám, rọi xuống con đường vắng lặng. Ngươi nhấc chân bước đi, tà áo nhỏ nhắn lướt nhẹ trên mặt đá đẫm sương. Thay vì trở về *Tướng Quân Phủ* ngay lập tức, ngươi uyển chuyển vận dụng bộ pháp thanh thoát đã thuần thục sau mười năm rèn luyện trong mộng, lặng lẽ rẽ vào một con hẻm nhỏ u tối nằm ở phía sau *Phủ Ninh An Công Chúa*. \nBóng tối bao trùm lấy con hẻm, che khuất hoàn toàn thân ảnh nhỏ bé của ngươi. Bức tường gạch rêu phong ẩm ướt tỏa ra hơi lạnh thấu xương, nhưng hơi thở của ngươi vẫn giữ được nhịp điệu đều đặn, không một tiếng động dư thừa. Ngươi dừng bước trước một cánh cửa gỗ cũ kỹ giấu đằng sau những hàng dây leo rậm rạp — đây là lối vào mật thất ngầm kết nối trực tiếp với mạng lưới ám vệ của *Vân Hương Lâu*. Ngươi đưa tay khẽ gõ lên cánh cửa theo một tiết tấu riêng biệt: ba tiếng ngắn, hai tiếng dài.\n\"Cạch.\"\nCánh cửa khẽ mở ra một khoảng vừa đủ cho một đứa trẻ lách qua. Ngươi bước vào bên trong, cánh cửa lập tức khép lại, trả lại sự tĩnh mịch cho con hẻm nhỏ. Dưới ánh nến tù mù của căn phòng ngầm, không khí mang theo mùi dầu phụng và giấy mực thanh mát. Một thân ảnh bọc trong y phục dạ hành màu đen tuyền đang quỳ một gối trên nền đá lạnh, tay chắp lại kính cẩn. Đây là thủ lĩnh toán ám vệ chịu trách nhiệm tổng hợp tin tức trong ngày."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ám Vệ",
+          "content": "Báo cáo chủ thượng, tuyến tin tức từ tửu lâu vừa gửi về. Vài giờ trước, người của *Ám Thương Hội* thuộc quyền quản lý ngầm của Nhị công tử *Diệp Bình Xuyên* đã bí mật tiếp xúc với một nhóm thương nhân lạ mặt từ phía Tây. Bọn họ đang gom một lượng lớn lương thực và thiết đao với giá cao. Ngoài ra, trong hoàng cung cũng truyền ra tin tức rằng *Diệp Vô Song* đại tướng quân đã dâng biểu đề nghị tăng cường quân đạm ở tuyến biên giới *Nam Ly Quốc*."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi tiến lại gần chiếc ghế gỗ nhỏ trong phòng ngầm, ngồi xuống và chắp hai tay lại trước cằm, đôi mắt đao sắc lẹm đăm chiêu suy nghĩ. Mọi quân cờ trên bàn cờ *Lạc Dương* dường như đang bắt đầu chuyển động nhanh hơn ngươi tưởng. \nNhị ca *Diệp Bình Xuyên* bề ngoài tỏ ra là một thư sinh yếu đuối, ngày ngày mang *Bách Nhật Túy* đến lừa ngươi uống để phong ấn nhận thức của ngươi, nhưng lưng chừng lại âm thầm điều hành *Ám Thương Hội* tích trữ lương thảo và binh khí. Hắn thu mua thiết đao để làm gì? Phải chăng kế hoạch \"Thâu thiên hoán nhật\" nhằm chiếm đoạt thân phận Thái tử *Nam Ly Quốc* của ngươi đã bước vào giai đoạn chuẩn bị thực lực quân sự? \nTrong khi đó, phụ thân trên danh nghĩa là *Diệp Vô Song* lại chủ động xin tăng viện cho biên giới *Nam Ly Quốc*. Điều này là ngẫu nhiên hay là một phần trong đại cục mà vị đại tướng quân Đại Hán này đang giăng ra? Và còn cả *Ngô Thu Phương* — cô công chúa *Tây Viêm* đang giả dạng làm *Ninh An công chúa* mà ngươi vừa chia tay ban nãy. Nàng đóng vai một đứa trẻ ngây thơ cùng ngươi chơi đùa trong hoa viên, nhưng liệu việc nàng lặng lẽ quan sát ngươi suốt buổi chiều có liên quan gì đến những xáo trộn lương thảo này hay không?\nTất cả những luồng thông tin đan xen nhau tạo thành một mạng nhện mưu đồ phức tạp. Nhưng khác với mười ngày trước, giờ đây ngươi không còn là một kẻ hoàn toàn bị động. Với võ công mười năm tích lũy trong mộng cùng hệ thống tình báo *Vân Hương Lâu* đang vận hành trơn tru, ngươi đã có đủ quân cờ trong tay để bắt đầu nghênh chiến.\nNgươi ngẩng đầu nhìn người ám vệ đang quỳ phía dưới, giọng nói tuy còn mang âm hưởng trong trẻo của một đứa trẻ mười tuổi nhưng ngữ điệu lại chứa đựng uy lực điềm tĩnh, không thể lay chuyển:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Nhị ca muốn gom lương thực và binh khí thì cứ để hắn gom. Tiếp tục cử người theo sát mọi biến động của *Ám Thương Hội*, nhưng tuyệt đối không được đánh rắn động cỏ. Riêng việc dịch chuyển quân nhu của phụ thân *Diệp Vô Song*, hãy cho người dò xét xem tuyến đường vận chuyển cụ thể sẽ đi qua những đâu."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ám Vệ",
+          "content": "Thuộc hạ đã rõ. Xin chủ thượng cẩn trọng, Nhị công tử dạo này kiểm tra các trạm gác trong *Tướng Quân Phủ* rất gắt gao, nếu ngài về muộn e rằng sẽ khiến hắn nảy sinh nghi ngờ."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi gật đầu nhẹ, đứng dậy phủi nhẹ lớp bụi mỏng trên tà áo gấm. Sự thận trọng của vị ám vệ này là hoàn toàn đúng đắn. *Diệp Bình Xuyên* là một kẻ xảo quyệt và thâm trầm, chỉ cần một sơ hở nhỏ lộ ra rằng *Bách Nhật Túy* không còn tác dụng, hắn chắc chắn sẽ chuyển sang những thủ đoạn tàn độc hơn.\nNgươi bước ra khỏi mật thất ngầm, trở lại con hẻm nhỏ vắng vẻ. Gió đêm *Lạc Dương* thổi qua làm tà áo ngươi lay động. Sương lạnh đọng thành những giọt nước nhỏ trên hàng lông mi, nhưng đôi mắt ngươi vẫn sáng quắc trong đêm tối. Ngươi men theo những con phố khuya tĩnh lặng, dùng bộ pháp nhẹ nhàng lướt qua các dãy nhà, hướng thẳng về phía *Tướng Quân Phủ*. Đêm đã về khuya, và ván cờ sinh tử này chỉ mới vừạ bắt đầu."
+        }
+      ]
+    },
+    {
+      "id": "c4f84dc3-5f39-4b25-99dd-802e37a9975d",
+      "type": "user_custom_action",
+      "content": "Lặng lẽ vượt tường rào trở về sương phòng tại Tướng Quân Phủ, giả vờ như vẫn đang ngủ mê do tác dụng của Bách Nhật Túy để tránh sự nghi ngờ của Diệp Bình Xuyên. Sau nhiều lần thăm dò, phụ tử Diệp gia đều đã bị ngươi qua mặt nên không còn để ý đến hoàn khố công tử là ngươi nữa. Diệp Bình Sinh được phái đến Nam Quan trấn thủ, Diệp Bình Xuyên thì được cử đến biên giới Tây Viêm, còn Diệp Bình Phàm thì mới 4 tuổi vẫn còn khá nhỏ. Diệp Vô Song thì quanh năm ở Kinh Thành. Còn về đứa con thứ 3 thật sự của Diệp Gia thì đang ở Nam Ly với thân phận Thái Tử Nam Ly - Triệu Công Minh"
+    },
+    {
+      "id": "9410e99b-1c0d-41b4-b71d-d33ac6ab31a6",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Bóng đêm tăm tối bao trùm lấy kinh thành *Lạc Dương*, sương mù lạnh lẽo giăng ngang những mái ngói rêu phong của *Tướng Quân Phủ*. Dưới tàn cây hòe cổ thụ bên ngoài bức tường cao vút chạm trổ hoa văn uy nghiêm, một thân ảnh nhỏ nhắn của đứa trẻ mười tuổi khẽ dịch chuyển. *Diệp Thần* nín thở, đôi mắt đen láy bộc lộ sự sắc bén vượt xa lứa tuổi. Vận dụng bộ pháp thanh thoát đã được mài dũa qua vô số đêm rèn luyện trong mộng cảnh, ngươi nhún người nhẹ nhàng như một chiếc lá khô. Thân hình nhỏ bé lướt qua khoảng không, vượt qua đỉnh tường rào cao ngất mà không tạo ra bất kỳ tiếng động nào, giẫm nhẹ lên ngói âm dương rồi lách qua ô cửa sổ mở hé, lặng lẽ đáp xuống sàn đá bên trong sương phòng của mình.\nVừa chạm chân xuống đất, ngươi liền nhanh chóng tháo bỏ vẻ tỉnh táo. Cởi bỏ lớp áo ngoài đẫm sương đêm, ngươi gieo mình xuống chiếc sập gỗ, buông xõa tà áo gấm, giả vờ gục đầu vào gối nằm trong tư thế vặn vẹo hoàn toàn vô lực. Hơi thở của ngươi bắt đầu được điều chỉnh trở nên dồn dập, ngắt quãng, hai mắt nhắm nghiền, gương mặt ửng hồng nhân tạo — một biểu hiện hoàn hảo của kẻ vừa tái phát cơn mê man nặng nề do độc tính của *Bách Nhật Túy* tích tụ qua nhiều năm.\nChỉ ít phút sau khi ngươi yên vị, bên ngoài cửa sổ gỗ chạm lưới hoa, một nhịp chân khẽ khàng dừng lại. Một luồng ánh mắt lạnh lẽo, dò xét xuyên qua kẽ hở nhìn vào bên trong. Cửa phòng khẽ xịch mở, bóng dáng cao ráo trong bộ trường bào xanh nhạt thêu mây trắng của *Diệp Bình Xuyên* tiến vào. Hắn bước từng bước chậm rãi, tay cầm chiếc quạt trúc nhẹ nhàng gõ vào lòng bàn tay. Đứng bên giường nhìn xuống đứa trẻ mười tuổi đang nằm mê mệt, ánh mắt phượng của hắn lướt qua từng nhịp thở ngắt quãng và cử chỉ vô thức của ngươi. *Diệp Bình Xuyên* khẽ vươn tay, hai ngón tay thô ráp bấm nhẹ vào huyệt cổ tay ngươi để kiểm tra mạch tượng. Ngươi chủ động thả lỏng toàn bộ cơ gân, để dòng khí huyết chạy loạn một cách vô quy tắc như đúng trạng thái bị dược lực phong ấn.\nSự dò xét kỹ lưỡng diễn ra trong tĩnh lặng rợn người. Sau nhiều lần thăm dò trực tiếp lẫn âm thầm trong suốt thời gian qua, nụ cười ôn hòa giả tạo trên môi *Diệp Bình Xuyên* cuối cùng cũng hiện ra một cách thỏa mãn. Hắn buông tay ngươi ra, lấy khăn lụa lau nhẹ ngón tay rồi khẽ buông một tiếng thở dài giả tạo. Đối với phụ tử nhà họ Diệp, đứa trẻ mười tuổi trước mắt này chung quy vẫn chỉ là một hoàn khố công tử phế vật, một con rối hoàn hảo hoàn toàn bị khống chế bởi *Bách Nhật Túy*, không hề có bất kỳ khả năng đe dọa nào đến đại cuộc.\nSự cảnh giác cuối cùng của phụ tử *Diệp gia* dành cho ngươi chính thức tan biến. *Diệp Bình Xuyên* xoay người ung dung bước ra khỏi sương phòng, cánh cửa gỗ khép lại khẽ khàng.\nSự đề phòng được dỡ bỏ đồng nghĩa với việc các quân cờ trong *Tướng Quân Phủ* bắt đầu phân tán theo đúng quỹ đạo chiến lược của bọn họ. Ngay sáng hôm sau, tin tức từ nội phủ truyền ra: Đại thiếu gia *Diệp Bình Sinh* mang theo quân lệnh của triều đình, tức tốc dẫn theo mười vạn tinh binh rời kinh thành tiến về phía *Nam Quan* để trấn thủ biên thùy. Trọng trách trấn giữ cửa ải phía Bắc đã kéo hắn rời xa vòng xoáy quyền lực ở trung ương. Trong khi đó, Nhị thiếu gia *Diệp Bình Xuyên* — kẻ nắm giữ *Ám Thương Hội* trong bóng tối — cũng nhận mật lệnh điều động, sửa sang hành trang lên đường đến khu vực biên giới giáp ranh *Tây Viêm* để mở rộng phạm vi ảnh hưởng và gom góp nguồn lực quân sự cho âm mưu lâu dài. Trong phủ lúc này chỉ còn lại Tứ thiếu gia *Diệp Bình Phàm* mới tròn bốn tuổi, suốt ngày chỉ biết quấy khóc trong vòng tay vú nuôi, hoàn toàn vô hại. Về phần Đại tướng quân *Diệp Vô Song*, hắn quanh năm bận rộn với công việc tại Binh Bộ và thượng triều ở Hoàng Cung, hiếm khi đặt chân về hậu viện.\nMọi mắt xích của kế hoạch \"Thâu thiên hoán nhật\" tàn độc dường như đang vận hành cực kỳ trơn tru dưới góc nhìn của phe địch. Bọn họ hoàn toàn không hề hay biết rằng, đứa con thứ ba thực sự của nhà họ Diệp hiện đang yên vị tại *Nam Ly Quốc* xa xôi, mang trên mình thân phận tôn quý là Thái Tử *Triệu Công Minh*. Còn kẻ đang nằm trên chiếc sập gỗ tại *Tướng Quân Phủ* này lại là một linh hồn xuyên không tỉnh táo tuyệt đối, sở hữu thực lực mười năm tu luyện trong mộng cùng một mạng lưới tình báo *Vân Hương Lâu* đang âm thầm phủ rộng khắp *Lạc Dương*.\nĐêm dài trôi qua trong sự tĩnh lặng của *Tướng Quân Phủ*. Nằm trên giường, ngươi khẽ nhắm mắt, thả tâm trí chìm sâu vào không gian mộng cảnh. Trong thế giới ý thức mênh mông vô tận ấy, một đêm bên ngoài tương đương với trọn vẹn một năm khổ luyện. Ngươi miệt mài vận chuyển khí huyết, rèn luyện thân pháp và các kỹ năng chiến đấu thân thể, biến từng thớ cơ của vóc dáng mười tuổi trở nên dẻo dai, bộc phát sức mạnh đáng sợ mà không ai có thể ngờ tới.\nKhi ánh ban mai đầu tiên xua tan màn sương lạnh buốt giá của kinh thành, ánh nắng vàng nhạt chiếu qua khe cửa sổ, rọi lên khuôn mặt tuấn tú của ngươi. *Diệp Thần* mở mắt, vươn vai đứng dậy. Một đêm đã trôi qua, thời gian mười tiếng đồng hồ yên bình trôi qua mang theo sự thay đổi lớn về cục diện xung quanh. Phủ tướng quân uy nghiêm ngày nào giờ đây trở nên vắng vẻ lạ thường khi các vị huynh đệ đều đã phân tán đi bốn phương.\nNgươi tự tay chỉnh đốn lại y phục màu xanh thẫm, bước ra khỏi sương phòng. Không khí buổi sáng trong phủ mang theo hương hoa đinh hương thoang thoảng cùng tiếng chổi quét lá xạc xác của vài tên gia nhân già. Gia nhân trong phủ nhìn thấy ngươi bước đi lảo đảo, ánh mắt đờ đẫn lười biếng như thường lệ thì chỉ cúi đầu chào qua loa rồi quay đi. Sự coi thường của bọn họ chính là lớp ngụy trang tốt nhất dành cho ngươi lúc này.\nNgươi thong thả dạo bước ra hoa viên phía sau phủ, dừng chân bên cạnh chòi nghỉ mát bằng gỗ mun. Tiếng chim hót líu lo trên cành trúc xanh khiến không gian thêm phần thư thái. Ngươi ngồi xuống ghế đá, khẽ tựa lưng vào cột gỗ, đưa mắt nhìn về hướng Tây — nơi *Diệp Bình Xuyên* đang trên đường nhậm chức. \n\"Một khi bọn họ đã gạt ta ra khỏi tầm mắt, đó chính là lúc ta có thể tự do đi lại trên bàn cờ này,\" ngươi thầm nghĩ, góc môi khẽ nhếch lên một nụ cười kín đáo. Sự rút lui của các huynh đệ *Diệp gia* để lại một khoảng trống tình báo lớn ngay bên trong kinh thành *Lạc Dương*. Lúc này, việc theo dõi động thái mua sắm quân nhu của *Ám Thương Hội* tại biên giới *Tây Viêm*, cũng như việc giữ liên lạc với *Vân Hương Lâu* và theo sát tung tích của Thái Tử *Triệu Công Minh* tại *Nam Ly Quốc* trở thành những nhiệm vụ chiến lược cấp thiết.\nBên ngoài cổng phủ, tiếng xe ngựa lăng xăng cùng tiếng rao hàng của các thương lái bắt đầu nhộn nhịp, báo hiệu một ngày mới lại bắt đầu tại kinh đô *Đại Hán*. Ngươi đứng dậy, phủi nhẹ tà áo, bắt đầu tính toán bước đi tiếp theo trong ván cờ sinh tử này."
+        }
+      ]
+    },
+    {
+      "id": "bca069e7-9f9f-4a37-978a-f979765541ba",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Tường thuật]: \"Ngươi đường đường chính chính đến Vân Hương Lâu. Với 1 hoàn khố công tử thì đến đây là 1 việc rất bình thường. Không đến mới là bất thường. Ngươi lên thẳng lầu 3, gọi người đến và dặn\"\n[Đoạn 2 - Lời Diệp Thần]: \"Ngươi đến Thôn Mộc Nhĩ, huyện Hãn Châu, tỉnh Sơn Tây tìm 1 cô bé mồ côi tên là Điêu Thuyền đưa về đây. Dạy nàng cầm, kỳ, thi, họa. Cho nàng tiếp khách nhưng không cho khách chạm vào nàng. Chỉ có thể ngồi cách 1 tấm bình phong. Từ nay nàng là đệ nhất mỹ nữ của Vân Hương Lâu. Nhớ kỹ, nàng là người của ta. Chỉ có ta mới được chạm vào nàng. Tất cả những kẻ nào có mưu đồ bất chính thì cứ tiễn hắn đi gặp Diêm Vương. Ngoài ra các ca kỹ khác cũng đều phải học cầm kỳ thi họa. Phân chia thành 4 bậc Đồng bài, Ngân bài, Kim bài, Tử bài. Thành lập tổ chức Hồng Nhan do Điêu Thuyền đứng đầu, các ca kỹ thuộc 4 bậc đều nghe lệnh nàng\""
+    },
+    {
+      "id": "65eb1893-7389-4f24-8bdb-da5779067c75",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Ánh nắng ban mai của kinh thành *Lạc Dương* rọi xuống những con phố lát đá xanh, xua tan đi màn sương lạnh lẽo của đêm trường. Trên đại lộ dẫn thẳng từ *Tướng Quân Phủ* tới khu phố sầm uất nhất, bóng dáng một tiểu công tử mười tuổi đang thong dong bước đi, tà áo gấm màu xanh nhạt khẽ lay động theo từng nhịp chân. Đó chính là ngươi, *Diệp Thần*. Với vẻ ngoài có chút lờ đờ, đôi mắt thỉnh thoảng lại nheo lại như chưa tỉnh ngủ hẳn, ngươi hiện lên trong mắt người qua đường không khác gì một \"hoàn khố công tử\" thứ thiệt — một kẻ ăn chơi trác táng, vô dụng, chỉ biết hưởng lạc dựa hơi phụ thân là Đại tướng quân. \nDân chúng và lính tuần tra nhìn thấy ngươi thì kẻ thì tặc lưỡi ngán ngẩm, người thì cúi đầu chào lấy lệ rồi lướt qua nhanh chóng. Không ai có thể ngờ rằng, đằng sau cái dáng vẻ lảo đảo vì \"dư âm\" của *Bách Nhật Túy* ấy là một linh hồn từ tương lai đang vận hành những thuật toán phức tạp nhất, và một thân thể đã được tôi luyện mười năm võ học trong mộng cảnh. Ngươi lách qua những hàng quán nhộn nhịp, tiếng rao hàng của tiểu thương và tiếng vó ngựa gõ nhịp trên mặt đá tạo thành một bản nhạc hỗn loạn nhưng đầy sức sống của thời đại này. Mục tiêu của ngươi hiện rõ ngay phía trước: *Vân Hương Lâu*.\nTửu lâu ba tầng nguy nga, lộng lẫy với những hàng đèn lồng đỏ treo cao, tỏa ra mùi thơm của rượu nồng và thức ăn mỹ vị. Với một thiếu gia nhà họ Diệp, việc lui tới chốn này vào sáng sớm chẳng có gì là bất thường. Ngươi đường đường chính chính bước qua ngưỡng cửa lớn, không buồn liếc nhìn những kẻ hầu người hạ đang khúm núm chào đón, mà đi thẳng lên tầng ba — khu vực biệt lập chỉ dành cho những khách hàng cực kỳ tôn quý hoặc chủ nhân thực sự của nơi này.\nTiếng sàn gỗ dưới chân kêu rít khẽ khàng. Lên đến tầng cao nhất, không khí bỗng chốc trở nên tĩnh lặng và nghiêm trang. Ngươi đẩy cánh cửa gỗ chạm trổ hình mẫu đơn, bước vào căn phòng rộng lớn tràn ngập hương trầm. Tại đây, một người đàn ông trung niên với gương mặt cương nghị, ánh mắt sắc lẹm tên là *Lý Tiệm* — thuộc hạ thân tín và cũng là người trực tiếp điều hành mạng lưới ám vệ của ngươi — đã đứng đợi sẵn. Thấy ngươi bước vào, hắn lập tức quỳ một gối xuống sàn, chắp tay cung kính."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Đứng lên đi. Có việc quan trọng ta cần ngươi phải thực hiện ngay lập tức, không được chậm trễ một khắc nào."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi tiến lại phía chiếc ghế chủ vị bằng gỗ trắc, ngồi xuống với một tư thế uy nghiêm hoàn toàn khác hẳn vẻ lười biếng bên ngoài. Ánh mắt ngươi lúc này lạnh lùng như lưỡi đao, nhìn xoáy vào *Lý Tiệm*."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Ngươi lập tức cử những kẻ nhanh nhẹn và trung thành nhất, bí mật đến *Thôn Mộc Nhĩ*, huyện *Hãn Châu*, tỉnh *Sơn Tây*. Ở đó có một cô bé mồ côi tên là *Điêu Thuyền*. Hãy đưa nàng về đây một cách an toàn và kín đáo nhất. Nhớ kỹ, trên đường đi phải chăm sóc nàng thật chu đáo, không được để nàng chịu bất kỳ tổn thương hay sợ hãi nào."
+        },
+        {
+          "type": "narrative",
+          "content": "*Lý Tiệm* khẽ nhíu mày, có chút ngạc nhiên trước yêu cầu tìm kiếm một đứa trẻ mồ côi ở tận phương xa, nhưng hắn không dám thắc mắc, chỉ cúi đầu lắng nghe. Ngươi tiếp tục hạ lệnh, giọng nói trầm xuống, mang theo một sự chiếm hữu mãnh liệt và quyền uy tuyệt đối:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Khi nàng về đến đây, hãy sắp xếp cho nàng một gian phòng thanh tịnh và sang trọng nhất tại tầng ba này. Tìm những danh sư giỏi nhất kinh thành về dạy nàng cầm, kỳ, thi, họa. Ta muốn nàng được đào tạo để trở thành đệ nhất mỹ nữ của *Vân Hương Lâu*, nhưng đồng thời cũng là một quân bài chiến lược. Cho nàng tiếp khách, nhưng tuyệt đối không cho bất kỳ ai được phép chạm vào nàng. Mọi cuộc gặp gỡ chỉ được phép diễn ra cách một tấm bình phong. Nhớ kỹ, nàng là người của ta. Chỉ có ta, *Diệp Thần*, mới có quyền chạm vào nàng. Bất cứ kẻ nào, dù là vương tôn công tử hay quan lại quyền quý, nếu dám có mưu đồ bất chính với nàng, ngươi cứ trực tiếp tiễn hắn đi gặp *Diêm Vương* mà không cần báo cáo."
+        },
+        {
+          "type": "narrative",
+          "content": "*Lý Tiệm* hít một hơi lạnh, cảm nhận được sát khí nồng đậm trong lời nói của một đứa trẻ mười tuổi. Hắn gật đầu lia lịa, ghi nhớ từng lời vàng ngọc. Ngươi đứng dậy, đi lại phía cửa sổ nhìn xuống dòng người tấp nập bên dưới, tâm trí bắt đầu phác thảo ra một tổ chức quyền lực trong bóng tối."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Ngoài ra, ta muốn thay đổi cách vận hành của các ca kỹ tại đây. Tất cả bọn họ, từ nay trở đi đều phải học tập cầm kỳ thi họa một cách nghiêm túc. Hãy phân chia bọn họ thành bốn bậc dựa trên tài năng và nhan sắc: *Đồng bài*, *Ngân bài*, *Kim bài* và cao nhất là *Tử bài*. Đồng thời, ta chính thức thành lập tổ chức mang tên *Hồng Nhan*. *Điêu Thuyền* sẽ là thủ lĩnh đứng đầu tổ chức này. Tất cả ca kỹ thuộc bốn bậc trên đều phải nghe theo mệnh lệnh của nàng. *Vân Hương Lâu* từ nay sẽ không chỉ là một tửu lâu, mà là một pháo đài thông tin, một lưỡi gươm sắc bén núp dưới vẻ đẹp của những nhành hoa."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Lý Tiệm",
+          "content": "Tuân lệnh chủ thượng! Thuộc hạ sẽ đích thân giám sát việc này. Chỉ trong vòng một tháng, *Hồng Nhan* chắc chắn sẽ khiến cả kinh thành *Lạc Dương* phải kinh ngạc."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi khẽ gật đầu, sự hài lòng hiện rõ trên khuôn mặt. Việc thu phục *Điêu Thuyền* — người mang dung nhan tuyệt mỹ tương lai và cũng là một nhân vật quan trọng trong dòng chảy lịch sử — là một bước đi mang tính quyết định. Với sự thức tỉnh của linh hồn xuyên không, ngươi biết rằng trong thời loạn lạc này, sức mạnh quân sự của *Diệp Vô Song* hay sự mưu mô của *Diệp Bình Xuyên* đều là những thứ đáng sợ, nhưng mạng lưới tình báo và sự chi phối lòng người từ bên trong mới là vũ khí tối thượng.\nMười ngày trôi qua kể từ khi ngươi tỉnh dậy, mỗi đêm tu luyện trong mộng cảnh tương đương với một năm miệt mài ngoài thực tế. Mười năm công phu tích lũy trong hình hài một đứa trẻ mười tuổi khiến mỗi bước đi của ngươi đều ẩn chứa sức bật kinh người, mỗi hơi thở đều điều hòa được khí huyết đến tận từng đầu ngón tay. Tuy nhiên, trước mặt thiên hạ, ngươi vẫn chỉ là tên tiểu tử ham chơi. \n*Lý Tiệm* cáo lui để triển khai mật lệnh. Một mình ngươi đứng lại giữa căn phòng tĩnh mịch, mùi hương trầm vẩn vương quanh cánh mũi. Ngươi tựa lưng vào khung cửa sổ, phóng tầm mắt về phía hoàng cung uy nghiêm phía xa. Tin tức từ các ám vệ khác liên tục đổ về trong đầu: đại ca *Diệp Bình Sinh* đã dẫn quân đi *Nam Quan*, nhị ca *Diệp Bình Xuyên* đang tiến về phía biên giới *Tây Viêm*. Phụ thân *Diệp Vô Song* thì bận rộn với các cuộc họp kín tại Binh Bộ. \n\"Mọi thứ đang diễn ra đúng như dự đoán,\" ngươi thầm nghĩ. Khi những kẻ mạnh nhất trong nhà họ Diệp rời đi, kinh thành *Lạc Dương* này chính là sân chơi của ngươi. *Vân Hương Lâu* lúc này không chỉ đón tiếp các quan chức đến hưởng lạc, mà còn thu hút cả những lãng khách giang hồ và các văn sĩ tài hoa. Mỗi chén rượu được rót ra, mỗi tiếng đàn vang lên đều mang theo những mảnh vụn tin tức về tình hình lương thảo, biến động quân sự ở các châu quận và cả những bí mật thâm cung đại nội.\nNgươi rời khỏi tầng ba, bước xuống cầu thang gỗ. Tiếng huyên náo bên dưới lại ùa tới. Một vài thương nhân đang tranh luận về giá muối, một nhóm công tử đang khoe khoang về những vần thơ mới sáng tác. Ngươi mỉm cười nhạt, bước ra khỏi tửu lâu, hòa mình vào ánh nắng rực rỡ của buổi trưa. \nBỗng nhiên, một cảm giác ớn lạnh kỳ lạ lướt qua sống lưng. Không phải là sự xao động của năng lượng siêu nhiên nào — bởi ngươi vốn là một người bình thường trong thế giới vật lý này — mà là bản năng sinh tồn của một kẻ đã luyện võ mười năm đang cảnh báo về một sự theo dõi. Ngươi không quay đầu lại, vẫn giữ nguyên bộ dạng của một kẻ say sưa, bước chân hơi loạng choạng tiến về phía một gánh hàng rong bên đường. Qua sự phản chiếu mờ ảo trên mặt chiếc gương đồng của người bán đồ trang sức, ngươi thoáng thấy một bóng người mặc trường bào màu xám tro đang đứng nép mình sau một cột nhà cách đó không xa. \nKẻ đó không mang theo binh khí lộ liễu, nhưng dáng đứng rất vững chãi, đôi mắt nheo lại đầy vẻ nghi hoặc. \"Là người của *Ám Thương Hội* chăng? Hay là tai mắt của một thế lực nào khác trong triều đình?\" Ngươi thầm phân tích. Việc ngươi thường xuyên lui tới *Vân Hương Lâu* có vẻ như đã bắt đầu khiến những kẻ đa nghi chú ý, dù ngươi đã cố tình tạo dựng vỏ bọc hoàn khố suốt bao năm qua.\nNgươi hít một hơi thật sâu, cảm nhận sức lực dồi dào trong cơ thể mười tuổi của mình. Dù đối phương có là một cao thủ đi chăng nữa, với bộ pháp mười năm tu luyện, ngươi hoàn toàn có thể cắt đuôi hắn trong vòng vài nhịp thở. Nhưng lúc này, hành động thiếu suy nghĩ sẽ làm hỏng đại cục. Ngươi cần một cách xử lý khôn ngoan hơn để vừa duy trì vỏ bọc, vừa khẳng định quyền uy thầm lặng của mình tại mảnh đất *Lạc Dương* đầy rẫy cạm bẫy này.\nTiếng chuông từ một ngôi chùa xa xăm vang lên, báo hiệu giờ Ngọ đã đến. Gió từ sông *Lạc* thổi vào thành phố, mang theo hơi ẩm và sự náo nhiệt của bến tàu. Ngươi nheo mắt nhìn về phía mặt trời, trong đầu đã có sẵn những bước đi tiếp theo cho ván cờ sinh tử này. Một tổ chức *Hồng Nhan* sắp được thành lập, một *Điêu Thuyền* sắp được đưa về, và một *Diệp Thần* đang dần bước ra khỏi bóng tối để thâu tóm tất cả.\nDưới chân ngươi, bóng đổ dài trên mặt đường đá xanh. Kinh thành này sắp sửa chứng kiến một cơn bão ngầm, mà tâm bão lại bắt nguồn từ chính đứa trẻ mười tuổi đang bị cả thiên hạ coi thường này."
+        }
+      ]
+    },
+    {
+      "id": "6834bc0c-d514-4a5f-817f-53c229554d8e",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Muốn theo dõi thì cứ theo dõi đi. Dù sao cũng không có gì bí mật\"\n[Đoạn 2 - Tường thuật]: \"Ngươi đánh xe về phủ tắm rửa nghỉ ngơi. Chiều đến phủ Ninh An công chúa chơi. Tối đến Vân Hương Lâu qua đêm. Mỗi ngày trôi qua đều như vậy. Cho đến 1 tháng sau, Điêu Thuyền được đưa về Vân Hương Lâu\""
+    },
+    {
+      "id": "397edcca-9247-444c-8b91-315c0ea0299c",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Dưới ánh hoàng hôn đỏ thẫm như máu đang dần lịm tắt sau những dãy tường thành kiên cố của kinh đô *Lạc Dương*, bóng tối bắt đầu bò trường trên những con phố lát đá xanh, mang theo cái se lạnh đặc trưng của sương đêm. Ngươi, *Diệp Thần*, bước đi thong dong trên đại lộ, tà áo gấm màu xanh nhạt khẽ lay động theo từng nhịp chân có phần lảo đảo, cốt để diễn cho tròn vai một tiểu công tử vừa mới \"tỉnh rượu\". Cảm giác bị theo dõi vẫn hiện hữu rõ rệt, như một chiếc bóng đen âm thầm bám riết lấy gót chân ngươi qua từng con hẻm nhỏ. Thay vì tỏ ra lo lắng hay vội vã, ngươi khẽ nhếch môi, một nụ cười nhạt nhẽo và đầy vẻ bất cần hiện lên trên gương mặt trẻ thơ mười tuổi. Ngươi không quay đầu lại, chỉ để mặc cho thanh âm trầm thấp của mình tan biến vào tiếng gió rít qua kẽ lá:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Muốn theo dõi thì cứ theo dõi đi. Dù sao cũng không có gì bí mật."
+        },
+        {
+          "type": "narrative",
+          "content": "Lời nói ấy vừa như một lời thách thức ngạo nghễ, vừa như một sự buông xuôi đầy tính toán của một kẻ đã quá quen với việc sống trong vòng vây của những âm mưu. Ngươi thừa biết kẻ đang nấp sau góc tường rêu phong kia là ai — hoặc ít nhất hắn thuộc về phe phái nào. Sự hiện diện của hắn chỉ càng chứng minh rằng màn kịch \"hoàn khố công tử\" mà ngươi dày công dàn dựng bấy lâu đang đi đúng hướng.\nSáng sớm hôm sau, khi những tia nắng ban mai đầu tiên còn chưa kịp xua tan màn sương mù dày đặc bao phủ trên các mái ngói âm dương của *Tướng Quân Phủ*, ngươi đã ngồi trong một bồn tắm gỗ đàn hương lớn, làn nước ấm áp bốc hơi nghi ngút mang theo mùi hương thanh khiết của thảo mộc. Những gia nhân già cúi đầu khép nép, dâng lên những tấm khăn lụa mềm mại nhất. Ngươi nhắm mắt, để mặc cho sự thư thái thấm vào từng thớ thịt, nhưng trong tâm trí, những luồng khí huyết đang vận hành theo một quỹ đạo vô cùng tinh vi — thành quả của những đêm dài khổ luyện trong mộng cảnh. \nMỗi buổi sáng trở về phủ tắm rửa và nghỉ ngơi đã trở thành một phần trong chuỗi sinh hoạt lặp đi lặp lại một cách nhàm chán của ngươi. Kẻ theo dõi ẩn danh kia, sau khi chứng kiến cảnh ngươi chỉ biết hưởng thụ sự xa hoa, thỉnh thoảng lại nổi trận lôi đình với gia nhân vì một chuyện vặt vãnh, hay nằm dài trên sập gụ hưởng lạc, thì ánh mắt hắn ban đầu còn đầy vẻ nghi hoặc, dần dà đã chuyển sang sự khinh miệt và lơ là. Đối với hắn, một đứa trẻ mười tuổi dù có mang linh hồn của ai đi chăng nữa, nếu chỉ biết đắm mình trong phấn son và rượu ngọt thì cũng chẳng thể tạo nên sóng gió.\nKhi mặt trời lên cao quá ngọn tre, ngươi lại đánh xe ngựa sang trọng, hướng thẳng về phía *Phủ Ninh An Công Chúa*. Hoa viên trong phủ công chúa luôn rực rỡ sắc hoa, là nơi chứng kiến những cuộc \"chơi đùa\" dường như vô tư lự giữa hai đứa trẻ. Ngươi và *Ngô Thu Phương* cùng nhau đuổi bướm bên hồ sen, hay ngồi dưới gốc cây đại thụ thi thố những vần thơ ngô nghê."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tịch Nhan muội muội, muội xem, ta vừa vẽ một con rồng bằng phấn trắng đây này. Phụ thân nói rồng là biểu tượng của sức mạnh, nhưng ta thấy nó giống một con giun lớn hơn."
+        },
+        {
+          "type": "narrative",
+          "content": "Nàng che miệng cười, đôi mắt phượng ánh lên những tia sáng phức tạp, vừa có vẻ nuông chiều, vừa có sự dò xét lạnh lùng ẩn giấu sâu bên trong."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngô Thu Phương",
+          "content": "Thần ca ca thật là... rồng trong tranh hay rồng ngoài đời thực, đôi khi chỉ cách nhau một ý niệm. Huynh cứ mải mê với những hình vẽ này, chẳng trách Nhị ca của huynh lúc nào cũng lo lắng cho tương lai của huynh."
+        },
+        {
+          "type": "narrative",
+          "content": "Nàng khẽ đưa tay chỉnh lại lọn tóc mai bị gió thổi loạn, cử chỉ thanh thoát như một vị tiên nữ nhỏ bé. Trong suốt một tháng ròng rã, ngày nào ngươi cũng đến, ngày nào nàng cũng đón tiếp bằng sự dịu dàng và những câu chuyện phiếm. Nàng không biết rằng, đằng sau những lời nói ngây ngô về con giun con rồng, ngươi đang âm thầm quan sát cách bố trí lính canh và những thay đổi nhỏ nhất trong thái độ của nàng. Ngươi đóng vai một vị hôn phu chung thủy và ngốc nghếch, còn nàng đóng vai một công chúa nhu mì nhưng sắc sảo. Cả hai cùng diễn một vở kịch mà khán giả duy nhất lại chính là đối phương.\nKhi màn đêm buông xuống, kinh thành *Lạc Dương* chìm vào sự náo nhiệt của đèn lồng và tiếng đàn hát, ngươi lại xuất hiện tại *Vân Hương Lâu*. Đây mới thực sự là chiến trường thầm lặng của ngươi. Những đêm dài \"qua đêm\" tại tửu lâu không phải để đắm chìm trong sắc dục, mà là để ngươi chìm vào giấc mộng dài. Một đêm bên ngoài bằng một năm trong mộng. Trong suốt một tháng ấy, tương đương với ba mươi năm miệt mài tu luyện không ngừng nghỉ trong không gian mộng cảnh, thực lực của ngươi đã đạt đến một tầm cao mà ngay cả những cao thủ hàng đầu của *Tướng Quân Phủ* cũng khó lòng tưởng tượng nổi. Gân cốt của thân thể mười tuổi đã được rèn sắt thành thép, khí huyết cuồn cuộn như đại dương, và mỗi bộ pháp đều đạt đến sự hoàn mỹ tuyệt đối.\nMột tháng trôi qua trong sự yên bình giả tạo ấy, kẻ theo dõi ẩn danh cuối cùng cũng đã hoàn toàn mất đi sự kiên nhẫn. Những báo cáo gửi về tổ chức của hắn giờ đây chỉ còn lại những dòng chữ ngắn gọn và đầy vẻ chủ quan: \"Đối tượng *Diệp Thần* hoàn toàn vô hại, chỉ là một tên phế vật ham chơi, không có bất kỳ dấu hiệu của sự thức tỉnh hay ý chí phản kháng. Đề nghị rút bớt nhân lực theo dõi để tập trung vào các mục tiêu quan trọng hơn.\"\nChính tại thời điểm sự cảnh giác của kẻ thù chạm mức thấp nhất, mạng lưới *Hồng Nhan* dưới sự điều hành bí mật của *Lý Tiệm* đã chính thức thành hình. Những ca kỹ được phân chia theo bốn bậc *Đồng bài*, *Ngân bài*, *Kim bài* và *Tử bài* bắt đầu len lỏi vào các phủ đệ, thu thập những thông tin nhạy cảm nhất từ những cuộc trò chuyện lúc say của các quan lại. Và rồi, vào một đêm trăng khuyết, một chiếc xe ngựa phủ rèm nhung kín đáo lặng lẽ dừng lại trước cửa sau của *Vân Hương Lâu*.\n*Lý Tiệm* đích thân mở cửa xe, dẫn một cô bé mồ côi với dung nhan dù còn nhỏ tuổi nhưng đã toát lên vẻ khuynh quốc khuynh thành bước vào bên trong. Đó chính là *Điêu Thuyền*, người mà ngươi đã hạ lệnh tìm kiếm bằng mọi giá. Ngươi đứng trên lầu ba, nhìn xuống bóng dáng nhỏ nhắn đang bỡ ngỡ bước đi giữa không gian xa hoa của tửu lâu. Ánh nến lung linh hắt lên gương mặt nàng, tạo nên một vẻ đẹp vừa u sầu vừa kiêu sa.\nNgươi bước xuống cầu thang gỗ, mỗi bước chân đều mang theo sự uy nghiêm của một bậc quân chủ thầm lặng. *Điêu Thuyền* thấy ngươi, nàng khẽ run rẩy, đôi mắt to tròn chứa đựng sự sợ hãi nhưng cũng đầy vẻ biết ơn. Nàng đã nghe kể về vị \"ân nhân\" đã cứu mình khỏi cảnh lầm than và đưa về đây để đào tạo. Nàng quỳ sụp xuống sàn gỗ lạnh lẽo, giọng nói trong trẻo như tiếng chuông ngân:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Nô tì... nô tì *Tú Dinh*, bái kiến chủ thượng. Đa tạ ngài đã ra tay cứu giúp, cho nô tì một con đường sống."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi tiến lại gần, vươn bàn tay nhỏ nhắn nhưng cứng cáp đỡ nàng đứng dậy. Ánh mắt ngươi nhìn sâu vào đôi mắt nàng, không có sự thèm khát dục vọng, chỉ có một sự kỳ vọng lớn lao và một lời cam kết thầm lặng."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Kể từ hôm nay, nàng không còn là cô bé mồ côi của *Thôn Mộc Nhĩ* nữa. Nàng là thủ lĩnh của *Hồng Nhan*, là đôi mắt và đôi tai của ta tại *Lạc Dương* này. Hãy nhớ kỹ những gì ta đã dặn, cầm kỳ thi họa chỉ là lớp vỏ bọc, thứ ta cần ở nàng là sự trung thành tuyệt đối và một trái tim sắt đá."
+        },
+        {
+          "type": "narrative",
+          "content": "Nàng ngẩng đầu nhìn ngươi, sự kinh ngạc hiện rõ khi thấy uy lực toát ra từ một đứa trẻ trạc tuổi mình. Nhưng ngay lập tức, nàng cảm nhận được một sự che chở và tin cậy mà nàng chưa từng có trong đời. Sự hảo cảm và kính nể trong lòng nàng đối với ngươi bùng lên mãnh liệt."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Nô tì nguyện đem tính mạng này để phụng sự chủ thượng. Những gì ngài giao phó, *Tú Dinh* dù chết cũng không dám lơ là."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi khẽ gật đầu, quay sang nhìn *Lý Tiệm* đang đứng cung kính bên cạnh."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tốt. Sắp xếp cho nàng theo đúng kế hoạch. *Vân Hương Lâu* từ nay sẽ bắt đầu mở rộng quy mô. Những quân bài chiến lược tiếp theo đã sẵn sàng để lật mở. Kinh thành này... đã đến lúc phải thay đổi chủ nhân thực sự rồi."
+        },
+        {
+          "type": "narrative",
+          "content": "Bên ngoài, gió đêm vẫn rít qua các kẽ lá, nhưng không gian bên trong *Vân Hương Lâu* lại mang một bầu không khí rực lửa của những tham vọng đang trỗi dậy. Một tháng nhẫn nhịn và diễn kịch đã mang lại cho ngươi một nền móng vững chắc. Kẻ địch lơ là, mỹ nhân đã về tay, và thực lực cá nhân của ngươi đã đạt tới độ chín muồi sau bốn mươi năm (mười ngày đầu và ba mươi ngày sau) khổ luyện trong mộng cảnh. \nThời gian dường như ngưng đọng trong khoảnh khắc ngươi đứng giữa lầu ba, phía sau là *Điêu Thuyền* và mạng lưới *Hồng Nhan*, phía trước là bóng tối bao trùm lấy *Tướng Quân Phủ* và những âm mưu của cha con nhà họ Diệp. Mỗi hơi thở của ngươi giờ đây đều hòa nhịp với mạch đập của kinh thành *Lạc Dương*. Những sinh hoạt hưởng lạc của một hoàn khố công tử vẫn sẽ tiếp diễn, nhưng đó sẽ là những sợi dây thừng êm ái nhất để siết cổ những kẻ dám coi thường ngươi.\nTrăng lên cao, rọi sáng một góc lầu, soi rõ gương mặt bình thản đến đáng sợ của ngươi. Ván cờ này, ngươi không chỉ là người chơi, mà đã dần trở thành người điều khiển cả bàn cờ."
+        }
+      ]
+    },
+    {
+      "id": "27c08f3d-a92c-4cbb-a021-88ebf7ecf194",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Các ca kỹ hiện tại đều chỉ được cấp Đồng bài. Có thể thăng cấp tối đa lên Ngân bài. Từ giờ tuyển chọn các cô nhi nữ dưới 15 tuổi. Nuôi dạy các nàng cầm kỳ thi họa. Để Điêu Thuyền đánh giá cấp bậc. Cao nhất chỉ được Kim bài, Tử bài sẽ do ta đánh giá và cấp. Những ai từ Kim Bài trở lên đều tạm thời không cho khách chạm vào. Cứ làm giống như Điêu Thuyền, tiếp khách sau bình phong. Để đạt Kim bài thì thứ nhất là nhan sắc thứ 2 là 4 kỹ năng cầm kỳ thi họa. 2 cái đều không được thiếu. Ngân sách cứ dùng của Vân Hương Lâu. Không cần tiết kiệm. Điêu Thuyền, nàng và Tử bài là người của ta. Ta sẽ không cho người khác chạm vào các nàng. Nàng chỉ cần ở sau bình phong tiếp khách và thu thập thông tin là được. 1 tháng sau ta sẽ kiểm tra tiến độ thực hiện. Được rồi. Mọi người đi làm việc đi\""
+    },
+    {
+      "id": "4a343ef7-c1e4-43db-b69f-46ca5d05544b",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Tại tầng ba của *Vân Hương Lâu*, không gian chìm trong mùi trầm hương u tịch, tách biệt hoàn toàn với sự xô bồ của phố thị *Lạc Dương* bên ngoài. Ánh nến lung linh hắt bóng ba thân ảnh lên những tấm bình phong lụa mỏng. Ngươi, *Diệp Thần*, ngồi ở vị trí chủ vị, đôi mắt đen láy bình thản nhưng ẩn chứa uy quyền đáng sợ, nhìn thẳng vào *Điêu Thuyền* và *Lý Tiệm*. Giọng nói của ngươi tuy vẫn còn nét trong trẻo của một đứa trẻ mười tuổi, nhưng từng câu từng chữ thốt ra lại đanh thép, rõ ràng như những nhát búa gõ vào đe thép:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Nghe cho kỹ đây. Từ hôm nay, quy tắc vận hành của *Vân Hương Lâu* sẽ thay đổi hoàn toàn. Các ca kỹ hiện tại đều chỉ được cấp Đồng bài. Bọn họ có thể nỗ lực thăng cấp, nhưng tối đa cũng chỉ đến Ngân bài mà thôi. Ta giao cho ngươi, *Lý Tiệm*, từ giờ hãy bí mật tuyển chọn các cô nhi nữ dưới mười lăm tuổi, đưa về đây chăm sóc. Hãy dạy cho các nàng cầm, kỳ, thi, họa một cách bài bản nhất."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi dừng lại một nhịp, liếc nhìn sang *Điêu Thuyền* — người lúc này đang đứng cung kính bên cạnh với vẻ mặt đầy nét nghiêm túc và tôn trọng."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Về phần đánh giá cấp bậc, ta giao toàn quyền cho nàng, *Tú Nhi*. Dưới trướng nàng sẽ có bốn bậc: Đồng, Ngân, Kim và Tử. Kim bài là cấp bậc cao nhất mà nàng có thể phê duyệt, yêu cầu cực kỳ khắt khe: thứ nhất phải có nhan sắc thoát tục, thứ hai là phải tinh thông cả bốn kỹ năng cầm kỳ thi họa, tuyệt đối không được thiếu sót bất cứ thứ gì. Còn bậc Tử bài... bậc này chỉ có ta mới có quyền đánh giá và cấp bài."
+        },
+        {
+          "type": "narrative",
+          "content": "*Lý Tiệm* cúi đầu ghi nhớ từng lời, trong khi *Điêu Thuyền* khẽ gật đầu, đôi mắt phượng ánh lên sự thông tuệ. Ngươi gõ nhẹ ngón tay lên mặt bàn gỗ trắc, tiếp tục dặn dò với ngữ điệu sắc lạnh hơn:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Quy tắc tiếp khách cũng phải sửa đổi. Những ai đạt từ Kim bài trở lên, tuyệt đối không cho phép khách được chạm vào người. Bọn họ sẽ làm giống như nàng, chỉ được phép tiếp khách sau một tấm bình phong che chắn. Về ngân sách, cứ dùng trực tiếp từ nguồn thu của *Vân Hương Lâu*, không cần phải tiết kiệm bất cứ thứ gì, thứ ta cần là chất lượng và sự trung thành tuyệt đối. Nhớ lấy, *Tú Nhi*, nàng và tất cả những ai mang Tử bài sau này đều là người của ta. Ta sẽ không bao giờ cho phép bất kỳ kẻ nào khác được chạm vào các nàng. Nàng chỉ cần ở sau bình phong tiếp khách và tập trung thu thập thông tin cho ta là đủ."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi đứng dậy, tà áo gấm khẽ lay động, ánh mắt hướng về phía cửa sổ nhìn ra màn đêm kinh thành đang dần buông xuống."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Một tháng sau, ta sẽ quay lại để kiểm tra tiến độ thực hiện. Nếu có bất kỳ kẻ nào gây khó dễ hoặc có mưu đồ bất chính, cứ việc xử lý theo quy định ta đã ban. Được rồi, mọi người đi làm việc đi."
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* khẽ lùi lại một bước, cung kính hành lễ theo đúng nghi thức, tà áo lụa của nàng quét nhẹ trên mặt sàn gỗ."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Nô tì tuân lệnh chủ thượng. Những quy tắc này, *Tú Nhi* đã khắc cốt ghi tâm. Trong vòng một tháng, nô tì nhất định sẽ không để ngài thất vọng, tổ chức *Hồng Nhan* sẽ sớm trở thành cánh tay đắc lực của ngài."
+        },
+        {
+          "type": "narrative",
+          "content": "*Lý Tiệm* cũng lập tức chắp tay, giọng nói trầm ổn đầy quyết tâm:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Lý Tiệm",
+          "content": "Thuộc hạ sẽ lập tức triển khai việc tuyển chọn cô nhi và giám sát các danh sư dạy bảo. Xin chủ thượng yên tâm trở về phủ nghỉ ngơi."
+        },
+        {
+          "type": "narrative",
+          "content": "Sau khi dặn dò xong xuôi, ngươi không nán lại lâu để tránh sự chú ý không cần thiết. Dưới sự yểm trợ của bóng đêm và bộ pháp nhẹ nhàng đã được rèn luyện suốt nhiều năm trong mộng cảnh, ngươi lặng lẽ rời khỏi *Vân Hương Lâu*. Bóng dáng nhỏ bé của một đứa trẻ mười tuổi lướt qua những con hẻm vắng, nhanh chóng vượt qua các trạm gác và tường rào kiên cố của *Tướng Quân Phủ* mà không gây ra bất kỳ tiếng động nào. Khi trở về đến sương phòng, ngươi lập tức cởi bỏ y phục bên ngoài, nằm xuống sập gỗ và giả vờ chìm vào giấc ngủ sâu, duy trì vẻ ngoài của một kẻ vẫn còn đang mê mệt do tác dụng của *Bách Nhật Túy*. Mười tiếng đồng hồ trôi qua trong sự tĩnh lặng của phủ tướng quân, cũng là lúc ngươi chìm sâu vào không gian mộng cảnh để tiếp tục hành trình tu luyện dài đằng đẵng của mình.\nÁnh nắng ban mai của ngày hôm sau chiếu qua khe cửa, rọi vào sương phòng. Ngươi mở mắt, cảm thấy một luồng sức mạnh cuồn cuộn đang chảy trôi trong huyết quản. Mười đêm tu luyện tương đương mười năm khổ luyện, kết hợp với ba mươi đêm vừa qua, thực lực của ngươi hiện tại đã đạt đến một cảnh giới mà ngay cả những võ tướng kỳ cựu nhất của *Đại Hán* cũng phải e dè nếu biết được sự thật. Gân cốt dẻo dai, nhịp thở điều hòa, mỗi một cử động của ngươi đều mang theo sự chuẩn xác đến kinh ngạc.\nNgươi ngồi dậy, thong thả mặc vào bộ y phục màu xanh thẫm đơn giản. Trong phủ lúc này vắng lặng hơn nhiều. *Diệp Bình Sinh* đã đi *Nam Quan*, *Diệp Bình Xuyên* đã tới biên giới *Tây Viêm*, để lại một khoảng trống quyền lực và giám sát quý giá. Ngươi bước ra hoa viên, cảm nhận không khí nắng ấm ban mai, lòng thầm tính toán về những báo cáo sắp tới từ *Vân Hương Lâu*. Điêu Thuyền là một quân bài quan trọng, và việc nàng chính thức bắt tay vào xây dựng *Hồng Nhan* sẽ giúp ngươi nắm thóp được toàn bộ giới quan trường *Lạc Dương*.\nTuy nhiên, sự im hơi lặng tiếng của phụ thân *Diệp Vô Song* trong suốt một tháng qua lại khiến ngươi nảy sinh một chút nghi hoặc. Ông ta là một đại tướng quân dày dạn kinh nghiệm, liệu ông ta có thực sự tin rằng đứa con thứ ba của mình là một tên phế vật, hay ông ta đang chờ đợi một điều gì đó khác? Ngươi nhặt một nhành liễu rủ bên hồ sen, khẽ bẻ gãy nó bằng một lực tay tinh tế. Ván cờ này, từng quân cờ đều đã vào vị trí.\nTại cửa sau của *Tướng Quân Phủ*, một gia nhân già đang lúi húi quét lá, nhưng ánh mắt ông ta thỉnh thoảng lại liếc về phía sương phòng của ngươi một cách đầy ẩn ý. Ngươi nhận ra đó là một trong những tai mắt của *Ám Thương Hội* còn sót lại để canh chừng \"Tam công tử\". Ngươi khẽ cười nhạt, bước đi lảo đảo như kẻ vẫn chưa tỉnh ngủ hẳn, hướng về phía bếp để tìm chút đồ ăn sáng, hoàn toàn duy trì vỏ bọc hoàn hảo của mình.\nSáng sớm tại *Lạc Dương* luôn mang theo vẻ nhộn nhịp hối hả, nhưng đối với ngươi, mỗi giây phút trôi qua đều là một bước tiến gần hơn đến việc lật đổ những xiềng xích mà phụ tử nhà họ Diệp đã đặt lên mình. Một tháng là thời gian đủ để *Hồng Nhan* bén rễ, và cũng là lúc ngươi cần phải chuẩn bị cho những biến cố lớn hơn sắp xảy đến khi các huynh trưởng của ngươi bắt đầu có những động thái quân sự thực sự tại biên thùy.\nĐịa điểm hiện tại: Hoa viên trong *Tướng Quân Phủ*.\nThời gian: 7 giờ 30 phút Sáng.\nThời tiết: Nắng ban mai ấm áp, gió nhẹ.\nTrạng thái: Sức lực sung mãn, tinh thần tỉnh táo tuyệt đối dưới lớp vỏ bọc phế vật."
+        }
+      ]
+    },
+    {
+      "id": "0e4885bd-ddfa-4d85-afea-2a2209438171",
+      "type": "user_custom_action",
+      "content": "Lại thêm 1 tháng trôi qua, ngươi duy trì thói quen đều đặn. Ban ngày ở phủ chơi đùa, chiều đến phủ công chúa, tối đến Vân Hương Lâu ngủ với Điêu Thuyền. Hôm nay cũng là ngày ngươi đánh giá tiến độ kế hoạch Hồng Nhan"
+    },
+    {
+      "id": "2af63e47-7534-415d-8b00-40d7dd5592ec",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Tháng sáu tại kinh thành *Lạc Dương*, cái nắng oi nồng ban ngày nhanh chóng nhường chỗ cho những cơn gió đêm mang theo hơi ẩm từ sông *Lạc*. Từng ngày, rồi từng tuần cứ thế lặng lẽ trôi qua theo một quỹ đạo tưởng chừng như lặp đi lặp lại đến nhàm chán. Trong mắt những gia nhân tại *Tướng Quân Phủ*, \"Tam công tử\" *Diệp Thần* vẫn chỉ là một thiếu niên mười tuổi thích hưởng lạc, sáng sớm thức dậy trong trạng thái lờ đờ, chiều đến lại vùi mình vào những trò chơi con trẻ tại phủ công chúa, và khi màn đêm buông xuống, bóng dáng nhỏ bé ấy lại biến mất sau cánh cửa rực rỡ đèn lồng của *Vân Hương Lâu*. \nNhưng đằng sau cái vỏ bọc vô dụng đó là một guồng quay mãnh liệt của trí tuệ và thực lực đang âm thầm tích lũy. Ba mươi ngày trôi qua, tương đương với ba mươi năm khổ luyện trong không gian mộng cảnh. Tổng cộng, linh hồn xuyên không của ngươi đã có bốn mươi năm kinh nghiệm võ học thực thụ được đúc kết vào xương tủy của thân thể mười tuổi này. Mỗi sáng thức dậy, ngươi cảm nhận được khí huyết trong người cuồn cuộn như sóng ngầm đại dương, gân cốt dẻo dai và săn chắc đến mức kinh ngạc, dù bề ngoài ngươi vẫn cố tình giữ vẻ mảnh khảnh, yếu ớt.\nHôm nay, khi ánh hoàng hôn vừa tắt, ngươi lại xuất hiện tại tầng ba của *Vân Hương Lâu*. Khác với vẻ lảo đảo bên ngoài, bước chân ngươi khi bước qua ngưỡng cửa mật phòng trở nên vững chãi và thanh thoát lạ thường. Không gian bên trong thoang thoảng mùi trầm hương thượng hạng, ánh nến lung linh hắt bóng qua tấm rèm trướng bằng lụa mỏng thêu hoa mẫu đơn. Ngươi ngồi xuống chiếc ghế chủ vị phía sau rèm, điềm tĩnh đặt đôi bàn tay nhỏ nhắn lên mặt bàn gỗ trắc mát lạnh. Phía bên kia rèm trướng, một bóng dáng thanh tú, thoát tục đang quỳ một gối, đầu hơi cúi xuống đầy vẻ cung kính — đó chính là *Điêu Thuyền*, người giờ đây đã rũ bỏ hoàn toàn vẻ rụt rè của cô bé mồ côi để trở thành thủ lĩnh sắc sảo của tổ chức *Hồng Nhan*."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Báo cáo chủ thượng, một tháng qua, mọi việc đều tiến triển đúng như dự liệu của ngài. Tổ chức *Hồng Nhan* đã chính thức đi vào quỹ đạo, biến *Vân Hương Lâu* thành một trạm thu phát thông tin khổng lồ giữa lòng *Lạc Dương*. Mạng lưới của chúng ta hiện nay đã siết chặt quanh các phủ đệ quan lại, không một lời thì thầm nào của các vị đại thần sau khi say rượu mà không lọt vào tai chúng ta."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi khẽ gật đầu, giọng nói trầm ổn vang lên sau tấm rèm:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tốt lắm, *Tú Nhi*. Hãy cho ta biết chi tiết về bảng danh sách ca kỹ và mạng lưới thông tin cụ thể nhất."
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* khẽ lật xấp hồ sơ bằng giấy tuyên mỏng, giọng nói trong trẻo nhưng đầy sự chuyên nghiệp bắt đầu vang lên trong căn phòng tĩnh mịch. Theo báo cáo của nàng, dưới sự đầu tư không tiếc tiền bạc của ngươi, *Vân Hương Lâu* đã tuyển chọn và đào tạo được hơn hai trăm ca kỹ. Bọn họ được phân cấp vô cùng nghiêm ngặt. Những người thuộc bậc *Đồng bài* và *Ngân bài* chiếm đa số, chịu trách nhiệm tiếp đón các thương nhân và quan lại cấp thấp, thu thập những tin tức vụn vặt về giá cả thị trường và biến động dân sinh. \nĐáng chú ý nhất là bậc *Kim bài*. Hiện tại đã có mười hai thiếu nữ đạt được danh hiệu này. Bọn họ không chỉ có nhan sắc chim sa cá lặn mà còn tinh thông cầm kỳ thi họa đến mức khiến những văn sĩ tài hoa nhất cũng phải cúi đầu. Theo đúng lệnh của ngươi, mười hai vị *Kim bài* này chỉ tiếp khách sau bình phong, tạo nên một sự khao khát và bí ẩn tột độ trong giới quý tộc *Lạc Dương*. Chính sự \"kiêu kỳ\" được tính toán này đã khiến các quan chức cấp cao của Binh Bộ và Hộ Bộ tìm đến ngày càng đông, sẵn sàng dâng hiến những bí mật quân nhu và ngân khố chỉ để đổi lấy một bản đàn hay một vần thơ từ phía sau tấm màn che."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Thưa chủ thượng, mạng lưới tình báo của bậc *Kim bài* đã bắt đầu chạm tới những thông tin cốt lõi. Chúng ta đã nắm được danh sách các đại lý phân phối thiết đao và lương thảo mà *Ám Thương Hội* của Nhị công tử *Diệp Bình Xuyên* đang bí mật giao dịch tại biên giới *Tây Viêm*. Ngoài ra, người của chúng ta tại phủ của Thượng thư bộ Hộ cũng đã nghe lỏm được việc triều đình đang âm thầm cắt giảm quân nhu cho các cánh quân trung thành với các thế lực địa phương để tập trung cho quân đội của *Diệp Vô Song* đại tướng quân."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi khẽ nhấp một ngụm trà thanh khiết, đôi mắt đao sau tấm rèm nheo lại. Mọi thứ đang dần trở nên rõ ràng. Việc Nhị ca *Diệp Bình Xuyên* và phụ thân *Diệp Vô Song* rời khỏi kinh thành không đơn giản chỉ là đi trấn thủ biên thùy, mà là một sự dịch chuyển quân bài trên bàn cờ lớn để chuẩn bị cho một biến cố rung chuyển thiên hạ."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Nàng làm rất tốt, *Tú Nhi*. Việc huấn luyện các ca kỹ đạt bậc *Tử bài* thì sao? Có ai đủ tư chất để ta trực tiếp đánh giá chưa?"
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* khẽ run nhẹ tà áo lụa, giọng nói mang theo một chút e dè nhưng vẫn đầy sự tôn trọng:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Báo cáo chủ thượng, bậc *Tử bài* đòi hỏi sự hoàn mỹ đến mức khắc nghiệt. Hiện tại ngoài nô tì, chỉ có hai cô gái trẻ khác đang ở giai đoạn cuối của quá trình thử thách. Bọn họ không chỉ học nghệ, mà còn đang được nô tì trực tiếp truyền dạy tâm pháp giữ vững tinh thần và cách quan sát tâm lý đối phương. Những gì ngài sắp đặt cho *Vân Hương Lâu* thực sự đã biến nơi này thành một lưỡi gươm sắc bén núp dưới vỏ bọc phấn hoa. Nô tì dẫu có mười năm cũng chưa chắc nghĩ ra được một hệ thống tinh vi như vậy."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi im lặng, cảm nhận sự kính nể chân thành trong giọng nói của nàng. Mặc dù *Điêu Thuyền* có cấp độ cao hơn ngươi (Cấp 12 so với Cấp 1), nàng vẫn dành cho ngươi một sự nể trọng tuyệt đối bởi tầm nhìn và những kế hoạch vượt thời đại mà ngươi đã đề ra. Đối với nàng, ngươi không phải là một đứa trẻ mười tuổi, mà là một vị minh chủ thầm lặng đang điều khiển cả kinh thành trong lòng bàn tay.\nBên ngoài, tiếng nhạc lầu dưới vẫn văng vẳng đưa lên, hòa cùng tiếng cười đùa huyên náo của khách làng chơi. Nhưng trong mật phòng này, chỉ có hơi thở của những âm mưu và khát vọng. Ngươi đứng dậy, tà áo nhỏ nhắn lướt qua sàn gỗ, bước tới gần cửa sổ nhìn ra ánh đèn lồng rực rỡ của phố thị."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tiếp tục siết chặt mạng lưới quanh phủ của các đại thần thân cận với *Diệp gia*. Ta muốn biết chính xác ngày nào *Diệp Bình Xuyên* sẽ hoàn tất việc gom lương thảo tại *Tây Viêm*. Còn về phần *Tịch Nhan* công chúa... hãy cử một vị *Ngân bài* khéo léo nhất, dưới danh nghĩa một người bán phấn son cao cấp, tìm cách tiếp cận các nô tỳ thân cận nhất trong phủ công chúa. Ta cần biết nàng thực sự đang liên lạc với ai tại *Tây Viêm*."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Điêu Thuyền",
+          "content": "Nô tì tuân lệnh. Mọi biến động nhỏ nhất sẽ được báo cáo cho ngài vào lần gặp tới."
+        },
+        {
+          "type": "narrative",
+          "content": "*Điêu Thuyền* lui ra sau một cái cúi đầu cung kính, để lại ngươi một mình trong căn phòng ngập tràn hương trầm. Một tháng nhẫn nhịn và âm thầm gầy dựng đã mang lại những quả ngọt đầu tiên. Kẻ địch tưởng rằng ngươi vẫn đang ngủ say dưới tác dụng của *Bách Nhật Túy*, nhưng bọn chúng không biết rằng con mãnh thú trong hình hài đứa trẻ này đã thức tỉnh và đang nhe nanh múa vuốt ngay giữa hang ổ của chúng.\nKhi bóng đêm sâu dần, ngươi lại lặng lẽ vượt tường rào trở về *Tướng Quân Phủ*. Những bước chân nhẹ tênh trên mái ngói rêu phong dường như hòa làm một với tiếng gió đêm. Trở về sương phòng, ngươi nằm xuống chiếc sập gỗ quen thuộc, nhắm mắt lại. Một ngày nữa lại kết thúc, và một \"năm\" tu luyện mới trong mộng cảnh lại chuẩn bị bắt đầu. \nSáng hôm sau, khi ánh nắng ban mai ấm áp chiếu qua khe cửa sổ, rọi lên khuôn mặt tuấn tú vẫn còn vương nét ngây ngô của ngươi, *Diệp Thần* từ từ mở mắt. Khí lực tràn đầy trong cơ thể khiến mỗi cử động của ngươi đều mang theo sự thanh thoát. Ngươi bước ra hoa viên, nhìn thấy gã gia nhân già vẫn đang cặm cụi quét lá ở cửa sau, ánh mắt hắn thỉnh thoảng vẫn liếc về phía ngươi với vẻ khinh miệt quen thuộc. Ngươi cười nhạt, nhặt một viên sỏi dưới chân, dùng ngón tay búng nhẹ. Viên sỏi bay vút đi, găm sâu vào thân cây cổ thụ phía xa mà không tạo ra một tiếng động nào lớn.\nCục diện *Lạc Dương* đang nằm dưới sự quan sát của *Hồng Nhan*, thực lực bản thân đã qua bốn mươi năm rèn luyện, và những bí mật của *Diệp gia* đang dần bị bóc trần. Ván cờ này, ngươi đã không còn là một quân cờ bị động nữa. Những ngày chơi đùa vô tư lự tại phủ công chúa sẽ vẫn tiếp tục, nhưng giờ đây mỗi hành động của ngươi đều mang một mục đích rõ ràng hơn bao giờ hết.\nĐịa điểm hiện tại: Hoa viên trong *Tướng Quân Phủ*.\nThời gian: 7 giờ 45 phút Sáng.\nThời tiết: Nắng ấm, gió nhẹ mang theo hương hoa đinh hương.\nTrạng thái: Tỉnh táo hoàn toàn, cơ thể dẻo dai với thực lực tương đương 40 năm võ học tích lũy."
+        }
+      ]
+    },
+    {
+      "id": "f7c1185e-62bb-4d75-929b-bd58ca644659",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Tường thuật]: \"Tử bài phải là những người có nhan sắc sánh ngang Điêu Thuyền. Ngươi lên danh sách Tử bài bao gồm: Triệu Vũ - Em gái Triệu Vân, Hạ Hầu Khinh Y - Con gái thái thú Chân Định Hạ Hầu Kiệt, Đại Kiều và Tiểu Kiều - Kiều gia Giang Đông, Thái Văn Cơ - Con gái Thái Ung, Chân Cơ - Chân thị Ký Châu, Công Tôn Bảo Nguyệt - Con gái thái thú Ung Châu Công Tôn Toản, Mã Vân Lộc - Em gái Mã Siêu ở Tây Lương.\"\n[Đoạn 2 - Lời Diệp Thần]: \"Lý Tiệm, đây là danh sách ứng cử viên Tử bài. Ngươi cho người âm thầm tiếp xúc và đưa họ về đây. Không để cho người khác biết. Sắp xếp cho họ mỗi người 1 phòng tại Vân Hương Lâu. Ta sẽ đích thân gặp từng người. Mỗi người đều ở 1 nơi khác nhau nên thời gian chắc sẽ lâu. Có 1 số người ưu tiên tiếp xúc đưa về trước. Đầu tiên là Thái Văn Cơ, thứ 2 là Chân Cơ, thứ 3 là Hạ Hầu Khinh Y, thứ 4 là 2 chị em Kiều Dao, Kiều Sương\""
+    },
+    {
+      "id": "ae4b4288-8b10-4e58-bf40-ec341aa4596f",
+      "type": "story",
+      "content": [
+        {
+          "type": "narrative",
+          "content": "Tại căn phòng mật nằm ở tầng ba của *Vân Hương Lâu*, làn hương trầm quyện trong không khí tĩnh lặng, ánh sáng ban mai xuyên qua ô cửa sổ chạm khắc hình chim phượng, rọi những vệt nắng vàng ươm lên mặt bàn gỗ trắc bóng loáng. *Diệp Thần* ngồi ở vị trí chủ vị, đôi mắt đen láy bộc lộ vẻ thâm trầm, sắc lạnh hoàn toàn trái ngược với độ tuổi mười tuổi của thân thể này. Đối diện với ngươi, *Lý Tiệm* đang quỳ một gối, hai tay chắp lại đầy kính cẩn, chăm chú lắng nghe từng lời dặn dò của vị chủ nhân nhỏ tuổi nhưng mang tầm nhìn kinh người.\nNgươi nhẹ nhàng đặt một ngọn bút lông cùng tờ giấy tuyên mỏng lên bàn, giọng nói vang lên đanh thép, từng chữ từng câu đều chứa đựng sự uy nghiêm và tính toán sâu sắc:\nTử bài phải là những người có nhan sắc sánh ngang Điêu Thuyền. Ngươi lên danh sách Tử bài bao gồm: Triệu Vũ - Em gái Triệu Vân, Hạ Hầu Khinh Y - Con gái thái thú Chân Định Hạ Hầu Kiệt, Đại Kiều và Tiểu Kiều - Kiều gia Giang Đông, Thái Văn Cơ - Con gái Thái Ung, Chân Cơ - Chân thị Ký Châu, Công Tôn Bảo Nguyệt - Con gái thái thú Ung Châu Công Tôn Toản, Mã Vân Lộc - Em gái Mã Siêu ở Tây Lương.\nNgươi ngừng lại một nhịp, quan sát nét mặt của *Lý Tiệm*. Nhận thấy sự kinh ngạc lẫn kính nể hiện rõ trong đôi mắt của thuộc hạ, ngươi tiếp tục đưa ra chỉ thị cụ thể, ấn định chiến lược thu phục từng người:"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Lý Tiệm, đây là danh sách ứng cử viên Tử bài. Ngươi cho người âm thầm tiếp xúc và đưa họ về đây. Không để cho người khác biết. Sắp xếp cho họ mỗi người 1 phòng tại Vân Hương Lâu. Ta sẽ đích thân gặp từng người. Mỗi người đều ở 1 nơi khác nhau nên thời gian chắc sẽ lâu. Có 1 số người ưu tiên tiếp xúc đưa về trước. Đầu tiên là Thái Văn Cơ, thứ 2 là Chân Cơ, thứ 3 là Hạ Hầu Khinh Y, thứ 4 là 2 chị em Kiều Dao, Kiều Sương."
+        },
+        {
+          "type": "narrative",
+          "content": "*Lý Tiệm* cẩn thận đón lấy tờ giấy tuyên mỏng từ tay ngươi. Ánh mắt hắn lướt qua từng cái tên được viết bằng nét chữ phượng múa rồng bay, lòng không khỏi chấn động mãnh liệt. Những cái tên mà ngươi vừa xướng lên không chỉ đại diện cho những tuyệt sắc mỹ nhân lừng danh khắp các châu quận, mà đằng sau mỗi người bọn họ đều là những thế lực, những danh tướng hay đại tộc có tầm ảnh hưởng sâu rộng đến cục diện thiên hạ. \n*Thái Văn Cơ* là ái nữ của đại danh sĩ *Thái Ung*, người nắm giữ danh tiếng và sự ảnh hưởng to lớn trong giới sĩ đại phu triều đình. *Chân Cơ* thuộc về *Chân thị* Ký Châu — một gia tộc giàu có tột đỉnh với mạng lưới thương nghiệp trải dài khắp phía Bắc. *Hạ Hầu Khinh Y* là con gái của Thái thú *Hạ Hầu Kiệt* ở Chân Định, nối liền vây cánh với các thế lực quân sự địa phương. Hai chị em *Kiều Dao* và *Kiều Sương* — *Đại Kiều* và *Tiểu Kiều* của Giang Đông — là biểu tượng mỹ nhân vùng sông nước Nam do các thế lực Giang Đông thèm khát. Còn *Triệu Vũ*, *Công Tôn Bảo Nguyệt* và *Mã Vân Lộc* đều là muội muội hoặc ái nữ của những danh tướng kiệt xuất như *Triệu Vân*, *Công Tôn Toản*, *Mã Siêu*.\n*Lý Tiệm* hít một hơi thật sâu, ngẩng đầu nhìn ngươi với ánh mắt tràn ngập sự kính kể tuyệt đối. Hắn rút từ trong ngực áo ra một cuốn sổ nhỏ bọc da, cẩn thận ghi chép lại danh sách các ứng cử viên *Tử bài* cùng thứ tự ưu tiên mà ngươi vừa giao phó. Cử chỉ của hắn vô cùng cẩn trọng, từng nét mực hạ xuống đều được che chắn kỹ lưỡng."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Lý Tiệm",
+          "content": "Chủ thượng anh minh! Danh sách này quả thực là tập hợp những khối ngọc quý nhất của thiên hạ. Thuộc hạ cẩn thận ghi chép lại danh sách các ứng cử viên Tử bài và hứa sẽ lập tức triển khai người âm thầm tiếp xúc, đưa Thái Văn Cơ, Chân Cơ, Hạ Hầu Khinh Y cùng chị em Kiều Dao, Kiều Sương về Vân Hương Lâu trước. Việc này liên quan đến mỹ nhân và thế lực các châu quận, thuộc hạ sẽ cho chọn ra những ám vệ tinh anh nhất, cải trang thành các đoàn thương nhân buôn lụa và ngựa quý để lên đường ngay trong ngày."
+        },
+        {
+          "type": "narrative",
+          "content": "Ngươi khẽ gật đầu, sự hài lòng hiện rõ trong mắt. *Lý Tiệm* vốn là kẻ làm việc cẩn mật, giao việc cho hắn khiến ngươi hoàn toàn yên tâm."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Ngươi",
+          "content": "Tốt lắm. Mọi việc tiếp xúc phải tiến hành trong êm đẹp. Hãy dùng lễ nghĩa, sự chân thành và những lý do hợp lý nhất để thuyết phục bọn họ, tuyệt đối không được dùng vũ lực hay cưỡng ép. Các căn phòng dành cho bọn họ tại tầng ba của *Vân Hương Lâu* phải được bố trí riêng biệt, trang nhã, đầy đủ tiện nghi và được bảo vệ nghiêm ngặt nhất. Mỗi người một phòng, không ai phiền đến ai. Việc tiếp đón sẽ do chính *Tú Nhi* đảm nhận trước khi ta đích thân gặp mặt từng người."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Lý Tiệm",
+          "content": "Thuộc hạ đã rõ! Tại kinh thành *Lạc Dương*, phủ đệ của đại thần *Thái Ung* không quá xa *Vân Hương Lâu*, việc tiếp xúc với *Thái Văn Cơ* tiểu thư có thể tiến hành nhanh nhất. Thuộc hạ sẽ bố trí nhân lực khéo léo để nương theo các buổi đàm đạo thơ văn của các nho sĩ mà tiếp cận nàng. Còn *Chân Cơ* tại Ký Châu và *Hạ Hầu Khinh Y* ở Chân Định, thuộc hạ sẽ cho ám vệ cưỡi ngựa nhanh nhất đi suốt ngày đêm. Riêng Giang Đông xa xôi, việc đưa hai tiểu thư *Kiều Dao* và *Kiều Sương* trở về sẽ mất nhiều thời gian hơn, nhưng thuộc hạ cam kết sẽ không để xảy ra bất kỳ sơ suất nào."
+        },
+        {
+          "type": "narrative",
+          "content": "Sau khi nhận mật lệnh, *Lý Tiệm* chắp tay vái chào rồi lặng lẽ lui ra sau tấm bình phong, biến mất qua cánh cửa mật. Căn phòng ngầm trở lại vẻ tĩnh mịch vốn có.\nNgươi đứng dậy, bước lại gần cửa sổ, khẽ đẩy cánh cửa gỗ nhìn xuống khung cảnh kinh thành *Lạc Dương* buổi sớm. Ánh nắng ban mai phản chiếu trên những mái ngói rêu phong, tiếng rao hàng và tiếng bước chân nhộn nhịp của dân chúng tạo nên một bức tranh thời loạn sống động. Việc tập hợp những vị mỹ nhân này về *Vân Hương Lâu* không đơn thuần chỉ là việc xây dựng tầng nấc cao nhất cho tổ chức *Hồng Nhan*, mà là một nước cờ chiến lược nhằm cắm những rễ ngầm tình báo và ảnh hưởng của ngươi đến khắp các vùng đất trọng yếu trên bản đồ *Đại Hán*.\nMột khi *Thái Văn Cơ*, *Chân Cơ*, *Hạ Hầu Khinh Y*, cùng chị em *Kiều Dao*, *Kiều Sương* lần lượt hội tụ về *Vân Hương Lâu*, nơi đây sẽ không chỉ là một tửu lâu nổi tiếng nhất kinh thành, mà sẽ trở thành trung tâm quyền lực ẩn mình trong bóng tối — nơi thu hút mọi ánh nhìn, mọi thông tin và cả vận mệnh của những thế lực lớn nhất thiên hạ.\nNgươi mỉm cười nhạt, điều hòa nhịp thở dẻo dai của thân thể mười tuổi. Với thực lực tích lũy qua bốn mươi năm khổ luyện trong mộng cảnh (mười ngày đầu và ba mươi ngày sau đó), gân cốt ngươi đã săn chắc như thép nguội, khí huyết lưu thông tràn đầy sức bật. Tuy nhiên, trước mắt thiên hạ và tai mắt của phụ tử nhà họ Diệp, ngươi vẫn phải giữ vững vỏ bọc của một \"hoàn khố công tử\" ham chơi vô hại.\nXong việc tại *Vân Hương Lâu*, ngươi lặng lẽ rời khỏi tửu lâu qua con hẻm phía sau. Vận dụng bộ pháp nhẹ nhàng, ngươi lướt qua những con phố lát đá, trở về *Tướng Quân Phủ*. \nBên trong phủ, không khí buổi sáng vẫn thanh bình. Đại ca *Diệp Bình Sinh* đã dẫn quân đến *Nam Quan*, Nhị ca *Diệp Bình Xuyên* đang ở biên giới *Tây Viêm*, phụ thân *Diệp Vô Song* thì bận rộn nơi triều đường. Ngươi thong thả bước vào hậu viện, vờ như vừa thức dậy sau một đêm dài \"đắm mình trong cuộc vui\". Tên gia nhân già đang quét lá ngoài sân lén liếc nhìn ngươi một cái rồi lại cúi đầu tiếp tục công việc. Sự coi thường và lơ là của kẻ thù chính là tấm lá chắn tốt nhất che giấu mọi kế hoạch vĩ đại mà ngươi đang triển khai.\nNgươi tiến về phía sương phòng của mình, chuẩn bị cho một ngày mới với những lịch trình quen thuộc: nghỉ ngơi tại phủ, chiều sang chơi tại *Phủ Ninh An Công Chúa* cùng *Ngô Thu Phương*, và tối lại trở về *Vân Hương Lâu* để giám sát guồng quay của tổ chức *Hồng Nhan* cũng như chờ đợi những tin tức đầu tiên từ *Lý Tiệm*.\nMặt trời dần lên cao, rọi những tia nắng ấm áp xuống hoa viên *Tướng Quân Phủ*. Hương đinh hương thoang thoảng trong gió nhẹ, mang theo dư vị của một cơn bão ngầm sắp sửa cuộn trào khắp kinh kỳ."
+        }
+      ]
+    },
+    {
+      "id": "4efe93fa-359f-4dc9-ba0a-f5d9d748d120",
+      "type": "user_custom_action",
+      "content": "[Đoạn 1 - Lời Diệp Thần]: \"Trước khi các Tử bài đến, đến lúc nàng hầu hạ ta rồi Điêu Thuyền\"\n[Đoạn 2 - Lời Điêu Thuyền]: \"Vâng, công tử\"\n[Đoạn 3 - Tường thuật]: Điêu Thuyền khóa trái căn phòng của mình, sau đó nàng giúp ngươi cởi đồ và cởi đồ của mình nằm lên giường. Ngươi không để nàng đợi, 2 tay vuốt ve bầu ngực trắng và cặp nhũ hoa đang dần căng cứng vì kích thích. Ngươi ngậm lấy nhũ hoa hồng hào, tay trái vuốt ve bộ ngực trắng, tay phải thì khám phá hang động hồng hào không cọng lông. Điêu Thuyền không nhịn được mà khẽ rên nhẹ. Sau đó ngươi mạnh mẽ hôn lên môi nàng, chiếc lưỡi chủ động tấn công. Điêu Thuyền cố nhắm mắt đáp trả bằng nụ hôn mãnh liệt hơn. tay phải ngươi xoa xoa hột le bên dưới, cảm nhận bên trong hang bắt đầu rỉ nước thì lưu luyến rời đôi môi anh đào mà khám phá hang động. Chiếc lưỡi đảo khắp vách hang. Nước rỉ ra ngày 1 nhiều, ngươi không để phí 1 giọt toàn bộ uống hết. Cảm thấy dạo đầu đã đủ, ngươi đưa cây thương thịt vào cửa hang rồi từ từ tiến vào. Ngay khi đầu thương chạm phải 1 bức tường, ngươi dùng sức thúc mạnh. Bức tường rách toạc khiến máu chảy dọc theo thân thương\n[Đoạn 4 - Lời Điêu Thuyền]: \"A... Đau quá...\"\n[Đoạn 5 - Tường thuật]: 2 tay nàng vòng qua cổ kéo ngươi xuống hôn tới tấp. 2 chân khóa hông không cho ngươi rút ra. Ngươi thuận thế từ từ nhấp nhẹ. Dần dần tăng tốc rồi đổi các loại tư thế: cưỡi ngựa, độc phụ tầm thương, nằm sấp, nằm nghiêng và cuối cùng là nằm ngửa. Ngươi để 2 chân nàng quấn quanh hông, cả người nằm sấp lên cơ thể trần trụi đang nằm ngửa của nàng mà nhấp. Tốc độ ngày càng tăng, tiếng rên của nàng ngày càng gấp. Cuối cùng, cả 2 cùng lên đỉnh, tinh dịch hòa lẫn dâm thủy chảy xuống giường bốc lên 1 mùi đặc trưng. Không cho nàng nghỉ lâu, cả đêm ngươi với nàng làm 10 hiệp. Ngươi để nàng nằm sấp ngủ trên người ngươi, cu ngươi vẫn nằm trong lồn nàng. Đến sáng, nàng hờn dỗi trách ngươi khiến nàng không xuống được giường vì 2 chân còn run\n[Đoạn 6 - Lời Diệp Thần]: \"Nếu nàng không xuống giường được vậy thì đừng xuống nữa.\"\n[Đoạn 7 - Tường thuật]: Nói xong ngươi lại tiếp tục vài chục hiệp với nàng. Cả ngày hôm đó ngươi chỉ ở Vân Hương Lâu không đi đâu cả"
     }
   ],
-  "choices": [
-    "Ngồi xếp bằng tĩnh tọa vận chuyển chân nguyên rèn luyện tu vi để gia tăng thực lực phòng thân trước thời loạn. {Tỷ lệ thành công: 85%, Hậu quả/Phần thưởng: Chân nguyên trở nên tinh thuần và mạnh mẽ hơn, cơ thể tràn đầy sinh khí}",
-    "Đi vòng quanh kiểm tra lại toàn bộ hệ thống hàng rào và cửa nẻo quanh nhà để đảm bảo an toàn tuyệt đối cho Tú Nhi trong đêm tối. {Tỷ lệ thành công: 95%, Hậu quả/Phần thưởng: Phát hiện các điểm yếu của tường rào để gia cố, tăng mức độ an toàn cho ngôi nhà}",
-    "Thắp một ngọn đèn dầu nhỏ và ngồi nghiên cứu tấm bản đồ địa hình xung quanh Thôn Mộc Nhĩ để tìm kiếm các khu vực săn bắn và câu cá an toàn hơn. {Tỷ lệ thành công: 80%, Hậu quả/Phần thưởng: Hiểu rõ địa hình xung quanh, phát hiện thêm một vài điểm câu cá và săn bắn tiềm năng}",
-    "Nằm nghỉ ngơi thư giãn để hồi phục hoàn toàn tinh thần sau một ngày dài đi câu mệt mỏi chuẩn bị cho các hoạt động ngày mai. {Tỷ lệ thành công: 100%, Hậu quả/Phần thưởng: Tinh thần sảng khoái tối đa, xua tan mọi mệt mỏi thể chất}"
-  ],
+  "choices": [],
   "gameMode": "EXPLORATION",
   "activeTrade": {
     "trader": null,
@@ -565,9 +1793,10 @@
     "npcOffer": null,
     "offerType": "sell",
     "sellMultiplier": 0,
+    "buyMultiplier": 1,
     "itemSpecificSellBonuses": {},
     "itemSpecificBuyBonuses": {}
   },
   "storySummaries": [],
-  "adventureTurnCount": 1
+  "adventureTurnCount": 19
 }
